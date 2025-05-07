@@ -2,122 +2,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BerMatModZ - Dino Runner</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+    <title>⚡ BerMatModZ Social 🔥</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
             margin: 0;
-            font-family: 'Orbitron', sans-serif;
-            background: radial-gradient(circle, #000, #111, #222, #000);
-            color: #0f0;
-            overflow: hidden;
+        }
+        .navbar {
+            background-color: #4267B2;
+            color: #fff;
+            padding: 10px 20px;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            height: 100vh;
-            justify-content: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
-        header {
-            background: linear-gradient(90deg, #0f0, #00f, #f0f);
-            padding: 20px;
-            text-align: center;
+        .navbar h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .navbar input {
+            padding: 8px;
             border-radius: 20px;
-            margin-bottom: 20px;
-            width: 90%;
-            animation: glow 2s infinite alternate;
-            box-shadow: 0 0 30px #0f0;
+            border: none;
+            width: 200px;
         }
-        @keyframes glow {
-            0% { color: #0f0; text-shadow: 0 0 5px #0f0, 0 0 15px #0f0; }
-            100% { color: #fff; text-shadow: 0 0 15px #00f, 0 0 30px #f0f; }
+        .sidebar {
+            width: 250px;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            height: 100vh;
+            position: fixed;
+            top: 60px;
+            overflow-y: auto;
         }
-        .game-container {
-            position: relative;
-            width: 80%;
-            height: 300px;
-            background: #111;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 0 20px #0f0, 0 0 40px #00f;
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
         }
-        .dino {
-            width: 50px;
-            height: 50px;
-            background: #0f0;
-            position: absolute;
-            bottom: 10px;
-            left: 20px;
+        .sidebar li {
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #4267B2;
+            color: #fff;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 18px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .feed {
+            margin-left: 270px;
+            padding: 100px 20px 20px 20px;
+            max-width: 700px;
+        }
+        .post {
+            background-color: #fff;
             border-radius: 10px;
-            animation: flicker 1s infinite alternate;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
         }
-        @keyframes flicker {
-            0% { opacity: 0.8; }
-            100% { opacity: 1; }
+        .post textarea {
+            width: 100%;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            resize: none;
         }
-        .obstacle {
-            width: 30px;
-            height: 50px;
-            background: #f00;
-            position: absolute;
-            bottom: 10px;
-            right: 0;
-            animation: move 2s linear infinite;
+        .post button {
+            background-color: #4267B2;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            color: #fff;
+            cursor: pointer;
         }
-        @keyframes move {
-            0% { right: 0; }
-            100% { right: 100%; }
+        .post button:hover {
+            background-color: #365899;
+        }
+        .profile-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .profile-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+        .profile-card h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+        .profile-card p {
+            color: #777;
+            margin: 5px 0 15px;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>⚡ BerMatModZ - Dino Runner 🔥</h1>
-        <p>El juego infinito de BerMatModZ</p>
-    </header>
-    <div class="game-container">
-        <div class="dino" id="dino"></div>
-        <div class="obstacle" id="obstacle"></div>
+    <div class="navbar">
+        <h1>⚡ BerMatModZ Social 🔥</h1>
+        <input type="text" placeholder="Buscar en BerMatModZ">
     </div>
-    <script>
-        const dino = document.getElementById('dino');
-        const obstacle = document.getElementById('obstacle');
-        let isJumping = false;function jump() {
-        if (isJumping) return;
-        isJumping = true;
-        let position = 0;
-        const upInterval = setInterval(() => {
-            if (position >= 150) {
-                clearInterval(upInterval);
-                const downInterval = setInterval(() => {
-                    if (position <= 0) {
-                        clearInterval(downInterval);
-                        isJumping = false;
-                    }
-                    position -= 20;
-                    dino.style.bottom = position + 'px';
-                }, 20);
-            }
-            position += 20;
-            dino.style.bottom = position + 'px';
-        }, 20);
-    }
-
-    function checkCollision() {
-        const dinoRect = dino.getBoundingClientRect();
-        const obstacleRect = obstacle.getBoundingClientRect();
-        if (
-            dinoRect.right > obstacleRect.left &&
-            dinoRect.left < obstacleRect.right &&
-            dinoRect.bottom > obstacleRect.top
-        ) {
-            alert('💀 Game Over - Eres un Hacker Épico, BerMatModZ 💥');
-            location.reload();
-        }
-    }
-
-    document.addEventListener('keydown', jump);
-    setInterval(checkCollision, 20);
-</script>
-
+    <div class="sidebar">
+        <h2>Menú</h2>
+        <ul>
+            <li>Perfil de Anth'Zz Berrocal</li>
+            <li>Amigos</li>
+            <li>Mensajes</li>
+            <li>Notificaciones</li>
+            <li>Proyectos (⚡BerMat-Bot MD🔥, BerMat_Mods, FAMA)</li>
+            <li>Configuración</li>
+        </ul>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/anthzberrocal">F</a>
+            <a href="https://www.instagram.com/anthzberrocal">I</a>
+            <a href="https://www.github.com/anthzberrocal">G</a>
+            <a href="https://www.tiktok.com/@anthzberrocal">T</a>
+        </div>
+    </div>
+    <div class="feed">
+        <div class="profile-card">
+            <img src="https://via.placeholder.com/150" alt="Anth'Zz Berrocal">
+            <h2>Anth'Zz Berrocal</h2>
+            <p>Desarrollador, programador y creador de BerMatModZ</p>
+        </div>
+        <div class="post">
+            <textarea rows="4" placeholder="¿Qué estás pensando, Anth'Zz?"></textarea>
+            <button>Publicar</button>
+        </div>
+        <div class="post">
+            <h3>Anth'Zz Berrocal</h3>
+            <p>Explorando nuevas ideas para mis proyectos de ciberseguridad. 🔥</p>
+        </div>
+        <div class="post">
+            <h3>BerMatModZ</h3>
+            <p>Creando sistemas sociales y bots personalizados para Termux. 😎</p>
+        </div>
+        <div class="post">
+            <h3>FAMA</h3>
+            <p>El futuro es nuestro. 💥</p>
+        </div>
+    </div>
 </body>
 </html>

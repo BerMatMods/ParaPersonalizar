@@ -2,153 +2,128 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feliz Día Mamá</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Orbitron:wght@600&family=Roboto&display=swap" rel="stylesheet">
+  <title>¡Feliz Día Mamita!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
     }
     body {
-      font-family: 'Roboto', sans-serif;
-      background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%);
+      background: linear-gradient(135deg, #ffe6f0, #ffd9ec);
+      color: #333;
       overflow-x: hidden;
     }
     .pantalla {
+      width: 100vw; height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+    }
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      color: #d63384;
+      margin-bottom: 1rem;
+    }
+    .mensaje {
+      font-size: 1.2rem;
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255,105,180,0.4);
+      max-width: 600px;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    .boton {
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      background: #ff69b4;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .boton:hover {
+      transform: scale(1.1);
+    }
+    .flor {
       position: absolute;
-      width: 100%;
-      height: 100vh;
+      bottom: 0;
+      animation: crecer 4s ease-out forwards;
+      width: 100px;
+    }
+    @keyframes crecer {
+      from { transform: scaleY(0); }
+      to { transform: scaleY(1); }
+    }
+    .redes {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .redes a {
+      text-decoration: none;
+      font-weight: bold;
       display: flex;
       align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      transition: opacity 1s ease-in-out;
+      gap: 0.5rem;
+      background: #fff;
+      padding: 0.6rem 1rem;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      transition: all 0.3s;
     }
-    #pantalla2 { display: none; }.flor-contenedor {
-  position: absolute;
-  bottom: -100px;
-  animation: crecerFlor 3s ease-out forwards;
-}
-.flor {
-  width: 100px;
-  height: 100px;
-  background: radial-gradient(circle, pink 40%, deeppink);
-  border-radius: 50%;
-  box-shadow: 0 0 25px #ff1493;
-}
-@keyframes crecerFlor {
-  to { bottom: 150px; }
-}
-
-.boton {
-  background: #ff1493;
-  color: white;
-  padding: 15px 40px;
-  border: none;
-  border-radius: 50px;
-  font-size: 1.4rem;
-  font-family: 'Orbitron', sans-serif;
-  box-shadow: 0 0 20px #ff1493;
-  cursor: pointer;
-  animation: brillar 2s infinite;
-  margin-top: 60px;
-}
-@keyframes brillar {
-  0%, 100% { box-shadow: 0 0 20px #ff1493; }
-  50% { box-shadow: 0 0 40px #ff69b4; }
-}
-
-.mensaje {
-  text-align: center;
-  max-width: 800px;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 40px;
-  border-radius: 30px;
-  box-shadow: 0 0 20px #ffc0cb;
-  animation: aparecer 1.5s ease-in;
-}
-@keyframes aparecer {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-.mensaje h1 {
-  font-family: 'Great Vibes', cursive;
-  font-size: 3rem;
-  color: #c2185b;
-  margin-bottom: 20px;
-}
-.mensaje p {
-  font-size: 1.3rem;
-  line-height: 1.6;
-  color: #880e4f;
-}
-
-.creditos {
-  margin-top: 40px;
-  font-family: 'Orbitron', sans-serif;
-  background: #fff0f5;
-  padding: 10px 30px;
-  border-radius: 20px;
-  box-shadow: 0 0 10px deeppink;
-  color: #ff1493;
-}
-
-.redes {
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-  flex-wrap: wrap;
-}
-.redes a {
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: white;
-  padding: 10px 15px;
-  border-radius: 20px;
-  box-shadow: 0 0 10px #ffb6c1;
-  font-weight: bold;
-  color: #d81b60;
-  transition: transform 0.3s;
-}
-.redes a:hover {
-  transform: scale(1.1);
-  background: #ffe0ec;
-}
-.redes img {
-  width: 24px;
-  height: 24px;
-}
-
+    .redes a:hover {
+      transform: scale(1.1);
+      background: #ffe0f0;
+    }
+    .creador {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
   </style>
 </head>
-<body>
-  <div id="pantalla1" class="pantalla">
-    <div class="flor-contenedor">
-      <div class="flor"></div>
-    </div>
-    <button class="boton" onclick="mostrarMensaje()">Haz clic para ver la sorpresa</button>
-  </div>  <div id="pantalla2" class="pantalla">
+<body>  <div class="pantalla" id="pantalla1">
+    <h1>¡Feliz Día Mamita!</h1>
     <div class="mensaje">
-      <h1>¡Feliz Día Mamita!</h1>
-      <p>Gracias por cada sonrisa, por cada consejo, por tu paciencia infinita y por tu amor que nunca falla. Eres el corazón de esta familia, la reina de nuestras vidas y la luz que siempre guía nuestros pasos. Hoy celebramos no solo a la madre, sino a la mujer maravillosa que eres. ¡Te amo con todo mi ser, mamá!</p>
-      <div class="creditos">Creado con amor por Anth'Zz Berrocal | BerMatModZ</div>
-      <div class="redes">
-        <a href="https://youtube.com/@bermatmods"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png">YouTube</a>
-        <a href="https://github.com/Anthzberrocal"><img src="https://cdn-icons-png.flaticon.com/512/733/733553.png">GitHub</a>
-        <a href="https://facebook.com/anthzberrocal"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">Facebook</a>
-        <a href="https://instagram.com/bermatmods"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">Instagram</a>
-        <a href="https://wa.me/51937556459"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">WhatsApp</a>
-        <a href="https://t.me/bermatmods"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png">Telegram</a>
-      </div>
+      Gracias por cada sonrisa, por cada consejo, por tu paciencia infinita y por tu amor que nunca falla. <br>
+      Eres el corazón de esta familia, la reina de nuestras vidas y la luz que siempre guía nuestros pasos. <br>
+      Hoy celebramos no solo a la madre, sino a la mujer maravillosa que eres. <br>
+      ¡Te amo con todo mi ser, mamá!
+    </div>
+    <button class="boton" onclick="siguientePantalla()">Ver Sorpresa</button>
+  </div>  <div class="pantalla" id="pantalla2" style="display: none;">
+    <h1>¡Te Mereces Todo Mamita!</h1>
+    <div class="mensaje">
+      Hoy florece esta flor para ti, como símbolo de todo el amor que sembraste en mi corazón. <br>
+      Que este día te llene de alegría, orgullo y amor. <br>
+      ¡Gracias por ser mi guía, mi fuerza y mi inspiración cada día!
+    </div>
+    <img class="flor" src="https://i.imgur.com/ntqbTqW.png" alt="Flor animada">
+    <div class="creador">
+      Creado con amor por <strong>Anth'Zz Berrocal | BerMatModZ</strong>
+    </div>
+    <div class="redes">
+      <a href="https://youtube.com/@bermatmodz" target="_blank">YouTube</a>
+      <a href="https://github.com/bermatmods" target="_blank">GitHub</a>
+      <a href="https://facebook.com/anthzzberrocal" target="_blank">Facebook</a>
+      <a href="https://instagram.com/bermatmodz" target="_blank">Instagram</a>
+      <a href="https://wa.me/51937556459" target="_blank">WhatsApp</a>
+      <a href="https://t.me/bermatmodz" target="_blank">Telegram</a>
     </div>
   </div>  <script>
-    function mostrarMensaje() {
-      document.getElementById('pantalla1').style.display = 'none';
-      document.getElementById('pantalla2').style.display = 'flex';
+    function siguientePantalla() {
+      document.getElementById("pantalla1").style.display = "none";
+      document.getElementById("pantalla2").style.display = "flex";
     }
   </script></body>
 </html>

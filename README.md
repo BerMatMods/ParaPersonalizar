@@ -9,9 +9,9 @@
         body {
             margin: 0;
             padding: 0;
-            background: radial-gradient(circle, #000000, #080808, #1a1a1a);
+            background: linear-gradient(135deg, #ffffff, #00ff00, #ff00ff); /* Fondo blanco a verde y fucsia */
             color: #00ff00;
-            font-family: 'Space Mono', monospace; /* Estilo futurista adicional */
+            font-family: 'Space Mono', monospace;
             overflow: hidden;
             perspective: 1000px;
         }
@@ -35,7 +35,7 @@
 
         h1 {
             color: #ff0000;
-            font-family: 'Orbitron', sans-serif; /* Fuente futurista */
+            font-family: 'Orbitron', sans-serif;
             font-size: 3em;
             margin-bottom: 20px;
             text-shadow: 0 0 20px #00ff00, 0 0 30px #ff0000;
@@ -59,7 +59,7 @@
             text-align: center;
             box-shadow: 0 0 10px #ff0000, 0 0 20px #00ff00;
             transform-style: preserve-3d;
-            font-family: 'Press Start 2P', cursive; /* Fuente retro-futurista */
+            font-family: 'Press Start 2P', cursive;
         }
 
         button {
@@ -73,7 +73,7 @@
             cursor: pointer;
             transition: 0.3s;
             transform: perspective(500px) rotateY(10deg) rotateX(10deg);
-            font-family: 'Orbitron', sans-serif; /* Fuente futurista */
+            font-family: 'Orbitron', sans-serif;
         }
 
         button:hover {
@@ -95,7 +95,7 @@
             text-transform: uppercase;
             transform-style: preserve-3d;
             animation: bannerAnim 5s infinite alternate ease-in-out;
-            font-family: 'Space Mono', monospace; /* Fuente futurista */
+            font-family: 'Space Mono', monospace;
         }
 
         @keyframes bannerAnim {
@@ -115,6 +115,25 @@
             filter: brightness(1.5);
         }
 
+        .info-personal, .proyectos {
+            font-family: 'Orbitron', sans-serif;
+            color: #ff0000;
+            text-shadow: 0 0 20px #00ff00, 0 0 30px #ff0000;
+            font-size: 1.4em;
+            margin-top: 20px;
+        }
+
+        .info-personal p, .proyectos p {
+            margin: 10px 0;
+        }
+
+        .proyectos h2, .info-personal h2 {
+            font-family: 'VT323', monospace;
+            color: #00ff00;
+            text-transform: uppercase;
+            text-shadow: 0 0 15px #ff0000, 0 0 25px #00ff00;
+        }
+
     </style>
 </head>
 <body>
@@ -129,24 +148,29 @@
             <input type="password" name="confirm_password" placeholder="Confirmar Contraseña" required>
             <button type="submit">Registrarse</button>
         </form>
-        <div class="panel">
+
+        <div class="info-personal">
             <h2>💥 Información Personal</h2>
             <p>Nombre: Anth'Zz Berrocal</p>
             <p>Alias: BerMatModZ</p>
             <p>Pasión: Tecnología, hacking y ciberseguridad</p>
+        </div>
+
+        <div class="proyectos">
             <h2>⚙️ Proyectos</h2>
             <p>⚡ BerMat-Bot MD🔥 - Bot de WhatsApp avanzado</p>
             <p>⚡ BerMat_Mods - Herramientas personalizadas</p>
             <p>⚡ Fuerza Anónima de Mentes Avanzadas (FAMA)</p>
-
-            <h2>🌐 Redes Sociales</h2>
-            <div class="social-icons">
-                <a href="https://www.instagram.com/tu_instagram" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"></a>
-                <a href="https://github.com/anthzberrocal" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub"></a>
-                <a href="https://www.facebook.com/tu_facebook" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"></a>
-                <a href="https://wa.me/937556459" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"></a>
-            </div>
         </div>
+
+        <h2>🌐 Redes Sociales</h2>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/tu_instagram" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"></a>
+            <a href="https://github.com/anthzberrocal" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub"></a>
+            <a href="https://www.facebook.com/tu_facebook" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"></a>
+            <a href="https://wa.me/937556459" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"></a>
+        </div>
+
         <div class="footer">
             © 2025 BerMatModZ - Todos los derechos reservados
         </div>

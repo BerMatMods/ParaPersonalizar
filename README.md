@@ -6,94 +6,92 @@
     <title>Mi Mundo - Anth'Zz Berrocal</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Orbitron:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(135deg, #000000, #00b3ff); /* Fondo negro a celeste */
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #212121, #1c1c1c, #0a0a0a);
-            color: #00ff88;
+            color: #fff;
             overflow: hidden;
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            position: relative;
         }
         h1 {
-            font-size: 4em;
+            font-size: 3.5em;
             color: #00b3ff;
             text-align: center;
-            text-shadow: 0 0 15px #00b3ff, 0 0 30px #00b3ff;
             margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(0, 179, 255, 0.9);
             font-family: 'Orbitron', sans-serif;
-            letter-spacing: 5px;
+            font-style: italic;
+        }
+        .banner {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 15px rgba(0, 179, 255, 0.8);
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            font-size: 1.5em;
+            color: #00b3ff;
+            font-family: 'Orbitron', sans-serif;
         }
         .game-container {
             position: relative;
-            width: 100vw;
-            height: 70vh;
+            width: 80vw;
+            height: 60vh;
             overflow: hidden;
-            border: 5px solid #00b3ff;
             border-radius: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
             box-shadow: 0 0 50px #00b3ff;
-            background-color: rgba(0, 0, 0, 0.6);
+            margin-bottom: 30px;
         }
         .catcher {
             position: absolute;
             bottom: 20px;
-            width: 180px;
-            height: 50px;
+            width: 120px;
+            height: 40px;
             background-color: #00b3ff;
-            border-radius: 25px;
-            filter: drop-shadow(0 0 15px #00b3ff);
-            box-shadow: 0 0 20px #00b3ff;
+            border-radius: 20px;
             transition: all 0.2s ease;
+            box-shadow: 0 0 15px #00b3ff;
         }
         .falling-photo {
             position: absolute;
             width: 120px;
             height: 120px;
-            border-radius: 15px;
-            border: 3px solid #fff;
+            border-radius: 50%;
             animation: fall 6s linear infinite;
+            border: 3px solid #fff;
         }
         @keyframes fall {
             0% { top: -120px; }
-            100% { top: 90vh; }
+            100% { top: 100%; }
         }
         .score-container {
-            font-size: 2.5em;
-            color: #00ffcc;
-            text-shadow: 0 0 20px #00ffcc, 0 0 30px #00ffcc;
-            margin-bottom: 10px;
+            font-size: 1.8em;
             display: flex;
             align-items: center;
-        }
-        .score-label {
-            margin-right: 10px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5em;
+            justify-content: center;
             color: #00b3ff;
-            text-shadow: 0 0 15px #00b3ff;
+            text-shadow: 0 0 10px #00b3ff;
+            margin-bottom: 15px;
         }
         .name {
-            font-size: 2em;
+            font-size: 1.8em;
             color: #00b3ff;
-            text-shadow: 0 0 20px #00b3ff;
-            margin-left: 20px;
+            text-shadow: 0 0 10px #00b3ff;
             font-family: 'Orbitron', sans-serif;
             font-style: italic;
-        }
-        .background-effects {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: url('https://i.postimg.cc/pXXHqkXr/1742316301125-2.jpg') no-repeat center center;
-            background-size: cover;
-            filter: blur(5px);
-            z-index: -1;
-            opacity: 0.5;
         }
         .cursor {
             width: 50px;
@@ -104,17 +102,31 @@
             pointer-events: none;
             transition: transform 0.1s ease;
         }
+        .score-box {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 179, 255, 0.9);
+            margin-top: 20px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.6em;
+        }
     </style>
 </head>
 <body>
-    <div class="background-effects"></div>
-    <h1>Bienvenido a mi mundo - Anth'Zz Berrocal</h1>
+    <h1>Mi Mundo - Anth'Zz Berrocal</h1>
+    <div class="banner">
+        ¡Bienvenido al juego de fotos de mi amor! ¡Ayuda a atrapar las fotos mientras caen! 
+    </div>
     <div class="score-container">
-        <span class="score-label">Puntos:</span> <span id="score">0</span>
+        <span id="score">Puntos: 0</span>
         <span class="name">Anth'Zz Berrocal</span>
     </div>
     <div class="game-container" id="game">
         <div class="catcher" id="catcher"></div>
+    </div>
+    <div class="score-box">
+        <span id="score-box">Puntos: 0</span>
     </div>
     <div class="cursor" id="cursor"></div>
     <script>
@@ -128,10 +140,10 @@
             const photo = document.createElement('img');
             photo.src = 'https://i.postimg.cc/pXXHqkXr/1742316301125-2.jpg';
             photo.classList.add('falling-photo');
-            photo.style.left = Math.random() * 95 + 'vw';
+            photo.style.left = Math.random() * (game.clientWidth - 120) + 'px';
             photo.addEventListener('click', () => {
                 score++;
-                scoreDisplay.textContent = score;
+                scoreDisplay.textContent = 'Puntos: ' + score;
                 photo.remove();
             });
             game.appendChild(photo);
@@ -139,7 +151,7 @@
         }
 
         function moveCatcher(e) {
-            const x = e.touches ? e.touches[0].clientX - 90 : e.clientX - 90;
+            const x = e.touches ? e.touches[0].clientX - 75 : e.clientX - 75;
             catcher.style.left = `${x}px`;
             cursor.style.left = `${x - 25}px`;
         }

@@ -67,6 +67,17 @@
             0% { top: -120px; }
             100% { top: 100%; }
         }
+        .score-box {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 179, 255, 0.9);
+            margin-top: 20px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.6em;
+            color: #00b3ff;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -74,14 +85,21 @@
     <div class="game-container" id="game">
         <div class="catcher" id="catcher"></div>
     </div>
+    <div class="score-box" id="score-box">Puntos: 0</div>
     <script>
         const game = document.getElementById('game');
         const catcher = document.getElementById('catcher');
+        const scoreBox = document.getElementById('score-box');
         let score = 0;function spawnPhoto() {
         const photo = document.createElement('img');
         photo.src = 'https://i.postimg.cc/pXXHqkXr/1742316301125-2.jpg';
         photo.classList.add('falling-photo');
         photo.style.left = Math.random() * (game.clientWidth - 120) + 'px';
+        photo.addEventListener('click', () => {
+            score++;
+            scoreBox.textContent = 'Puntos: ' + score;
+            photo.remove();
+        });
         game.appendChild(photo);
         setTimeout(() => photo.remove(), 6000);
     }

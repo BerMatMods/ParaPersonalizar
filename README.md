@@ -92,7 +92,7 @@
         const scoreBox = document.getElementById('score-box');
         let score = 0;function spawnPhoto() {
         const photo = document.createElement('img');
-        photo.src = 'https://i.postimg.cc/pXXHqkXr/1742316301125-2.jpg';
+        photo.src = 'https://i.postimg.cc/MH40gdRR/Mag-Pic-20250501-185936660-3.jpg';
         photo.classList.add('falling-photo');
         photo.style.left = Math.random() * (game.clientWidth - 120) + 'px';
         photo.addEventListener('click', () => {

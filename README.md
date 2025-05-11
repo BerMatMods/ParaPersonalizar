@@ -1,179 +1,318 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ BerMatModZ - Registro Exclusivo ⚡</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=VT323&family=Press+Start+2P&family=Space+Mono&display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #ffffff, #00ff00, #ff00ff); /* Fondo blanco a verde y fucsia */
-            color: #00ff00;
-            font-family: 'Space Mono', monospace;
-            overflow: hidden;
-            perspective: 1000px;
-        }
-        .container {
-            width: 90%;
-            max-width: 600px;
-            margin: 80px auto;
-            padding: 40px;
-            background: rgba(0, 0, 0, 0.9);
-            border-radius: 15px;
-            box-shadow: 0 0 40px #00ff00, 0 0 80px #ff0000;
-            backdrop-filter: blur(15px);
-            transform-style: preserve-3d;
-            animation: float 5s infinite alternate ease-in-out;
-        }
-
-        @keyframes float {
-            0% { transform: rotateY(0deg) rotateX(0deg) translateZ(0px); }
-            100% { transform: rotateY(20deg) rotateX(10deg) translateZ(30px); }
-        }
-
-        h1 {
-            color: #ff0000;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3em;
-            margin-bottom: 20px;
-            text-shadow: 0 0 20px #00ff00, 0 0 30px #ff0000;
-            animation: titleAnim 3s infinite alternate ease-in-out;
-        }
-
-        @keyframes titleAnim {
-            0% { text-shadow: 0 0 20px #00ff00, 0 0 30px #ff0000; }
-            100% { text-shadow: 0 0 40px #ff0000, 0 0 60px #00ff00; }
-        }
-
-        input[type="text"], input[type="password"] {
-            width: 100%;
-            padding: 15px;
-            margin: 15px 0;
-            background-color: rgba(255, 0, 0, 0.2);
-            border: none;
-            color: #fff;
-            border-radius: 10px;
-            font-size: 1.2em;
-            text-align: center;
-            box-shadow: 0 0 10px #ff0000, 0 0 20px #00ff00;
-            transform-style: preserve-3d;
-            font-family: 'Press Start 2P', cursive;
-        }
-
-        button {
-            background-color: #00ff00;
-            color: #000;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.5em;
-            border-radius: 10px;
-            box-shadow: 0 0 20px #ff0000, 0 0 40px #00ff00;
-            cursor: pointer;
-            transition: 0.3s;
-            transform: perspective(500px) rotateY(10deg) rotateX(10deg);
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        button:hover {
-            background-color: #ff0000;
-            color: #fff;
-            box-shadow: 0 0 40px #00ff00, 0 0 80px #ff0000;
-            transform: perspective(500px) rotateY(0deg) rotateX(0deg) scale(1.1);
-        }
-
-        .banner {
-            text-align: center;
-            margin: 20px 0;
-            padding: 15px;
-            background-color: rgba(255, 0, 0, 0.8);
-            border-radius: 15px;
-            box-shadow: 0 0 40px #00ff00, 0 0 60px #ff0000;
-            color: #fff;
-            font-size: 2em;
-            text-transform: uppercase;
-            transform-style: preserve-3d;
-            animation: bannerAnim 5s infinite alternate ease-in-out;
-            font-family: 'Space Mono', monospace;
-        }
-
-        @keyframes bannerAnim {
-            0% { transform: rotateY(0deg) translateZ(0px); }
-            100% { transform: rotateY(15deg) translateZ(20px); }
-        }
-
-        .social-icons img {
-            width: 50px;
-            margin: 15px;
-            transition: 0.3s;
-            transform: perspective(500px) rotateY(10deg) rotateX(10deg);
-        }
-
-        .social-icons img:hover {
-            transform: perspective(500px) rotateY(0deg) rotateX(0deg) scale(1.2);
-            filter: brightness(1.5);
-        }
-
-        .info-personal, .proyectos {
-            font-family: 'Orbitron', sans-serif;
-            color: #ff0000;
-            text-shadow: 0 0 20px #00ff00, 0 0 30px #ff0000;
-            font-size: 1.4em;
-            margin-top: 20px;
-        }
-
-        .info-personal p, .proyectos p {
-            margin: 10px 0;
-        }
-
-        .proyectos h2, .info-personal h2 {
-            font-family: 'VT323', monospace;
-            color: #00ff00;
-            text-transform: uppercase;
-            text-shadow: 0 0 15px #ff0000, 0 0 25px #00ff00;
-        }
-
-    </style>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" href="img/flowers.png" type="image/x-icon">
+    <title>flowers</title>
+    
 </head>
-<body>
-    <div class="container">
-        <h1>⚡ BerMatModZ ⚡</h1>
-        <div class="banner">Regístrate para obtener acceso exclusivo a BerMatModZ</div>
-        <form action="https://formsubmit.co/antonioberrocal62@gmail.com" method="POST" id="registerForm">
-            <input type="hidden" name="_subject" value="Nuevo registro en BerMatModZ">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="text" name="email" placeholder="Correo Electrónico" required>
-            <input type="password" name="password" placeholder="Contraseña" required>
-            <input type="password" name="confirm_password" placeholder="Confirmar Contraseña" required>
-            <button type="submit">Registrarse</button>
-        </form>
 
-        <div class="info-personal">
-            <h2>💥 Información Personal</h2>
-            <p>Nombre: Anth'Zz Berrocal</p>
-            <p>Alias: BerMatModZ</p>
-            <p>Pasión: Tecnología, hacking y ciberseguridad</p>
+<body class="container">
+    <div class="night"></div>
+    <div class="flowers">
+      <div class="flower flower--1">
+        <div class="flower__leafs flower__leafs--1">
+          <div class="flower__leaf flower__leaf--1"></div>
+          <div class="flower__leaf flower__leaf--2"></div>
+          <div class="flower__leaf flower__leaf--3"></div>
+          <div class="flower__leaf flower__leaf--4"></div>
+          <div class="flower__white-circle"></div>
+  
+          <div class="flower__light flower__light--1"></div>
+          <div class="flower__light flower__light--2"></div>
+          <div class="flower__light flower__light--3"></div>
+          <div class="flower__light flower__light--4"></div>
+          <div class="flower__light flower__light--5"></div>
+          <div class="flower__light flower__light--6"></div>
+          <div class="flower__light flower__light--7"></div>
+          <div class="flower__light flower__light--8"></div>
+  
         </div>
-
-        <div class="proyectos">
-            <h2>⚙️ Proyectos</h2>
-            <p>⚡ BerMat-Bot MD🔥 - Bot de WhatsApp avanzado</p>
-            <p>⚡ BerMat_Mods - Herramientas personalizadas</p>
-            <p>⚡ Fuerza Anónima de Mentes Avanzadas (FAMA)</p>
+        <div class="flower__line">
+          <div class="flower__line__leaf flower__line__leaf--1"></div>
+          <div class="flower__line__leaf flower__line__leaf--2"></div>
+          <div class="flower__line__leaf flower__line__leaf--3"></div>
+          <div class="flower__line__leaf flower__line__leaf--4"></div>
+          <div class="flower__line__leaf flower__line__leaf--5"></div>
+          <div class="flower__line__leaf flower__line__leaf--6"></div>
         </div>
-
-        <h2>🌐 Redes Sociales</h2>
-        <div class="social-icons">
-            <a href="https://www.instagram.com/tu_instagram" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"></a>
-            <a href="https://github.com/anthzberrocal" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub"></a>
-            <a href="https://www.facebook.com/tu_facebook" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"></a>
-            <a href="https://wa.me/937556459" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"></a>
+      </div>
+  
+      <div class="flower flower--2">
+        <div class="flower__leafs flower__leafs--2">
+          <div class="flower__leaf flower__leaf--1"></div>
+          <div class="flower__leaf flower__leaf--2"></div>
+          <div class="flower__leaf flower__leaf--3"></div>
+          <div class="flower__leaf flower__leaf--4"></div>
+          <div class="flower__white-circle"></div>
+  
+          <div class="flower__light flower__light--1"></div>
+          <div class="flower__light flower__light--2"></div>
+          <div class="flower__light flower__light--3"></div>
+          <div class="flower__light flower__light--4"></div>
+          <div class="flower__light flower__light--5"></div>
+          <div class="flower__light flower__light--6"></div>
+          <div class="flower__light flower__light--7"></div>
+          <div class="flower__light flower__light--8"></div>
+  
         </div>
-
-        <div class="footer">
-            © 2025 BerMatModZ - Todos los derechos reservados
+        <div class="flower__line">
+          <div class="flower__line__leaf flower__line__leaf--1"></div>
+          <div class="flower__line__leaf flower__line__leaf--2"></div>
+          <div class="flower__line__leaf flower__line__leaf--3"></div>
+          <div class="flower__line__leaf flower__line__leaf--4"></div>
         </div>
-    </div>
-</body>
+      </div>
+  
+      <div class="flower flower--3">
+        <div class="flower__leafs flower__leafs--3">
+          <div class="flower__leaf flower__leaf--1"></div>
+          <div class="flower__leaf flower__leaf--2"></div>
+          <div class="flower__leaf flower__leaf--3"></div>
+          <div class="flower__leaf flower__leaf--4"></div>
+          <div class="flower__white-circle"></div>
+  
+          <div class="flower__light flower__light--1"></div>
+          <div class="flower__light flower__light--2"></div>
+          <div class="flower__light flower__light--3"></div>
+          <div class="flower__light flower__light--4"></div>
+          <div class="flower__light flower__light--5"></div>
+          <div class="flower__light flower__light--6"></div>
+          <div class="flower__light flower__light--7"></div>
+          <div class="flower__light flower__light--8"></div>
+  
+        </div>
+        <div class="flower__line">
+          <div class="flower__line__leaf flower__line__leaf--1"></div>
+          <div class="flower__line__leaf flower__line__leaf--2"></div>
+          <div class="flower__line__leaf flower__line__leaf--3"></div>
+          <div class="flower__line__leaf flower__line__leaf--4"></div>
+        </div>
+      </div>
+  
+      <div class="grow-ans" style="--d:1.2s">
+        <div class="flower__g-long">
+          <div class="flower__g-long__top"></div>
+          <div class="flower__g-long__bottom"></div>
+        </div>
+      </div>
+  
+      <div class="growing-grass">
+        <div class="flower__grass flower__grass--1">
+          <div class="flower__grass--top"></div>
+          <div class="flower__grass--bottom"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--1"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--2"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--3"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--4"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--5"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--6"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--7"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--8"></div>
+          <div class="flower__grass__overlay"></div>
+        </div>
+      </div>
+  
+      <div class="growing-grass">
+        <div class="flower__grass flower__grass--2">
+          <div class="flower__grass--top"></div>
+          <div class="flower__grass--bottom"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--1"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--2"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--3"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--4"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--5"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--6"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--7"></div>
+          <div class="flower__grass__leaf flower__grass__leaf--8"></div>
+          <div class="flower__grass__overlay"></div>
+        </div>
+      </div>
+  
+      <div class="grow-ans" style="--d:2.4s">
+        <div class="flower__g-right flower__g-right--1">
+          <div class="leaf"></div>
+        </div>
+      </div>
+  
+      <div class="grow-ans" style="--d:2.8s">
+        <div class="flower__g-right flower__g-right--2">
+          <div class="leaf"></div>
+        </div>
+      </div>
+  
+      <div class="grow-ans" style="--d:2.8s">
+        <div class="flower__g-front">
+          <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--1">
+            <div class="flower__g-front__leaf"></div>
+          </div>
+          <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--2">
+            <div class="flower__g-front__leaf"></div>
+          </div>
+          <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--3">
+            <div class="flower__g-front__leaf"></div>
+          </div>
+          <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--4">
+            <div class="flower__g-front__leaf"></div>
+          </div>
+          <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--5">
+            <div class="flower__g-front__leaf"></div>
+          </div>
+          <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--6">
+            <div class="flower__g-front__leaf"></div>
+          </div>
+          <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--7">
+            <div class="flower__g-front__leaf"></div>
+          </div>
+          <div class="flower__g-front__leaf-wrapper flower__g-front__leaf-wrapper--8">
+            <div class="flower__g-front__leaf"></div>
+          </div>
+          <div class="flower__g-front__line"></div>
+        </div>
+      </div>
+  
+      <div class="grow-ans" style="--d:3.2s">
+        <div class="flower__g-fr">
+          <div class="leaf"></div>
+          <div class="flower__g-fr__leaf flower__g-fr__leaf--1"></div>
+          <div class="flower__g-fr__leaf flower__g-fr__leaf--2"></div>
+          <div class="flower__g-fr__leaf flower__g-fr__leaf--3"></div>
+          <div class="flower__g-fr__leaf flower__g-fr__leaf--4"></div>
+          <div class="flower__g-fr__leaf flower__g-fr__leaf--5"></div>
+          <div class="flower__g-fr__leaf flower__g-fr__leaf--6"></div>
+          <div class="flower__g-fr__leaf flower__g-fr__leaf--7"></div>
+          <div class="flower__g-fr__leaf flower__g-fr__leaf--8"></div>
+        </div>
+      </div>
+  
+      <div class="long-g long-g--0">
+        <div class="grow-ans" style="--d:3s">
+          <div class="leaf leaf--0"></div>
+        </div>
+        <div class="grow-ans" style="--d:2.2s">
+          <div class="leaf leaf--1"></div>
+        </div>
+        <div class="grow-ans" style="--d:3.4s">
+          <div class="leaf leaf--2"></div>
+        </div>
+        <div class="grow-ans" style="--d:3.6s">
+          <div class="leaf leaf--3"></div>
+        </div>
+      </div>
+  
+      <div class="long-g long-g--1">
+        <div class="grow-ans" style="--d:3.6s">
+          <div class="leaf leaf--0"></div>
+        </div>
+        <div class="grow-ans" style="--d:3.8s">
+          <div class="leaf leaf--1"></div>
+        </div>
+        <div class="grow-ans" style="--d:4s">
+          <div class="leaf leaf--2"></div>
+        </div>
+        <div class="grow-ans" style="--d:4.2s">
+          <div class="leaf leaf--3"></div>
+        </div>
+      </div>
+  
+      <div class="long-g long-g--2">
+        <div class="grow-ans" style="--d:4s">
+          <div class="leaf leaf--0"></div>
+        </div>
+        <div class="grow-ans" style="--d:4.2s">
+          <div class="leaf leaf--1"></div>
+        </div>
+        <div class="grow-ans" style="--d:4.4s">
+          <div class="leaf leaf--2"></div>
+        </div>
+        <div class="grow-ans" style="--d:4.6s">
+          <div class="leaf leaf--3"></div>
+        </div>
+      </div>
+  
+      <div class="long-g long-g--3">
+        <div class="grow-ans" style="--d:4s">
+          <div class="leaf leaf--0"></div>
+        </div>
+        <div class="grow-ans" style="--d:4.2s">
+          <div class="leaf leaf--1"></div>
+        </div>
+        <div class="grow-ans" style="--d:3s">
+          <div class="leaf leaf--2"></div>
+        </div>
+        <div class="grow-ans" style="--d:3.6s">
+          <div class="leaf leaf--3"></div>
+        </div>
+      </div>
+  
+      <div class="long-g long-g--4">
+        <div class="grow-ans" style="--d:4s">
+          <div class="leaf leaf--0"></div>
+        </div>
+        <div class="grow-ans" style="--d:4.2s">
+          <div class="leaf leaf--1"></div>
+        </div>
+        <div class="grow-ans" style="--d:3s">
+          <div class="leaf leaf--2"></div>
+        </div>
+        <div class="grow-ans" style="--d:3.6s">
+          <div class="leaf leaf--3"></div>
+        </div>
+      </div>
+  
+      <div class="long-g long-g--5">
+        <div class="grow-ans" style="--d:4s">
+          <div class="leaf leaf--0"></div>
+        </div>
+        <div class="grow-ans" style="--d:4.2s">
+          <div class="leaf leaf--1"></div>
+        </div>
+        <div class="grow-ans" style="--d:3s">
+          <div class="leaf leaf--2"></div>
+        </div>
+        <div class="grow-ans" style="--d:3.6s">
+          <div class="leaf leaf--3"></div>
+        </div>
+      </div>
+  
+      <div class="long-g long-g--6">
+        <div class="grow-ans" style="--d:4.2s">
+          <div class="leaf leaf--0"></div>
+        </div>
+        <div class="grow-ans" style="--d:4.4s">
+          <div class="leaf leaf--1"></div>
+        </div>
+        <div class="grow-ans" style="--d:4.6s">
+          <div class="leaf leaf--2"></div>
+        </div>
+        <div class="grow-ans" style="--d:4.8s">
+          <div class="leaf leaf--3"></div>
+        </div>
+      </div>
+  
+      <div class="long-g long-g--7">
+        <div class="grow-ans" style="--d:3s">
+          <div class="leaf leaf--0"></div>
+        </div>
+        <div class="grow-ans" style="--d:3.2s">
+          <div class="leaf leaf--1"></div>
+        </div>
+        <div class="grow-ans" style="--d:3.5s">
+          <div class="leaf leaf--2"></div>
+        </div>
+        <div class="grow-ans" style="--d:3.6s">
+          <div class="leaf leaf--3"></div>
+        </div>
+      </div>
+    </div> 
+    
+    <script src="main.js"></script>
+  </body>
 </html>
+
+<audio controls autoplay class="music">
+  <source src='music/music.mp3' type="audio/mpeg">
+</audio>

@@ -31,35 +31,36 @@
         .envelope {
             position: relative;
             width: 320px;
-            height: 200px;
-            background-color: #fff;
+            height: 250px;
+            background-color: #ffffff;
             border-radius: 8px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.15);
             overflow: hidden;
-            transition: 0.6s ease-in-out;
             cursor: pointer;
         }
         .envelope .flap {
             position: absolute;
-            top: -50px;
+            top: -160px;
             left: 0;
             width: 100%;
-            height: 150px;
+            height: 160px;
             background-color: #c2185b;
             border-radius: 0 0 320px 320px;
-            transition: 0.6s ease-in-out;
+            transform-origin: bottom center;
+            transition: transform 0.6s ease-in-out;
+            z-index: 2;
         }
         .envelope.opened .flap {
             transform: rotateX(-180deg);
-            transform-origin: bottom center;
         }
         .message {
-            padding: 20px;
+            padding: 30px 20px;
             font-family: 'Pacifico', cursive;
             color: #c2185b;
             opacity: 0;
             transform: translateY(200px);
-            transition: 0.8s ease-in-out 0.4s;
+            transition: opacity 0.8s ease-in-out 0.4s, transform 0.8s ease-in-out 0.4s;
+            z-index: 1;
         }
         .envelope.opened .message {
             opacity: 1;

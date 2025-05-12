@@ -2,117 +2,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BerMat-Games</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Orbitron:wght@400;500&display=swap" rel="stylesheet">
+    <title>Corazón Animado - BerMatModZ</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
         body {
-            background: linear-gradient(135deg, #000000, #00b3ff);
-            font-family: 'Poppins', sans-serif;
-            color: #fff;
-            overflow: hidden;
-            height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: relative;
-        }
-        h1 {
-            font-size: 4em;
-            color: #00b3ff;
-            text-align: center;
-            margin-bottom: 20px;
-            text-shadow: 0 0 15px rgba(0, 179, 255, 0.9);
-            font-family: 'Orbitron', sans-serif;
-            font-style: italic;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 15px 30px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px #00b3ff;
-        }
-        .game-container {
-            position: relative;
-            width: 80vw;
-            height: 60vh;
+            min-height: 100vh;
+            background-color: #0f0f0f;
+            color: #ffffff;
+            font-family: 'Courier New', Courier, monospace;
             overflow: hidden;
-            border-radius: 20px;
-            background-color: rgba(0, 0, 0, 0.7);
-            box-shadow: 0 0 50px #00b3ff;
-            margin-bottom: 30px;
         }
-        .catcher {
+        .heart-container {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            animation: float 5s ease-in-out infinite alternate;
+        }
+        .heart {
+            width: 100%;
+            height: 100%;
+            background-color: #ff007f;
             position: absolute;
-            bottom: 20px;
-            width: 120px;
-            height: 40px;
-            background-color: #00b3ff;
-            border-radius: 20px;
-            transition: all 0.2s ease;
-            box-shadow: 0 0 15px #00b3ff;
+            top: 0;
+            left: 0;
+            clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 50% 85%, 20% 100%, 0% 35%);
+            animation: heartbeat 1.5s ease-in-out infinite;
         }
-        .falling-photo {
+        .text-container {
             position: absolute;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            animation: fall 6s linear infinite;
-            border: 3px solid #fff;
-        }
-        @keyframes fall {
-            0% { top: -120px; }
-            100% { top: 100%; }
-        }
-        .score-box {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 10px 20px;
-            border-radius: 12px;
-            box-shadow: 0 0 10px rgba(0, 179, 255, 0.9);
-            margin-top: 20px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.6em;
-            color: #00b3ff;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             text-align: center;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+        .text-container h1 {
+            color: #ffd700;
+            font-size: 24px;
+            margin: 0;
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(0.9); }
+            75% { transform: scale(1.2); }
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-20px); }
+        }
+        .flower {
+            position: absolute;
+            bottom: -60px;
+            width: 50px;
+            animation: grow 5s infinite alternate ease-in-out;
+        }
+        .flower:nth-child(1) { left: 20%; animation-delay: 0s; }
+        .flower:nth-child(2) { left: 50%; animation-delay: 2s; }
+        .flower:nth-child(3) { left: 80%; animation-delay: 4s; }
+        @keyframes grow {
+            0% { transform: scale(0) translateY(100px); opacity: 0; }
+            50% { transform: scale(1) translateY(-30px); opacity: 1; }
+            100% { transform: scale(1.2) translateY(-60px); opacity: 0.8; }
         }
     </style>
 </head>
 <body>
-    <h1>🌀 BerMat-Games 🌀</h1>
-    <div class="game-container" id="game">
-        <div class="catcher" id="catcher"></div>
+    <div class="heart-container">
+        <div class="heart"></div>
+        <div class="text-container">
+            <h1>⚡ BerMatModZ ⚡</h1>
+            <p>Programador | Hacker | Ciberseguridad</p>
+            <p>Proyectos: BerMat_Bot, BerMatMods, ⚡BerMat-Bot MD🔥</p>
+            <p>Contacta: Anth'Zz Berrocal</p>
+            <p>WhatsApp: 937556459</p>
+            <p>Ubicación: Andahuaylas</p>
+        </div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Rose_icon.svg/1200px-Rose_icon.svg.png" class="flower" alt="Flor 1">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Rose_icon.svg/1200px-Rose_icon.svg.png" class="flower" alt="Flor 2">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Rose_icon.svg/1200px-Rose_icon.svg.png" class="flower" alt="Flor 3">
     </div>
-    <div class="score-box" id="score-box">Puntos: 0</div>
-    <script>
-        const game = document.getElementById('game');
-        const catcher = document.getElementById('catcher');
-        const scoreBox = document.getElementById('score-box');
-        let score = 0;function spawnPhoto() {
-        const photo = document.createElement('img');
-        photo.src = 'https://i.postimg.cc/MH40gdRR/Mag-Pic-20250501-185936660-3.jpg';
-        photo.classList.add('falling-photo');
-        photo.style.left = Math.random() * (game.clientWidth - 120) + 'px';
-        photo.addEventListener('click', () => {
-            score++;
-            scoreBox.textContent = 'Puntos: ' + score;
-            photo.remove();
-        });
-        game.appendChild(photo);
-        setTimeout(() => photo.remove(), 6000);
-    }
-
-    function moveCatcher(e) {
-        const x = e.touches ? e.touches[0].clientX - 75 : e.clientX - 75;
-        catcher.style.left = `${x}px`;
-    }
-
-    document.addEventListener('mousemove', moveCatcher);
-    document.addEventListener('touchmove', moveCatcher);
-    setInterval(spawnPhoto, 1000);
-</script>
-
 </body>
 </html>

@@ -2,11 +2,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carta para Briyidth - BerMatModZ</title>
+    <title>Libro de Amor - BerMatModZ</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Raleway:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #fdf6e3;
+            background-color: #fff0f5;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -14,57 +14,36 @@
             min-height: 100vh;
             font-family: 'Raleway', sans-serif;
             margin: 0;
+        }
+        .book {
+            width: 600px;
+            height: 400px;
+            background-color: #fff;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            border-radius: 15px;
             overflow: hidden;
-        }
-        .intro {
-            font-size: 30px;
-            margin-bottom: 20px;
-            color: #c2185b;
-            font-family: 'Pacifico', cursive;
-            text-align: center;
-            animation: fadeIn 1.5s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .envelope {
             position: relative;
-            width: 320px;
-            height: 250px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-            overflow: hidden;
-            cursor: pointer;
+            perspective: 1500px;
         }
-        .envelope .flap {
-            position: absolute;
-            top: -160px;
-            left: 0;
+        .pages {
             width: 100%;
-            height: 160px;
-            background-color: #c2185b;
-            border-radius: 0 0 320px 320px;
-            transform-origin: bottom center;
-            transition: transform 0.6s ease-in-out;
-            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            transition: transform 1s ease-in-out;
+            transform-origin: left center;
         }
-        .envelope.opened .flap {
-            transform: rotateX(-180deg);
-        }
-        .message {
-            padding: 30px 20px;
+        .page {
+            width: 100%;
+            padding: 40px;
+            background-color: #ffe4e1;
+            border-radius: 15px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
             font-family: 'Pacifico', cursive;
             color: #c2185b;
-            opacity: 0;
-            transform: translateY(200px);
-            transition: opacity 0.8s ease-in-out 0.4s, transform 0.8s ease-in-out 0.4s;
-            z-index: 1;
-        }
-        .envelope.opened .message {
-            opacity: 1;
-            transform: translateY(0);
+            line-height: 1.8;
+            overflow-y: auto;
+            text-align: center;
         }
         .button {
             background-color: #c2185b;
@@ -73,7 +52,7 @@
             border: none;
             border-radius: 30px;
             cursor: pointer;
-            margin-top: 20px;
+            margin: 20px 10px;
             font-family: 'Raleway', sans-serif;
             font-weight: bold;
             transition: background-color 0.3s ease;
@@ -81,18 +60,41 @@
         .button:hover {
             background-color: #b71c1c;
         }
+        .controls {
+            display: flex;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
-    <div class="intro">Esto es para la niña más hermosa del mundo 💖</div>
-    <div class="envelope" id="envelope" onclick="this.classList.toggle('opened')">
-        <div class="flap"></div>
-        <div class="message">
-            <h2>Te Amo Muchísimo</h2>
-            <p>Gracias por llegar a mi vida, eres lo más valioso que tengo y siempre te voy a amar en las buenas y en las malas. Sé que juntos vamos a salir adelante. ¡Te amo muchísimo, mi mami! 💕</p>
-            <p>Tu siempre, Anth'Zz</p>
+    <div class="book">
+        <div class="pages" id="pages">
+            <div class="page">Eres lo más hermoso que ha llegado a mi vida. 💖</div>
+            <div class="page">Gracias por ser mi razón para sonreír cada día. 😘</div>
+            <div class="page">Te amo más de lo que las palabras pueden expresar. 💞</div>
+            <div class="page">Siempre estaré a tu lado, en las buenas y en las malas. ❤️</div>
+            <div class="page">Eres mi mundo, mi vida, mi todo. Te amo infinitamente. 🌹</div>
         </div>
     </div>
-    <button class="button" onclick="document.getElementById('envelope').classList.toggle('opened')">Abrir la Carta</button>
+    <div class="controls">
+        <button class="button" onclick="previousPage()">⬅️ Anterior</button>
+        <button class="button" onclick="nextPage()">➡️ Siguiente</button>
+    </div>
+    <script>
+        let currentPage = 0;
+        const pages = document.getElementById('pages');
+        function nextPage() {
+            if (currentPage < pages.children.length - 1) {
+                currentPage++;
+                pages.style.transform = `translateX(-${currentPage * 100}%)`;
+            }
+        }
+        function previousPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                pages.style.transform = `translateX(-${currentPage * 100}%)`;
+            }
+        }
+    </script>
 </body>
 </html>

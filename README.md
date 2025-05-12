@@ -10,7 +10,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #0f0f0f;
+            background-color: #ff00aa;
             color: #ffffff;
             font-family: 'Raleway', sans-serif;
             overflow: hidden;
@@ -64,13 +64,13 @@
         .flower {
             position: absolute;
             bottom: -80px;
-            width: 60px;
+            width: 70px;
             animation: grow 6s infinite alternate ease-in-out;
             transform-origin: bottom center;
         }
-        .flower:nth-child(3) { left: 20%; animation-delay: 0s; }
+        .flower:nth-child(3) { left: 15%; animation-delay: 0s; }
         .flower:nth-child(4) { left: 50%; animation-delay: 2s; }
-        .flower:nth-child(5) { left: 80%; animation-delay: 4s; }
+        .flower:nth-child(5) { left: 85%; animation-delay: 4s; }
         @keyframes grow {
             0% { transform: scale(0) translateY(100px); opacity: 0; }
             50% { transform: scale(1) translateY(-30px); opacity: 1; }
@@ -89,9 +89,9 @@
             <p>WhatsApp: 937556459</p>
             <p>Ubicación: Andahuaylas</p>
         </div>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Rose_icon.svg/1024px-Rose_icon.svg.png" class="flower" alt="Flor 1">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Rose_icon.svg/1024px-Rose_icon.svg.png" class="flower" alt="Flor 2">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Rose_icon.svg/1024px-Rose_icon.svg.png" class="flower" alt="Flor 3">
+        <img src="https://img.icons8.com/color/96/000000/rose.png" class="flower" alt="Flor 1">
+        <img src="https://img.icons8.com/color/96/000000/rose.png" class="flower" alt="Flor 2">
+        <img src="https://img.icons8.com/color/96/000000/rose.png" class="flower" alt="Flor 3">
     </div>
 </body>
 </html>

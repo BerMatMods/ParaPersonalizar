@@ -22,6 +22,33 @@
             letter-spacing: 2px;
             position: relative;
             z-index: 10;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .main-screen {
+            background-image: url('https://i.imgur.com/UhCxskT.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            padding: 50px 20px;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .main-screen h1 {
+            font-family: 'Anton', sans-serif;
+            font-size: 4em;
+            letter-spacing: 2px;
+            margin: 0;
+            text-shadow: 2px 4px 10px rgba(0,0,0,0.8);
+        }
+        .main-screen p {
+            font-size: 1.5em;
+            margin-top: 20px;
+            font-weight: bold;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
         }
         .menu {
             position: fixed;
@@ -75,36 +102,6 @@
             margin: 5px 0;
             transition: 0.3s;
         }
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 80px auto 20px auto;
-            display: none;
-        }
-        .card {
-            background-color: #fff;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            margin: 20px 0;
-            padding: 20px;
-            border-radius: 12px;
-            border-left: 5px solid #FFCC00;
-        }
-        .card-header {
-            background-color: #FFCC00;
-            color: #000;
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 1.5em;
-            text-align: center;
-            font-family: 'Anton', sans-serif;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-        }
-        .info-section {
-            display: none;
-        }
-        .info-section.active {
-            display: block;
-        }
     </style>
 </head>
 <body>
@@ -123,46 +120,9 @@
             <li><a href="#" onclick="showSection('info')">Info</a></li>
         </ul>
     </div>
-    <div class="container" id="profile" class="info-section">
-        <div class="card">
-            <div class="card-header">Información Personal</div>
-            <p>Nombre: Anth'Zz Berrocal</p>
-            <p>Alias: BerMatModZ</p>
-            <p>Red: Bitel</p>
-            <p>Proyecto: Internet Gratis</p>
-        </div>
-    </div>
-    <div class="container" id="data" class="info-section">
-        <div class="card">
-            <div class="card-header">Consumo de Datos</div>
-            <p>Consumo actual:</p>
-            <div class="data-bar">
-                <div class="data-bar-inner" id="data-bar"></div>
-            </div>
-            <strong id="total-usage">0 GB usados de 400 GB</strong>
-        </div>
-    </div>
-    <div class="container" id="chip" class="info-section">
-        <div class="card">
-            <div class="card-header">Activar Chip Prepago</div>
-            <button class="button">Activar Chip Entel</button>
-        </div>
-    </div>
-    <div class="container" id="internet" class="info-section">
-        <div class="card">
-            <div class="card-header">Internet Gratis</div>
-            <input type="text" placeholder="Ingresa tu código aquí" style="width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #ccc; margin-bottom: 20px;">
-            <button class="button">Activar Internet</button>
-        </div>
-    </div>
-    <div class="container" id="info" class="info-section">
-        <div class="card">
-            <div class="card-header">Info</div>
-            <p>Desarrollado por Anth'Zz Berrocal</p>
-            <p>Alias: BerMatModZ</p>
-            <p>Proyecto: Internet</p>
-            <p>Red: Bitel</p>
-        </div>
+    <div class="main-screen">
+        <h1>BerMatModZ</h1>
+        <p>Agente Principal de Bitel - Programador y Activador</p>
     </div>
     <script>
         function toggleMenu() {
@@ -173,17 +133,6 @@
             sections.forEach(section => section.classList.remove('active'));
             document.getElementById(id).classList.add('active');
         }
-        let used = 0;
-        let total = 400;
-        function updateUsage() {
-            if (used < 300) {
-                used += 1;
-                let percent = (used / total) * 100;
-                document.getElementById('data-bar').style.width = percent + '%';
-                document.getElementById('total-usage').innerText = used + ' GB usados de 400 GB';
-            }
-        }
-        setInterval(updateUsage, 200);
     </script>
 </body>
 </html>

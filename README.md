@@ -64,9 +64,30 @@
         .flower {
             position: absolute;
             bottom: -80px;
-            width: 70px;
+            width: 50px;
+            height: 50px;
+            background-color: #ff4d94;
+            border-radius: 50%;
             animation: grow 6s infinite alternate ease-in-out;
             transform-origin: bottom center;
+            box-shadow: 0 0 15px #ff4d94, 0 0 30px #ff4d94;
+        }
+        .flower::before, .flower::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #ff4d94;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #ff4d94, 0 0 30px #ff4d94;
+        }
+        .flower::before {
+            top: -30px;
+            left: -25px;
+        }
+        .flower::after {
+            top: -30px;
+            left: 25px;
         }
         .flower:nth-child(3) { left: 15%; animation-delay: 0s; }
         .flower:nth-child(4) { left: 50%; animation-delay: 2s; }
@@ -89,9 +110,9 @@
             <p>WhatsApp: 937556459</p>
             <p>Ubicación: Andahuaylas</p>
         </div>
-        <img src="https://img.icons8.com/color/96/000000/rose.png" class="flower" alt="Flor 1">
-        <img src="https://img.icons8.com/color/96/000000/rose.png" class="flower" alt="Flor 2">
-        <img src="https://img.icons8.com/color/96/000000/rose.png" class="flower" alt="Flor 3">
+        <div class="flower"></div>
+        <div class="flower"></div>
+        <div class="flower"></div>
     </div>
 </body>
 </html>

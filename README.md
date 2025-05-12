@@ -6,91 +6,97 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Raleway:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #ff00aa;
+            background-color: #fdf6e3;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
             font-family: 'Raleway', sans-serif;
-            overflow: hidden;
-            color: #ffffff;
-            text-align: center;
-            padding: 20px;
+            margin: 0;
         }
         .intro {
             font-size: 28px;
             margin-bottom: 20px;
-            color: #ffd700;
-            text-shadow: 2px 2px 10px #ff007f;
+            color: #c2185b;
             font-family: 'Pacifico', cursive;
+            text-align: center;
         }
         .card-container {
             position: relative;
-            width: 300px;
-            height: 200px;
-            background-color: #ff4d94;
-            border-radius: 15px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            width: 350px;
+            height: 250px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
             overflow: hidden;
-            cursor: pointer;
+            transition: all 0.8s ease-in-out;
+        }
+        .card-container .cover {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #f8bbd0;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
             transition: transform 0.8s ease-in-out;
         }
-        .card-container.opened {
-            transform: scale(1.1) rotateX(180deg);
+        .card-container.opened .cover {
+            transform: translateY(-300px);
         }
         .card-container .paper {
             position: absolute;
             width: 100%;
-            height: 200%;
+            height: 100%;
             background-color: #ffffff;
-            border-radius: 15px;
+            border-radius: 10px;
             padding: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-            font-family: 'Pacifico', cursive;
-            font-size: 18px;
-            color: #ff007f;
-            line-height: 1.5;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            opacity: 0;
             transform: translateY(100%);
-            transition: transform 1s ease-in-out;
+            transition: all 0.8s ease-in-out;
+            font-family: 'Pacifico', cursive;
+            color: #c2185b;
+            text-align: center;
+            line-height: 1.6;
         }
         .card-container.opened .paper {
+            opacity: 1;
             transform: translateY(0);
         }
-        .heart {
-            position: absolute;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 50px;
-            color: #ffd700;
-            animation: bounce 2s infinite;
-            text-shadow: 0 0 10px #ff007f;
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-20px); }
-        }
-        .banner {
+        .button {
+            background-color: #c2185b;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
             margin-top: 20px;
             font-family: 'Raleway', sans-serif;
-            color: #ffffff;
-            text-align: center;
-            font-size: 24px;
-            text-shadow: 2px 2px 10px #ff007f;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #b71c1c;
         }
     </style>
 </head>
 <body>
     <div class="intro">Esto es para la niña más hermosa del mundo 💖</div>
-    <div class="card-container" onclick="this.classList.toggle('opened')">
-        <div class="heart">💖</div>
+    <div class="card-container" id="card">
+        <div class="cover">
+            💌 Para Mi Reina Briyidth 💖
+        </div>
         <div class="paper">
             <h2>Te Amo Muchísimo</h2>
             <p>Gracias por llegar a mi vida, eres lo más valioso que tengo y siempre te voy a amar en las buenas y en las malas. Sé que juntos vamos a salir adelante. ¡Te amo muchísimo, mi mami! 💕</p>
             <p>Tu siempre, Anth'Zz</p>
         </div>
     </div>
-    <div class="banner">⚡ BerMatModZ ⚡</div>
+    <button class="button" onclick="document.getElementById('card').classList.toggle('opened')">Abrir la Carta</button>
 </body>
 </html>

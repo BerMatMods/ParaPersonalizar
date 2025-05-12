@@ -2,117 +2,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Corazón Animado - BerMatModZ</title>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&family=Roboto+Slab:wght@900&display=swap" rel="stylesheet">
+    <title>Carta para Briyidth - BerMatModZ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Raleway:wght@700&display=swap" rel="stylesheet">
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
             background-color: #ff00aa;
-            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
             font-family: 'Raleway', sans-serif;
             overflow: hidden;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
         }
-        .heart-container {
+        .intro {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #ffd700;
+            text-shadow: 2px 2px 10px #ff007f;
+            font-family: 'Pacifico', cursive;
+        }
+        .card-container {
             position: relative;
             width: 300px;
-            height: 300px;
-            animation: float 5s ease-in-out infinite alternate;
+            height: 200px;
+            background-color: #ff4d94;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.8s ease-in-out;
+        }
+        .card-container.opened {
+            transform: scale(1.1) rotateX(180deg);
+        }
+        .card-container .paper {
+            position: absolute;
+            width: 100%;
+            height: 200%;
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            font-family: 'Pacifico', cursive;
+            font-size: 18px;
+            color: #ff007f;
+            line-height: 1.5;
+            transform: translateY(100%);
+            transition: transform 1s ease-in-out;
+        }
+        .card-container.opened .paper {
+            transform: translateY(0);
         }
         .heart {
-            width: 100%;
-            height: 100%;
-            background-color: #ff007f;
             position: absolute;
-            top: 0;
-            left: 0;
-            clip-path: path('M150 30 C130 -20, 0 -20, 0 100 C0 200, 150 300, 150 250 C150 300, 300 200, 300 100 C300 -20, 170 -20, 150 30 Z');
-            animation: heartbeat 1.5s ease-in-out infinite;
-        }
-        .text-container {
-            position: absolute;
-            top: 50%;
+            top: -30px;
             left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: #ffffff;
-            font-weight: bold;
-            font-size: 18px;
-            line-height: 1.5;
-            font-family: 'Roboto Slab', serif;
-            text-shadow: 2px 2px 5px #ff007f;
-        }
-        .text-container h1 {
+            transform: translateX(-50%);
+            font-size: 50px;
             color: #ffd700;
-            font-size: 32px;
-            margin: 0;
+            animation: bounce 2s infinite;
+            text-shadow: 0 0 10px #ff007f;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-20px); }
+        }
+        .banner {
+            margin-top: 20px;
             font-family: 'Raleway', sans-serif;
-            text-shadow: 3px 3px 10px #ffd700;
-        }
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            25% { transform: scale(1.1); }
-            50% { transform: scale(0.9); }
-            75% { transform: scale(1.2); }
-        }
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            100% { transform: translateY(-20px); }
-        }
-        .flower {
-            position: absolute;
-            bottom: -80px;
-            width: 50px;
-            height: 50px;
-            background-color: #ff4d94;
-            border-radius: 50%;
-            animation: grow 6s infinite alternate ease-in-out;
-            transform-origin: bottom center;
-            box-shadow: 0 0 15px #ff4d94, 0 0 30px #ff4d94;
-        }
-        .flower::before, .flower::after {
-            content: '';
-            position: absolute;
-            width: 50px;
-            height: 50px;
-            background-color: #ff4d94;
-            border-radius: 50%;
-            box-shadow: 0 0 15px #ff4d94, 0 0 30px #ff4d94;
-        }
-        .flower::before {
-            top: -30px;
-            left: -25px;
-        }
-        .flower::after {
-            top: -30px;
-            left: 25px;
-        }
-        .flower:nth-child(3) { left: 15%; animation-delay: 0s; }
-        .flower:nth-child(4) { left: 50%; animation-delay: 2s; }
-        .flower:nth-child(5) { left: 85%; animation-delay: 4s; }
-        @keyframes grow {
-            0% { transform: scale(0) translateY(100px); opacity: 0; }
-            50% { transform: scale(1) translateY(-30px); opacity: 1; }
-            100% { transform: scale(1.2) translateY(-60px); opacity: 0.8; }
+            color: #ffffff;
+            text-align: center;
+            font-size: 24px;
+            text-shadow: 2px 2px 10px #ff007f;
         }
     </style>
 </head>
 <body>
-    <div class="heart-container">
-        <div class="heart"></div>
-        <div class="text-container">
-            <h1>⚡ BerMatModZ ⚡</h1>
-            <p>Programador | Hacker | Ciberseguridad</p>
-            <p>Proyectos: BerMat_Bot, BerMatMods, ⚡BerMat-Bot MD🔥</p>
-            <p>Contacta: Anth'Zz Berrocal</p>
-            <p>WhatsApp: 937556459</p>
-            <p>Ubicación: Andahuaylas</p>
+    <div class="intro">Esto es para la niña más hermosa del mundo 💖</div>
+    <div class="card-container" onclick="this.classList.toggle('opened')">
+        <div class="heart">💖</div>
+        <div class="paper">
+            <h2>Te Amo Muchísimo</h2>
+            <p>Gracias por llegar a mi vida, eres lo más valioso que tengo y siempre te voy a amar en las buenas y en las malas. Sé que juntos vamos a salir adelante. ¡Te amo muchísimo, mi mami! 💕</p>
+            <p>Tu siempre, Anth'Zz</p>
         </div>
-        <div class="flower"></div>
-        <div class="flower"></div>
-        <div class="flower"></div>
     </div>
+    <div class="banner">⚡ BerMatModZ ⚡</div>
 </body>
 </html>

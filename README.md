@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,66 +9,73 @@
         body {
             background-color: #fff0f5;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            min-height: 100vh;
+            align-items: center;
+            height: 100vh;
             font-family: 'Raleway', sans-serif;
             margin: 0;
         }
         .book {
-            width: 600px;
-            height: 400px;
-            background-color: #fff;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
+            width: 400px;
+            height: 600px;
             perspective: 1500px;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
         }
         .pages {
-            width: 100%;
-            height: 100%;
             display: flex;
             flex-direction: row;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
             transition: transform 1s ease-in-out;
-            transform-origin: left center;
         }
         .page {
             width: 100%;
-            padding: 40px;
+            height: 100%;
             background-color: #ffe4e1;
-            border-radius: 15px;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+            border: 2px solid #c2185b;
+            border-radius: 10px;
+            padding: 40px;
             font-family: 'Pacifico', cursive;
             color: #c2185b;
             line-height: 1.8;
-            overflow-y: auto;
             text-align: center;
+            position: absolute;
+            transform-origin: left center;
+            transform: rotateY(0deg);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+        }
+        .page.show {
+            opacity: 1;
+            visibility: visible;
+            transform: rotateY(0deg);
+        }
+        .page.previous {
+            transform: rotateY(-180deg);
+            opacity: 0;
         }
         .button {
             background-color: #c2185b;
-            color: #ffffff;
+            color: white;
             padding: 10px 30px;
             border: none;
             border-radius: 30px;
             cursor: pointer;
-            margin: 20px 10px;
-            font-family: 'Raleway', sans-serif;
             font-weight: bold;
             transition: background-color 0.3s ease;
+            margin-top: 20px;
         }
         .button:hover {
             background-color: #b71c1c;
         }
-        .controls {
-            display: flex;
-            justify-content: center;
-        }
     </style>
 </head>
 <body>
-    <div class="book">
+    <div class="book" id="book">
         <div class="pages" id="pages">
             <div class="page">Eres lo más hermoso que ha llegado a mi vida. 💖</div>
             <div class="page">Gracias por ser mi razón para sonreír cada día. 😘</div>
@@ -76,23 +84,27 @@
             <div class="page">Eres mi mundo, mi vida, mi todo. Te amo infinitamente. 🌹</div>
         </div>
     </div>
-    <div class="controls">
-        <button class="button" onclick="previousPage()">⬅️ Anterior</button>
-        <button class="button" onclick="nextPage()">➡️ Siguiente</button>
-    </div>
+    <button class="button" onclick="nextPage()">Siguiente Página</button>
+    <button class="button" onclick="previousPage()">Página Anterior</button>
+
     <script>
         let currentPage = 0;
-        const pages = document.getElementById('pages');
+        const pages = document.querySelectorAll('.page');
+        pages[currentPage].classList.add('show');
+
         function nextPage() {
-            if (currentPage < pages.children.length - 1) {
+            if (currentPage < pages.length - 1) {
+                pages[currentPage].classList.remove('show');
                 currentPage++;
-                pages.style.transform = `translateX(-${currentPage * 100}%)`;
+                pages[currentPage].classList.add('show');
             }
         }
+
         function previousPage() {
             if (currentPage > 0) {
+                pages[currentPage].classList.remove('show');
                 currentPage--;
-                pages.style.transform = `translateX(-${currentPage * 100}%)`;
+                pages[currentPage].classList.add('show');
             }
         }
     </script>

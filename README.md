@@ -63,9 +63,10 @@
         }
         .flower {
             position: absolute;
-            bottom: -60px;
+            bottom: -80px;
             width: 60px;
             animation: grow 6s infinite alternate ease-in-out;
+            transform-origin: bottom center;
         }
         .flower:nth-child(3) { left: 20%; animation-delay: 0s; }
         .flower:nth-child(4) { left: 50%; animation-delay: 2s; }
@@ -88,9 +89,9 @@
             <p>WhatsApp: 937556459</p>
             <p>Ubicación: Andahuaylas</p>
         </div>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Emoji_u1f33a.svg" class="flower" alt="Flor 1">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Emoji_u1f33a.svg" class="flower" alt="Flor 2">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Emoji_u1f33a.svg" class="flower" alt="Flor 3">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Rose_icon.svg/1024px-Rose_icon.svg.png" class="flower" alt="Flor 1">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Rose_icon.svg/1024px-Rose_icon.svg.png" class="flower" alt="Flor 2">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Rose_icon.svg/1024px-Rose_icon.svg.png" class="flower" alt="Flor 3">
     </div>
 </body>
 </html>

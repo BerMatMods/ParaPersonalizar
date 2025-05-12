@@ -10,6 +10,7 @@
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
         }
         .header {
             background-color: #FFCC00;
@@ -19,11 +20,65 @@
             font-family: 'Anton', sans-serif;
             font-size: 2em;
             letter-spacing: 2px;
+            position: relative;
+            z-index: 10;
+        }
+        .menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            transform: translateX(-260px);
+            transition: transform 0.4s ease;
+            box-shadow: 5px 0 15px rgba(0,0,0,0.3);
+            z-index: 20;
+        }
+        .menu.active {
+            transform: translateX(0);
+        }
+        .menu h2 {
+            color: #FFCC00;
+            margin-bottom: 20px;
+            font-family: 'Anton', sans-serif;
+        }
+        .menu ul {
+            list-style: none;
+            padding: 0;
+        }
+        .menu ul li {
+            margin-bottom: 15px;
+        }
+        .menu ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+        .menu ul li a:hover {
+            color: #FFCC00;
+        }
+        .burger {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            width: 30px;
+            cursor: pointer;
+            z-index: 30;
+        }
+        .burger div {
+            width: 30px;
+            height: 4px;
+            background-color: #000;
+            margin: 5px 0;
+            transition: 0.3s;
         }
         .container {
             width: 90%;
             max-width: 1200px;
-            margin: 20px auto;
+            margin: 80px auto 20px auto;
         }
         .card {
             background-color: #fff;
@@ -31,6 +86,7 @@
             margin: 20px 0;
             padding: 20px;
             border-radius: 12px;
+            border-left: 5px solid #FFCC00;
         }
         .card-header {
             background-color: #FFCC00;
@@ -40,18 +96,13 @@
             font-size: 1.5em;
             text-align: center;
             font-family: 'Anton', sans-serif;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
         }
         .info {
             display: flex;
             justify-content: space-between;
             margin-bottom: 15px;
             font-weight: bold;
-        }
-        .data-usage {
-            font-size: 1.2em;
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-between;
         }
         .data-bar {
             width: 100%;
@@ -60,6 +111,7 @@
             border-radius: 15px;
             margin: 10px 0;
             overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
         }
         .data-bar-inner {
             height: 100%;
@@ -68,27 +120,23 @@
             border-radius: 15px 0 0 15px;
             transition: width 0.5s ease;
         }
-        .button {
-            background-color: #FFCC00;
-            color: #000;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: bold;
-            width: 100%;
-            margin-top: 20px;
-            transition: background-color 0.3s, transform 0.2s;
-            font-family: 'Anton', sans-serif;
-        }
-        .button:hover {
-            background-color: #e6b800;
-            transform: scale(1.05);
-        }
     </style>
 </head>
 <body>
+    <div class="burger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="menu" id="menu">
+        <h2>Menú</h2>
+        <ul>
+            <li><a href="#">Perfil</a></li>
+            <li><a href="#">Consumo de Datos</a></li>
+            <li><a href="#">Activar Chip</a></li>
+            <li><a href="#">Internet Gratis</a></li>
+        </ul>
+    </div>
     <div class="header">Bitel - BerMatModZ</div>
     <div class="container">
         <div class="card">
@@ -104,25 +152,12 @@
         </div>
         <div class="card">
             <div class="card-header">Consumo de Datos</div>
-            <div class="data-usage">
-                <div id="used-data">Usados: 0 GB</div>
-                <div id="available-data">Disponibles: 400 GB</div>
-            </div>
             <div class="data-bar">
                 <div class="data-bar-inner" id="data-bar"></div>
             </div>
             <div style="text-align: center;">
                 <strong id="total-usage">0 GB usados de 400 GB</strong>
             </div>
-        </div>
-        <div class="card">
-            <div class="card-header">Activar Chip Prepago</div>
-            <button class="button">Activar Chip Entel</button>
-        </div>
-        <div class="card">
-            <div class="card-header">Internet Gratis</div>
-            <input type="text" placeholder="Ingresa tu código aquí" style="width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #ccc; margin-bottom: 20px;">
-            <button class="button">Activar Internet</button>
         </div>
     </div>
     <script>
@@ -133,12 +168,13 @@
                 used += 1;
                 let percent = (used / total) * 100;
                 document.getElementById('data-bar').style.width = percent + '%';
-                document.getElementById('used-data').innerText = 'Usados: ' + used + ' GB';
-                document.getElementById('available-data').innerText = 'Disponibles: ' + (total - used) + ' GB';
                 document.getElementById('total-usage').innerText = used + ' GB usados de 400 GB';
             }
         }
         setInterval(updateUsage, 200);
+        function toggleMenu() {
+            document.getElementById('menu').classList.toggle('active');
+        }
     </script>
 </body>
 </html>

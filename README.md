@@ -1,193 +1,144 @@
-<!DOCTYPE html>
-<html lang="es">
+<!DOCTYPE html><html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bitel - Mi Cuenta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <title>Bitel - BerMatModZ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Anton&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
         }
-
         .header {
-            background-color: #FFCC00; /* Color de Bitel */
-            color: white;
-            padding: 15px;
+            background-color: #FFCC00;
+            color: #000;
+            padding: 20px;
             text-align: center;
+            font-family: 'Anton', sans-serif;
             font-size: 2em;
+            letter-spacing: 2px;
         }
-
         .container {
             width: 90%;
             max-width: 1200px;
             margin: 20px auto;
         }
-
         .card {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             margin: 20px 0;
             padding: 20px;
-            border-radius: 8px;
+            border-radius: 12px;
         }
-
         .card-header {
             background-color: #FFCC00;
-            color: white;
-            padding: 10px;
+            color: #000;
+            padding: 15px;
             border-radius: 8px;
             font-size: 1.5em;
             text-align: center;
+            font-family: 'Anton', sans-serif;
         }
-
-        .card-body {
-            margin-top: 20px;
-        }
-
         .info {
             display: flex;
             justify-content: space-between;
             margin-bottom: 15px;
+            font-weight: bold;
         }
-
-        .info div {
-            width: 45%;
-        }
-
         .data-usage {
-            font-size: 1.3em;
+            font-size: 1.2em;
             margin-top: 20px;
             display: flex;
             justify-content: space-between;
         }
-
         .data-bar {
-            width: 80%;
-            height: 20px;
+            width: 100%;
+            height: 30px;
             background-color: #ddd;
-            border-radius: 10px;
+            border-radius: 15px;
             margin: 10px 0;
-            position: relative;
+            overflow: hidden;
         }
-
         .data-bar-inner {
             height: 100%;
             background-color: #FFCC00;
-            border-radius: 10px;
-            width: 75%; /* Simulando uso de 300GB de 400GB */
+            width: 75%;
+            border-radius: 15px 0 0 15px;
+            transition: width 0.5s ease;
         }
-
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            color: #999;
-        }
-
         .button {
             background-color: #FFCC00;
-            color: white;
-            padding: 12px 20px;
+            color: #000;
+            padding: 15px 20px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             font-size: 1em;
-            margin-top: 20px;
-            transition: background-color 0.3s;
+            font-weight: bold;
             width: 100%;
+            margin-top: 20px;
+            transition: background-color 0.3s, transform 0.2s;
+            font-family: 'Anton', sans-serif;
         }
-
         .button:hover {
             background-color: #e6b800;
-        }
-
-        .profile-img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin: 0 auto;
-            display: block;
-            background-image: url('https://via.placeholder.com/80');
-            background-size: cover;
-            background-position: center;
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
-
-    <div class="header">
-        <h1>Mi Cuenta Bitel</h1>
-    </div>
-
+    <div class="header">Bitel - BerMatModZ</div>
     <div class="container">
-        <!-- Información personal -->
         <div class="card">
             <div class="card-header">Información Personal</div>
-            <div class="card-body">
-                <div class="info">
-                    <div><strong>Nombre:</strong> Anth'Zz Berrocal</div>
-                    <div><strong>Alias:</strong> BerMatModZ</div>
-                </div>
-                <div class="info">
-                    <div><strong>Red:</strong> Bitel</div>
-                    <div><strong>Proyecto:</strong> Internet Gratis</div>
-                </div>
+            <div class="info">
+                <div>Nombre: Anth'Zz Berrocal</div>
+                <div>Alias: BerMatModZ</div>
+            </div>
+            <div class="info">
+                <div>Red: Bitel</div>
+                <div>Proyecto: Internet Gratis</div>
             </div>
         </div>
-
-        <!-- Imagen de perfil -->
-        <div class="card">
-            <div class="card-header">Mi Perfil</div>
-            <div class="card-body">
-                <div class="profile-img"></div>
-                <div style="text-align: center; margin-top: 10px;">
-                    <strong>¡Hola, Anth'Zz!</strong>
-                </div>
-            </div>
-        </div>
-
-        <!-- Consumo de datos -->
         <div class="card">
             <div class="card-header">Consumo de Datos</div>
-            <div class="card-body">
-                <div class="data-usage">
-                    <div>Usados: 300 GB</div>
-                    <div>Disponibles: 100 GB</div>
-                </div>
-                <div class="data-bar">
-                    <div class="data-bar-inner"></div>
-                </div>
-                <div style="text-align: center;">
-                    <strong>300 GB usados de 400 GB</strong>
-                </div>
+            <div class="data-usage">
+                <div id="used-data">Usados: 0 GB</div>
+                <div id="available-data">Disponibles: 400 GB</div>
+            </div>
+            <div class="data-bar">
+                <div class="data-bar-inner" id="data-bar"></div>
+            </div>
+            <div style="text-align: center;">
+                <strong id="total-usage">0 GB usados de 400 GB</strong>
             </div>
         </div>
-
-        <!-- Activar Chip prepago -->
         <div class="card">
             <div class="card-header">Activar Chip Prepago</div>
-            <div class="card-body">
-                <button class="button">Activar Chip Entel</button>
-            </div>
+            <button class="button">Activar Chip Entel</button>
         </div>
-
-        <!-- Activar Internet Gratis -->
         <div class="card">
             <div class="card-header">Internet Gratis</div>
-            <div class="card-body">
-                <p>Ingresa tu código BerMatModZ para activar internet gratis.</p>
-                <input type="text" placeholder="Código aquí" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
-                <button class="button">Activar Internet</button>
-            </div>
+            <input type="text" placeholder="Ingresa tu código aquí" style="width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #ccc; margin-bottom: 20px;">
+            <button class="button">Activar Internet</button>
         </div>
     </div>
-
-    <div class="footer">
-        <p>Bitel - Proyecto BerMatModZ | Todos los derechos reservados.</p>
-    </div>
-
+    <script>
+        let used = 0;
+        let total = 400;
+        function updateUsage() {
+            if (used < 300) {
+                used += 1;
+                let percent = (used / total) * 100;
+                document.getElementById('data-bar').style.width = percent + '%';
+                document.getElementById('used-data').innerText = 'Usados: ' + used + ' GB';
+                document.getElementById('available-data').innerText = 'Disponibles: ' + (total - used) + ' GB';
+                document.getElementById('total-usage').innerText = used + ' GB usados de 400 GB';
+            }
+        }
+        setInterval(updateUsage, 200);
+    </script>
 </body>
 </html>

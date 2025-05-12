@@ -14,66 +14,63 @@
             min-height: 100vh;
             font-family: 'Raleway', sans-serif;
             margin: 0;
+            overflow: hidden;
         }
         .intro {
-            font-size: 28px;
+            font-size: 30px;
             margin-bottom: 20px;
             color: #c2185b;
             font-family: 'Pacifico', cursive;
             text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
         }
-        .card-container {
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .envelope {
             position: relative;
-            width: 350px;
-            height: 250px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            width: 320px;
+            height: 200px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
             overflow: hidden;
-            transition: all 0.8s ease-in-out;
+            transition: 0.6s ease-in-out;
+            cursor: pointer;
         }
-        .card-container .cover {
+        .envelope .flap {
             position: absolute;
+            top: -50px;
+            left: 0;
             width: 100%;
-            height: 100%;
-            background-color: #f8bbd0;
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            transition: transform 0.8s ease-in-out;
+            height: 150px;
+            background-color: #c2185b;
+            border-radius: 0 0 320px 320px;
+            transition: 0.6s ease-in-out;
         }
-        .card-container.opened .cover {
-            transform: translateY(-300px);
+        .envelope.opened .flap {
+            transform: rotateX(-180deg);
+            transform-origin: bottom center;
         }
-        .card-container .paper {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: #ffffff;
-            border-radius: 10px;
+        .message {
             padding: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-            opacity: 0;
-            transform: translateY(100%);
-            transition: all 0.8s ease-in-out;
             font-family: 'Pacifico', cursive;
             color: #c2185b;
-            text-align: center;
-            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(200px);
+            transition: 0.8s ease-in-out 0.4s;
         }
-        .card-container.opened .paper {
+        .envelope.opened .message {
             opacity: 1;
             transform: translateY(0);
         }
         .button {
             background-color: #c2185b;
             color: #ffffff;
-            padding: 10px 20px;
+            padding: 10px 30px;
             border: none;
-            border-radius: 20px;
+            border-radius: 30px;
             cursor: pointer;
             margin-top: 20px;
             font-family: 'Raleway', sans-serif;
@@ -87,16 +84,14 @@
 </head>
 <body>
     <div class="intro">Esto es para la niña más hermosa del mundo 💖</div>
-    <div class="card-container" id="card">
-        <div class="cover">
-            💌 Para Mi Reina Briyidth 💖
-        </div>
-        <div class="paper">
+    <div class="envelope" id="envelope" onclick="this.classList.toggle('opened')">
+        <div class="flap"></div>
+        <div class="message">
             <h2>Te Amo Muchísimo</h2>
             <p>Gracias por llegar a mi vida, eres lo más valioso que tengo y siempre te voy a amar en las buenas y en las malas. Sé que juntos vamos a salir adelante. ¡Te amo muchísimo, mi mami! 💕</p>
             <p>Tu siempre, Anth'Zz</p>
         </div>
     </div>
-    <button class="button" onclick="document.getElementById('card').classList.toggle('opened')">Abrir la Carta</button>
+    <button class="button" onclick="document.getElementById('envelope').classList.toggle('opened')">Abrir la Carta</button>
 </body>
 </html>

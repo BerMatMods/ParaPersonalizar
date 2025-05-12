@@ -3,110 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Libro de Amor - BerMatModZ</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Raleway:wght@700&display=swap" rel="stylesheet">
+    <title>Interfaz Bitel - BerMatModZ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #fff0f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-family: 'Raleway', sans-serif;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
             margin: 0;
+            padding: 0;
         }
-        .book {
-            width: 400px;
-            height: 600px;
-            perspective: 1500px;
-            background-color: #fff;
-            display: flex;
-            flex-direction: column;
-        }
-        .pages {
-            display: flex;
-            flex-direction: row;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            transition: transform 1s ease-in-out;
-        }
-        .page {
-            width: 100%;
-            height: 100%;
-            background-color: #ffe4e1;
-            border: 2px solid #c2185b;
-            border-radius: 10px;
-            padding: 40px;
-            font-family: 'Pacifico', cursive;
-            color: #c2185b;
-            line-height: 1.8;
-            text-align: center;
-            position: absolute;
-            transform-origin: left center;
-            transform: rotateY(0deg);
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
-            opacity: 0;
-            visibility: hidden;
-        }
-        .page.show {
-            opacity: 1;
-            visibility: visible;
-            transform: rotateY(0deg);
-        }
-        .page.previous {
-            transform: rotateY(-180deg);
-            opacity: 0;
-        }
-        .button {
-            background-color: #c2185b;
+        .header {
+            background-color: #FFCC00; /* Color de Bitel */
             color: white;
-            padding: 10px 30px;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+        .card {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 10px 0;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .card-header {
+            background-color: #FFCC00;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 1.2em;
+        }
+        .content {
             margin-top: 20px;
         }
+        .info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .info div {
+            width: 45%;
+        }
+        .button {
+            background-color: #FFCC00;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
         .button:hover {
-            background-color: #b71c1c;
+            background-color: #e6b800;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #999;
         }
     </style>
 </head>
 <body>
-    <div class="book" id="book">
-        <div class="pages" id="pages">
-            <div class="page">Eres lo más hermoso que ha llegado a mi vida. 💖</div>
-            <div class="page">Gracias por ser mi razón para sonreír cada día. 😘</div>
-            <div class="page">Te amo más de lo que las palabras pueden expresar. 💞</div>
-            <div class="page">Siempre estaré a tu lado, en las buenas y en las malas. ❤️</div>
-            <div class="page">Eres mi mundo, mi vida, mi todo. Te amo infinitamente. 🌹</div>
+    <div class="header">
+        <h1>Bienvenido a Bitel - BerMatModZ</h1>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                Mi Información
+            </div>
+            <div class="content">
+                <div class="info">
+                    <div><strong>Nombre:</strong> Anth'Zz Berrocal</div>
+                    <div><strong>Alias:</strong> BerMatModZ</div>
+                </div>
+                <div class="info">
+                    <div><strong>Red de Datos:</strong> Bitel</div>
+                    <div><strong>Proyecto:</strong> Internet Gratis con Código</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                Activar Chip Prepago Entel
+            </div>
+            <div class="content">
+                <p>Aquí puedes activar un chip de prepago de Entel. Introduce los detalles y confirma.</p>
+                <button class="button">Activar Chip</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                Dar Internet Gratis
+            </div>
+            <div class="content">
+                <p>Introduce tu código de BerMatModZ para activar internet gratis en tu cuenta.</p>
+                <input type="text" placeholder="Ingresa tu código aquí" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+                <button class="button">Activar Internet Gratis</button>
+            </div>
         </div>
     </div>
-    <button class="button" onclick="nextPage()">Siguiente Página</button>
-    <button class="button" onclick="previousPage()">Página Anterior</button>
 
-    <script>
-        let currentPage = 0;
-        const pages = document.querySelectorAll('.page');
-        pages[currentPage].classList.add('show');
+    <div class="footer">
+        <p>Bitel - Proyecto BerMatModZ | Todos los derechos reservados.</p>
+    </div>
 
-        function nextPage() {
-            if (currentPage < pages.length - 1) {
-                pages[currentPage].classList.remove('show');
-                currentPage++;
-                pages[currentPage].classList.add('show');
-            }
-        }
-
-        function previousPage() {
-            if (currentPage > 0) {
-                pages[currentPage].classList.remove('show');
-                currentPage--;
-                pages[currentPage].classList.add('show');
-            }
-        }
-    </script>
 </body>
 </html>

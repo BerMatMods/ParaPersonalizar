@@ -79,6 +79,7 @@
             width: 90%;
             max-width: 1200px;
             margin: 80px auto 20px auto;
+            display: none;
         }
         .card {
             background-color: #fff;
@@ -98,27 +99,11 @@
             font-family: 'Anton', sans-serif;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
         }
-        .info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            font-weight: bold;
+        .info-section {
+            display: none;
         }
-        .data-bar {
-            width: 100%;
-            height: 30px;
-            background-color: #ddd;
-            border-radius: 15px;
-            margin: 10px 0;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-        }
-        .data-bar-inner {
-            height: 100%;
-            background-color: #FFCC00;
-            width: 75%;
-            border-radius: 15px 0 0 15px;
-            transition: width 0.5s ease;
+        .info-section.active {
+            display: block;
         }
     </style>
 </head>
@@ -131,36 +116,63 @@
     <div class="menu" id="menu">
         <h2>Menú</h2>
         <ul>
-            <li><a href="#">Perfil</a></li>
-            <li><a href="#">Consumo de Datos</a></li>
-            <li><a href="#">Activar Chip</a></li>
-            <li><a href="#">Internet Gratis</a></li>
+            <li><a href="#" onclick="showSection('profile')">Perfil</a></li>
+            <li><a href="#" onclick="showSection('data')">Consumo de Datos</a></li>
+            <li><a href="#" onclick="showSection('chip')">Activar Chip</a></li>
+            <li><a href="#" onclick="showSection('internet')">Internet Gratis</a></li>
+            <li><a href="#" onclick="showSection('info')">Info</a></li>
         </ul>
     </div>
-    <div class="header">Bitel - BerMatModZ</div>
-    <div class="container">
+    <div class="container" id="profile" class="info-section">
         <div class="card">
             <div class="card-header">Información Personal</div>
-            <div class="info">
-                <div>Nombre: Anth'Zz Berrocal</div>
-                <div>Alias: BerMatModZ</div>
-            </div>
-            <div class="info">
-                <div>Red: Bitel</div>
-                <div>Proyecto: Internet Gratis</div>
-            </div>
+            <p>Nombre: Anth'Zz Berrocal</p>
+            <p>Alias: BerMatModZ</p>
+            <p>Red: Bitel</p>
+            <p>Proyecto: Internet Gratis</p>
         </div>
+    </div>
+    <div class="container" id="data" class="info-section">
         <div class="card">
             <div class="card-header">Consumo de Datos</div>
+            <p>Consumo actual:</p>
             <div class="data-bar">
                 <div class="data-bar-inner" id="data-bar"></div>
             </div>
-            <div style="text-align: center;">
-                <strong id="total-usage">0 GB usados de 400 GB</strong>
-            </div>
+            <strong id="total-usage">0 GB usados de 400 GB</strong>
+        </div>
+    </div>
+    <div class="container" id="chip" class="info-section">
+        <div class="card">
+            <div class="card-header">Activar Chip Prepago</div>
+            <button class="button">Activar Chip Entel</button>
+        </div>
+    </div>
+    <div class="container" id="internet" class="info-section">
+        <div class="card">
+            <div class="card-header">Internet Gratis</div>
+            <input type="text" placeholder="Ingresa tu código aquí" style="width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #ccc; margin-bottom: 20px;">
+            <button class="button">Activar Internet</button>
+        </div>
+    </div>
+    <div class="container" id="info" class="info-section">
+        <div class="card">
+            <div class="card-header">Info</div>
+            <p>Desarrollado por Anth'Zz Berrocal</p>
+            <p>Alias: BerMatModZ</p>
+            <p>Proyecto: Internet</p>
+            <p>Red: Bitel</p>
         </div>
     </div>
     <script>
+        function toggleMenu() {
+            document.getElementById('menu').classList.toggle('active');
+        }
+        function showSection(id) {
+            const sections = document.querySelectorAll('.info-section');
+            sections.forEach(section => section.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
         let used = 0;
         let total = 400;
         function updateUsage() {
@@ -172,9 +184,6 @@
             }
         }
         setInterval(updateUsage, 200);
-        function toggleMenu() {
-            document.getElementById('menu').classList.toggle('active');
-        }
     </script>
 </body>
 </html>

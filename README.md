@@ -2,120 +2,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>⚡BerMat-Bot MD🔥</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <title>⚡BerMat-Bot MD🔥 - WhatsApp Simulado</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
-      background: #000000;
-      color: #00ffee;
-      font-family: 'Share Tech Mono', monospace;
       margin: 0;
       padding: 0;
-      background-image: url('https://i.ibb.co/ZMx6hC3/matrix-bg.gif');
-      background-size: cover;
-      background-attachment: fixed;
+      font-family: 'Roboto', sans-serif;
+      background-color: #e5ddd5;
     }
-    .container {
-      max-width: 700px;
-      margin: 50px auto;
-      padding: 25px;
-      background: rgba(10, 10, 10, 0.92);
-      box-shadow: 0 0 35px #0ff;
-      border-radius: 20px;
-      animation: neonPulse 4s infinite ease-in-out;
+    .whatsapp-container {
+      width: 100%;
+      max-width: 500px;
+      height: 100vh;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
-    @keyframes neonPulse {
-      0%, 100% { box-shadow: 0 0 35px #00ffee; }
-      50% { box-shadow: 0 0 60px #0ff, 0 0 20px #0ff inset; }
-    }
-    h1 {
-      text-align: center;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2.8em;
-      color: #00ffee;
-      text-shadow: 0 0 15px #00ffee;
+    .header {
+      background-color: #075e54;
+      color: white;
+      padding: 10px 15px;
+      font-weight: bold;
+      font-size: 1.2em;
+      display: flex;
+      align-items: center;
     }
     .chat-box {
-      background: #111;
-      border-radius: 15px;
+      flex: 1;
       padding: 15px;
-      height: 500px;
+      background-image: url('https://i.imgur.com/3M3K0Fz.png');
+      background-size: cover;
       overflow-y: auto;
-      box-shadow: inset 0 0 15px #00ffcc44;
-      font-size: 1.1em;
+      display: flex;
+      flex-direction: column;
     }
-    .user, .bot {
-      padding: 12px 16px;
-      margin: 12px;
-      border-radius: 14px;
-      max-width: 90%;
-      animation: fadeIn 0.4s ease;
+    .msg {
+      max-width: 75%;
+      padding: 10px 14px;
+      margin: 8px;
+      border-radius: 8px;
+      font-size: 0.95em;
+      line-height: 1.4em;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
     .user {
-      background: #0047ab;
-      color: #fff;
       align-self: flex-end;
-      margin-left: auto;
-      font-weight: bold;
+      background-color: #dcf8c6;
     }
     .bot {
-      background: #0c0c0c;
-      color: #00ffee;
-      border-left: 4px solid #00ffee;
-      font-family: 'Courier New', Courier, monospace;
+      align-self: flex-start;
+      background-color: #fff;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    .input-box {
+      display: flex;
+      padding: 10px;
+      border-top: 1px solid #ccc;
+      background-color: #f0f0f0;
     }
     input {
-      width: 100%;
-      padding: 14px;
-      border-radius: 12px;
+      flex: 1;
+      padding: 10px;
       border: none;
-      margin-top: 20px;
-      background: #000;
-      color: #0ff;
+      border-radius: 20px;
       font-size: 1em;
-      font-family: 'Share Tech Mono', monospace;
-      box-shadow: 0 0 10px #0ff;
-    }
-    .footer {
-      text-align: center;
-      margin-top: 25px;
-      color: #ccc;
-      font-size: 0.9em;
-    }
-    .footer a {
-      color: #00ffee;
-      text-decoration: none;
+      outline: none;
+      background-color: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>⚡BERMAT-BOT MD🔥</h1>
+  <div class="whatsapp-container">
+    <div class="header">⚡ BerMat-Bot MD🔥</div>
     <div class="chat-box" id="chat">
-      <div class="bot">👾 Bienvenido a <b>⚡BERMAT-BOT MD🔥</b><br>Inteligencia Artificial Avanzada creada por <b>Anth'Zz Berrocal</b><br>Escribe comandos como <code>.Menu</code>, <code>.Info</code>, <code>.Hack</code>, <code>.Darkweb</code>, <code>.Verso</code>...</div>
+      <div class="msg bot">👋 Hola, soy tu bot inteligente ⚡<br>Escribe <strong>.menu</strong>, <strong>.info</strong>, <strong>.hack</strong>, <strong>.verso</strong> y más.</div>
     </div>
-    <input type="text" id="userInput" placeholder="🔐 Escribe un comando aquí y presiona Enter..." onkeydown="if(event.key==='Enter'){sendMessage()}" />
-    <div class="footer">
-      © 2025 por <strong>Anth'Zz Berrocal</strong> | Alias: <code>BerMatModZ</code> | Andahuaylas - Perú 🌐
+    <div class="input-box">
+      <input type="text" id="userInput" placeholder="Escribe un mensaje..." onkeydown="if(event.key==='Enter'){sendMessage()}" />
     </div>
   </div>  <script>
     const chat = document.getElementById("chat");
     const responses = {
-      ".menu": "📜 Comandos disponibles:<br>- .Info<br>- .Hack<br>- .Darkweb<br>- .Verso<br>- .Sticker<br>- .XO<br>- .Ayuda<br>- .Novia<br>- .Sistema<br>- .Creditos",
-      ".info": "📌 Creador: Anth'Zz Berrocal<br>⚙️ Alias: BerMatModZ<br>🌍 Ciudad: Andahuaylas, Perú<br>📞 WhatsApp: 937556459<br>💻 Proyectos: ⚡BerMat-Bot MD🔥, Simulador Hacker, Web Interactiva<br>🎓 Habilidades: Python, Hacking Ético, IA, Termux, GitHub, Diseño Web Avanzado",
-      ".hack": "🛠️ Simulando ataque...<br>🔗 Conectando al servidor<br>⚡ Inyección de paquetes...<br>💣 Sistema vulnerado con éxito - Nivel ROOT activo<br><em>Mensajes extraídos: 'AnthZz pásame el nuevo bot'...</em>",
-      ".darkweb": "🌐 Accediendo al nodo encriptado de la DarkWeb...<br>Usuario: BerMatModZ | Estado: ACEPTADO<br>Bienvenido al subsistema clandestino de bots y exploits 💀",
-      ".verso": "📝 'Cada línea de código, un poema cifrado,<br>en mi núcleo binario, tu nombre está programado' 💘 - Para Briyidth Jhorgina",
-      ".xo": "🎮 Tres en Raya en marcha:<br>[❌ | 🟢 | ⬜]<br>[⬜ | ❌ | ⬜]<br>[⬜ | ⬜ | 🟢]",
-      ".sticker": "🎨 Generando sticker .BerMat personalizado con código QR 💾... ¡Listo para descargar!",
-      ".Chupapinga": "💖 Te amo muchísimo mi reina Briyidth Jhorgina 💘 Eres mi mundo y mi código más valioso 💌",
-      ".sistema": "💻 Sistema Interno: BerMatOS AI Core v1.8<br>🔐 Seguridad: Criptografía cuántica<br>🧠 Motor de decisiones: GPT-BerMat Fusion<br>🧬 Estado: Estable y activo 24/7",
-      ".ayuda": "🤖 Usa el comando .Menu para ver todo lo que puedes hacer. Este bot está potenciado por IA desarrollada por BerMatModZ.",
-      ".creditos": "✨ Desarrollo por Anth'Zz Berrocal (BerMatModZ)<br>🛠️ Inspirado en la fuerza hacker peruana 🇵🇪<br>💾 Powered by Termux + HTML + JS + 💡 creatividad sin límites"
+      ".menu": "📜 Comandos disponibles:<br>- .info<br>- .hack<br>- .darkweb<br>- .verso<br>- .xo<br>- .novia<br>- .sistema<br>- .creditos",
+      ".info": "👤 Creador: Anth'Zz Berrocal<br>🔗 Alias: BerMatModZ<br>🌍 Ciudad: Andahuaylas<br>📱 WhatsApp: 937556459<br>🛠️ Proyectos: ⚡BerMat-Bot MD🔥, Bots IA, Webs hacker, Terminal Scripts",
+      ".hack": "💻 Iniciando simulación de hackeo...<br>📡 Accediendo a servidor...<br>🔐 Acceso root exitoso ✔️<br>Mensaje: 'Tío pásame el bot cause.'",
+      ".darkweb": "🌐 Accediendo a nodo secreto...<br>Conexión cifrada. Identificado como BerMatModZ<br>🧠 Nivel de seguridad: MÁXIMO",
+      ".verso": "❤️ 'Eres mi reina, Briyidth Jhorgina,<br>En mi código tú eres la rutina más divina'",
+      ".xo": "🎮 Partida de XO:<br>[❌ | 🟢 | ⬜]<br>[⬜ | ❌ | ⬜]<br>[⬜ | ⬜ | 🟢]",
+      ".novia": "💖 Mi reina Briyidth Jhorgina, eres mi todo. Gracias por estar en mi vida 💘",
+      ".sistema": "🧠 Sistema: BerMatOS X-AI<br>Motor IA: BerMat-Core v3.0<br>Seguridad: Nivel militar<br>Estado: ACTIVO 24/7",
+      ".creditos": "⚡ Desarrollado por Anth'Zz Berrocal | BerMatModZ<br>Hecho con amor, código y pasión hacker 🇵🇪"
     };
 
     function sendMessage() {
@@ -124,13 +103,13 @@
       if (!text) return;
 
       const userMsg = document.createElement("div");
-      userMsg.className = "user";
+      userMsg.className = "msg user";
       userMsg.textContent = text;
       chat.appendChild(userMsg);
 
       const botMsg = document.createElement("div");
-      botMsg.className = "bot";
-      const response = responses[text.toLowerCase()] || "⚠️ Comando no reconocido. Escribe <code>.Menu</code> para ver las opciones disponibles.";
+      botMsg.className = "msg bot";
+      const response = responses[text.toLowerCase()] || "⚠️ Comando no reconocido. Escribe <strong>.menu</strong> para ver opciones.";
       botMsg.innerHTML = response;
       chat.appendChild(botMsg);
 

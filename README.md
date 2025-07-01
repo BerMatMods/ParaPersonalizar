@@ -3,21 +3,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Feliz Aniversario Mi Reina</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Orbitron&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to top right, #ffe4ec, #ffd6f0);
+      font-family: 'Pacifico', cursive;
+      background: radial-gradient(circle, #ffe4ec, #ffc1e3);
       overflow: hidden;
       text-align: center;
       color: #880e4f;
     }h1 {
-  font-size: 2.5em;
+  font-size: 3em;
   margin-top: 40px;
   animation: fadeIn 2s ease-in-out;
 }
 
 #contador {
+  font-family: 'Orbitron', sans-serif;
   font-size: 1.5em;
   margin: 20px 0;
   font-weight: bold;
@@ -30,10 +32,11 @@
   color: white;
   border: none;
   border-radius: 50px;
-  font-size: 1.2em;
+  font-size: 1.3em;
   cursor: pointer;
   transition: background 0.3s ease;
   animation: fadeIn 3s ease-in-out;
+  font-family: 'Orbitron', sans-serif;
 }
 
 .boton:hover {
@@ -52,9 +55,21 @@
   animation: fadeIn 2s ease-in-out forwards;
 }
 
+#mensaje-final {
+  display: none;
+  font-size: 2em;
+  margin-top: 30px;
+  animation: explotar 1s ease-in-out forwards;
+}
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes explotar {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1.3); opacity: 1; color: #d50000; }
 }
 
 .corazones {
@@ -99,11 +114,16 @@
   100% { transform: translateY(-10vh) rotate(45deg); }
 }
 
+#by {
+  font-size: 0.8em;
+  margin-top: 50px;
+  color: #880e4f;
+}
+
   </style>
 </head>
 <body>
   <div class="corazones">
-    <!-- Corazones aleatorios -->
     <script>
       for (let i = 0; i < 30; i++) {
         const heart = document.createElement('div');
@@ -122,26 +142,53 @@
     Gracias por llegar a mi vida, eres lo más valioso que tengo y tengo miedo a perderte.<br>
     Siempre te voy a amar en las buenas y en las malas y sé que juntos vamos a salir adelante.<br>
     <strong>Te amo muchísimo mi mami ❤️</strong></p>
-  </div>  <script>
-    const fechaInicio = new Date("2023-11-10T00:00:00");
-    const fechaFinal = new Date("2025-07-10T00:00:00");
+  </div>  <div id="mensaje-final">💣 VAMOS POR MÁS MI AMOR 💣</div>
+  <div id="by">By Anth'Zz Berrocal</div>  <script>
+    const inicio = new Date("2023-11-10T00:00:00");
+    const fin = new Date("2025-07-10T00:00:00");
+
+    function calcularTiempoExacto() {
+      let años = fin.getFullYear() - inicio.getFullYear();
+      let meses = fin.getMonth() - inicio.getMonth();
+      let dias = fin.getDate() - inicio.getDate();
+
+      if (dias < 0) {
+        meses -= 1;
+        dias += new Date(fin.getFullYear(), fin.getMonth(), 0).getDate();
+      }
+      if (meses < 0) {
+        años -= 1;
+        meses += 12;
+      }
+      return { años, meses, dias };
+    }
 
     function actualizarContador() {
-      const ahora = fechaFinal;
-      const diff = ahora - fechaInicio;
-
-      const segundosTotales = Math.floor(diff / 1000);
+      const total = fin - inicio;
+      const segundosTotales = Math.floor(total / 1000);
       const minutosTotales = Math.floor(segundosTotales / 60);
       const horasTotales = Math.floor(minutosTotales / 60);
       const diasTotales = Math.floor(horasTotales / 24);
 
-      const años = Math.floor(diasTotales / 365);
-      const meses = Math.floor((diasTotales % 365) / 30);
-      const dias = (diasTotales % 365) % 30;
+      const exacto = calcularTiempoExacto();
 
-      document.getElementById("contador").innerHTML =
-        `🕰️ ${años} años, ${meses} meses y ${dias} días juntos ❤️<br>` +
-        `📆 Total: ${diasTotales} días, ${horasTotales} horas, ${minutosTotales} minutos y ${segundosTotales} segundos contigo mi amor.`;
+      let texto = `🕰️ ${exacto.años} años, ${exacto.meses} meses y ${exacto.dias} días juntos ❤️<br>`;
+      let i = 0;
+
+      const interval = setInterval(() => {
+        if (i <= segundosTotales) {
+          let seg = i;
+          let min = Math.floor(seg / 60);
+          let hrs = Math.floor(min / 60);
+          let dias = Math.floor(hrs / 24);
+          document.getElementById("contador").innerHTML = texto +
+            `📆 Total: ${dias} días, ${hrs} horas, ${min} minutos y ${seg} segundos contigo mi amor.`;
+          i += 5;
+        } else {
+          clearInterval(interval);
+          document.getElementById("mensaje-final").style.display = 'block';
+        }
+      }, 50);
     }
 
     function mostrarCarta() {

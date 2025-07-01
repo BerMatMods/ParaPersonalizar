@@ -3,11 +3,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Feliz Aniversario Mi Reina</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Orbitron&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Orbitron&family=Courgette&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Pacifico', cursive;
+      font-family: 'Courgette', cursive;
       background: radial-gradient(circle, #ffe4ec, #ffc1e3);
       overflow: hidden;
       text-align: center;
@@ -20,9 +20,14 @@
 
 #contador {
   font-family: 'Orbitron', sans-serif;
-  font-size: 1.5em;
-  margin: 20px 0;
+  font-size: 1.7em;
+  margin: 20px auto;
   font-weight: bold;
+  padding: 15px;
+  width: 80%;
+  background: #fff5f9;
+  border-radius: 15px;
+  box-shadow: 0 0 15px #ec407a;
   animation: fadeIn 2.5s ease-in-out;
 }
 
@@ -57,7 +62,7 @@
 
 #mensaje-final {
   display: none;
-  font-size: 2em;
+  font-size: 2.3em;
   margin-top: 30px;
   animation: explotar 1s ease-in-out forwards;
 }
@@ -69,7 +74,7 @@
 
 @keyframes explotar {
   0% { transform: scale(0.5); opacity: 0; }
-  100% { transform: scale(1.3); opacity: 1; color: #d50000; }
+  100% { transform: scale(1.4); opacity: 1; color: #d50000; }
 }
 
 .corazones {
@@ -115,7 +120,7 @@
 }
 
 #by {
-  font-size: 0.8em;
+  font-size: 0.9em;
   margin-top: 50px;
   color: #880e4f;
 }
@@ -166,14 +171,12 @@
     function actualizarContador() {
       const total = fin - inicio;
       const segundosTotales = Math.floor(total / 1000);
-      const minutosTotales = Math.floor(segundosTotales / 60);
-      const horasTotales = Math.floor(minutosTotales / 60);
-      const diasTotales = Math.floor(horasTotales / 24);
 
       const exacto = calcularTiempoExacto();
-
       let texto = `🕰️ ${exacto.años} años, ${exacto.meses} meses y ${exacto.dias} días juntos ❤️<br>`;
+
       let i = 0;
+      const velocidad = 30; // más rápido aún
 
       const interval = setInterval(() => {
         if (i <= segundosTotales) {
@@ -182,13 +185,13 @@
           let hrs = Math.floor(min / 60);
           let dias = Math.floor(hrs / 24);
           document.getElementById("contador").innerHTML = texto +
-            `📆 Total: ${dias} días, ${hrs} horas, ${min} minutos y ${seg} segundos contigo mi amor.`;
-          i += 5;
+            `📆 Total: <strong>${dias}</strong> días, <strong>${hrs}</strong> horas, <strong>${min}</strong> minutos y <strong>${seg}</strong> segundos contigo mi amor.`;
+          i += velocidad;
         } else {
           clearInterval(interval);
           document.getElementById("mensaje-final").style.display = 'block';
         }
-      }, 50);
+      }, 15);
     }
 
     function mostrarCarta() {

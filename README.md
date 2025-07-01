@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,119 +13,152 @@
       overflow: hidden;
       text-align: center;
       color: #880e4f;
-    }h1 {
-  font-size: 3em;
-  margin-top: 40px;
-  animation: fadeIn 2s ease-in-out;
-}
+    }
 
-#contador {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.7em;
-  margin: 20px auto;
-  font-weight: bold;
-  padding: 15px;
-  width: 80%;
-  background: #fff5f9;
-  border-radius: 15px;
-  box-shadow: 0 0 15px #ec407a;
-  animation: fadeIn 2.5s ease-in-out;
-}
+    h1 {
+      font-size: 3em;
+      margin-top: 40px;
+      animation: fadeIn 2s ease-in-out;
+    }
 
-.boton {
-  padding: 15px 30px;
-  background-color: #ec407a;
-  color: white;
-  border: none;
-  border-radius: 50px;
-  font-size: 1.3em;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  animation: fadeIn 3s ease-in-out;
-  font-family: 'Orbitron', sans-serif;
-}
+    #contador {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.7em;
+      margin: 20px auto;
+      font-weight: bold;
+      padding: 15px;
+      width: 80%;
+      background: #fff5f9;
+      border-radius: 15px;
+      box-shadow: 0 0 15px #ec407a;
+      animation: fadeIn 2.5s ease-in-out;
+    }
 
-.boton:hover {
-  background-color: #d81b60;
-}
+    .boton {
+      padding: 15px 30px;
+      background-color: #ec407a;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.3em;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      animation: fadeIn 3s ease-in-out;
+      font-family: 'Orbitron', sans-serif;
+    }
 
-#carta {
-  display: none;
-  max-width: 80%;
-  margin: 30px auto;
-  font-size: 1.2em;
-  background: white;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 0 10px #c2185b;
-  animation: fadeIn 2s ease-in-out forwards;
-}
+    .boton:hover {
+      background-color: #d81b60;
+    }
 
-#mensaje-final {
-  display: none;
-  font-size: 2.3em;
-  margin-top: 30px;
-  animation: explotar 1s ease-in-out forwards;
-}
+    #carta {
+      display: none;
+      max-width: 80%;
+      margin: 30px auto;
+      font-size: 1.2em;
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px #c2185b;
+      animation: fadeIn 2s ease-in-out forwards;
+    }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+    #mensaje-final {
+      display: none;
+      font-size: 2.3em;
+      margin-top: 30px;
+      animation: explotar 1s ease-in-out forwards;
+    }
 
-@keyframes explotar {
-  0% { transform: scale(0.5); opacity: 0; }
-  100% { transform: scale(1.4); opacity: 1; color: #d50000; }
-}
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-.corazones {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-}
+    @keyframes explotar {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1.4); opacity: 1; color: #d50000; }
+    }
 
-.corazon {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: red;
-  transform: rotate(45deg);
-  animation: flotar 10s linear infinite;
-}
+    .corazones {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
 
-.corazon::before, .corazon::after {
-  content: '';
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: red;
-  border-radius: 50%;
-}
+    .corazon {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: flotar 10s linear infinite;
+    }
 
-.corazon::before {
-  top: -10px;
-  left: 0;
-}
-.corazon::after {
-  left: -10px;
-  top: 0;
-}
+    .corazon::before, .corazon::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
 
-@keyframes flotar {
-  0% { transform: translateY(100vh) rotate(45deg); }
-  100% { transform: translateY(-10vh) rotate(45deg); }
-}
+    .corazon::before {
+      top: -10px;
+      left: 0;
+    }
+    .corazon::after {
+      left: -10px;
+      top: 0;
+    }
 
-#by {
-  font-size: 0.9em;
-  margin-top: 50px;
-  color: #880e4f;
-}
+    @keyframes flotar {
+      0% { transform: translateY(100vh) rotate(45deg); }
+      100% { transform: translateY(-10vh) rotate(45deg); }
+    }
 
+    #by {
+      font-size: 0.9em;
+      margin-top: 50px;
+      color: #880e4f;
+    }
+
+    #stitch {
+      position: absolute;
+      bottom: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: moverStitch 5s ease-in-out infinite;
+    }
+
+    @keyframes moverStitch {
+      0% { transform: translateX(-50%) rotate(0); }
+      50% { transform: translateX(-45%) rotate(10deg); }
+      100% { transform: translateX(-50%) rotate(-10deg); }
+    }
+
+    #stitch-sign {
+      font-size: 2em;
+      position: absolute;
+      top: -30px;
+      color: #fff;
+      background: #ff4081;
+      padding: 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #ec407a;
+      animation: signAnimation 1.5s ease-in-out infinite;
+    }
+
+    @keyframes signAnimation {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
   </style>
 </head>
 <body>
@@ -139,16 +173,29 @@
         document.body.appendChild(heart);
       }
     </script>
-  </div>  <h1>💖 FELIZ ANIVERSARIO MI REINA 💖</h1>
-  <div id="contador">Calculando el tiempo que estamos juntos...</div><button class="boton" onclick="mostrarCarta()">💌 Haz click aquí mi mami</button>
+  </div>
+
+  <h1>💖 FELIZ ANIVERSARIO MI REINA 💖</h1>
+  <div id="contador">Calculando el tiempo que estamos juntos...</div>
+
+  <button class="boton" onclick="mostrarCarta()">💌 Haz click aquí mi mami</button>
 
   <div id="carta">
     <p>Te amo mucho mi amor, mi reina hermosa. 💘<br>
     Gracias por llegar a mi vida, eres lo más valioso que tengo y tengo miedo a perderte.<br>
     Siempre te voy a amar en las buenas y en las malas y sé que juntos vamos a salir adelante.<br>
     <strong>Te amo muchísimo mi mami ❤️</strong></p>
-  </div>  <div id="mensaje-final">💣 VAMOS POR MÁS MI AMOR 💣</div>
-  <div id="by">By Anth'Zz Berrocal</div>  <script>
+  </div>
+
+  <div id="mensaje-final">💣 VAMOS POR MÁS MI AMOR 💣</div>
+  <div id="by">By Anth'Zz Berrocal</div>
+
+  <div id="stitch">
+    <img src="stitch-image.gif" alt="Stitch animado" width="150">
+    <div id="stitch-sign">10/11/23</div>
+  </div>
+
+  <script>
     const inicio = new Date("2023-11-10T00:00:00");
     const fin = new Date("2025-07-10T00:00:00");
 
@@ -199,5 +246,6 @@
     }
 
     actualizarContador();
-  </script></body>
+  </script>
+</body>
 </html>

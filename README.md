@@ -1,170 +1,215 @@
-<!DOCTYPE html><html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🎮 BerMat Battle Royale</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: #000;
-      color: #fff;
-      font-family: 'Segoe UI', sans-serif;
-      overflow: hidden;
-    }
-    canvas {
-      background: url('https://i.postimg.cc/B6dRjvrv/battle-bg.jpg') no-repeat center center;
-      background-size: cover;
-      display: block;
-      margin: 0 auto;
-    }
-    .hud {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: rgba(0,0,0,0.6);
-      padding: 10px;
-      border-radius: 10px;
-      font-weight: bold;
-    }
-    .branding {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      font-size: 12px;
-      background: rgba(0,0,0,0.5);
-      padding: 5px 10px;
-      border-radius: 10px;
-    }
-    .joystick-container {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      width: 120px;
-      height: 120px;
-    }
-    .joystick-base, .joystick-stick {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.1);
-    }
-    .joystick-base {
-      width: 100px;
-      height: 100px;
-      background: rgba(255,255,255,0.2);
-    }
-    .joystick-stick {
-      width: 60px;
-      height: 60px;
-      background: rgba(0,255,100,0.7);
-      left: 20px;
-      top: 20px;
-    }
-    .fire-button {
-      position: fixed;
-      bottom: 40px;
-      right: 30px;
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: red;
-      color: white;
-      font-weight: bold;
-      font-size: 16px;
-      text-align: center;
-      line-height: 80px;
-      box-shadow: 0 0 20px red;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Aniversario 💖</title>
+<style>
+/* ======== ESTILO GENERAL ======== */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #4a148c, #880e4f);
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+/* ======== PANTALLA DE ACCESO ======== */
+#pantallaClave {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, #6a1b9a, #ad1457);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+#pantallaClave h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #ff80ab;
+  text-shadow: 0 0 15px #ff4081;
+}
+
+.opcion-btn {
+  background: linear-gradient(45deg, #d500f9, #ff4081);
+  border: none;
+  border-radius: 25px;
+  padding: 15px 30px;
+  margin: 10px;
+  font-size: 1.2em;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0 20px #ff80ab;
+  transition: transform 0.2s ease;
+}
+.opcion-btn:hover {
+  transform: scale(1.1);
+}
+
+/* ======== CONTENIDO PRINCIPAL ======== */
+#contenidoPrincipal {
+  display: none;
+  padding: 20px;
+}
+
+/* Contador con efecto de corazones */
+.contador-box {
+  position: relative;
+  background: rgba(0,0,0,0.3);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px #ff4081;
+  margin: 20px auto;
+  max-width: 600px;
+  overflow: hidden;
+}
+#corazonesCanvas {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+#contador {
+  position: relative;
+  z-index: 1;
+  font-size: 1.2em;
+  color: #ff80ab;
+}
+
+/* ======== SECCIONES ======== */
+section {
+  margin: 40px 0;
+}
+img {
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #ff80ab;
+}
+</style>
 </head>
 <body>
-  <canvas id="game" width="1024" height="576"></canvas>
-  <div class="hud">
-    ❤️ Vida: <span id="life">100</span><br>
-    🏆 Score: <span id="score">0</span>
+
+<!-- ======== PANTALLA DE ACCESO ======== -->
+<div id="pantallaClave">
+  <h2>💖 ¿Qué tan goloza eres? 💖</h2>
+  <button class="opcion-btn" onclick="verificar('Poco')">Poco</button>
+  <button class="opcion-btn" onclick="verificar('Medio')">Medio</button>
+  <button class="opcion-btn" onclick="verificar('Mucho')">Mucho</button>
+</div>
+
+<!-- ======== CONTENIDO PRINCIPAL ======== -->
+<div id="contenidoPrincipal">
+  <h1>💝 Feliz Aniversario Mi Amor 💝</h1>
+
+  <!-- Contador -->
+  <div class="contador-box">
+    <canvas id="corazonesCanvas"></canvas>
+    <div id="contador">Calculando...</div>
   </div>
-  <div class="branding">
-    🔥 Creador: <strong>AnthZz Berrocal (BerMatModZ)</strong><br>
-    🤖 Bots & IA – Andahuaylas, Perú
-  </div>
-  <div class="joystick-container">
-    <div class="joystick-base"></div>
-    <div class="joystick-stick" id="stick"></div>
-  </div>
-  <div class="fire-button" onclick="shoot()">🔫</div>  <script>
-    const canvas = document.getElementById('game');
-    const ctx = canvas.getContext('2d');
 
-    let player = { x: 100, y: 100, size: 40, color: '#00ff99', life: 100 };
-    let bullets = [];
-    let score = 0;
+  <!-- Aquí va tu contenido original -->
+  <section>
+    <h2>Nuestros Recuerdos</h2>
+    <img src="imagen1.jpg" alt="Foto juntos">
+  </section>
+  <section>
+    <h2>Momentos Especiales</h2>
+    <img src="imagen2.jpg" alt="Momentos felices">
+  </section>
+  <button class="opcion-btn">TOCA AQUÍ MI REINA</button>
+</div>
 
-    function drawPlayer() {
-      ctx.fillStyle = player.color;
-      ctx.fillRect(player.x, player.y, player.size, player.size);
-    }
+<script>
+// ======== CONTROL DE ACCESO ========
+function verificar(opcion) {
+  if (opcion === "Mucho") {
+    document.getElementById('pantallaClave').style.display = 'none';
+    document.getElementById('contenidoPrincipal').style.display = 'block';
+  } else {
+    alert('Código incorrecto ❌');
+  }
+}
 
-    function drawBullets() {
-      bullets.forEach((b, i) => {
-        b.x += 7;
-        ctx.fillStyle = 'red';
-        ctx.fillRect(b.x, b.y, 10, 4);
-        if (b.x > canvas.width) bullets.splice(i, 1);
-      });
-    }
+// ======== CONTADOR ========
+const inicio = new Date("2023-11-10T00:00:00");
+const contador = document.getElementById("contador");
 
-    function shoot() {
-      bullets.push({ x: player.x + player.size, y: player.y + player.size / 2 });
-    }
+function actualizarContador() {
+  const ahora = new Date();
+  let anos = ahora.getFullYear() - inicio.getFullYear();
+  let meses = ahora.getMonth() - inicio.getMonth();
+  let dias = ahora.getDate() - inicio.getDate();
+  let horas = ahora.getHours() - inicio.getHours();
+  let minutos = ahora.getMinutes() - inicio.getMinutes();
+  let segundos = ahora.getSeconds() - inicio.getSeconds();
 
-    function updateGame() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      drawPlayer();
-      drawBullets();
-      requestAnimationFrame(updateGame);
-    }
-    updateGame();
+  if (segundos < 0) { segundos += 60; minutos--; }
+  if (minutos < 0) { minutos += 60; horas--; }
+  if (horas < 0) { horas += 24; dias--; }
+  if (dias < 0) {
+    meses--;
+    const mesAnterior = new Date(ahora.getFullYear(), ahora.getMonth(), 0);
+    dias += mesAnterior.getDate();
+  }
+  if (meses < 0) { meses += 12; anos--; }
 
-    // JOYSTICK CONTROL
-    const stick = document.getElementById('stick');
-    let dragging = false, offsetX = 0, offsetY = 0;
-    let moveX = 0, moveY = 0;
+  contador.innerHTML = `💞 Llevamos: ${anos} años, ${meses} meses, ${dias} días, ${horas}h ${minutos}m ${segundos}s 💞`;
+}
+setInterval(actualizarContador, 1000);
 
-    stick.addEventListener('touchstart', (e) => {
-      dragging = true;
-      const touch = e.touches[0];
-      offsetX = touch.clientX - stick.offsetLeft;
-      offsetY = touch.clientY - stick.offsetTop;
-    });
+// ======== CORAZONES CAYENDO ========
+const canvas = document.getElementById('corazonesCanvas');
+const ctx = canvas.getContext('2d');
+let hearts = [];
 
-    stick.addEventListener('touchmove', (e) => {
-      if (!dragging) return;
-      e.preventDefault();
-      const touch = e.touches[0];
-      let x = touch.clientX - offsetX;
-      let y = touch.clientY - offsetY;
+function resizeCanvas() {
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
 
-      x = Math.max(0, Math.min(60, x));
-      y = Math.max(0, Math.min(60, y));
+function createHeart() {
+  return {
+    x: Math.random() * canvas.width,
+    y: -20,
+    size: Math.random() * 20 + 10,
+    speed: Math.random() * 4 + 2, // rápido
+    opacity: Math.random() * 0.5 + 0.5
+  };
+}
 
-      stick.style.left = x + 'px';
-      stick.style.top = y + 'px';
+function drawHeart(h) {
+  ctx.globalAlpha = h.opacity;
+  ctx.fillStyle = "#ff80ab";
+  ctx.beginPath();
+  ctx.moveTo(h.x, h.y);
+  ctx.bezierCurveTo(h.x - h.size / 2, h.y - h.size / 2, h.x - h.size, h.y + h.size / 3, h.x, h.y + h.size);
+  ctx.bezierCurveTo(h.x + h.size, h.y + h.size / 3, h.x + h.size / 2, h.y - h.size / 2, h.x, h.y);
+  ctx.fill();
+  ctx.globalAlpha = 1;
+}
 
-      moveX = (x - 20) / 10;
-      moveY = (y - 20) / 10;
-    });
+function animateHearts() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (Math.random() < 0.3) { // más frecuencia
+    hearts.push(createHeart());
+  }
+  hearts.forEach(h => {
+    h.y += h.speed;
+    drawHeart(h);
+  });
+  hearts = hearts.filter(h => h.y < canvas.height + 20);
+  requestAnimationFrame(animateHearts);
+}
+animateHearts();
+</script>
 
-    stick.addEventListener('touchend', () => {
-      dragging = false;
-      stick.style.left = '20px';
-      stick.style.top = '20px';
-      moveX = 0;
-      moveY = 0;
-    });
-
-    setInterval(() => {
-      player.x += moveX;
-      player.y += moveY;
-    }, 50);
-  </script></body>
+</body>
 </html>

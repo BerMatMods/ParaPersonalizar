@@ -1,149 +1,237 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Contador Futurista Amoroso</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dedicatoria para Briyidth</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&family=Raleway:wght@400;700&display=swap" rel="stylesheet" />
 <style>
   body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    font-family: 'Raleway', sans-serif;
+    color: #f8bbd0;
+    margin: 0; padding: 0;
+    display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 720px;
+    background: rgba(25, 0, 40, 0.85);
+    margin: 60px 20px;
+    padding: 30px 40px;
+    border-radius: 25px;
+    box-shadow: 0 0 30px #f48fb1;
     text-align: center;
-    background: linear-gradient(135deg, #0d0221, #3a0ca3, #ff006e);
-    background-size: 400% 400%;
-    animation: fondoAnimado 10s ease infinite;
-    color: #fff;
-    font-size: 1.5em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  @keyframes fondoAnimado {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-  }
-  .contador-box {
     position: relative;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 20px 40px;
-    border-radius: 15px;
-    box-shadow: 0 0 30px #ff4ecb;
-    overflow: hidden;
+    z-index: 10;
   }
-  #efectoCanvas {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 0;
+
+  .titulo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 48px;
+    color: #ff7eb9;
+    text-shadow: 0 0 15px #ff79c6, 0 0 10px #f06292;
+    margin-bottom: 15px;
   }
-  #contador, #reloj {
-    position: relative;
-    z-index: 1;
-    text-shadow: 0 0 10px #ff4ecb, 0 0 20px #ff4ecb, 0 0 30px #ff4ecb;
+
+  .contador {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 15px 0 30px;
+    color: #ff9ccf;
+    letter-spacing: 1.2px;
+    text-shadow: 0 0 12px #ff8ac1;
   }
+
   #reloj {
-    margin-top: 10px;
-    font-size: 1.2em;
-    color: #ffe4f5;
+    font-family: 'Great Vibes', cursive;
+    font-size: 30px;
+    color: #ff6fae;
+    margin-bottom: 40px;
+    text-shadow: 0 0 15px #ff3b8a, 0 0 20px #ff6699;
+  }
+
+  #mensajeDedicatoria {
+    font-family: 'Great Vibes', cursive;
+    font-size: 28px;
+    line-height: 1.5;
+    color: #f48fb1;
+    min-height: 120px;
+    margin-bottom: 40px;
+    text-shadow: 0 0 20px #ff6ea1;
+    white-space: pre-wrap;
+  }
+
+  /* Corazones que caen */
+  .corazon {
+    position: fixed;
+    top: -40px;
+    color: #ff4da6;
+    font-size: 18px;
+    user-select: none;
+    pointer-events: none;
+    animation-name: caer;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes caer {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(110vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  /* Máquina de escribir cursor */
+  #cursor {
+    display: inline-block;
+    background-color: #ff69b4;
+    width: 3px;
+    animation: parpadear 1s infinite;
+    margin-left: 3px;
+    vertical-align: bottom;
+  }
+  @keyframes parpadear {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
   }
 </style>
 </head>
 <body>
 
-<div class="contador-box">
-  <canvas id="efectoCanvas"></canvas>
-  <div id="contador">Calculando...</div>
-  <div id="reloj">00:00:00</div>
+<div class="container">
+  <div class="titulo">💖 Para Mi Reina Briyidth 💖</div>
+  <div class="contador" id="contador">Calculando el tiempo... ⏳</div>
+  <div id="reloj">--:--:-- --</div>
+  <div id="mensajeDedicatoria"></div>
 </div>
 
 <script>
-// ======== CONTADOR ========
-const inicio = new Date("2023-11-10T00:00:00");
-const contador = document.getElementById("contador");
+  // Contador desde 10 Nov 2023
+  const inicio = new Date("2023-11-10T00:00:00");
+  const contadorEl = document.getElementById("contador");
 
-function actualizarContador() {
-  const ahora = new Date();
-  let anos = ahora.getFullYear() - inicio.getFullYear();
-  let meses = ahora.getMonth() - inicio.getMonth();
-  let dias = ahora.getDate() - inicio.getDate();
-  let horas = ahora.getHours() - inicio.getHours();
-  let minutos = ahora.getMinutes() - inicio.getMinutes();
-  let segundos = ahora.getSeconds() - inicio.getSeconds();
+  function actualizarContador() {
+    const ahora = new Date();
+    let anos = ahora.getFullYear() - inicio.getFullYear();
+    let meses = ahora.getMonth() - inicio.getMonth();
+    let dias = ahora.getDate() - inicio.getDate();
+    let horas = ahora.getHours() - inicio.getHours();
+    let minutos = ahora.getMinutes() - inicio.getMinutes();
+    let segundos = ahora.getSeconds() - inicio.getSeconds();
 
-  if (segundos < 0) { segundos += 60; minutos--; }
-  if (minutos < 0) { minutos += 60; horas--; }
-  if (horas < 0) { horas += 24; dias--; }
-  if (dias < 0) {
-    meses--;
-    const mesAnterior = new Date(ahora.getFullYear(), ahora.getMonth(), 0);
-    dias += mesAnterior.getDate();
+    if (segundos < 0) { segundos += 60; minutos--; }
+    if (minutos < 0) { minutos += 60; horas--; }
+    if (horas < 0) { horas += 24; dias--; }
+    if (dias < 0) {
+      meses--;
+      const mesAnterior = new Date(ahora.getFullYear(), ahora.getMonth(), 0);
+      dias += mesAnterior.getDate();
+    }
+    if (meses < 0) { meses += 12; anos--; }
+
+    contadorEl.textContent = `💞 YA VAMOS: ${anos} AÑOS, ${meses} MESES, ${dias} DÍAS, ${horas}h ${minutos}m ${segundos}s 💞`;
   }
-  if (meses < 0) { meses += 12; anos--; }
+  setInterval(actualizarContador, 1000);
 
-  contador.textContent = 
-    `💖 Llevamos: ${anos} años, ${meses} meses, ${dias} días, ${horas}h ${minutos}m ${segundos}s 💖`;
-}
-setInterval(actualizarContador, 1000);
-actualizarContador();
+  // Reloj en horario Perú (UTC-5) con AM/PM
+  const relojEl = document.getElementById("reloj");
 
-// ======== RELOJ DE PERÚ ========
-const reloj = document.getElementById("reloj");
-function actualizarReloj() {
-  const ahora = new Date();
-  const opciones = { timeZone: "America/Lima", hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit" };
-  reloj.textContent = new Intl.DateTimeFormat("es-PE", opciones).format(ahora);
-}
-setInterval(actualizarReloj, 1000);
-actualizarReloj();
+  function actualizarReloj() {
+    const ahora = new Date();
 
-// ======== EFECTO MATRIX DE CORAZONES Y ESTRELLAS ========
-const canvas = document.getElementById('efectoCanvas');
-const ctx = canvas.getContext('2d');
-let elementos = [];
+    // Convertir a hora Perú (UTC-5)
+    // Obtener hora UTC y restar 5 horas
+    let utc = ahora.getTime() + (ahora.getTimezoneOffset() * 60000);
+    let peruTime = new Date(utc - (5 * 3600000));
 
-function resizeCanvas() {
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
-}
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
+    let h = peruTime.getHours();
+    let m = peruTime.getMinutes();
+    let s = peruTime.getSeconds();
+    let ampm = h >= 12 ? 'PM' : 'AM';
 
-const simbolos = ["💖", "⭐", "💜", "✨", "❤️"];
+    h = h % 12;
+    h = h ? h : 12; // 0 -> 12
 
-function crearElemento() {
-  return {
-    x: Math.random() * canvas.width,
-    y: -20,
-    simbolo: simbolos[Math.floor(Math.random() * simbolos.length)],
-    size: Math.random() * 20 + 15,
-    speed: Math.random() * 3 + 2,
-    opacity: Math.random() * 0.5 + 0.5
-  };
-}
+    m = m < 10 ? '0'+m : m;
+    s = s < 10 ? '0'+s : s;
 
-function dibujarElemento(e) {
-  ctx.globalAlpha = e.opacity;
-  ctx.font = `${e.size}px Arial`;
-  ctx.fillStyle = Math.random() > 0.5 ? "#ff80ab" : "#a770ff";
-  ctx.fillText(e.simbolo, e.x, e.y);
-  ctx.globalAlpha = 1;
-}
-
-function animarElementos() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  if (Math.random() < 0.4) {
-    elementos.push(crearElemento());
+    relojEl.textContent = `🕒 Hora Perú: ${h}:${m}:${s} ${ampm}`;
   }
-  elementos.forEach(el => {
-    el.y += el.speed;
-    dibujarElemento(el);
-  });
-  elementos = elementos.filter(el => el.y < canvas.height + 20);
-  requestAnimationFrame(animarElementos);
-}
-animarElementos();
+  setInterval(actualizarReloj, 1000);
+  actualizarReloj();
+
+  // Mensajes de dedicatoria con máquina de escribir
+  const mensajes = [
+    "Mi Briyidth, cada día a tu lado es un regalo que nunca dejaré de agradecer.",
+    "Tu sonrisa ilumina mis días más oscuros y llena mi alma de alegría.",
+    "Eres la reina de mi corazón, mi inspiración y mi mejor amiga.",
+    "Juntos hemos creado un mundo donde el amor siempre gana, sin importar nada más.",
+    "Gracias por ser mi compañera, mi confidente y mi amor incondicional.",
+    "Cada instante contigo es eterno, cada beso es un sueño hecho realidad.",
+    "Prometo amarte y cuidarte en las buenas y en las malas, hoy y siempre.",
+    "Te amo con toda mi alma, y nada ni nadie podrá cambiar eso, mi reina hermosa."
+  ];
+
+  const mensajeEl = document.getElementById("mensajeDedicatoria");
+  const cursorEl = document.createElement('span');
+  cursorEl.id = 'cursor';
+  mensajeEl.appendChild(cursorEl);
+
+  let i = 0; // índice de mensaje
+  let charIndex = 0;
+  let escribiendo = true;
+  let timeoutId;
+
+  function escribir() {
+    if (charIndex <= mensajes[i].length && escribiendo) {
+      mensajeEl.textContent = mensajes[i].substring(0, charIndex);
+      mensajeEl.appendChild(cursorEl);
+      charIndex++;
+      timeoutId = setTimeout(escribir, 80);
+    } else {
+      escribiendo = false;
+      timeoutId = setTimeout(borrar, 1800);
+      if (i === 6 || i === 7) crearCorazones(); // más corazones en mensajes intensos
+    }
+  }
+
+  function borrar() {
+    if (charIndex >= 0 && !escribiendo) {
+      mensajeEl.textContent = mensajes[i].substring(0, charIndex);
+      mensajeEl.appendChild(cursorEl);
+      charIndex--;
+      timeoutId = setTimeout(borrar, 40);
+    } else {
+      escribiendo = true;
+      i = (i + 1) % mensajes.length;
+      timeoutId = setTimeout(escribir, 600);
+    }
+  }
+
+  escribir();
+
+  // Crear corazones animados que caen
+  function crearCorazones() {
+    for(let c=0; c<15; c++) {
+      const heart = document.createElement('div');
+      heart.classList.add('corazon');
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.animationDuration = (3 + Math.random() * 2) + 's';
+      heart.style.fontSize = (12 + Math.random() * 12) + 'px';
+      heart.style.opacity = Math.random();
+      heart.textContent = "❤️";
+      document.body.appendChild(heart);
+
+      // Remover corazón después de la animación
+      setTimeout(() => heart.remove(), 5000);
+    }
+  }
 </script>
 
 </body>

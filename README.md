@@ -1,377 +1,503 @@
-<!DOCTYPE html>
+
 <html lang="es">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>BerMatMods - Multijuegos Web</title>
+<title>Juego XO - BerMatMods</title>
 <style>
-  /* Reset y base */
-  * { box-sizing: border-box; }
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+
+  * {
+    box-sizing: border-box;
+  }
+
   body {
-    margin: 0; font-family: 'Montserrat', sans-serif;
-    background: #0a0f12; color: #00ff00;
-    display: flex; min-height: 100vh; flex-direction: column;
-  }
-  a {
-    color: #00ff00; text-decoration: none;
-  }
-  a:hover {
-    color: #0ff;
-  }
-  /* Menú toggle y icono */
-  #menuToggle { display: none; }
-  .menu-icon {
-    cursor: pointer; display: inline-block;
-    padding: 10px; position: fixed; top: 10px; left: 10px;
-    z-index: 2000;
-  }
-  .menu-icon div {
-    width: 25px; height: 3px; background-color: #0ff;
-    margin: 5px 0; transition: 0.4s;
-  }
-  /* Navegación lateral */
-  nav {
-    background: #01110f; width: 240px; height: 100vh;
-    padding-top: 3rem; position: fixed; top: 0; left: 0;
-    overflow-y: auto; transform: translateX(0);
-    transition: transform 0.3s ease; z-index: 1000;
-  }
-  nav ul {
-    list-style: none; padding: 0; margin: 0;
-  }
-  nav ul li {
-    border-bottom: 1px solid #022;
-  }
-  nav ul li a {
-    display: block; padding: 15px 20px; font-weight: 700;
-    border-left: 4px solid transparent;
-  }
-  nav ul li a:hover,
-  nav ul li a.active {
-    background: #013333;
-    border-left-color: #0ff;
-    color: #0ff;
-  }
-  /* Sobre mí */
-  .about-me {
-    padding: 20px;
-    color: #0ff;
-    margin-top: 20px;
-    font-family: 'Dancing Script', cursive;
-    border-top: 1px solid #022;
-  }
-  .about-me h3 {
-    margin-top: 0;
-  }
-  .about-me ul.social-links {
-    list-style: none;
-    padding-left: 0;
-  }
-  .about-me ul.social-links li {
-    margin: 5px 0;
-  }
-  .about-me ul.social-links li a {
-    color: #0ff;
-  }
-  /* Contenido principal */
-  main {
-    margin-left: 240px; padding: 20px; flex-grow: 1;
-    min-height: 100vh;
-  }
-  /* Responsive */
-  @media (max-width: 768px) {
-    nav {
-      transform: translateX(-100%);
-      position: fixed;
-      z-index: 1000;
-    }
-    #menuToggle:checked + nav {
-      transform: translateX(0);
-    }
-    main {
-      margin-left: 0;
-      padding-top: 70px;
-    }
-  }
-  /* Juego Tic Tac Toe */
-  .tictactoe-wrapper {
-    display: flex; flex-wrap: wrap; gap: 30px; justify-content: center;
-  }
-  .tictactoe-game {
-    background: #022; border-radius: 15px; padding: 20px;
-    box-shadow: 0 0 15px #0ff; width: 320px;
-  }
-  .tictactoe-board {
-    display: grid;
-    grid-template-columns: repeat(3, 80px);
-    grid-gap: 10px;
-  }
-  .cell {
-    background: #004040;
-    color: #0ff;
-    font-size: 3rem;
+    margin: 0; 
+    background: linear-gradient(135deg, #1f1c2c, #928dab);
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    cursor: pointer;
-    border-radius: 10px;
+    min-height: 100vh;
+    padding: 20px 15px 60px 15px;
+  }
+
+  h1 {
+    margin-bottom: 5px;
+    font-size: 3.5rem;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px #e0aaff;
     user-select: none;
-    transition: background 0.3s ease;
   }
-  .cell:hover {
-    background: #006666;
+
+  h2 {
+    margin-top: 0;
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    user-select: none;
   }
-  #status {
-    margin-top: 15px;
-    font-weight: bold;
+
+  #mode-select {
+    margin-bottom: 15px;
+  }
+
+  select {
     font-size: 1.2rem;
-    text-align: center;
-  }
-  #resetButton {
-    margin-top: 15px;
-    background: #0ff;
+    padding: 8px 15px;
+    border-radius: 10px;
     border: none;
-    color: #022;
-    font-weight: 700;
-    padding: 10px 15px;
-    border-radius: 8px;
+    background: #442266;
+    color: #fff;
     cursor: pointer;
-    transition: background 0.3s ease;
-    width: 100%;
+    box-shadow: 0 0 8px #a37cff;
+    transition: background-color 0.3s ease;
   }
-  #resetButton:hover {
-    background: #33ffff;
+  select:hover {
+    background: #6a3ea1;
   }
-  /* Info animada */
-  .info-box {
-    background: #011;
-    border: 2px solid #0ff;
+
+  #name-inputs {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  #name-inputs > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  label {
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  input[type="text"] {
+    padding: 8px 12px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    box-shadow: inset 0 0 8px #6b4dbb;
+    width: 180px;
+    color: #333;
+  }
+  input[type="text"]:focus {
+    box-shadow: 0 0 10px #bb33ff;
+  }
+
+  #board {
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    grid-template-rows: repeat(3, 120px);
+    gap: 15px;
+    user-select: none;
+  }
+
+  .cell {
+    background: #2e2a44;
     border-radius: 15px;
-    padding: 20px;
-    width: 300px;
-    color: #0ff;
-    font-family: 'Dancing Script', cursive;
-    box-shadow: 0 0 15px #0ff;
-    animation: float 4s ease-in-out infinite;
+    box-shadow: inset 0 0 10px #4a3f77;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    font-weight: 900;
+    color: #cfa4ff;
+    position: relative;
+    transition: background-color 0.3s ease;
   }
-  .info-box img {
-    display: block;
-    margin: 0 auto 15px auto;
-    width: 100px;
-    border-radius: 50%;
-    border: 2px solid #0ff;
+
+  .cell:hover:not(.disabled) {
+    background: #5e4dbb;
   }
-  .info-box h3 {
+
+  /* Animación parpadeo para X */
+  .x {
+    color: #ff5c8d;
+    animation: blinkX 1.2s infinite alternate;
+    text-shadow:
+      0 0 5px #ff5c8d,
+      0 0 15px #ff1f6a,
+      0 0 30px #ff004c;
+  }
+  @keyframes blinkX {
+    0%, 100% {opacity: 1;}
+    50% {opacity: 0.5;}
+  }
+
+  /* Animación parpadeo para O */
+  .o {
+    color: #4affca;
+    animation: blinkO 1.2s infinite alternate;
+    text-shadow:
+      0 0 5px #4affca,
+      0 0 15px #00f6d4,
+      0 0 30px #00c9a4;
+  }
+  @keyframes blinkO {
+    0%, 100% {opacity: 1;}
+    50% {opacity: 0.5;}
+  }
+
+  .disabled {
+    pointer-events: none;
+  }
+
+  #info {
+    margin-top: 25px;
+    font-size: 1.4rem;
+    min-height: 40px;
+    user-select: none;
     text-align: center;
-    margin: 0 0 10px 0;
+    padding: 10px 20px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 12px;
+    box-shadow: 0 0 12px #9255ff88;
   }
-  .info-box p {
-    margin: 5px 0;
+
+  #reset-btn {
+    margin-top: 20px;
+    font-size: 1.3rem;
+    background: #bb33ff;
+    border: none;
+    padding: 12px 28px;
+    color: white;
+    font-weight: 700;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 0 15px #bb33ffaa;
+    transition: background-color 0.3s ease;
+  }
+  #reset-btn:hover {
+    background: #dd44ff;
+  }
+
+  /* Pie de página con marca y redes */
+  footer {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: #2e2a44cc;
+    color: #ddaaff;
+    font-size: 0.9rem;
+    padding: 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    box-shadow: 0 -3px 10px #bb33ffaa;
+  }
+  footer .brand {
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 1.5px;
+    text-shadow: 0 0 6px #bb33ff;
+  }
+  footer .info {
+    flex: 1;
     text-align: center;
   }
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0);
-      box-shadow: 0 0 15px #0ff;
-    }
-    50% {
-      transform: translateY(-10px);
-      box-shadow: 0 0 25px #33ffff;
-    }
+  footer .socials a {
+    color: #ddaaff;
+    text-decoration: none;
+    margin-left: 15px;
+    font-weight: 700;
+    transition: color 0.3s ease;
   }
+  footer .socials a:hover {
+    color: #ff77ff;
+  }
+
 </style>
 </head>
 <body>
 
-<input type="checkbox" id="menuToggle" />
-<label for="menuToggle" class="menu-icon">
-  <div></div><div></div><div></div>
-</label>
+<h1>🕹️ Tic Tac Toe (XO)</h1>
+<h2 id="subtitle">Modo: 2 Jugadores</h2>
 
-<nav>
-  <ul>
-    <li><a href="#juego1" class="active">Tic Tac Toe</a></li>
-    <li><a href="#juego2">Snake</a></li>
-    <li><a href="#juego3">Memory Match</a></li>
-    <li><a href="#juego4">Pong</a></li>
-    <li><a href="#juego5">Simon Dice</a></li>
-    <li><a href="#juego6">Flappy Bird</a></li>
-    <li><a href="#juego7">Breakout</a></li>
-    <li><a href="#juego8">Laberinto</a></li>
-    <li><a href="#juego9">Sudoku</a></li>
-    <li><a href="#juego10">Quiz Trivia</a></li>
-    <li><a href="#juego11">Ahorcado</a></li>
-    <li><a href="#juego12">Clicker</a></li>
-    <li><a href="#juego13">Tower Defense</a></li>
-    <li><a href="#juego14">Juego de Cartas</a></li>
-    <li><a href="#juego15">Text Adventure</a></li>
-    <li><a href="#juego16">Rhythm Game</a></li>
-    <li><a href="#juego17">Juego de Dados</a></li>
-    <li><a href="#juego18">RPG Simple</a></li>
-    <li><a href="#juego19">Juego de Palabras</a></li>
-    <li><a href="#juego20">Lanzamiento Física</a></li>
-  </ul>
+<div id="mode-select">
+  <label for="mode">Selecciona modo: </label>
+  <select id="mode" aria-label="Selecciona modo de juego">
+    <option value="2players" selected>2 Jugadores</option>
+    <option value="bot">Jugar contra Bot</option>
+  </select>
+</div>
 
-  <hr />
-  <div class="about-me">
-    <h3>Sobre AnthZz Berrocal</h3>
-    <p>Alias: <strong>⚡BerMatModZ🔥</strong></p>
-    <p>Ubicación: Andahuaylas, Perú</p>
-    <p>Profesión: Programador & Hacker Ético</p>
-    <p>Redes Sociales:</p>
-    <ul class="social-links">
-      <li><a href="https://github.com/BerMatMods" target="_blank" rel="noopener">GitHub</a></li>
-      <li><a href="https://t.me/Berrocal_mdz" target="_blank" rel="noopener">Telegram</a></li>
-      <li><a href="https://wa.me/937556459" target="_blank" rel="noopener">WhatsApp</a></li>
-      <li><a href="https://instagram.com/berrocalanthony12" target="_blank" rel="noopener">Instagram</a></li>
-    </ul>
+<div id="name-inputs" aria-label="Nombres de jugadores">
+  <div id="playerX-name-div">
+    <label for="playerX-name">Nombre jugador X:</label>
+    <input type="text" id="playerX-name" placeholder="Jugador X" maxlength="12" />
   </div>
-</nav>
+  <div id="playerO-name-div">
+    <label for="playerO-name">Nombre jugador O:</label>
+    <input type="text" id="playerO-name" placeholder="Jugador O" maxlength="12" />
+  </div>
+</div>
 
-<main>
-  <!-- Contenido cargado dinámicamente -->
-</main>
+<div id="board" aria-label="Tablero de Tic Tac Toe" role="grid" tabindex="0">
+  <!-- Celdas generadas por JS -->
+</div>
+
+<div id="info" aria-live="polite">Turno: Jugador X</div>
+<button id="reset-btn" aria-label="Reiniciar juego">Reiniciar Juego</button>
+
+<footer>
+  <div class="brand">⚡ BerMatMods ⚡</div>
+  <div class="info">Creado por <strong>Anth'Zz Berrocal</strong> | Andahuaylas</div>
+  <div class="socials" aria-label="Redes sociales de BerMatMods">
+    <a href="https://t.me/Berrocal_mdz" target="_blank" rel="noopener noreferrer" title="Telegram">Telegram</a>
+    <a href="https://github.com/BerMatMods" target="_blank" rel="noopener noreferrer" title="GitHub">GitHub</a>
+    <a href="https://wa.me/51937556459" target="_blank" rel="noopener noreferrer" title="WhatsApp">WhatsApp</a>
+  </div>
+</footer>
 
 <script>
-  // Manejo navegación menú y carga juegos
-  document.addEventListener('DOMContentLoaded', () => {
-    const menuLinks = document.querySelectorAll('nav ul li a');
-    const main = document.querySelector('main');
+  const boardEl = document.getElementById('board');
+  const infoEl = document.getElementById('info');
+  const resetBtn = document.getElementById('reset-btn');
+  const modeSelect = document.getElementById('mode');
+  const subtitle = document.getElementById('subtitle');
+  const playerXInput = document.getElementById('playerX-name');
+  const playerOInput = document.getElementById('playerO-name');
+  const playerONameDiv = document.getElementById('playerO-name-div');
 
-    function clearActive() {
-      menuLinks.forEach(link => link.classList.remove('active'));
-    }
+  let board = ['', '', '', '', '', '', '', '', ''];
+  let currentPlayer = 'X';
+  let gameActive = true;
+  let mode = '2players'; // o 'bot'
 
-    // Juego Tic Tac Toe - implementación completa
-    function ticTacToe() {
-      main.innerHTML = `
-      <h2>Tic Tac Toe - Juego y Mi Info</h2>
-      <div class="tictactoe-wrapper">
-        <div class="tictactoe-game">
-          <div class="tictactoe-board" id="board">
-            <div class="cell" data-cell></div>
-            <div class="cell" data-cell></div>
-            <div class="cell" data-cell></div>
-            <div class="cell" data-cell></div>
-            <div class="cell" data-cell></div>
-            <div class="cell" data-cell></div>
-            <div class="cell" data-cell></div>
-            <div class="cell" data-cell></div>
-            <div class="cell" data-cell></div>
-          </div>
-          <div id="status">Turno de: X</div>
-          <button id="resetButton">Reiniciar Juego</button>
-        </div>
-        <aside class="info-box">
-          <img src="https://avatars.githubusercontent.com/u/74011966?v=4" alt="Avatar de AnthZz Berrocal" />
-          <h3>AnthZz Berrocal</h3>
-          <p><strong>Alias:</strong> ⚡BerMatModZ🔥</p>
-          <p><strong>Ubicación:</strong> Andahuaylas, Perú</p>
-          <p><strong>Profesión:</strong> Programador & Hacker Ético</p>
-          <p>¡Gracias por jugar! 😊</p>
-        </aside>
-      </div>
-      `;
+  // Nombres jugadores (por defecto)
+  let playerNames = {
+    X: 'Jugador X',
+    O: 'Jugador O'
+  };
 
-      const X = 'X';
-      const O = 'O';
-      let turn = X;
-      let board = Array(9).fill(null);
-      const cells = main.querySelectorAll('.cell');
-      const status = main.querySelector('#status');
-      const resetButton = main.querySelector('#resetButton');
+  // Posibles combinaciones ganadoras
+  const winningConditions = [
+    [0,1,2],[3,4,5],[6,7,8], // filas
+    [0,3,6],[1,4,7],[2,5,8], // columnas
+    [0,4,8],[2,4,6]          // diagonales
+  ];
 
-      function checkWin(player) {
-        const winPatterns = [
-          [0,1,2],[3,4,5],[6,7,8], // filas
-          [0,3,6],[1,4,7],[2,5,8], // columnas
-          [0,4,8],[2,4,6]          // diagonales
-        ];
-        return winPatterns.some(pattern =>
-          pattern.every(index => board[index] === player)
-        );
-      }
-      function checkDraw() {
-        return board.every(cell => cell !== null);
-      }
-      function updateStatus(text) {
-        status.textContent = text;
-      }
-      function handleClick(e) {
-        const index = [...cells].indexOf(e.target);
-        if(board[index] !== null) return;
-        board[index] = turn;
-        e.target.textContent = turn;
-        if(checkWin(turn)) {
-          updateStatus(`¡Jugador ${turn} gana! 🎉`);
-          cells.forEach(c => c.removeEventListener('click', handleClick));
-          return;
+  // Crear las celdas del tablero
+  function createBoard() {
+    boardEl.innerHTML = '';
+    for(let i=0; i<9; i++){
+      const cell = document.createElement('div');
+      cell.classList.add('cell');
+      cell.setAttribute('data-cell-index', i);
+      cell.setAttribute('role', 'button');
+      cell.setAttribute('tabindex', 0);
+      cell.addEventListener('click', () => handleCellClick(i));
+      cell.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleCellClick(i);
         }
-        if(checkDraw()) {
-          updateStatus(`¡Empate! 🤝`);
-          return;
-        }
-        turn = turn === X ? O : X;
-        updateStatus(`Turno de: ${turn}`);
-      }
-      cells.forEach(cell => cell.addEventListener('click', handleClick));
-      resetButton.addEventListener('click', () => {
-        board.fill(null);
-        cells.forEach(cell => cell.textContent = '');
-        turn = X;
-        updateStatus(`Turno de: ${turn}`);
-        cells.forEach(cell => cell.addEventListener('click', handleClick));
       });
+      boardEl.appendChild(cell);
     }
+  }
 
-    // Juegos pendientes: mostrar mensaje "Próximamente"
-    function comingSoon(name) {
-      main.innerHTML = `<h2>${name}</h2><p style="font-size:1.2rem; text-align:center; margin-top:40px;">Este juego estará disponible próximamente. ¡Mantente atento! 🚀</p>`;
-    }
-
-    function loadGame(id) {
-      clearActive();
-      const link = document.querySelector(`nav ul li a[href="#${id}"]`);
-      if (link) link.classList.add('active');
-
-      switch(id) {
-        case 'juego1': ticTacToe(); break;
-        case 'juego2': comingSoon('Snake'); break;
-        case 'juego3': comingSoon('Memory Match'); break;
-        case 'juego4': comingSoon('Pong'); break;
-        case 'juego5': comingSoon('Simon Dice'); break;
-        case 'juego6': comingSoon('Flappy Bird'); break;
-        case 'juego7': comingSoon('Breakout'); break;
-        case 'juego8': comingSoon('Laberinto'); break;
-        case 'juego9': comingSoon('Sudoku'); break;
-        case 'juego10': comingSoon('Quiz Trivia'); break;
-        case 'juego11': comingSoon('Ahorcado'); break;
-        case 'juego12': comingSoon('Clicker'); break;
-        case 'juego13': comingSoon('Tower Defense'); break;
-        case 'juego14': comingSoon('Juego de Cartas'); break;
-        case 'juego15': comingSoon('Text Adventure'); break;
-        case 'juego16': comingSoon('Rhythm Game'); break;
-        case 'juego17': comingSoon('Juego de Dados'); break;
-        case 'juego18': comingSoon('RPG Simple'); break;
-        case 'juego19': comingSoon('Juego de Palabras'); break;
-        case 'juego20': comingSoon('Lanzamiento Física'); break;
-        default:
-          main.innerHTML = `<p>Juego no encontrado.</p>`;
+  // Actualiza el tablero visual según array board
+  function updateBoard() {
+    const cells = boardEl.querySelectorAll('.cell');
+    cells.forEach((cell, i) => {
+      cell.textContent = board[i];
+      cell.classList.remove('x','o','disabled');
+      if(board[i] === 'X') {
+        cell.classList.add('x', 'disabled');
+      } else if(board[i] === 'O') {
+        cell.classList.add('o', 'disabled');
       }
-    }
-
-    // Inicializar el primer juego
-    loadGame('juego1');
-
-    // Manejo clicks menú
-    menuLinks.forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        const id = link.getAttribute('href').substring(1);
-        loadGame(id);
-      });
+      else {
+        cell.classList.remove('disabled');
+      }
     });
+  }
+
+  // Comprobar ganador o empate
+  function checkResult() {
+    for(let condition of winningConditions){
+      const [a,b,c] = condition;
+      if(board[a] && board[a] === board[b] && board[a] === board[c]){
+        return board[a]; // X u O ganador
+      }
+    }
+    if(!board.includes('')) return 'draw'; // empate
+    return null;
+  }
+
+  // Cambiar jugador
+  function switchPlayer() {
+    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    infoEl.textContent = `Turno: ${playerNames[currentPlayer]} (${currentPlayer})`;
+  }
+
+  // Maneja el click en celda
+  function handleCellClick(index) {
+    if(!gameActive || board[index]) return;
+
+    board[index] = currentPlayer;
+    updateBoard();
+
+    const result = checkResult();
+
+    if(result){
+      gameActive = false;
+      if(result === 'draw'){
+        infoEl.textContent = "¡Empate! 😐";
+      } else {
+        infoEl.textContent = `¡Ganó ${playerNames[result]} (${result})! 🎉`;
+        highlightWinningCells(result);
+      }
+      return;
+    }
+
+    switchPlayer();
+
+    if(mode === 'bot' && currentPlayer === 'O' && gameActive){
+      infoEl.textContent = `Turno: Bot (O)`;
+      setTimeout(botMove, 700);
+    }
+  }
+
+  // Bot elige movimiento simple
+  function botMove() {
+    if(!gameActive) return;
+    const emptyIndexes = board
+      .map((val, idx) => val === '' ? idx : null)
+      .filter(i => i !== null);
+
+    // Estrategia simple: ganar, bloquear, aleatorio
+    let move = findBestMove('O'); // Intentar ganar
+    if(move === null) move = findBestMove('X'); // Bloquear jugador
+    if(move === null) move = emptyIndexes[Math.floor(Math.random() * emptyIndexes.length)];
+
+    if(move !== null){
+      board[move] = currentPlayer;
+      updateBoard();
+
+      const result = checkResult();
+
+      if(result){
+        gameActive = false;
+        if(result === 'draw'){
+          infoEl.textContent = "¡Empate! 😐";
+        } else {
+          infoEl.textContent = `¡Ganó el Bot (O)! 🎉`;
+          highlightWinningCells(result);
+        }
+        return;
+      }
+      switchPlayer();
+      infoEl.textContent = `Turno: ${playerNames[currentPlayer]} (${currentPlayer})`;
+    }
+  }
+
+  // Buscar movimiento ganador o bloqueador
+  function findBestMove(player) {
+    for(let condition of winningConditions){
+      const [a,b,c] = condition;
+      const line = [board[a], board[b], board[c]];
+
+      if(line.filter(cell => cell === player).length === 2 && line.includes('')){
+        const emptyIndex = [a,b,c].find(idx => board[idx] === '');
+        return emptyIndex;
+      }
+    }
+    return null;
+  }
+
+  // Resaltar combinación ganadora
+  function highlightWinningCells(winner) {
+    for(let condition of winningConditions){
+      const [a,b,c] = condition;
+      if(board[a] === winner && board[b] === winner && board[c] === winner){
+        const cells = boardEl.querySelectorAll('.cell');
+        [a,b,c].forEach(i => {
+          cells[i].style.boxShadow = winner === 'X' ?
+            '0 0 20px 6px #ff3c6e' :
+            '0 0 20px 6px #0fffc9';
+          cells[i].style.transition = 'box-shadow 0.5s ease';
+        });
+        break;
+      }
+    }
+  }
+
+  // Reiniciar juego
+  function resetGame() {
+    board = ['', '', '', '', '', '', '', '', ''];
+    currentPlayer = 'X';
+    gameActive = true;
+    updateBoard();
+    infoEl.textContent = `Turno: ${playerNames[currentPlayer]} (${currentPlayer})`;
+  }
+
+  // Actualizar nombres jugadores desde inputs
+  function updatePlayerNames(){
+    const xName = playerXInput.value.trim();
+    const oName = playerOInput.value.trim();
+
+    playerNames.X = xName || 'Jugador X';
+    if(mode === 'bot'){
+      playerNames.O = 'Bot (O)';
+    } else {
+      playerNames.O = oName || 'Jugador O';
+    }
+    updateTurnInfo();
+  }
+
+  function updateTurnInfo() {
+    if(!gameActive){
+      return; // no cambiar mensaje en juego terminado
+    }
+    if(currentPlayer === 'O' && mode === 'bot'){
+      infoEl.textContent = `Turno: Bot (O)`;
+    } else {
+      infoEl.textContent = `Turno: ${playerNames[currentPlayer]} (${currentPlayer})`;
+    }
+  }
+
+  // Cambiar modo juego
+  modeSelect.addEventListener('change', () => {
+    mode = modeSelect.value;
+    subtitle.textContent = mode === '2players' ? "Modo: 2 Jugadores" : "Modo: Jugar contra Bot";
+
+    // Mostrar u ocultar input de jugador O
+    if(mode === 'bot'){
+      playerONameDiv.style.display = 'none';
+      playerOInput.value = '';
+    } else {
+      playerONameDiv.style.display = 'flex';
+    }
+
+    updatePlayerNames();
+    resetGame();
   });
+
+  // Escuchar cambios en inputs para actualizar nombres
+  playerXInput.addEventListener('input', () => {
+    updatePlayerNames();
+  });
+  playerOInput.addEventListener('input', () => {
+    if(mode === '2players') updatePlayerNames();
+  });
+
+  // Inicialización
+  createBoard();
+  updatePlayerNames();
+  updateBoard();
+
+  resetBtn.addEventListener('click', resetGame);
+
 </script>
 
 </body>

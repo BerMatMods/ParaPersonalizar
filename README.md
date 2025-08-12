@@ -376,129 +376,470 @@
       .filter(i => i !== null);
 
     // Estrategia simple: ganar, bloquear, aleatorio
-    let move = findBestMove('O'); // Intentar ganar
-    if(move === null) move = findBestMove('X'); // Bloquear jugador
-    if(move === null) move = emptyIndexes[Math.floor(Math.random() * emptyIndexes.length)];
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Juego XO - BerMatMods</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
 
-    if(move !== null){
-      board[move] = currentPlayer;
-      updateBoard();
-
-      const result = checkResult();
-
-      if(result){
-        gameActive = false;
-        if(result === 'draw'){
-          infoEl.textContent = "¡Empate! 😐";
-        } else {
-          infoEl.textContent = `¡Ganó el Bot (O)! 🎉`;
-          highlightWinningCells(result);
-        }
-        return;
-      }
-      switchPlayer();
-      infoEl.textContent = `Turno: ${playerNames[currentPlayer]} (${currentPlayer})`;
-    }
+  * {
+    box-sizing: border-box;
   }
 
-  // Buscar movimiento ganador o bloqueador
-  function findBestMove(player) {
-    for(let condition of winningConditions){
-      const [a,b,c] = condition;
-      const line = [board[a], board[b], board[c]];
-
-      if(line.filter(cell => cell === player).length === 2 && line.includes('')){
-        const emptyIndex = [a,b,c].find(idx => board[idx] === '');
-        return emptyIndex;
-      }
-    }
-    return null;
+  body {
+    margin: 0; 
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px 15px 100px 15px;
+    background: var(--bg-gradient);
+    transition: background 0.8s ease;
   }
 
-  // Resaltar combinación ganadora
-  function highlightWinningCells(winner) {
-    for(let condition of winningConditions){
-      const [a,b,c] = condition;
-      if(board[a] === winner && board[b] === winner && board[c] === winner){
-        const cells = boardEl.querySelectorAll('.cell');
-        [a,b,c].forEach(i => {
-          cells[i].style.boxShadow = winner === 'X' ?
-            '0 0 20px 6px #ff3c6e' :
-            '0 0 20px 6px #0fffc9';
-          cells[i].style.transition = 'box-shadow 0.5s ease';
-        });
-        break;
-      }
-    }
+  /* Temas neón */
+  :root {
+    --bg-gradient: linear-gradient(135deg, #1f1c2c, #928dab);
+    --color-x: #ff5c8d;
+    --color-o: #4affca;
+    --color-x-shadow: #ff004c;
+    --color-o-shadow: #00c9a4;
+    --btn-bg: #bb33ff;
+    --btn-bg-hover: #dd44ff;
+    --board-bg: #2e2a44;
+    --board-shadow: #4a3f77;
+    --info-bg: rgba(0,0,0,0.3);
+    --info-shadow: #9255ff88;
+    --modal-bg: rgba(25,0,50,0.95);
   }
 
-  // Reiniciar juego
-  function resetGame() {
-    board = ['', '', '', '', '', '', '', '', ''];
-    currentPlayer = 'X';
-    gameActive = true;
-    updateBoard();
-    infoEl.textContent = `Turno: ${playerNames[currentPlayer]} (${currentPlayer})`;
+  /* Tema 2 (azul) */
+  body.theme-blue {
+    --bg-gradient: linear-gradient(135deg, #0a2540, #355375);
+    --color-x: #3ec6ff;
+    --color-o: #00ffd1;
+    --color-x-shadow: #0099ff;
+    --color-o-shadow: #00cca3;
+    --btn-bg: #007acc;
+    --btn-bg-hover: #0099ff;
+    --board-bg: #16324f;
+    --board-shadow: #245d8c;
+    --info-bg: rgba(0, 30, 60, 0.5);
+    --info-shadow: #007acc88;
+    --modal-bg: rgba(0,20,40,0.95);
   }
 
-  // Actualizar nombres jugadores desde inputs
-  function updatePlayerNames(){
-    const xName = playerXInput.value.trim();
-    const oName = playerOInput.value.trim();
-
-    playerNames.X = xName || 'Jugador X';
-    if(mode === 'bot'){
-      playerNames.O = 'Bot (O)';
-    } else {
-      playerNames.O = oName || 'Jugador O';
-    }
-    updateTurnInfo();
+  /* Tema 3 (rosa) */
+  body.theme-pink {
+    --bg-gradient: linear-gradient(135deg, #350a3f, #7e2f65);
+    --color-x: #ff3e96;
+    --color-o: #ff63c3;
+    --color-x-shadow: #d9006e;
+    --color-o-shadow: #e600a3;
+    --btn-bg: #d81e88;
+    --btn-bg-hover: #ff3e96;
+    --board-bg: #502a4a;
+    --board-shadow: #7d3b6e;
+    --info-bg: rgba(60,20,60,0.5);
+    --info-shadow: #d81e8888;
+    --modal-bg: rgba(40,10,40,0.95);
   }
 
-  function updateTurnInfo() {
-    if(!gameActive){
-      return; // no cambiar mensaje en juego terminado
-    }
-    if(currentPlayer === 'O' && mode === 'bot'){
-      infoEl.textContent = `Turno: Bot (O)`;
-    } else {
-      infoEl.textContent = `Turno: ${playerNames[currentPlayer]} (${currentPlayer})`;
-    }
+  h1 {
+    margin-bottom: 5px;
+    font-size: 3.5rem;
+    letter-spacing: 2px;
+    user-select: none;
+    text-shadow:
+      0 0 8px var(--color-x),
+      0 0 20px var(--color-x-shadow);
   }
 
-  // Cambiar modo juego
-  modeSelect.addEventListener('change', () => {
-    mode = modeSelect.value;
-    subtitle.textContent = mode === '2players' ? "Modo: 2 Jugadores" : "Modo: Jugar contra Bot";
+  h2 {
+    margin-top: 0;
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    user-select: none;
+    color: #ddd;
+    text-shadow: 0 0 5px var(--btn-bg);
+  }
 
-    // Mostrar u ocultar input de jugador O
-    if(mode === 'bot'){
-      playerONameDiv.style.display = 'none';
-      playerOInput.value = '';
-    } else {
-      playerONameDiv.style.display = 'flex';
+  #mode-select {
+    margin-bottom: 15px;
+  }
+
+  label {
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  select, input[type="text"] {
+    font-size: 1.2rem;
+    padding: 8px 15px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    background: var(--board-bg);
+    color: #fff;
+    box-shadow: 0 0 12px var(--btn-bg);
+    transition: box-shadow 0.3s ease;
+  }
+  select:hover, input[type="text"]:focus {
+    box-shadow: 0 0 20px var(--btn-bg);
+  }
+
+  #name-inputs {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  #name-inputs > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #board {
+    display: grid;
+    grid-template-columns: repeat(3, 130px);
+    grid-template-rows: repeat(3, 130px);
+    gap: 18px;
+    user-select: none;
+  }
+
+  .cell {
+    background: var(--board-bg);
+    border-radius: 20px;
+    box-shadow:
+      inset 0 0 12px var(--board-shadow),
+      0 0 15px transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6rem;
+    font-weight: 900;
+    color: var(--color-x);
+    position: relative;
+    transition: background-color 0.3s ease, box-shadow 0.4s ease;
+  }
+
+  .cell:hover:not(.disabled) {
+    background: #5533aa;
+    box-shadow:
+      0 0 25px var(--btn-bg),
+      0 0 40px var(--btn-bg);
+  }
+
+  /* Animación parpadeo para X */
+  .x {
+    color: var(--color-x);
+    animation: blinkX 1.2s infinite alternate;
+    text-shadow:
+      0 0 8px var(--color-x),
+      0 0 25px var(--color-x-shadow),
+      0 0 50px var(--color-x-shadow);
+  }
+  @keyframes blinkX {
+    0%, 100% {opacity: 1;}
+    50% {opacity: 0.5;}
+  }
+
+  /* Animación parpadeo para O */
+  .o {
+    color: var(--color-o);
+    animation: blinkO 1.2s infinite alternate;
+    text-shadow:
+      0 0 8px var(--color-o),
+      0 0 25px var(--color-o-shadow),
+      0 0 50px var(--color-o-shadow);
+  }
+  @keyframes blinkO {
+    0%, 100% {opacity: 1;}
+    50% {opacity: 0.5;}
+  }
+
+  .disabled {
+    pointer-events: none;
+  }
+
+  #info {
+    margin-top: 25px;
+    font-size: 1.4rem;
+    min-height: 40px;
+    user-select: none;
+    text-align: center;
+    padding: 12px 25px;
+    background: var(--info-bg);
+    border-radius: 16px;
+    box-shadow: 0 0 20px var(--info-shadow);
+    letter-spacing: 1.1px;
+  }
+
+  #reset-btn {
+    margin-top: 20px;
+    font-size: 1.3rem;
+    background: var(--btn-bg);
+    border: none;
+    padding: 14px 34px;
+    color: white;
+    font-weight: 700;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 0 20px var(--btn-bg);
+    transition: background-color 0.3s ease, box-shadow 0.4s ease;
+  }
+  #reset-btn:hover {
+    background: var(--btn-bg-hover);
+    box-shadow:
+      0 0 30px var(--btn-bg-hover),
+      0 0 60px var(--btn-bg-hover);
+  }
+
+  /* Botón cambiar tema */
+  #theme-btn {
+    margin-top: 15px;
+    font-size: 1rem;
+    background: transparent;
+    border: 2px solid var(--btn-bg);
+    padding: 8px 20px;
+    border-radius: 20px;
+    color: var(--btn-bg);
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  #theme-btn:hover {
+    background: var(--btn-bg);
+    color: #fff;
+    box-shadow: 0 0 20px var(--btn-bg);
+  }
+
+  /* Pie de página con marca y redes */
+  footer {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--board-bg);
+    color: #ddaaff;
+    font-size: 0.9rem;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    box-shadow: 0 -3px 15px var(--btn-bg);
+  }
+  footer .brand {
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 1.5px;
+    text-shadow: 0 0 10px var(--btn-bg);
+  }
+  footer .info {
+    flex: 1;
+    text-align: center;
+  }
+  footer .socials a {
+    color: #ddaaff;
+    text-decoration: none;
+    margin-left: 15px;
+    font-weight: 700;
+    transition: color 0.3s ease;
+  }
+  footer .socials a:hover {
+    color: var(--btn-bg-hover);
+    text-shadow: 0 0 10px var(--btn-bg-hover);
+  }
+
+  /* Modal pantalla final */
+  #result-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: var(--modal-bg);
+    border-radius: 25px;
+    padding: 35px 40px;
+    box-shadow:
+      0 0 30px var(--btn-bg),
+      0 0 70px var(--btn-bg);
+    color: #fff;
+    text-align: center;
+    font-size: 2.1rem;
+    font-weight: 700;
+    user-select: none;
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    max-width: 90vw;
+  }
+
+  #result-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  #result-modal .message {
+    margin-bottom: 20px;
+    text-shadow:
+      0 0 12px var(--btn-bg),
+      0 0 25px var(--btn-bg);
+  }
+
+  #result-modal .buttons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+  }
+
+  #result-modal button, #result-modal a.button-link {
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 12px 30px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    background: var(--btn-bg);
+    color: white;
+    box-shadow: 0 0 20px var(--btn-bg);
+    transition: background-color 0.3s ease, box-shadow 0.4s ease;
+    text-decoration: none;
+    user-select: none;
+  }
+  #result-modal button:hover, #result-modal a.button-link:hover {
+    background: var(--btn-bg-hover);
+    box-shadow:
+      0 0 30px var(--btn-bg-hover),
+      0 0 60px var(--btn-bg-hover);
+  }
+
+  /* Redes sociales en modal */
+  #result-modal .socials {
+    margin-top: 25px;
+    font-size: 1rem;
+  }
+  #result-modal .socials a {
+    color: var(--btn-bg);
+    margin: 0 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  #result-modal .socials a:hover {
+    color: var(--btn-bg-hover);
+    text-shadow: 0 0 15px var(--btn-bg-hover);
+  }
+
+  /* Responsive pequeño */
+  @media (max-width: 450px) {
+    #board {
+      grid-template-columns: repeat(3, 90px);
+      grid-template-rows: repeat(3, 90px);
+      gap: 12px;
     }
+    .cell {
+      font-size: 4rem;
+      border-radius: 15px;
+    }
+    #reset-btn {
+      font-size: 1.1rem;
+      padding: 10px 24px;
+    }
+    #result-modal {
+      font-size: 1.5rem;
+      padding: 25px 30px;
+    }
+    #result-modal button, #result-modal a.button-link {
+      font-size: 1rem;
+      padding: 10px 24px;
+    }
+  }
+</style>
+</head>
+<body>
 
-    updatePlayerNames();
-    resetGame();
-  });
+<h1>🕹️ Tic Tac Toe (XO)</h1>
+<h2 id="subtitle">Modo: 2 Jugadores</h2>
 
-  // Escuchar cambios en inputs para actualizar nombres
-  playerXInput.addEventListener('input', () => {
-    updatePlayerNames();
-  });
-  playerOInput.addEventListener('input', () => {
-    if(mode === '2players') updatePlayerNames();
-  });
+<div id="mode-select">
+  <label for="mode">Selecciona modo: </label>
+  <select id="mode" aria-label="Selecciona modo de juego">
+    <option value="2players" selected>2 Jugadores</option>
+    <option value="bot">Jugar contra Bot</option>
+  </select>
+</div>
 
-  // Inicialización
-  createBoard();
-  updatePlayerNames();
-  updateBoard();
+<div id="name-inputs" aria-label="Nombres de jugadores">
+  <div id="playerX-name-div">
+    <label for="playerX-name">Nombre jugador X:</label>
+    <input type="text" id="playerX-name" placeholder="Jugador X" maxlength="12" />
+  </div>
+  <div id="playerO-name-div">
+    <label for="playerO-name">Nombre jugador O:</label>
+    <input type="text" id="playerO-name" placeholder="Jugador O" maxlength="12" />
+  </div>
+</div>
 
-  resetBtn.addEventListener('click', resetGame);
+<div id="board" aria-label="Tablero de Tic Tac Toe" role="grid" tabindex="0">
+  <!-- Celdas generadas por JS -->
+</div>
 
-</script>
+<div id="info" aria-live="polite">Turno: Jugador X</div>
+<button id="reset-btn" aria-label="Reiniciar juego">Reiniciar Juego</button>
+<button id="theme-btn" aria-label="Cambiar tema de colores">Cambiar Tema 🎨</button>
 
-</body>
-</html>
+<footer>
+  <div class="brand">⚡ BerMatMods ⚡</div>
+  <div class="info">Creado por <strong>Anth'Zz Berrocal</strong> | Andahuaylas</div>
+  <div class="socials" aria-label="Redes sociales de BerMatMods">
+    <a href="https://t.me/Berrocal_mdz" target="_blank" rel="noopener noreferrer" title="Telegram">Telegram</a>
+    <a href="https://github.com/BerMatMods" target="_blank" rel="noopener noreferrer" title="GitHub">GitHub</a>
+    <a href="https://wa.me/51937556459" target="_blank" rel="noopener noreferrer" title="WhatsApp">WhatsApp</a>
+  </div>
+</footer>
+
+<!-- Modal resultado -->
+<div id="result-modal" role="dialog" aria-modal="true" aria-labelledby="result-message" aria-describedby="result-description">
+  <div class="message" id="result-message">¡Ganó Jugador X!</div>
+  <div class="buttons">
+    <button id="play-again-btn" aria-label="Jugar de nuevo">Jugar de nuevo</button>
+    <a href="#footer" class="button-link" id="show-socials-btn" aria-label="Mostrar redes sociales">Ver redes</a>
+  </div>
+  <div class="socials" id="modal-socials" aria-label="Redes sociales de BerMatMods">
+    <a href="https://t.me/Berrocal_mdz" target="_blank" rel="noopener noreferrer" title="Telegram">Telegram</a>
+    <a href="https://github.com/BerMatMods" target="_blank" rel="noopener noreferrer" title="GitHub">GitHub</a>
+    <a href="https://wa.me/51937556459" target="_blank" rel="noopener noreferrer" title="WhatsApp">WhatsApp</a>
+  </div>
+</div>
+
+<script>
+  const boardEl = document.getElementById('board');
+  const infoEl = document.getElementById('info');
+  const resetBtn = document.getElementById('reset-btn');
+  const modeSelect = document.getElementById('mode');
+  const subtitle = document.getElementById('subtitle');
+  const playerXInput = document.getElementById('playerX-name');
+  const playerOInput = document.getElementById('playerO-name');
+  const playerONameDiv = document.getElementById('playerO-name-div');
+  const resultModal = document.getElementById('result-modal');
+  const resultMessage = document.getElementById('result-message');
+  const playAgainBtn = document.getElementById('play-again-btn');
+  const themeBtn = document.getElementById('theme-btn');
+
+  let board = ['', '', '', '', '', '', '', '', ''];
+  let currentPlayer = 'X';
+  let gameActive = true;
+  let mode = '2players'; // o 'bot'

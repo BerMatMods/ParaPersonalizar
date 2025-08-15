@@ -1,257 +1,238 @@
 
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>⚡ BerMat — Windows 11 Web</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTTP Injector BerMatModZ 🔥</title>
 <style>
-:root {
-  --bg: #0f1724;
-  --glass: rgba(255,255,255,0.06);
-  --accent: #6ee7b7;
-  --task: #0b1220;
-  --text: #e6eef8;
-  --muted: #9fb0c8;
-  font-family: 'Segoe UI', Roboto, system-ui, -apple-system;
+body {
+    margin: 0;
+    font-family: 'Consolas', 'Courier New', monospace;
+    background: #000;
+    color: #0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
 }
-html, body {
-  margin: 0;
-  height: 100%;
-  background: linear-gradient(180deg, #051025 0%, #081426 50%, #0b1220 100%);
-  color: var(--text);
-  overflow: hidden;
+h1 { color: #ff6600; text-align: center; margin-top: 10px; }
+h2 { color: #00ff99; text-align: center; margin-bottom: 10px; }
+.container { width: 95%; max-width: 1000px; }
+.panel {
+    background: #111;
+    border: 2px solid #00ff00;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
 }
-.wallpaper {
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at 30% 30%, rgba(110,231,183,0.12), transparent 30%),
-              radial-gradient(circle at 80% 70%, rgba(124,58,237,0.06), transparent 30%);
+.btn {
+    background: #ff6600;
+    color: #000;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 3px;
+    transition: 0.3s;
 }
-.desktop {
-  position: relative;
-  height: 100%;
-  padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
+.btn:hover { background: #ff8533; }
+#log {
+    background: #000;
+    color: #0f0;
+    padding: 10px;
+    height: 250px;
+    overflow-y: auto;
+    border-radius: 10px;
+    border: 1px solid #0f0;
+    font-size: 0.9rem;
 }
-.icon {
-  width: 88px;
-  text-align: center;
-  cursor: pointer;
+.info {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px dashed #ff6600;
+    border-radius: 8px;
+    background: #111a11aa;
 }
-.icon .img {
-  width: 64px;
-  height: 64px;
-  border-radius: 12px;
-  background: var(--glass);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent);
-  font-weight: 700;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-}
-.icon .label {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 6px;
-}
-/* Taskbar */
-.taskbar {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 56px;
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  padding: 0 12px;
-}
-.start {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  background: var(--glass);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-.tray {
-  margin-left: auto;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-.tray .btn {
-  padding: 6px 10px;
-  border-radius: 8px;
-  background: rgba(255,255,255,0.02);
-  color: var(--muted);
-}
-/* Window */
-.window {
-  position: absolute;
-  background: rgba(255,255,255,0.03);
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.08);
-  width: 700px;
-  max-width: calc(100% - 40px);
-  height: 480px;
-  display: none;
-  flex-direction: column;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.7);
-}
-.titlebar {
-  height: 44px;
-  display: flex;
-  align-items: center;
-  padding: 0 10px;
-  background: rgba(255,255,255,0.05);
-  cursor: move;
-}
-.titlebar .title {
-  font-weight: 600;
-}
-.controls {
-  margin-left: auto;
-  display: flex;
-  gap: 8px;
-}
-.ctrl {
-  width: 30px;
-  height: 26px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-.win-body {
-  padding: 12px;
-  overflow: auto;
-  flex: 1;
-}
-.avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, var(--accent), #7c3aed);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  font-weight: 700;
-  color: #021018;
-}
-.gallery img {
-  width: 150px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 8px;
-  cursor: pointer;
-}
-.viewer {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.9);
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
-.viewer img {
-  max-width: 90%;
-  max-height: 90%;
-}
+.info b { color: #ff6600; }
+.info span { color: #00ff99; }
+.meter { width: 100%; height: 20px; background: #222; border-radius: 10px; overflow: hidden; margin-top: 10px; }
+.meter-fill { height: 100%; width: 0%; background: #ff6600; transition: width 0.5s; }
+.socials { display: flex; justify-content: center; gap: 15px; margin-top: 10px; }
+.socials a { display: inline-block; width: 40px; height: 40px; background: #ff6600; color: #000; border-radius: 50%; display: flex; justify-content: center; align-items: center; text-decoration: none; font-weight: bold; transition: 0.3s; }
+.socials a:hover { background: #ff8533; transform: scale(1.2); }
+.tabs { display: flex; flex-wrap: wrap; margin-bottom: 10px; }
+.tab { padding: 8px 15px; background: #222; margin-right: 5px; cursor: pointer; border-radius: 6px; transition: 0.2s; }
+.tab:hover { background: #00ff00; color: #000; }
+.tab.active { background: #ff6600; color: #000; }
+.tab-content { display: none; background: #111; border: 1px solid #0f0; border-radius: 10px; padding: 10px; }
+.tab-content.active { display: block; }
+input[type=text], input[type=file] { width: 90%; padding: 8px; margin: 5px 0; border-radius:5px; border:1px solid #0f0; background:#000; color:#0f0; }
 </style>
 </head>
 <body>
-<div class="wallpaper"></div>
 
-<div class="desktop">
-  <div class="icon" onclick="openWin('about')">
-    <div class="img">BM</div>
-    <div class="label">Sobre mí</div>
-  </div>
-  <div class="icon" onclick="openWin('projects')">
-    <div class="img">⚡</div>
-    <div class="label">Proyectos</div>
-  </div>
-  <div class="icon" onclick="openWin('gallery')">
-    <div class="img">📷</div>
-    <div class="label">Galería</div>
-  </div>
+<h1>HTTP Injector BerMatModZ 🔥</h1>
+<h2>Simulación completa de conexión</h2>
+
+<div class="container">
+
+<div class="panel info">
+<b>Nombre:</b> <span>Anth’Zz Berrocal</span><br>
+<b>Alias:</b> <span>BerMatModZ</span><br>
+<b>Ubicación:</b> <span>Andahuaylas</span><br>
+<b>Proyectos:</b> <span>⚡BerMat-Bot MD🔥, BerMat_Mods, BerMatMods_Bot</span><br>
+<b>Contacto:</b> <span><a href="https://wa.me/937556459" style="color:#00ff99;">WhatsApp</a></span>
 </div>
 
-<div class="taskbar">
-  <div class="start" onclick="alert('Menú inicio en construcción')">☰</div>
-  <div class="tray">
-    <div class="btn">Andahuaylas</div>
-    <div class="btn">ESP</div>
-    <div class="btn" id="clock"></div>
-  </div>
+<div class="panel">
+<div class="tabs">
+    <div class="tab active" onclick="openTab('connection')">Conexión</div>
+    <div class="tab" onclick="openTab('tools')">Herramientas</div>
+    <div class="tab" onclick="openTab('import')">Importar/Exportar</div>
+    <div class="tab" onclick="openTab('help')">Ayuda</div>
+    <div class="tab" onclick="openTab('settings')">Ajustes</div>
 </div>
 
-<!-- Ventanas -->
-<div id="about" class="window" style="left:100px; top:80px;">
-  <div class="titlebar"><span class="title">Sobre Anth'Zz Berrocal</span>
-    <div class="controls"><div class="ctrl" onclick="closeWin('about')">✕</div></div>
-  </div>
-  <div class="win-body">
-    <div class="avatar">AB</div>
-    <h2>Anth'Zz Berrocal</h2>
-    <p><b>Alias:</b> BerMatModZ — <b>Proyecto:</b> ⚡BerMat-Bot MD🔥</p>
-    <p><b>Ubicación:</b> Andahuaylas</p>
-    <p><b>Mensaje:</b> 💖 TE AMO MUCHÍSIMO MI REINA Mi BriyidthCha</p>
-    <p><b>GitHub:</b> <a href="https://github.com/AnthZz-Berrocal" target="_blank">Abrir perfil</a></p>
-  </div>
+<div id="connection" class="tab-content active">
+    <button class="btn" onclick="connect()">Conectar</button>
+    <button class="btn" onclick="disconnect()">Desconectar</button>
+    <button class="btn" onclick="payload()">Payload</button>
+    <button class="btn" onclick="config()">Config</button>
+    <div id="status" style="margin-top:10px;">Estado: <b>Desconectado</b></div>
+    <div class="meter"><div class="meter-fill" id="meter"></div></div>
+    <div style="margin-top:5px;">Velocidad: <b id="speed">0 KB/s</b> | Datos: <b id="data">0 MB</b></div>
+    <h3>Registro de conexión:</h3>
+    <div id="log"></div>
 </div>
 
-<div id="projects" class="window" style="left:160px; top:140px;">
-  <div class="titlebar"><span class="title">Proyectos</span>
-    <div class="controls"><div class="ctrl" onclick="closeWin('projects')">✕</div></div>
-  </div>
-  <div class="win-body">
-    <ul>
-      <li>⚡ BerMat-Bot MD🔥 — Bot de WhatsApp</li>
-      <li>BerMat_Mods — Automatizaciones</li>
-      <li>Webs estilo hacker y Windows 11</li>
-    </ul>
-  </div>
+<div id="tools" class="tab-content">
+<h3>Herramientas simuladas:</h3>
+<ul>
+<li>Ping a servidor: <button class="btn" onclick="pingServer()">Ping</button></li>
+<li>Ver IP y puerto: <button class="btn" onclick="showIP()">Mostrar IP</button></li>
+<li>Test de velocidad: <button class="btn" onclick="speedTest()">Test</button></li>
+<li>Estadísticas avanzadas: <button class="btn" onclick="stats()">Mostrar</button></li>
+</ul>
 </div>
 
-<div id="gallery" class="window" style="left:200px; top:200px;">
-  <div class="titlebar"><span class="title">Galería</span>
-    <div class="controls"><div class="ctrl" onclick="closeWin('gallery')">✕</div></div>
-  </div>
-  <div class="win-body gallery">
-    <img src="https://picsum.photos/400/300?1" onclick="viewImg(this.src)">
-    <img src="https://picsum.photos/400/300?2" onclick="viewImg(this.src)">
-    <img src="https://picsum.photos/400/300?3" onclick="viewImg(this.src)">
-  </div>
+<div id="import" class="tab-content">
+<h3>Importar / Exportar configuración</h3>
+<input type="file" id="importFile"><button class="btn" onclick="importConfig()">Importar</button>
+<br>
+<input type="text" id="exportName" placeholder="Nombre del archivo"><button class="btn" onclick="exportConfig()">Exportar</button>
 </div>
 
-<!-- Visor de imágenes -->
-<div class="viewer" id="viewer" onclick="this.style.display='none'">
-  <img src="" alt="">
+<div id="help" class="tab-content">
+<h3>Ayuda / FAQ</h3>
+<ul>
+<li>Cómo conectar: Presiona "Conectar".</li>
+<li>Payload: Ingresa tu payload válido.</li>
+<li>Importar/exportar: Selecciona archivo o nombre.</li>
+<li>Contactar soporte: <a href="https://wa.me/937556459" style="color:#0f0;">WhatsApp</a></li>
+</ul>
+</div>
+
+<div id="settings" class="tab-content">
+<h3>Ajustes de simulación</h3>
+<label>Protocolos:</label>
+<select id="protocol">
+<option>HTTP</option>
+<option>SSH</option>
+<option>SSL</option>
+<option>TCP</option>
+</select><br>
+<label>Puerto:</label>
+<input type="text" id="port" placeholder="8080"><br>
+<label>Proxy:</label>
+<input type="text" id="proxy" placeholder="proxy.example.com"><br>
+<button class="btn" onclick="saveSettings()">Guardar</button>
+</div>
+
+</div>
+
+<div class="socials">
+<a href="https://www.facebook.com/anthzz.berrocal" target="_blank">F</a>
+<a href="https://www.instagram.com/anthzz.berrocal" target="_blank">I</a>
+<a href="https://twitter.com/AnthZz" target="_blank">T</a>
+<a href="https://github.com/anthzz" target="_blank">G</a>
+</div>
+
 </div>
 
 <script>
-function openWin(id) {
-  document.getElementById(id).style.display = 'flex';
+let connected=false;
+let dataUsed=0;
+const userInfo={
+    name:"Anth’Zz Berrocal",
+    alias:"BerMatModZ",
+    location:"Andahuaylas",
+    projects:["⚡BerMat-Bot MD🔥","BerMat_Mods","BerMatMods_Bot"]
+};
+
+function addLog(msg){
+    const time = new Date().toLocaleTimeString();
+    document.getElementById('log').innerHTML += `[${time}] ${msg}<br>`;
+    document.getElementById('log').scrollTop = document.getElementById('log').scrollHeight;
 }
-function closeWin(id) {
-  document.getElementById(id).style.display = 'none';
+
+function simulateConnection(){
+    addLog("Iniciando secuencia de conexión...");
+    document.getElementById('meter').style.width="0%";
+    dataUsed=0;
+    let progress=0;
+    let speed=0;
+    const interval = setInterval(()=>{
+        progress+=5;
+        if(progress>100) progress=100;
+        document.getElementById('meter').style.width=progress+"%";
+        speed=Math.floor(Math.random()*50+50);
+        dataUsed+=speed*0.005;
+        document.getElementById('speed').textContent=speed+" KB/s";
+        document.getElementById('data').textContent=dataUsed.toFixed(2)+" MB";
+        addLog(`Conectando... ${progress}% - Velocidad: ${speed} KB/s - Datos: ${dataUsed.toFixed(2)} MB`);
+        if(progress>=100){
+            clearInterval(interval);
+            connected=true;
+            document.getElementById('status').innerHTML='Estado: <b>Conectado ✅</b>';
+            addLog(`Conexión establecida!`);
+            addLog(`Usuario: ${userInfo.alias} (${userInfo.name})`);
+            addLog(`Ubicación: ${userInfo.location}`);
+            addLog(`Proyectos activos: ${userInfo.projects.join(", ")}`);
+        }
+    },500);
 }
-function viewImg(src) {
-  document.getElementById('viewer').style.display = 'flex';
-  document.querySelector('#viewer img').src = src;
+
+function connect(){ if(connected) addLog("Ya estás conectado."); else simulateConnection(); }
+function disconnect(){ 
+    if(!connected) addLog("Ya estás desconectado."); 
+    else{
+        addLog("Cerrando conexión...");
+        setTimeout(()=>{
+            connected=false;
+            document.getElementById('meter').style.width="0%";
+            document.getElementById('speed').textContent="0 KB/s";
+            document.getElementById('data').textContent="0 MB";
+            document.getElementById('status').innerHTML='Estado: <b>Desconectado</b>';
+            addLog("Conexión terminada.");
+        },1500);
+    } 
 }
-setInterval(()=>{
-  document.getElementById('clock').textContent = new Date().toLocaleTimeString();
-},1000);
-</script>
-</body>
-</html>
+function payload(){ const p=prompt("Ingresa payload:"); if(p) addLog(`Payload configurado: ${p}`); }
+function config(){ addLog("Configuración abierta (simulada)."); }
+
+function openTab(tab){
+    document.querySelectorAll('.tab-content').forEach(tc=>tc.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.getElementById(tab).classList.add('active');
+    event.currentTarget.classList.add('active');
+}
+
+function pingServer(){ addLog("Ping a servidor: 45ms"); }
+function showIP(){ addLog("IP simulada: 192.168.1."+Math.floor(Math.random()*255)); }
+function speedTest(){ addLog("Velocidad de prueba: "+(Math.floor(Math.random()*80+50))+" KB/s"); }
+function stats(){ addLog("Estadísticas: Conexión estable, datos estables, sin errores."); }
+
+function importConfig(){ addLog("Archivo importado (simulado)"); }
+function exportConfig(){ const name=document.getElementById('exportName').value||"config"; addLog("Archivo exportado como "+name+".hxi (simulado)"); }
+function saveSettings(){ addLog("Ajustes guardados: Puerto "+document.getElementById('port').value+", Proxy "+document.getElementById('proxy').value+", Protocolo "+document.getElementById('protocol').value); }

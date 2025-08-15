@@ -3,201 +3,179 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flip Card Tarjeta</title>
+<title>La Magia del Barbero | Barber Shop</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 <style>
-/* Contenedor principal */
-.flip-card {
-  background-color: transparent;
-  width: 240px;
-  height: 154px;
-  perspective: 1000px;
-  color: white;
-  margin: 50px auto;
-  position: relative;
-  font-family: 'Arial', sans-serif;
-}
+/* ===== RESET ===== */
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:#111;color:#fff;line-height:1.6}
 
-/* Interacción flip */
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-  cursor: pointer;
-}
+/* ===== HEADER ===== */
+header{background:#000;padding:20px;text-align:center;border-bottom:3px solid gold}
+header h1{font-size:2.5rem;color:gold;text-shadow:0 0 5px rgba(255,215,0,0.6)}
+header p{color:#ccc}
+nav{display:flex;justify-content:center;gap:20px;margin-top:10px;flex-wrap:wrap}
+nav a{color:gold;text-decoration:none;font-weight:500;transition:color .3s}
+nav a:hover{color:#fff}
 
-.flip-card-inner.flipped {
-  transform: rotateY(180deg);
-}
+/* ===== SECTION ===== */
+section{padding:50px 20px;max-width:1100px;margin:auto}
+h2{text-align:center;margin-bottom:20px;font-size:2rem}
 
-/* Frente y reverso */
-.flip-card-front, .flip-card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 1rem;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 2px,
-              rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
-              rgba(0, 0, 0, 0.2) 0px -1px 0px inset;
-  background-color: #171717;
-}
+/* ===== HERO ===== */
+.hero{text-align:center}
+.hero svg{width:200px;height:200px;margin-top:20px;filter:drop-shadow(0 0 8px gold)}
 
-/* Reverso rotado */
-.flip-card-back {
-  transform: rotateY(180deg);
-}
+/* ===== SERVICES ===== */
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.service{background:#222;padding:20px;border-radius:10px;text-align:center;box-shadow:0 0 10px rgba(0,0,0,0.5);transition:transform .3s}
+.service:hover{transform:translateY(-5px)}
+.service svg{width:100%;height:150px;margin-bottom:10px}
+.service strong{color:gold;font-size:1.1rem}
 
-/* Elementos del frente */
-.chip {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  width: 40px;
-  height: 30px;
-  background-color: gold;
-  border-radius: 5px;
-}
+/* ===== GALLERY ===== */
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.gallery svg{width:100%;height:200px;transition:transform .3s}
+.gallery svg:hover{transform:scale(1.05)}
 
-.contactless {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 20px;
-  height: 15px;
-  background-color: silver;
-  border-radius: 50%;
-}
+/* ===== CONTACT & BUTTONS ===== */
+.contact{text-align:center}
+.contact a{display:inline-block;margin:10px;padding:10px 20px;background:gold;color:black;border-radius:5px;text-decoration:none;font-weight:bold;transition:background .3s}
+.contact a:hover{background:#d4af37}
+button{background:gold;color:black;border:none;padding:10px 20px;margin-top:10px;border-radius:5px;font-weight:bold;cursor:pointer;transition:background .3s}
+button:hover{background:#d4af37}
 
-.logo {
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
-  font-weight: bold;
-  font-size: 1em;
-}
+/* ===== DIFERENCIAL ===== */
+.diferencial{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;text-align:center}
+.card{background:#222;padding:20px;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,0.5)}
 
-.number {
-  position: absolute;
-  top: 60px;
-  left: 15px;
-  font-weight: bold;
-  font-size: 0.9em;
-  letter-spacing: 2px;
-}
-
-.valid_thru {
-  position: absolute;
-  top: 90px;
-  left: 15px;
-  font-weight: bold;
-  font-size: 0.6em;
-}
-
-.date_8264 {
-  position: absolute;
-  top: 90px;
-  left: 80px;
-  font-weight: bold;
-  font-size: 0.6em;
-}
-
-.name {
-  position: absolute;
-  bottom: 15px;
-  left: 15px;
-  font-weight: bold;
-  font-size: 0.7em;
-}
-
-/* Banda magnética y códigos */
-.strip {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 30px;
-  background: repeating-linear-gradient(
-    45deg,
-    #303030,
-    #303030 10px,
-    #202020 10px,
-    #202020 20px
-  );
-}
-
-.mstrip {
-  position: absolute;
-  top: 50px;
-  left: 10px;
-  width: 80px;
-  height: 8px;
-  background-color: #fff;
-  border-radius: 2px;
-}
-
-.sstrip {
-  position: absolute;
-  top: 50px;
-  left: 150px;
-  width: 40px;
-  height: 8px;
-  background-color: #fff;
-  border-radius: 2px;
-}
-
-/* Texto de código (reverso) */
-.code {
-  font-weight: bold;
-  text-align: center;
-  color: black;
-  margin: 10px;
-}
-
-/* Responsividad */
-@media (max-width: 500px) {
-  .flip-card {
-    width: 90%;
-    height: auto;
-  }
-  .number, .valid_thru, .date_8264, .name {
-    font-size: 0.8em;
-  }
-}
+/* ===== FOOTER ===== */
+footer{background:#000;text-align:center;padding:20px;font-size:.9rem;color:#888;border-top:3px solid gold}
+footer strong{color:gold}
 </style>
 </head>
 <body>
 
-<div class="flip-card">
-  <div class="flip-card-inner" onclick="this.classList.toggle('flipped')">
+<header>
+    <h1>La Magia del Barbero</h1>
+    <p>Barber Shop – Jirón Alfonso Ugarte, 3er piso</p>
+    <p>Horario: Lunes a Domingo – 8:00 AM a 8:00 PM</p>
+    <nav>
+        <a href="#servicios">Servicios</a>
+        <a href="#galeria">Galería</a>
+        <a href="#fidelidad">Fidelidad</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+</header>
 
-    <!-- Frente -->
-    <div class="flip-card-front">
-      <div class="chip"></div>
-      <div class="contactless"></div>
-      <div class="strip"></div>
-      <div class="mstrip"></div>
-      <div class="sstrip"></div>
-      <div class="number">1234 5678 9012 3456</div>
-      <div class="valid_thru">VALID THRU</div>
-      <div class="date_8264">12/28</div>
-      <div class="name">Anth'Zz Berrocal</div>
-      <div class="logo">LOGO</div>
+<section class="hero">
+    <h2>¡Cortes modernos y clásicos con estilo único!</h2>
+    <p>Programa de fidelidad: corta tu cabello 4 veces y el 5° es GRATIS.</p>
+    <svg viewBox="0 0 64 64" fill="gold">
+        <circle cx="32" cy="32" r="30" stroke="gold" stroke-width="4" fill="none"/>
+        <path d="M20 40 L44 40 L32 20 Z" fill="gold"/>
+    </svg>
+</section>
+
+<section id="servicios">
+    <h2 style="color: gold;">Nuestros Servicios</h2>
+    <div class="services">
+        <div class="service">
+            <svg viewBox="0 0 64 64" fill="gold"><rect x="10" y="20" width="44" height="24" rx="5"/></svg>
+            <h3>Corte Moderno</h3>
+            <p>Estilos actuales y personalizados.</p>
+            <strong>S/ 25.00</strong>
+        </div>
+        <div class="service">
+            <svg viewBox="0 0 64 64" fill="gold"><circle cx="32" cy="32" r="20"/></svg>
+            <h3>Corte Clásico</h3>
+            <p>Elegancia atemporal y precisa.</p>
+            <strong>S/ 20.00</strong>
+        </div>
+        <div class="service">
+            <svg viewBox="0 0 64 64" fill="gold"><path d="M8 56 L56 8 L56 56 Z"/></svg>
+            <h3>Degradado</h3>
+            <p>Transiciones suaves y limpias.</p>
+            <strong>S/ 28.00</strong>
+        </div>
+        <div class="service">
+            <svg viewBox="0 0 64 64" fill="gold"><path d="M8 32 Q32 56 56 32 Q32 8 8 32 Z"/></svg>
+            <h3>Diseño de Barba</h3>
+            <p>Perfilado y cuidado profesional.</p>
+            <strong>S/ 15.00</strong>
+        </div>
     </div>
+</section>
 
-    <!-- Reverso -->
-    <div class="flip-card-back">
-      <div class="code">123</div>
+<section id="galeria">
+    <h2 style="color: gold;">Galería</h2>
+    <div class="gallery">
+        <svg viewBox="0 0 64 64" fill="gold"><rect x="8" y="8" width="48" height="48"/></svg>
+        <svg viewBox="0 0 64 64" fill="gold"><circle cx="32" cy="32" r="24"/></svg>
+        <svg viewBox="0 0 64 64" fill="gold"><path d="M8 56 L56 8 L56 56 Z"/></svg>
+        <svg viewBox="0 0 64 64" fill="gold"><path d="M8 8 H56 V56 H8 Z"/></svg>
     </div>
+</section>
 
-  </div>
-</div>
+<section id="fidelidad" class="contact">
+    <h2 style="color: gold;">Programa de Fidelidad</h2>
+    <p>Corta tu cabello 4 veces y el 5° es GRATIS.</p>
+    <p id="contador"></p>
+    <button onclick="sumarCorte()">Registrar Corte</button>
+    <button onclick="reiniciarFidelidad()">Reiniciar</button>
+</section>
+
+<section class="diferencial">
+    <div class="card">
+        <h3>Profesionales Expertos</h3>
+        <p>Más de 10 años creando estilos únicos para cada cliente.</p>
+    </div>
+    <div class="card">
+        <h3>Atención Personalizada</h3>
+        <p>Escuchamos lo que quieres y lo hacemos realidad.</p>
+    </div>
+    <div class="card">
+        <h3>Ambiente Cómodo</h3>
+        <p>Relájate y disfruta de tu corte en un lugar agradable.</p>
+    </div>
+</section>
+
+<section id="contacto" class="contact">
+    <h2 style="color: gold;">Reserva Rápida</h2>
+    <a href="https://wa.me/51977355999" target="_blank">WhatsApp 977 355 999</a>
+    <a href="https://wa.me/51931538059" target="_blank">WhatsApp 931 538 059</a>
+    <p>📍 Jirón Alfonso Ugarte, 3er piso</p>
+    <p>📞 977 355 999 | 931 538 059</p>
+</section>
+
+<footer>
+    © 2025 La Magia del Barbero – Todos los derechos reservados. <br>
+    Diseño por <strong>Anth’Zz Berrocal · BerMatModZ</strong>
+</footer>
+
+<script>
+let cortes = localStorage.getItem("cortes") ? parseInt(localStorage.getItem("cortes")) : 0;
+function mostrarCortes(){
+    if(cortes >= 4){
+        document.getElementById("contador").innerHTML = "🎉 ¡Felicidades! Tu próximo corte es GRATIS.";
+    } else {
+        document.getElementById("contador").innerHTML = `Has acumulado ${cortes} cortes de 4.`;
+    }
+}
+function sumarCorte(){
+    if(cortes < 4){
+        cortes++;
+        localStorage.setItem("cortes", cortes);
+        mostrarCortes();
+    }
+}
+function reiniciarFidelidad(){
+    cortes = 0;
+    localStorage.setItem("cortes", cortes);
+    mostrarCortes();
+}
+mostrarCortes();
+</script>
 
 </body>
 </html>

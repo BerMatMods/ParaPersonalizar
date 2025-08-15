@@ -1,351 +1,168 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>La Magia del Barbero</title>
-  <meta name="description" content="La Magia del Barbero - Estilo, calidad y confianza. Reserva ahora." />
   <style>
-    /* ------------------- VARIABLES ------------------- */
-    :root{
-      --bg:#0b0b0b;
-      --card:#0f0f10;
-      --accent:#ffd166; /* dorado */
-      --accent-2:#ff4d4d; /* rojo brillante */
-      --muted:#bdbdbd;
-      --glass: rgba(255,255,255,0.04);
-      --glass-2: rgba(0,0,0,0.35);
-      --radius:18px;
-      --ff-sans: 'Poppins', system-ui, Arial, sans-serif;
-      --ff-serif: 'Playfair Display', Georgia, serif;
-    }
-    /* ------------------- RESET ------------------- */n
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    body{
-      font-family:var(--ff-sans);
-      background:linear-gradient(180deg,#060606 0%,#0b0b0b 100%);
-      color:#fff; -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale; line-height:1.4;
-    }
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-    /* ------------------- CONTAINER ------------------- */
-    .container{max-width:1200px;margin:0 auto;padding:28px}/* ------------------- NAV ------------------- */
-header{position:fixed;top:18px;left:0;right:0;z-index:60;backdrop-filter: blur(6px);}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 24px;margin:0 auto;max-width:1200px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.6)}
-.brand{display:flex;align-items:center;gap:12px}
-.logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#ffb86b);display:flex;align-items:center;justify-content:center;font-weight:800;color:#0b0b0b;font-family:var(--ff-serif);box-shadow:0 6px 18px rgba(0,0,0,0.6)}
-nav a{margin-left:14px;padding:8px 12px;border-radius:10px;font-weight:600}
-nav a:hover{background:rgba(255,255,255,0.03)}
+    /* ---------------- Reset & Variables ---------------- */
+    * { box-sizing: border-box; margin:0; padding:0; }
+    html, body { width:100%; height:100%; overflow-x:hidden; font-family: 'Poppins', sans-serif; background:#050407; color:#fff; }
+    a { text-decoration:none; color:inherit; }
+    img { display:block; width:100%; }
 
-/* ------------------- HERO ------------------- */
-.hero{min-height:78vh;display:grid;grid-template-columns:1fr 420px;align-items:center;padding:120px 0}
-.hero-left{padding:8px 18px}
-.eyebrow{display:inline-block;padding:6px 12px;border-radius:999px;background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));color:var(--accent);font-weight:700;margin-bottom:12px}
-h1{font-family:var(--ff-serif);font-size:48px;line-height:1.02;margin-bottom:10px;color:linear-gradient(90deg,var(--accent),#fff)}
-h1 .neon{color:var(--accent);text-shadow:0 6px 28px rgba(255,209,102,0.08),0 0 18px rgba(255,209,102,0.12)}
-p.lead{color:var(--muted);max-width:560px;margin-bottom:18px}
-.hero-cta{display:flex;gap:12px;align-items:center}
-.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:14px;font-weight:700;cursor:pointer}
-.btn-primary{background:linear-gradient(90deg,var(--accent),#ffc88a);color:#111;box-shadow:0 12px 30px rgba(255,177,66,0.12);transform:translateY(0);transition:transform .2s}
-.btn-primary:hover{transform:translateY(-4px)}
-.btn-ghost{border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--muted)}
+    /* ---------------- Animations ---------------- */
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+    @keyframes fadeUp { from { opacity:0; transform: translateY(30px);} to {opacity:1; transform:translateY(0);} }
+    @keyframes shine { 0% {left:-50%;} 50% {left:150%;} 100% {left:150%;} }
 
-/* ------------------- BANNER SLIDER (IMAGENES) ------------------- */
-.slider{position:relative;border-radius:14px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.7);height:520px}
-.slides{display:flex;height:100%;transition:transform .8s cubic-bezier(.22,.9,.24,1)}
-.slide{min-width:100%;position:relative;background-size:cover;background-position:center}
-.slide::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(11,11,11,0.2) 0%, rgba(6,6,6,0.7) 60%)}
-.slider-indicators{position:absolute;left:12px;bottom:12px;display:flex;gap:8px}
-.dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.12);cursor:pointer}
-.dot.active{background:var(--accent)}
+    .reveal { opacity:0; transform: translateY(30px); transition: all .7s ease-in-out; }
+    .reveal.visible { opacity:1; transform: none; }
 
-/* ------------------- SECTIONS ------------------- */
-section{padding:72px 0}
-.section-title{display:flex;align-items:center;gap:14px;margin-bottom:24px}
-.section-title h2{font-family:var(--ff-serif);font-size:26px}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.card{background:linear-gradient(180deg,var(--glass), rgba(255,255,255,0.02));padding:22px;border-radius:16px;box-shadow:0 20px 40px rgba(0,0,0,0.6);transform-style:preserve-3d;transition:transform .5s, box-shadow .5s}
-.card:hover{transform:translateY(-10px) rotateX(4deg);box-shadow:0 40px 80px rgba(0,0,0,0.7)}
-.card h3{margin-bottom:8px}
-.price{font-weight:800;color:var(--accent-2)}
+    /* ---------------- Header (Hero) ---------------- */
+    header { display:flex; flex-direction: column; align-items: center; justify-content:center; height:100vh; background: url('https://source.unsplash.com/1600x900/?barber-shop') center/cover no-repeat; text-align: center; position: relative; }
+    header:after { content:''; position:absolute; inset:0; background: rgba(0,0,0,0.5); }
+    header h1, header p, header nav { position: relative; z-index:1; }
+    header h1 { font-size:3em; color:#ffd166; animation: fadeIn 1s ease forwards; }
+    header p { font-size:1.5em; margin-top:10px; color:#fff; animation: fadeIn 1.5s ease forwards; }
+    header nav { margin-top:20px; animation: fadeIn 2s ease forwards; }
+    header nav a { margin:0 15px; font-size:1.1em; color:#fff; padding:8px 12px; border-radius:6px; transition: 0.3s; }
+    header nav a:hover { background:rgba(255,255,255,0.1); }
 
-/* ------------------- BEFORE & AFTER SLIDER ------------------- */
-.before-after{position:relative;height:360px;border-radius:16px;overflow:hidden}
-.before-after img{height:100%;object-fit:cover}
-.ba-handle{position:absolute;left:50%;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--accent),#fff);cursor:ew-resize;display:flex;align-items:center;justify-content:center}
-.ba-handle .dot{width:28px;height:28px;border-radius:50%;background:var(--accent);box-shadow:0 8px 22px rgba(255,209,102,0.14)}
+    /* ---------------- Sección Sobre mí ---------------- */
+    #sobre { padding:60px 20px; display:flex; align-items:center; gap:40px; background:#0b0b0b; }
+    #sobre img { width:300px; border-radius:15px; box-shadow: 0 8px 24px rgba(255,209,102,0.5); }
+    #sobre .texto { flex:1; }
+    #sobre .texto h2 { font-size:2em; color:#ffd166; margin-bottom:10px; }
+    #sobre .texto p { font-size:1.1em; line-height:1.6; }
 
-/* ------------------- GALLERY ------------------- */
-.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    /* ---------------- Servicios ---------------- */
+    #servicios { padding:60px 20px; }
+    #servicios h2 { font-size:2em; color:#ffd166; text-align:center; margin-bottom:30px; }
+    .servicios { display:grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
+    .servicio { background:#111; border-radius:12px; overflow:hidden; position:relative; opacity:0; transform: translateY(30px); transition: 0.5s; }
+    .servicio.visible { opacity:1; transform:none; }
+    .servicio img { height:180px; object-fit:cover; }
+    .servicio .info { padding:20px; }
+    .servicio .info h3 { color: #ffd166; margin-bottom:8px; }
+    .servicio .info p { font-size:1em;  }
+    .btn { display:inline-block; padding:10px 16px; margin-top:12px; background:#ffd166; color:#111; border-radius:8px; font-weight:bold; position:relative; overflow:hidden; }
+    .btn::after { content:''; position:absolute; top:0; left:-100%; width:50%; height:100%; background:rgba(255,255,255,0.4); transform: skewX(-20deg); transition:0.7s; }
+    .btn:hover::after { left:200%; }
 
-/* ------------------- TEAM ------------------- */
-.team{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.member{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.2));padding:16px;border-radius:14px;text-align:center}
-.avatar{width:120px;height:120px;border-radius:50%;margin:0 auto 12px;overflow:hidden;border:6px solid var(--glass-2);display:flex;align-items:center;justify-content:center}
+    /* ---------------- Galería con Lightbox Simulado ---------------- */
+    #galeria { padding:60px 20px; background:#0b0b0b; }
+    #galeria h2 { font-size:2em; color:#ffd166; text-align:center; margin-bottom:30px; }
+    .galeria { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; }
+    .galeria figure { cursor:pointer; position:relative; overflow:hidden; }
+    .galeria figure img { width:100%; height:150px; object-fit:cover; filter: brightness(0.9); transition:0.5s; }
+    .galeria figure:hover img { filter: brightness(1.1); transform:scale(1.05); }
+    .galeria figcaption { position:absolute; bottom:8px; left:8px; background:rgba(0,0,0,0.5); padding:6px 8px; font-size:0.9em; color:#ffd166; }
 
-/* ------------------- OFFERS & REVIEWS ------------------- */
-.offers{display:flex;gap:18px}
-.offer{flex:1;padding:20px;border-radius:14px;background:linear-gradient(90deg, rgba(255,77,77,0.06), rgba(255,209,102,0.04))}
-.reviews{display:flex;flex-direction:column;gap:12px}
-.review{background:var(--card);padding:16px;border-radius:12px}
+    /* ---------------- Testimonios Slider Simulado ---------------- */
+    #testimonios { padding:60px 20px; }
+    #testimonios h2 { font-size:2em; color:#ffd166; text-align:center; margin-bottom:30px; }
+    .testimonios { display:flex; overflow-x:auto; gap:20px; padding-bottom:10px; }
+    .testimonio { min-width:300px; background:#111; border-radius:12px; padding:20px; box-shadow: 0 4px 16px rgba(0,0,0,0.6); flex-shrink:0; position:relative; }
+    .testimonio p { font-style:italic; margin-bottom:12px; }
+    .testimonio strong { display:block; color:#ffd166; text-align:right; }
 
-/* ------------------- CONTACT ------------------- */
-.contact-grid{display:grid;grid-template-columns:1fr 380px;gap:22px}
-.form input,.form textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff;margin-bottom:12px}
-.map{border-radius:14px;overflow:hidden}
+    /* ---------------- Ubicación ---------------- */
+    #ubicacion { padding:60px 20px; }
+    #ubicacion h2 { font-size:2em; color:#ffd166; text-align:center; margin-bottom:30px; }
+    .mapa { border-radius:12px; overflow:hidden; box-shadow:0 4px 16px rgba(0,0,0,0.6); }
 
-/* ------------------- WHATSAPP FLOAT ------------------- */
-.whatsapp{position:fixed;right:18px;bottom:18px;z-index:200}
-.wa-btn{display:inline-flex;align-items:center;gap:10px;padding:12px 14px;border-radius:999px;background:linear-gradient(90deg,#25d366,#1ebe5b);color:#042106;font-weight:800;box-shadow:0 12px 40px rgba(2,99,44,0.18)}
-
-/* ------------------- FOOTER ------------------- */
-footer{padding:36px 0;text-align:center;color:var(--muted)}
-
-/* ------------------- RESPONSIVE ------------------- */
-@media(max-width:1024px){
-  .hero{grid-template-columns:1fr;gap:18px}
-  .cards{grid-template-columns:repeat(2,1fr)}
-  .gallery{grid-template-columns:repeat(3,1fr)}
-  .team{grid-template-columns:repeat(2,1fr)}
-  .contact-grid{grid-template-columns:1fr}
-}
-@media(max-width:560px){
-  .container{padding:14px}
-  h1{font-size:34px}
-  .cards{grid-template-columns:1fr}
-  .gallery{grid-template-columns:repeat(2,1fr)}
-}
-
-/* small sparkle animation */
-@keyframes sparkle{0%{transform:translateY(0) rotate(0)}50%{transform:translateY(-6px) rotate(4deg)}100%{transform:translateY(0) rotate(0)}}
+    /* ---------------- Footer ---------------- */
+    footer { background:#0b0b0b; padding:40px 20px; text-align:center; }
+    footer .hora { margin-bottom:20px; font-size:1em; color:#bbb; }
+    .creditos { display:inline-flex; align-items:center; gap:10px; }
+    .creditos a img { width:40px; height:40px; filter: invert(1); transition:0.3s; }
+    .creditos a:hover img { transform:scale(1.2) rotate(10deg); filter:drop-shadow(0 0 8px gold); }
 
   </style>
 </head>
 <body>
+  <!-- Hero -->
   <header>
-    <div class="topbar container">
-      <div class="brand">
-        <div class="logo">BM</div>
-        <div>
-          <div style="font-weight:800">La Magia del Barbero</div>
-          <div style="font-size:12px;color:var(--muted)">Estilo · Confianza · Tradición</div>
-        </div>
-      </div>
-      <nav>
-        <a href="#servicios">Servicios</a>
-        <a href="#galeria">Galería</a>
-        <a href="#equipo">Equipo</a>
-        <a href="#resenas">Reseñas</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
-    </div>
-  </header>  <main>
-    <div class="container">
-      <section class="hero">
-        <div class="hero-left">
-          <span class="eyebrow">Barbería Premium</span>
-          <h1><span class="neon">La Magia del Barbero</span><br><small style="font-size:18px;color:var(--muted);font-weight:600">Donde el estilo cobra vida</small></h1>
-          <p class="lead">Cortes modernos y clásicos, arreglos de barba y diseños con navaja. Ambiente cómodo y productos premium. Reserva en segundos y luce impecable.</p>
-          <div class="hero-cta">
-            <a class="btn btn-primary" href="#contacto">Reservar ahora</a>
-            <a class="btn btn-ghost" href="#galeria">Ver galería</a>
-          </div><div style="margin-top:18px;display:flex;gap:10px;align-items:center">
-        <div style="background:var(--glass);padding:10px;border-radius:12px;font-weight:700">🎁 Promoción: Corte + Barba S/25</div>
-        <div style="color:var(--muted);font-size:13px">Horario: Lun-Sáb 9:00 - 21:00</div>
-      </div>
-    </div>
+    <h1>La Magia del Barbero</h1>
+    <p>Tu barbero de confianza: <strong>Kennedy</strong></p>
+    <nav><a href="#servicios">Servicios</a><a href="#galeria">Galería</a><a href="#ubicacion">Ubicación</a></nav>
+  </header>
 
-    <!-- SLIDER -->
-    <div class="slider" aria-hidden="false">
-      <div class="slides" id="slides">
-        <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1591012911205-4f46a4b9f1f9?auto=format&fit=crop&w=1400&q=80')"></div>
-        <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1628515174184-1b8b5a0e4b25?auto=format&fit=crop&w=1400&q=80')"></div>
-        <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1400&q=80')"></div>
-      </div>
-      <div class="slider-indicators" id="dots"></div>
+  <!-- Sobre mí -->
+  <section id="sobre" class="reveal">
+    <img src="https://source.unsplash.com/400x400/?barber,portrait" alt="Kennedy - Barbero" />
+    <div class="texto">
+      <h2>Sobre Kennedy</h2>
+      <p>Con más de 5 años de experiencia, Kennedy es un experto en cortes modernos, fades impecables y diseños con navaja. Su pasión por el estilo y atención al detalle lo convierten en uno de los barberos más recomendados de la ciudad.</p>
     </div>
   </section>
 
-  <!-- BEFORE & AFTER -->
+  <!-- Servicios -->
   <section id="servicios">
-    <div class="section-title">
-      <h2>Mira el Antes & Después</h2>
-    </div>
-    <div class="before-after" id="ba">
-      <img src="https://images.unsplash.com/photo-1603002886193-30c3b9d5b0e6?auto=format&fit=crop&w=1400&q=80" alt="Antes" style="position:absolute;left:0;top:0;bottom:0;width:100%;height:100%;object-fit:cover"/>
-      <div id="baAfter" style="position:absolute;left:0;top:0;height:100%;overflow:hidden;width:50%;">
-        <img src="https://images.unsplash.com/photo-1591012911205-4f46a4b9f1f9?auto=format&fit=crop&w=1400&q=80" alt="Después" style="height:100%;object-fit:cover;"/>
-      </div>
-      <div class="ba-handle" id="handle"><div class="dot"></div></div>
+    <h2 class="reveal">Servicios de Kennedy</h2>
+    <div class="servicios">
+      <div class="servicio reveal"><img src="https://source.unsplash.com/400x300/?barber,fade" alt="Fade Moderno"><div class="info"><h3>Fade Moderno</h3><p>Transiciones limpias y acabados modernos que resaltan tu estilo.</p><a href="#ubicacion" class="btn">Agendar</a></div></div>
+      <div class="servicio reveal"><img src="https://source.unsplash.com/400x300/?beard,barber" alt="Barba Perfilada"><div class="info"><h3>Barba Perfilada</h3><p>Recorte de barba preciso, perfilado y estilo impecable.</p><a href="#ubicacion" class="btn">Agendar</a></div></div>
+      <div class="servicio reveal"><img src="https://source.unsplash.com/400x300/?barber,classic" alt="Corte Clásico"><div class="info"><h3>Corte Clásico</h3><p>Estilo tradicional y elegante, con un acabado profesional.</p><a href="#ubicacion" class="btn">Agendar</a></div></div>
+      <div class="servicio reveal"><img src="https://source.unsplash.com/400x300/?haircut,modern" alt="Corte Moderno"><div class="info"><h3>Corte Moderno</h3><p>Diseños contemporáneos adaptados a tu personalidad.</p><a href="#ubicacion" class="btn">Agendar</a></div></div>
     </div>
   </section>
 
-  <!-- SERVICES -->
-  <section>
-    <div class="section-title"><h2>Servicios Destacados</h2></div>
-    <div class="cards">
-      <div class="card">
-        <h3>Corte Clásico</h3>
-        <p class="muted">Corte preciso con estilo tradicional.</p>
-        <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center"><div class="price">S/15</div><a class="btn btn-primary" href="#contacto">Agendar</a></div>
-      </div>
-      <div class="card">
-        <h3>Degradado / Fade</h3>
-        <p class="muted">Transiciones limpias y definidas.</p>
-        <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center"><div class="price">S/20</div><a class="btn btn-primary" href="#contacto">Agendar</a></div>
-      </div>
-      <div class="card">
-        <h3>Barba & Bigote</h3>
-        <p class="muted">Recorte, perfilado y aceite de acabado.</p>
-        <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center"><div class="price">S/12</div><a class="btn btn-primary" href="#contacto">Agendar</a></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- GALLERY -->
+  <!-- Galería -->
   <section id="galeria">
-    <div class="section-title"><h2>Galería de Estilos</h2></div>
-    <div class="gallery">
-      <img src="https://images.unsplash.com/photo-1581579181545-6e8f7f5b0b5a?auto=format&fit=crop&w=800&q=60" alt="corte1"/>
-      <img src="https://images.unsplash.com/photo-1559526324-593bc073d938?auto=format&fit=crop&w=800&q=60" alt="corte2"/>
-      <img src="https://images.unsplash.com/photo-1598970434795-0c54fe7c0642?auto=format&fit=crop&w=800&q=60" alt="corte3"/>
-      <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=60" alt="corte4"/>
+    <h2 class="reveal">Galería de Trabajos Reales</h2>
+    <div class="galeria">
+      <figure class="reveal"><img src="https://images.unsplash.com/photo-1591012911205-4f46a4b9f1f9?auto=format&fit=crop&w=800" alt="Antes y Después 1"><figcaption>Antes y Después 1</figcaption></figure>
+      <figure class="reveal"><img src="https://images.unsplash.com/photo-1628515174184-1b8b5a0e4b25?auto=format&fit=crop&w=800" alt="Antes y Después 2"><figcaption>Antes y Después 2</figcaption></figure>
+      <figure class="reveal"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800" alt="Corte Detallado"><figcaption>Corte Detallado</figcaption></figure>
+      <figure class="reveal"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800" alt="Fade Completo"><figcaption>Fade Completo</figcaption></figure>
     </div>
   </section>
 
-  <!-- TEAM -->
-  <section id="equipo">
-    <div class="section-title"><h2>Conoce a Nuestros Barberos</h2></div>
-    <div class="team">
-      <div class="member">
-        <div class="avatar"><img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?auto=format&fit=crop&w=400&q=60" alt="Luis"/></div>
-        <h4>Luis</h4>
-        <div style="color:var(--muted);font-size:13px">Especialista en fades</div>
-      </div>
-      <div class="member">
-        <div class="avatar"><img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=400&q=60" alt="Mario"/></div>
-        <h4>Mario</h4>
-        <div style="color:var(--muted);font-size:13px">Diseños con navaja</div>
-      </div>
-      <div class="member">
-        <div class="avatar"><img src="https://images.unsplash.com/photo-1545996124-3a6f8b4e2c36?auto=format&fit=crop&w=400&q=60" alt="Jorge"/></div>
-        <h4>Jorge</h4>
-        <div style="color:var(--muted);font-size:13px">Barba & Estilos clásicos</div>
-      </div>
+  <!-- Testimonios -->
+  <section id="testimonios">
+    <h2 class="reveal">Opiniones de Clientes</h2>
+    <div class="testimonios">
+      <div class="testimonio reveal"><p>"¡Increíble corte! Kennedy sabe lo que hace."</p><strong>– Juan P.</strong></div>
+      <div class="testimonio reveal"><p>"Profesional y detallista, siempre salgo satisfecho."</p><strong>– Carlos M.</strong></div>
+      <div class="testimonio reveal"><p>"El mejor fade que he tenido."</p><strong>– Miguel L.</strong></div>
     </div>
   </section>
 
-  <!-- OFFERS & REVIEWS -->
-  <section id="resenas">
-    <div class="section-title"><h2>Ofertas y Reseñas</h2></div>
-    <div style="display:grid;grid-template-columns:1fr 420px;gap:20px">
-      <div class="offers">
-        <div class="offer">
-          <h3>Promoción semanal</h3>
-          <p>Corte + Barba a S/25. Solo por tiempo limitado.</p>
-          <div style="margin-top:12px;font-weight:800">Termina en <span id="countdown">03:12:45</span></div>
-        </div>
-        <div class="offer">
-          <h3>Descuento nuevos clientes</h3>
-          <p>10% de descuento en tu primera visita.</p>
-        </div>
-      </div>
-      <div class="reviews">
-        <div class="review"><strong>Juan P.</strong><div style="color:var(--muted);font-size:13px">"Me dejaron impecable, ambiente relajado. 5/5"</div></div>
-        <div class="review"><strong>Carlos M.</strong><div style="color:var(--muted);font-size:13px">"Los mejores fades de la ciudad"</div></div>
-        <div class="review"><strong>Mauro L.</strong><div style="color:var(--muted);font-size:13px">"Buena atención y precios justos"</div></div>
-      </div>
+  <!-- Ubicación -->
+  <section id="ubicacion">
+    <h2 class="reveal">Ubicación</h2>
+    <div class="mapa reveal">
+      <iframe src="https://maps.app.goo.gl/5um9wS8RcRro1foS7?g_st=ac" allowfullscreen loading="lazy"></iframe>
     </div>
   </section>
 
-  <!-- SHOP (simulado) -->
-  <section>
-    <div class="section-title"><h2>Tienda Recomendada</h2></div>
-    <div style="display:flex;gap:16px;flex-wrap:wrap">
-      <div class="card" style="min-width:220px;max-width:260px">
-        <h4>Pomada Premium</h4>
-        <div style="color:var(--muted);font-size:13px">Fijación media, acabado brillante</div>
-        <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center"><div class="price">S/35</div><a class="btn btn-primary" href="#contacto">Comprar</a></div>
-      </div>
-      <div class="card" style="min-width:220px;max-width:260px">
-        <h4>Aceite para barba</h4>
-        <div style="color:var(--muted);font-size:13px">Hidratación y brillo natural</div>
-        <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center"><div class="price">S/28</div><a class="btn btn-primary" href="#contacto">Comprar</a></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contacto">
-    <div class="section-title"><h2>Contacto & Reserva</h2></div>
-    <div class="contact-grid">
-      <div class="form">
-        <input placeholder="Tu nombre" />
-        <input placeholder="Tu teléfono" />
-        <select style="width:100%;padding:12px;border-radius:10px;background:transparent;color:#fff;margin-bottom:12px;border:1px solid rgba(255,255,255,0.04)"><option>Corte clásico</option><option>Degradado</option><option>Barba</option></select>
-        <input type="datetime-local" />
-        <textarea placeholder="Mensaje (opcional)" rows="4"></textarea>
-        <div style="display:flex;gap:10px"><a class="btn btn-primary" href="#">Enviar</a><a class="btn btn-ghost" href="tel:+51977355999">Llamar</a></div>
-      </div>
-      <div>
-        <div class="map">
-          <!-- Usa tu iframe de Google Maps aquí -->
-          <iframe width="100%" height="280" frameborder="0" style="border:0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.0000000000005!2d-77.00000000000001!3d-12.000000000000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDAwJzAwLjAiUyA3N8KwMDAnMDAuMCJX!5e0!3m2!1ses!2spe!4v1620000000000!5m2!1ses!2spe"></iframe>
-        </div>
-        <div style="margin-top:12px;color:var(--muted);font-size:13px">
-          <div>Dirección: Jirón Alfonso Ugarte, 3er piso</div>
-          <div>Tel: <a href="tel:+51977355999">977 355 999</a></div>
-          <div>Horario: Lun-Sáb 9:00 - 21:00</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  <!-- Footer -->
   <footer>
-    <div style="margin-top:22px;color:var(--muted);font-size:14px">© La Magia del Barbero · Creado con ❤️</div>
+    <div class="hora">Horario: Lun–Sáb 9:00 – 21:00</div>
+    <div class="creditos">
+      <p>Diseñado por <strong>AnthZz Berrocal</strong></p>
+      <a href="https://github.com/BerMatMods" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" />
+      </a>
+    </div>
   </footer>
-</div>
 
-  </main>  <!-- WHATSAPP FLOAT -->  <div class="whatsapp">
-    <a class="wa-btn" href="https://wa.me/51977355999?text=Hola%2C%20quiero%20reservar%20un%20corte" target="_blank">💬 Reservar</a>
-  </div>  <script>
-    /* ------------------- SLIDER LOGIC ------------------- */
-    (function(){
-      const slides=document.getElementById('slides');
-      const dots=document.getElementById('dots');
-      const total=slides.children.length;let idx=0;
-      for(let i=0;i<total;i++){const d=document.createElement('div');d.className='dot';d.addEventListener('click',()=>go(i));dots.appendChild(d)}
-      const dotEls=[...dots.children];dotEls[0].classList.add('active');
-      function go(i){idx=i;slides.style.transform=`translateX(-${100*i}%)`;dotEls.forEach(x=>x.classList.remove('active'));dotEls[i].classList.add('active')}
-      let auto=setInterval(()=>{idx=(idx+1)%total;go(idx)},4200);
-      // pause on hover
-      document.querySelector('.slider').addEventListener('mouseenter',()=>clearInterval(auto));
-      document.querySelector('.slider').addEventListener('mouseleave',()=>auto=setInterval(()=>{idx=(idx+1)%total;go(idx)},4200));
-    })();
-
-    /* ------------------- BEFORE/AFTER HANDLE ------------------- */
-    (function(){
-      const baAfter=document.getElementById('baAfter');
-      const handle=document.getElementById('handle');
-      let dragging=false;const container=document.getElementById('ba');
-      function setPos(x){const rect=container.getBoundingClientRect();let pct=(x-rect.left)/rect.width; if(pct<0)pct=0;if(pct>1)pct=1;baAfter.style.width=(pct*100)+'%';handle.style.left=(pct*100)+'%'}
-      handle.addEventListener('mousedown',()=>dragging=true);window.addEventListener('mouseup',()=>dragging=false);window.addEventListener('mousemove',(e)=>{if(dragging)setPos(e.clientX)});
-      // touch
-      handle.addEventListener('touchstart',()=>dragging=true);window.addEventListener('touchend',()=>dragging=false);window.addEventListener('touchmove',(e)=>{if(dragging)setPos(e.touches[0].clientX)});
-    })();
-
-    /* ------------------- COUNTDOWN SIMPLE ------------------- */
-    (function(){
-      const el=document.getElementById('countdown');
-      // ejemplo: cuenta regresiva 3 horas desde ahora
-      let t=3*60*60;function fmt(s){const h=Math.floor(s/3600);const m=Math.floor((s%3600)/60);const ss=s%60;return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(ss).padStart(2,'0')}`} 
-      el.textContent=fmt(t);setInterval(()=>{if(t>0){t--;el.textContent=fmt(t)}},1000);
-    })();
-
-    /* ------------------- SMALL TOUCH: make avatars circular images fit ------------------- */
-    document.querySelectorAll('.avatar img').forEach(img=>{img.style.width='100%';img.style.height='100%';img.style.objectFit='cover'});
-  </script></body>
+  <!-- Scroll Reveal Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      reveals.forEach(el => observer.observe(el));
+    });
+  </script>
+</body>
 </html>

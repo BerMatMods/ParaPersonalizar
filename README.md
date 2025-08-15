@@ -1,363 +1,257 @@
-<!DOCTYPE html>
+
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>La Magia del Barbero - Kennedy</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>⚡ BerMat — Windows 11 Web</title>
 <style>
-/* ------------------- RESET ------------------- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-html {
-    scroll-behavior: smooth;
-}
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #0a0a0a;
-    color: white;
-    line-height: 1.6;
-}
-
-/* ------------------- COLORES ------------------- */
 :root {
-    --color-principal: #FFD700;
-    --color-secundario: #111;
-    --color-texto: #fff;
-    --color-acento: #ffcc00;
+  --bg: #0f1724;
+  --glass: rgba(255,255,255,0.06);
+  --accent: #6ee7b7;
+  --task: #0b1220;
+  --text: #e6eef8;
+  --muted: #9fb0c8;
+  font-family: 'Segoe UI', Roboto, system-ui, -apple-system;
 }
-
-/* ------------------- HEADER ------------------- */
-header {
-    position: fixed;
-    width: 100%;
-    background: rgba(0,0,0,0.85);
-    backdrop-filter: blur(5px);
-    padding: 1rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
-    border-bottom: 2px solid var(--color-principal);
+html, body {
+  margin: 0;
+  height: 100%;
+  background: linear-gradient(180deg, #051025 0%, #081426 50%, #0b1220 100%);
+  color: var(--text);
+  overflow: hidden;
 }
-header h1 {
-    font-size: 1.5rem;
-    color: var(--color-principal);
-    text-shadow: 0 0 10px var(--color-principal);
+.wallpaper {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(110,231,183,0.12), transparent 30%),
+              radial-gradient(circle at 80% 70%, rgba(124,58,237,0.06), transparent 30%);
 }
-nav a {
-    color: var(--color-texto);
-    margin-left: 20px;
-    text-decoration: none;
-    font-weight: bold;
-    position: relative;
+.desktop {
+  position: relative;
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
 }
-nav a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -5px;
-    width: 0%;
-    height: 2px;
-    background: var(--color-principal);
-    transition: 0.3s;
+.icon {
+  width: 88px;
+  text-align: center;
+  cursor: pointer;
 }
-nav a:hover::after {
-    width: 100%;
+.icon .img {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  background: var(--glass);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
 }
-
-/* ------------------- HERO ------------------- */
-.hero {
-    height: 100vh;
-    background: url('https://images.unsplash.com/photo-1598294200450-1a5e8b3c78c1?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: relative;
+.icon .label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
 }
-.hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
+/* Taskbar */
+.taskbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 56px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
 }
-.hero-content {
-    position: relative;
-    z-index: 2;
-    color: white;
-    animation: fadeInUp 2s ease;
+.start {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--glass);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
-.hero-content h2 {
-    font-size: 3rem;
-    color: var(--color-principal);
-    text-shadow: 0 0 15px var(--color-principal);
+.tray {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
-.hero-content p {
-    font-size: 1.2rem;
-    margin-top: 10px;
+.tray .btn {
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.02);
+  color: var(--muted);
 }
-.hero-content a {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 25px;
-    background: var(--color-principal);
-    color: black;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 30px;
-    box-shadow: 0 0 20px var(--color-principal);
-    transition: 0.3s;
+/* Window */
+.window {
+  position: absolute;
+  background: rgba(255,255,255,0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+  width: 700px;
+  max-width: calc(100% - 40px);
+  height: 480px;
+  display: none;
+  flex-direction: column;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.7);
 }
-.hero-content a:hover {
-    background: white;
-    color: black;
-    box-shadow: 0 0 25px white;
+.titlebar {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  background: rgba(255,255,255,0.05);
+  cursor: move;
 }
-
-/* Animación */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.titlebar .title {
+  font-weight: 600;
 }
-
-/* ------------------- SECCIÓN SOBRE MÍ ------------------- */
-section {
-    padding: 5rem 2rem;
+.controls {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
 }
-#about {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    align-items: center;
+.ctrl {
+  width: 30px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
-#about img {
-    flex: 1 1 300px;
-    border-radius: 20px;
-    max-width: 400px;
-    box-shadow: 0 0 15px var(--color-principal);
+.win-body {
+  padding: 12px;
+  overflow: auto;
+  flex: 1;
 }
-#about .text {
-    flex: 1 1 300px;
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--accent), #7c3aed);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: #021018;
 }
-#about h2 {
-    font-size: 2rem;
-    color: var(--color-principal);
-    margin-bottom: 1rem;
+.gallery img {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
 }
-#about p {
-    font-size: 1rem;
+.viewer {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
 }
-
-/* ------------------- SERVICIOS ------------------- */
-#services {
-    background: var(--color-secundario);
-    text-align: center;
-}
-#services h2 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    color: var(--color-principal);
-}
-.services-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-    gap: 2rem;
-}
-.service {
-    background: #1a1a1a;
-    padding: 1.5rem;
-    border-radius: 15px;
-    box-shadow: 0 0 10px #000;
-    transition: transform 0.3s;
-}
-.service:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 0 20px var(--color-principal);
-}
-.service img {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 1rem;
-}
-
-/* ------------------- GALERÍA ------------------- */
-#gallery h2 {
-    text-align: center;
-    color: var(--color-principal);
-    margin-bottom: 2rem;
-}
-.gallery-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
-    gap: 1rem;
-}
-.gallery-container img {
-    width: 100%;
-    border-radius: 10px;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-.gallery-container img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px var(--color-principal);
-}
-
-/* ------------------- TESTIMONIOS ------------------- */
-#testimonials {
-    background: var(--color-secundario);
-    text-align: center;
-}
-#testimonials h2 {
-    color: var(--color-principal);
-    margin-bottom: 2rem;
-}
-.testimonial {
-    max-width: 600px;
-    margin: auto;
-    font-style: italic;
-    margin-bottom: 1.5rem;
-}
-
-/* ------------------- MAPA ------------------- */
-#map {
-    text-align: center;
-}
-#map iframe {
-    width: 100%;
-    height: 400px;
-    border: none;
-    border-radius: 15px;
-}
-
-/* ------------------- FOOTER ------------------- */
-footer {
-    background: #000;
-    text-align: center;
-    padding: 2rem 1rem;
-    color: white;
-    border-top: 2px solid var(--color-principal);
-}
-footer a {
-    color: var(--color-principal);
-    text-decoration: none;
-}
-footer .creditos {
-    margin-top: 1rem;
-    background: var(--color-secundario);
-    display: inline-block;
-    padding: 10px 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px var(--color-principal);
-}
-
-/* ------------------- RESPONSIVE ------------------- */
-@media (max-width: 768px) {
-    #about {
-        flex-direction: column;
-    }
+.viewer img {
+  max-width: 90%;
+  max-height: 90%;
 }
 </style>
 </head>
 <body>
+<div class="wallpaper"></div>
 
-<!-- HEADER -->
-<header>
-    <h1>La Magia del Barbero</h1>
-    <nav>
-        <a href="#about">Sobre mí</a>
-        <a href="#services">Servicios</a>
-        <a href="#gallery">Galería</a>
-        <a href="#testimonials">Testimonios</a>
-        <a href="#map">Ubicación</a>
-    </nav>
-</header>
+<div class="desktop">
+  <div class="icon" onclick="openWin('about')">
+    <div class="img">BM</div>
+    <div class="label">Sobre mí</div>
+  </div>
+  <div class="icon" onclick="openWin('projects')">
+    <div class="img">⚡</div>
+    <div class="label">Proyectos</div>
+  </div>
+  <div class="icon" onclick="openWin('gallery')">
+    <div class="img">📷</div>
+    <div class="label">Galería</div>
+  </div>
+</div>
 
-<!-- HERO -->
-<section class="hero">
-    <div class="hero-content">
-        <h2>Bienvenido a La Magia del Barbero</h2>
-        <p>Donde Kennedy transforma tu estilo</p>
-        <a href="#services">Ver servicios</a>
-    </div>
-</section>
+<div class="taskbar">
+  <div class="start" onclick="alert('Menú inicio en construcción')">☰</div>
+  <div class="tray">
+    <div class="btn">Andahuaylas</div>
+    <div class="btn">ESP</div>
+    <div class="btn" id="clock"></div>
+  </div>
+</div>
 
-<!-- SOBRE MÍ -->
-<section id="about">
-    <img src="https://images.unsplash.com/photo-1598550880863-9e75e2645a80?auto=format&fit=crop&w=800&q=80" alt="Kennedy el barbero">
-    <div class="text">
-        <h2>Sobre mí</h2>
-        <p>Hola, soy Kennedy, barbero profesional con más de 10 años de experiencia en cortes y estilos para hombres, mujeres, niños y niñas. En "La Magia del Barbero" me apasiona brindar un servicio personalizado, asegurando que cada cliente se sienta seguro y satisfecho con su nuevo look.</p>
-    </div>
-</section>
+<!-- Ventanas -->
+<div id="about" class="window" style="left:100px; top:80px;">
+  <div class="titlebar"><span class="title">Sobre Anth'Zz Berrocal</span>
+    <div class="controls"><div class="ctrl" onclick="closeWin('about')">✕</div></div>
+  </div>
+  <div class="win-body">
+    <div class="avatar">AB</div>
+    <h2>Anth'Zz Berrocal</h2>
+    <p><b>Alias:</b> BerMatModZ — <b>Proyecto:</b> ⚡BerMat-Bot MD🔥</p>
+    <p><b>Ubicación:</b> Andahuaylas</p>
+    <p><b>Mensaje:</b> 💖 TE AMO MUCHÍSIMO MI REINA Mi BriyidthCha</p>
+    <p><b>GitHub:</b> <a href="https://github.com/AnthZz-Berrocal" target="_blank">Abrir perfil</a></p>
+  </div>
+</div>
 
-<!-- SERVICIOS -->
-<section id="services">
-    <h2>Servicios</h2>
-    <div class="services-container">
-        <div class="service">
-            <img src="https://images.unsplash.com/photo-1598281351390-0b14a7dbb33a?auto=format&fit=crop&w=800&q=80" alt="Corte masculino">
-            <h3>Corte Masculino</h3>
-            <p>Estilos clásicos y modernos para resaltar tu personalidad.</p>
-        </div>
-        <div class="service">
-            <img src="https://images.unsplash.com/photo-1621605811364-3ef674e7dc86?auto=format&fit=crop&w=800&q=80" alt="Corte femenino">
-            <h3>Corte Femenino</h3>
-            <p>Cortes y peinados para cada ocasión, resaltando tu belleza.</p>
-        </div>
-        <div class="service">
-            <img src="https://images.unsplash.com/photo-1601084881623-cdfb1eec60f5?auto=format&fit=crop&w=800&q=80" alt="Corte para niños">
-            <h3>Corte Infantil</h3>
-            <p>Cómodo y divertido para los más pequeños.</p>
-        </div>
-        <div class="service">
-            <img src="https://images.unsplash.com/photo-1612322327993-fb1ba627d7d1?auto=format&fit=crop&w=800&q=80" alt="Afeitado y barba">
-            <h3>Afeitado y Barba</h3>
-            <p>Arreglo de barba y afeitado tradicional con toalla caliente.</p>
-        </div>
-    </div>
-</section>
+<div id="projects" class="window" style="left:160px; top:140px;">
+  <div class="titlebar"><span class="title">Proyectos</span>
+    <div class="controls"><div class="ctrl" onclick="closeWin('projects')">✕</div></div>
+  </div>
+  <div class="win-body">
+    <ul>
+      <li>⚡ BerMat-Bot MD🔥 — Bot de WhatsApp</li>
+      <li>BerMat_Mods — Automatizaciones</li>
+      <li>Webs estilo hacker y Windows 11</li>
+    </ul>
+  </div>
+</div>
 
-<!-- GALERÍA -->
-<section id="gallery">
-    <h2>Galería</h2>
-    <div class="gallery-container">
-        <img src="https://images.unsplash.com/photo-1598294200450-1a5e8b3c78c1?auto=format&fit=crop&w=800&q=80" alt="Corte 1">
-        <img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?auto=format&fit=crop&w=800&q=80" alt="Corte 2">
-        <img src="https://images.unsplash.com/photo-1622295022195-2fc90d92c1e1?auto=format&fit=crop&w=800&q=80" alt="Corte 3">
-        <img src="https://images.unsplash.com/photo-1606335543042-17e74af9c4b2?auto=format&fit=crop&w=800&q=80" alt="Corte 4">
-    </div>
-</section>
+<div id="gallery" class="window" style="left:200px; top:200px;">
+  <div class="titlebar"><span class="title">Galería</span>
+    <div class="controls"><div class="ctrl" onclick="closeWin('gallery')">✕</div></div>
+  </div>
+  <div class="win-body gallery">
+    <img src="https://picsum.photos/400/300?1" onclick="viewImg(this.src)">
+    <img src="https://picsum.photos/400/300?2" onclick="viewImg(this.src)">
+    <img src="https://picsum.photos/400/300?3" onclick="viewImg(this.src)">
+  </div>
+</div>
 
-<!-- TESTIMONIOS -->
-<section id="testimonials">
-    <h2>Testimonios</h2>
-    <div class="testimonial">"Kennedy es un maestro del estilo. Siempre salgo con una sonrisa." – Carlos M.</div>
-    <div class="testimonial">"La mejor barbería de la ciudad, ambiente agradable y servicio impecable." – Laura G.</div>
-    <div class="testimonial">"Mi hijo siempre sale feliz con su corte nuevo." – Andrés P.</div>
-</section>
+<!-- Visor de imágenes -->
+<div class="viewer" id="viewer" onclick="this.style.display='none'">
+  <img src="" alt="">
+</div>
 
-<!-- MAPA -->
-<section id="map">
-    <h2>Ubicación</h2>
-    <iframe src="https://maps.google.com/maps?q=5um9wS8RcRro1foS7&output=embed"></iframe>
-</section>
-
-<!-- FOOTER -->
-<footer>
-    <p>© 2025 La Magia del Barbero - Todos los derechos reservados</p>
-    <div class="creditos">
-        Diseñado por <strong>AnthZz Berrocal</strong> | 
-        <a href="https://github.com/BerMatMods" target="_blank">Mi GitHub</a>
-    </div>
-</footer>
-
+<script>
+function openWin(id) {
+  document.getElementById(id).style.display = 'flex';
+}
+function closeWin(id) {
+  document.getElementById(id).style.display = 'none';
+}
+function viewImg(src) {
+  document.getElementById('viewer').style.display = 'flex';
+  document.querySelector('#viewer img').src = src;
+}
+setInterval(()=>{
+  document.getElementById('clock').textContent = new Date().toLocaleTimeString();
+},1000);
+</script>
 </body>
 </html>

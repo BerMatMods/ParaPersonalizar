@@ -4,14 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>La Magia del Barbero | Barber Shop</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --rojo: #d62828;
-      --azul: #003049;
+      --negro: #0d0d0d;
+      --dorado: #d4af37;
+      --plateado: #c0c0c0;
       --blanco: #fff;
-      --gris: #f8f9fa;
-      --negro: #111;
     }
     * {
       margin: 0;
@@ -19,92 +18,131 @@
       box-sizing: border-box;
     }
     body {
-      font-family: 'Poppins', sans-serif;
-      background-color: var(--gris);
-      color: var(--negro);
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--negro);
+      color: var(--blanco);
       line-height: 1.6;
+      overflow-x: hidden;
     }
     header {
-      background: linear-gradient(90deg, var(--azul), var(--rojo));
+      background: linear-gradient(135deg, var(--negro) 0%, var(--dorado) 100%);
       color: var(--blanco);
-      padding: 20px;
+      padding: 30px 20px;
       text-align: center;
+      position: relative;
+      animation: fadeDown 1.5s ease-in-out;
     }
     header h1 {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 3rem;
+      font-size: 3.5rem;
+      letter-spacing: 2px;
+    }
+    header p {
+      font-size: 1.2rem;
+      font-weight: 300;
     }
     nav {
-      background-color: var(--negro);
+      background-color: rgba(255, 255, 255, 0.05);
       display: flex;
       justify-content: center;
+      backdrop-filter: blur(5px);
     }
     nav a {
       color: var(--blanco);
       text-decoration: none;
       padding: 15px 20px;
       display: block;
-      transition: background 0.3s;
+      font-weight: bold;
+      letter-spacing: 1px;
+      position: relative;
+      transition: color 0.3s;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 2px;
+      background-color: var(--dorado);
+      transition: width 0.3s;
+    }
+    nav a:hover::after {
+      width: 100%;
     }
     nav a:hover {
-      background: var(--rojo);
+      color: var(--dorado);
     }
     .hero {
       text-align: center;
-      padding: 40px 20px;
-      background: var(--azul);
-      color: var(--blanco);
+      padding: 60px 20px;
+      background: radial-gradient(circle at center, #222, #000);
+      animation: fadeUp 1.5s ease-in-out;
     }
     .hero h2 {
-      font-size: 2.5rem;
+      font-size: 3rem;
       font-family: 'Bebas Neue', sans-serif;
       margin-bottom: 15px;
+      color: var(--dorado);
     }
     .section {
-      padding: 40px 20px;
+      padding: 50px 20px;
       max-width: 1100px;
       margin: auto;
     }
     .section h2 {
       text-align: center;
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 2rem;
-      color: var(--azul);
-      margin-bottom: 20px;
+      font-size: 2.5rem;
+      color: var(--dorado);
+      margin-bottom: 30px;
+      animation: fadeUp 1s ease-in-out;
     }
     .services {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      gap: 25px;
     }
     .service {
-      background: var(--blanco);
-      border-radius: 10px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
       padding: 20px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
       text-align: center;
+      transition: transform 0.4s, box-shadow 0.4s;
+      animation: fadeUp 1.2s ease-in-out;
+    }
+    .service:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px var(--dorado);
     }
     .service img {
       width: 100%;
       border-radius: 10px;
-      height: 200px;
+      height: 220px;
       object-fit: cover;
+      margin-bottom: 15px;
+      transition: filter 0.4s;
+    }
+    .service:hover img {
+      filter: brightness(1.2);
     }
     .promo {
-      background: var(--rojo);
-      color: var(--blanco);
+      background: linear-gradient(90deg, var(--dorado), var(--plateado));
+      color: var(--negro);
       padding: 20px;
       text-align: center;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       font-weight: bold;
       border-radius: 10px;
+      animation: pulse 2s infinite;
     }
     footer {
       background: var(--negro);
-      color: var(--blanco);
+      color: var(--plateado);
       text-align: center;
       padding: 15px;
       font-size: 0.9rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
     }
     .btn-whatsapp {
       background: #25d366;
@@ -113,8 +151,27 @@
       display: inline-block;
       margin: 15px 5px;
       text-decoration: none;
-      border-radius: 5px;
+      border-radius: 50px;
       font-weight: bold;
+      box-shadow: 0 0 10px #25d366;
+      transition: transform 0.3s;
+    }
+    .btn-whatsapp:hover {
+      transform: scale(1.05);
+    }
+
+    /* Animaciones */
+    @keyframes fadeUp {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeDown {
+      from {opacity: 0; transform: translateY(-30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes pulse {
+      0%, 100% {box-shadow: 0 0 10px var(--dorado);}
+      50% {box-shadow: 0 0 20px var(--dorado);}
     }
   </style>
 </head>
@@ -132,8 +189,8 @@
   </nav>
 
   <section class="hero">
-    <h2>Transforma tu estilo con nosotros</h2>
-    <p>Cortes modernos, clásicos, arreglo de barba y más</p>
+    <h2>Transforma tu look</h2>
+    <p>Los mejores cortes y estilos con un toque de magia</p>
   </section>
 
   <section id="servicios" class="section">
@@ -142,17 +199,14 @@
       <div class="service">
         <img src="https://via.placeholder.com/400x300?text=Corte+Moderno" alt="Corte moderno">
         <h3>Corte Moderno</h3>
-        <p>Desde S/ 25</p>
       </div>
       <div class="service">
         <img src="https://via.placeholder.com/400x300?text=Corte+Clasico" alt="Corte clásico">
         <h3>Corte Clásico</h3>
-        <p>Desde S/ 20</p>
       </div>
       <div class="service">
         <img src="https://via.placeholder.com/400x300?text=Barba" alt="Arreglo de barba">
         <h3>Arreglo de Barba</h3>
-        <p>S/ 15</p>
       </div>
     </div>
   </section>

@@ -1,200 +1,220 @@
 
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>⚡ Tres en Raya - BerMat_Mods ⚡</title>
-<style>
-  body {
-    background: radial-gradient(circle at top, #0f0f0f, #000);
-    color: #fff;
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-  }
+  <meta charset="UTF-8">
+  <title>Juego XO - BerMat_Mods</title>
+  <style>
+    body {
+      background: radial-gradient(circle at top, #111, #000);
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
 
-  h1 {
-    font-size: 2.5rem;
-    text-shadow: 0 0 20px cyan, 0 0 40px blue;
-    margin-bottom: 10px;
-  }
+    h1 {
+      font-size: 2.5em;
+      text-shadow: 0 0 20px cyan, 0 0 40px blue;
+      margin-bottom: 20px;
+    }
 
-  #gameMode {
-    margin: 15px;
-  }
+    .players {
+      margin-bottom: 20px;
+    }
 
-  .board {
-    display: grid;
-    grid-template-columns: repeat(3, 120px);
-    grid-template-rows: repeat(3, 120px);
-    gap: 12px;
-  }
+    .players input {
+      padding: 8px;
+      margin: 5px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1em;
+      text-align: center;
+    }
 
-  .cell {
-    width: 120px;
-    height: 120px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 15px;
-    box-shadow: 0 0 20px cyan;
-    font-size: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: all .3s;
-  }
+    #game {
+      display: grid;
+      grid-template-columns: repeat(3, 120px);
+      grid-template-rows: repeat(3, 120px);
+      gap: 10px;
+    }
 
-  .cell:hover {
-    box-shadow: 0 0 25px #ff00ff, 0 0 50px #00ffff;
-    transform: scale(1.05);
-  }
+    .cell {
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(145deg, #222, #111);
+      border: 3px solid cyan;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5em;
+      cursor: pointer;
+      box-shadow: 0 0 15px cyan;
+      transition: all 0.2s;
+    }
 
-  .winner {
-    animation: glow 1s infinite alternate;
-  }
+    .cell:hover {
+      background: linear-gradient(145deg, #333, #111);
+      transform: scale(1.05);
+    }
 
-  @keyframes glow {
-    from { box-shadow: 0 0 20px lime; }
-    to { box-shadow: 0 0 40px yellow; }
-  }
+    #message {
+      position: absolute;
+      top: 20%;
+      background: rgba(0,0,0,0.85);
+      padding: 20px 40px;
+      border-radius: 15px;
+      font-size: 1.8em;
+      text-align: center;
+      display: none;
+      animation: fadeIn 1s ease-in-out;
+      box-shadow: 0 0 25px lime;
+    }
 
-  #message {
-    margin-top: 20px;
-    font-size: 1.5rem;
-    text-shadow: 0 0 15px lime, 0 0 30px yellow;
-  }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: scale(0.5);}
+      to {opacity: 1; transform: scale(1);}
+    }
 
-  .scoreboard {
-    margin-top: 15px;
-    display: flex;
-    gap: 25px;
-    font-size: 1.2rem;
-    text-shadow: 0 0 15px cyan;
-  }
+    @keyframes vibrate {
+      0% { transform: translate(0);}
+      25% { transform: translate(-2px, 2px);}
+      50% { transform: translate(2px, -2px);}
+      75% { transform: translate(-2px, -2px);}
+      100% { transform: translate(0);}
+    }
 
-  button {
-    margin-top: 20px;
-    padding: 10px 25px;
-    border: none;
-    border-radius: 10px;
-    background: linear-gradient(90deg, cyan, blue);
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    box-shadow: 0 0 20px cyan;
-    transition: all .3s;
-  }
+    .scoreboard {
+      margin: 20px;
+      font-size: 1.2em;
+      text-shadow: 0 0 10px magenta;
+    }
 
-  button:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 30px #ff00ff;
-  }
-</style>
+    #credits {
+      margin-top: 30px;
+      font-size: 0.9em;
+      text-shadow: 0 0 10px cyan;
+    }
+
+    /* 🎉 Confetti para cuando gana */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: hsl(var(--hue), 100%, 50%);
+      top: -10px;
+      animation: fall 3s linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>⚡ Tres en Raya - BerMat_Mods ⚡</h1>
+  <h1>🎮 Juego de XO - BerMat_Mods</h1>
 
-  <select id="gameMode">
-    <option value="bot">Jugador vs Bot</option>
-    <option value="2p">Jugador vs Jugador</option>
-  </select>
-
-  <div class="board" id="board"></div>
-
-  <div id="message"></div>
-
-  <div class="scoreboard">
-    <div>👤 Jugador X: <span id="scoreX">0</span></div>
-    <div>🤖 Jugador O: <span id="scoreO">0</span></div>
+  <div class="players">
+    <input type="text" id="player1" placeholder="Nombre Jugador 1">
+    <input type="text" id="player2" placeholder="Nombre Jugador 2 / Bot">
+    <button onclick="startGame()">Iniciar</button>
   </div>
 
-  <button onclick="resetGame()">🔄 Reiniciar</button>
+  <div id="game"></div>
+  <div class="scoreboard" id="scoreboard">Marcador: </div>
 
-<script>
-  const board = document.getElementById("board");
-  const message = document.getElementById("message");
-  const scoreXEl = document.getElementById("scoreX");
-  const scoreOEl = document.getElementById("scoreO");
-  const gameMode = document.getElementById("gameMode");
+  <div id="message"></div>
+  <div id="credits">⚡ Creado por Anth'Zz Berrocal (Alias: BerMat_Mods) ⚡</div>
 
-  let cells, currentPlayer, gameActive, scoreX = 0, scoreO = 0;
+  <script>
+    const gameBoard = document.getElementById('game');
+    const messageBox = document.getElementById('message');
+    const scoreboard = document.getElementById('scoreboard');
+    let currentPlayer = 'X';
+    let board = Array(9).fill('');
+    let playerNames = ['Jugador 1','Jugador 2'];
+    let scores = {X:0,O:0};
 
-  function startGame() {
-    board.innerHTML = "";
-    currentPlayer = "X";
-    gameActive = true;
-    message.textContent = "👉 Turno de: " + currentPlayer;
-
-    for (let i = 0; i < 9; i++) {
-      const cell = document.createElement("div");
-      cell.classList.add("cell");
-      cell.addEventListener("click", () => handleClick(cell), { once: true });
-      board.appendChild(cell);
+    function startGame() {
+      playerNames[0] = document.getElementById('player1').value || "Jugador 1";
+      playerNames[1] = document.getElementById('player2').value || "Jugador 2";
+      resetBoard();
+      updateScoreboard();
     }
-    cells = document.querySelectorAll(".cell");
-  }
 
-  function handleClick(cell) {
-    if (!gameActive) return;
-    cell.textContent = currentPlayer;
-    cell.style.color = currentPlayer === "X" ? "cyan" : "yellow";
-    if (checkWin(currentPlayer)) {
-      endGame(false);
-    } else if ([...cells].every(c => c.textContent !== "")) {
-      endGame(true);
-    } else {
-      currentPlayer = currentPlayer === "X" ? "O" : "X";
-      message.textContent = "👉 Turno de: " + currentPlayer;
-
-      if (gameMode.value === "bot" && currentPlayer === "O") {
-        botMove();
+    function resetBoard() {
+      board = Array(9).fill('');
+      gameBoard.innerHTML = '';
+      for (let i=0;i<9;i++){
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        cell.dataset.index = i;
+        cell.addEventListener('click', handleClick);
+        gameBoard.appendChild(cell);
       }
     }
-  }
 
-  function botMove() {
-    let emptyCells = [...cells].filter(c => c.textContent === "");
-    if (emptyCells.length === 0) return;
-    let move = emptyCells[Math.floor(Math.random() * emptyCells.length)];
-    setTimeout(() => handleClick(move), 500);
-  }
+    function handleClick(e){
+      const index = e.target.dataset.index;
+      if (board[index] !== '') return;
 
-  function checkWin(player) {
-    const winPatterns = [
-      [0,1,2],[3,4,5],[6,7,8],
-      [0,3,6],[1,4,7],[2,5,8],
-      [0,4,8],[2,4,6]
-    ];
-    return winPatterns.some(pattern => 
-      pattern.every(index => cells[index].textContent === player)
-    );
-  }
+      board[index] = currentPlayer;
+      e.target.textContent = currentPlayer;
+      e.target.style.animation = "vibrate 0.2s";
 
-  function endGame(draw) {
-    gameActive = false;
-    if (draw) {
-      message.textContent = "🤝 Empate! Grandes mentes piensan igual 💡";
-    } else {
-      message.textContent = "🎉 Felicitaciones " + currentPlayer + "! Eres un verdadero campeón 🏆✨";
-      if (currentPlayer === "X") {
-        scoreX++;
-        scoreXEl.textContent = scoreX;
-      } else {
-        scoreO++;
-        scoreOEl.textContent = scoreO;
+      if (checkWinner()) {
+        scores[currentPlayer]++;
+        updateScoreboard();
+        showMessage(`🎉 Felicidades ${playerNames[currentPlayer === 'X' ? 0:1]} (${currentPlayer}) ganó! 🎉`);
+        confetti();
+        setTimeout(resetBoard, 2500);
+        return;
+      }
+
+      if (board.every(cell => cell !== '')) {
+        showMessage("🤝 ¡Empate! Grandes jugadores 👏");
+        setTimeout(resetBoard, 2000);
+        return;
+      }
+
+      currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    }
+
+    function checkWinner(){
+      const combos = [
+        [0,1,2],[3,4,5],[6,7,8],
+        [0,3,6],[1,4,7],[2,5,8],
+        [0,4,8],[2,4,6]
+      ];
+      return combos.some(([a,b,c]) => board[a] && board[a]===board[b] && board[a]===board[c]);
+    }
+
+    function showMessage(msg){
+      messageBox.textContent = msg;
+      messageBox.style.display = "block";
+      setTimeout(()=>{messageBox.style.display="none"}, 2000);
+    }
+
+    function updateScoreboard(){
+      scoreboard.textContent = `Marcador: ${playerNames[0]} (X): ${scores.X} | ${playerNames[1]} (O): ${scores.O}`;
+    }
+
+    function confetti(){
+      for(let i=0;i<50;i++){
+        const c = document.createElement('div');
+        c.className='confetti';
+        c.style.left = Math.random()*100+'vw';
+        c.style.setProperty('--hue', Math.random()*360);
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),3000);
       }
     }
-  }
-
-  function resetGame() {
-    startGame();
-  }
-
-  startGame();
-</script>
+  </script>
 </body>
 </html>

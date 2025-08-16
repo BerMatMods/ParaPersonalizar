@@ -3,236 +3,198 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HTTP Injector BerMatModZ 🔥</title>
+<title>⚡ Tres en Raya - BerMat_Mods ⚡</title>
 <style>
-body {
-    margin: 0;
-    font-family: 'Consolas', 'Courier New', monospace;
-    background: #000;
-    color: #0f0;
+  body {
+    background: radial-gradient(circle at top, #0f0f0f, #000);
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
-}
-h1 { color: #ff6600; text-align: center; margin-top: 10px; }
-h2 { color: #00ff99; text-align: center; margin-bottom: 10px; }
-.container { width: 95%; max-width: 1000px; }
-.panel {
-    background: #111;
-    border: 2px solid #00ff00;
-    border-radius: 12px;
-    padding: 15px;
-    margin-bottom: 15px;
-}
-.btn {
-    background: #ff6600;
-    color: #000;
-    padding: 10px 18px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    margin: 3px;
-    transition: 0.3s;
-}
-.btn:hover { background: #ff8533; }
-#log {
-    background: #000;
-    color: #0f0;
-    padding: 10px;
-    height: 250px;
-    overflow-y: auto;
-    border-radius: 10px;
-    border: 1px solid #0f0;
-    font-size: 0.9rem;
-}
-.info {
-    padding: 10px;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    text-shadow: 0 0 20px cyan, 0 0 40px blue;
     margin-bottom: 10px;
-    border: 2px dashed #ff6600;
-    border-radius: 8px;
-    background: #111a11aa;
-}
-.info b { color: #ff6600; }
-.info span { color: #00ff99; }
-.meter { width: 100%; height: 20px; background: #222; border-radius: 10px; overflow: hidden; margin-top: 10px; }
-.meter-fill { height: 100%; width: 0%; background: #ff6600; transition: width 0.5s; }
-.socials { display: flex; justify-content: center; gap: 15px; margin-top: 10px; }
-.socials a { display: inline-block; width: 40px; height: 40px; background: #ff6600; color: #000; border-radius: 50%; display: flex; justify-content: center; align-items: center; text-decoration: none; font-weight: bold; transition: 0.3s; }
-.socials a:hover { background: #ff8533; transform: scale(1.2); }
-.tabs { display: flex; flex-wrap: wrap; margin-bottom: 10px; }
-.tab { padding: 8px 15px; background: #222; margin-right: 5px; cursor: pointer; border-radius: 6px; transition: 0.2s; }
-.tab:hover { background: #00ff00; color: #000; }
-.tab.active { background: #ff6600; color: #000; }
-.tab-content { display: none; background: #111; border: 1px solid #0f0; border-radius: 10px; padding: 10px; }
-.tab-content.active { display: block; }
-input[type=text], input[type=file] { width: 90%; padding: 8px; margin: 5px 0; border-radius:5px; border:1px solid #0f0; background:#000; color:#0f0; }
+  }
+
+  #gameMode {
+    margin: 15px;
+  }
+
+  .board {
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    grid-template-rows: repeat(3, 120px);
+    gap: 12px;
+  }
+
+  .cell {
+    width: 120px;
+    height: 120px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 15px;
+    box-shadow: 0 0 20px cyan;
+    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all .3s;
+  }
+
+  .cell:hover {
+    box-shadow: 0 0 25px #ff00ff, 0 0 50px #00ffff;
+    transform: scale(1.05);
+  }
+
+  .winner {
+    animation: glow 1s infinite alternate;
+  }
+
+  @keyframes glow {
+    from { box-shadow: 0 0 20px lime; }
+    to { box-shadow: 0 0 40px yellow; }
+  }
+
+  #message {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    text-shadow: 0 0 15px lime, 0 0 30px yellow;
+  }
+
+  .scoreboard {
+    margin-top: 15px;
+    display: flex;
+    gap: 25px;
+    font-size: 1.2rem;
+    text-shadow: 0 0 15px cyan;
+  }
+
+  button {
+    margin-top: 20px;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(90deg, cyan, blue);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 0 20px cyan;
+    transition: all .3s;
+  }
+
+  button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px #ff00ff;
+  }
 </style>
 </head>
 <body>
+  <h1>⚡ Tres en Raya - BerMat_Mods ⚡</h1>
 
-<h1>HTTP Injector BerMatModZ 🔥</h1>
-<h2>Simulación completa de conexión</h2>
+  <select id="gameMode">
+    <option value="bot">Jugador vs Bot</option>
+    <option value="2p">Jugador vs Jugador</option>
+  </select>
 
-<div class="container">
+  <div class="board" id="board"></div>
 
-<div class="panel info">
-<b>Nombre:</b> <span>Anth’Zz Berrocal</span><br>
-<b>Alias:</b> <span>BerMatModZ</span><br>
-<b>Ubicación:</b> <span>Andahuaylas</span><br>
-<b>Proyectos:</b> <span>⚡BerMat-Bot MD🔥, BerMat_Mods, BerMatMods_Bot</span><br>
-<b>Contacto:</b> <span><a href="https://wa.me/937556459" style="color:#00ff99;">WhatsApp</a></span>
-</div>
+  <div id="message"></div>
 
-<div class="panel">
-<div class="tabs">
-    <div class="tab active" onclick="openTab('connection')">Conexión</div>
-    <div class="tab" onclick="openTab('tools')">Herramientas</div>
-    <div class="tab" onclick="openTab('import')">Importar/Exportar</div>
-    <div class="tab" onclick="openTab('help')">Ayuda</div>
-    <div class="tab" onclick="openTab('settings')">Ajustes</div>
-</div>
+  <div class="scoreboard">
+    <div>👤 Jugador X: <span id="scoreX">0</span></div>
+    <div>🤖 Jugador O: <span id="scoreO">0</span></div>
+  </div>
 
-<div id="connection" class="tab-content active">
-    <button class="btn" onclick="connect()">Conectar</button>
-    <button class="btn" onclick="disconnect()">Desconectar</button>
-    <button class="btn" onclick="payload()">Payload</button>
-    <button class="btn" onclick="config()">Config</button>
-    <div id="status" style="margin-top:10px;">Estado: <b>Desconectado</b></div>
-    <div class="meter"><div class="meter-fill" id="meter"></div></div>
-    <div style="margin-top:5px;">Velocidad: <b id="speed">0 KB/s</b> | Datos: <b id="data">0 MB</b></div>
-    <h3>Registro de conexión:</h3>
-    <div id="log"></div>
-</div>
-
-<div id="tools" class="tab-content">
-<h3>Herramientas simuladas:</h3>
-<ul>
-<li>Ping a servidor: <button class="btn" onclick="pingServer()">Ping</button></li>
-<li>Ver IP y puerto: <button class="btn" onclick="showIP()">Mostrar IP</button></li>
-<li>Test de velocidad: <button class="btn" onclick="speedTest()">Test</button></li>
-<li>Estadísticas avanzadas: <button class="btn" onclick="stats()">Mostrar</button></li>
-</ul>
-</div>
-
-<div id="import" class="tab-content">
-<h3>Importar / Exportar configuración</h3>
-<input type="file" id="importFile"><button class="btn" onclick="importConfig()">Importar</button>
-<br>
-<input type="text" id="exportName" placeholder="Nombre del archivo"><button class="btn" onclick="exportConfig()">Exportar</button>
-</div>
-
-<div id="help" class="tab-content">
-<h3>Ayuda / FAQ</h3>
-<ul>
-<li>Cómo conectar: Presiona "Conectar".</li>
-<li>Payload: Ingresa tu payload válido.</li>
-<li>Importar/exportar: Selecciona archivo o nombre.</li>
-<li>Contactar soporte: <a href="https://wa.me/937556459" style="color:#0f0;">WhatsApp</a></li>
-</ul>
-</div>
-
-<div id="settings" class="tab-content">
-<h3>Ajustes de simulación</h3>
-<label>Protocolos:</label>
-<select id="protocol">
-<option>HTTP</option>
-<option>SSH</option>
-<option>SSL</option>
-<option>TCP</option>
-</select><br>
-<label>Puerto:</label>
-<input type="text" id="port" placeholder="8080"><br>
-<label>Proxy:</label>
-<input type="text" id="proxy" placeholder="proxy.example.com"><br>
-<button class="btn" onclick="saveSettings()">Guardar</button>
-</div>
-
-</div>
-
-<div class="socials">
-<a href="https://www.facebook.com/anthzz.berrocal" target="_blank">F</a>
-<a href="https://www.instagram.com/anthzz.berrocal" target="_blank">I</a>
-<a href="https://twitter.com/AnthZz" target="_blank">T</a>
-<a href="https://github.com/anthzz" target="_blank">G</a>
-</div>
-
-</div>
+  <button onclick="resetGame()">🔄 Reiniciar</button>
 
 <script>
-let connected=false;
-let dataUsed=0;
-const userInfo={
-    name:"Anth’Zz Berrocal",
-    alias:"BerMatModZ",
-    location:"Andahuaylas",
-    projects:["⚡BerMat-Bot MD🔥","BerMat_Mods","BerMatMods_Bot"]
-};
+  const board = document.getElementById("board");
+  const message = document.getElementById("message");
+  const scoreXEl = document.getElementById("scoreX");
+  const scoreOEl = document.getElementById("scoreO");
+  const gameMode = document.getElementById("gameMode");
 
-function addLog(msg){
-    const time = new Date().toLocaleTimeString();
-    document.getElementById('log').innerHTML += `[${time}] ${msg}<br>`;
-    document.getElementById('log').scrollTop = document.getElementById('log').scrollHeight;
-}
+  let cells, currentPlayer, gameActive, scoreX = 0, scoreO = 0;
 
-function simulateConnection(){
-    addLog("Iniciando secuencia de conexión...");
-    document.getElementById('meter').style.width="0%";
-    dataUsed=0;
-    let progress=0;
-    let speed=0;
-    const interval = setInterval(()=>{
-        progress+=5;
-        if(progress>100) progress=100;
-        document.getElementById('meter').style.width=progress+"%";
-        speed=Math.floor(Math.random()*50+50);
-        dataUsed+=speed*0.005;
-        document.getElementById('speed').textContent=speed+" KB/s";
-        document.getElementById('data').textContent=dataUsed.toFixed(2)+" MB";
-        addLog(`Conectando... ${progress}% - Velocidad: ${speed} KB/s - Datos: ${dataUsed.toFixed(2)} MB`);
-        if(progress>=100){
-            clearInterval(interval);
-            connected=true;
-            document.getElementById('status').innerHTML='Estado: <b>Conectado ✅</b>';
-            addLog(`Conexión establecida!`);
-            addLog(`Usuario: ${userInfo.alias} (${userInfo.name})`);
-            addLog(`Ubicación: ${userInfo.location}`);
-            addLog(`Proyectos activos: ${userInfo.projects.join(", ")}`);
-        }
-    },500);
-}
+  function startGame() {
+    board.innerHTML = "";
+    currentPlayer = "X";
+    gameActive = true;
+    message.textContent = "👉 Turno de: " + currentPlayer;
 
-function connect(){ if(connected) addLog("Ya estás conectado."); else simulateConnection(); }
-function disconnect(){ 
-    if(!connected) addLog("Ya estás desconectado."); 
-    else{
-        addLog("Cerrando conexión...");
-        setTimeout(()=>{
-            connected=false;
-            document.getElementById('meter').style.width="0%";
-            document.getElementById('speed').textContent="0 KB/s";
-            document.getElementById('data').textContent="0 MB";
-            document.getElementById('status').innerHTML='Estado: <b>Desconectado</b>';
-            addLog("Conexión terminada.");
-        },1500);
-    } 
-}
-function payload(){ const p=prompt("Ingresa payload:"); if(p) addLog(`Payload configurado: ${p}`); }
-function config(){ addLog("Configuración abierta (simulada)."); }
+    for (let i = 0; i < 9; i++) {
+      const cell = document.createElement("div");
+      cell.classList.add("cell");
+      cell.addEventListener("click", () => handleClick(cell), { once: true });
+      board.appendChild(cell);
+    }
+    cells = document.querySelectorAll(".cell");
+  }
 
-function openTab(tab){
-    document.querySelectorAll('.tab-content').forEach(tc=>tc.classList.remove('active'));
-    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-    document.getElementById(tab).classList.add('active');
-    event.currentTarget.classList.add('active');
-}
+  function handleClick(cell) {
+    if (!gameActive) return;
+    cell.textContent = currentPlayer;
+    cell.style.color = currentPlayer === "X" ? "cyan" : "yellow";
+    if (checkWin(currentPlayer)) {
+      endGame(false);
+    } else if ([...cells].every(c => c.textContent !== "")) {
+      endGame(true);
+    } else {
+      currentPlayer = currentPlayer === "X" ? "O" : "X";
+      message.textContent = "👉 Turno de: " + currentPlayer;
 
-function pingServer(){ addLog("Ping a servidor: 45ms"); }
-function showIP(){ addLog("IP simulada: 192.168.1."+Math.floor(Math.random()*255)); }
-function speedTest(){ addLog("Velocidad de prueba: "+(Math.floor(Math.random()*80+50))+" KB/s"); }
-function stats(){ addLog("Estadísticas: Conexión estable, datos estables, sin errores."); }
+      if (gameMode.value === "bot" && currentPlayer === "O") {
+        botMove();
+      }
+    }
+  }
 
-function importConfig(){ addLog("Archivo importado (simulado)"); }
-function exportConfig(){ const name=document.getElementById('exportName').value||"config"; addLog("Archivo exportado como "+name+".hxi (simulado)"); }
-function saveSettings(){ addLog("Ajustes guardados: Puerto "+document.getElementById('port').value+", Proxy "+document.getElementById('proxy').value+", Protocolo "+document.getElementById('protocol').value); }
+  function botMove() {
+    let emptyCells = [...cells].filter(c => c.textContent === "");
+    if (emptyCells.length === 0) return;
+    let move = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+    setTimeout(() => handleClick(move), 500);
+  }
+
+  function checkWin(player) {
+    const winPatterns = [
+      [0,1,2],[3,4,5],[6,7,8],
+      [0,3,6],[1,4,7],[2,5,8],
+      [0,4,8],[2,4,6]
+    ];
+    return winPatterns.some(pattern => 
+      pattern.every(index => cells[index].textContent === player)
+    );
+  }
+
+  function endGame(draw) {
+    gameActive = false;
+    if (draw) {
+      message.textContent = "🤝 Empate! Grandes mentes piensan igual 💡";
+    } else {
+      message.textContent = "🎉 Felicitaciones " + currentPlayer + "! Eres un verdadero campeón 🏆✨";
+      if (currentPlayer === "X") {
+        scoreX++;
+        scoreXEl.textContent = scoreX;
+      } else {
+        scoreO++;
+        scoreOEl.textContent = scoreO;
+      }
+    }
+  }
+
+  function resetGame() {
+    startGame();
+  }
+
+  startGame();
+</script>
+</body>
+</html>

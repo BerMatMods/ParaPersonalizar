@@ -2,10 +2,11 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Juego XO - BerMat_Mods</title>
   <style>
     body {
-      background: radial-gradient(circle at top, #111, #000);
+      background: linear-gradient(135deg, #0f0f0f, #1e1e1e, #000);
       color: #fff;
       font-family: 'Orbitron', sans-serif;
       display: flex;
@@ -18,24 +19,26 @@
 
     h1 {
       font-size: 2.5em;
-      text-shadow: 0 0 20px cyan, 0 0 40px blue;
-      margin-bottom: 20px;
+      color: #00ffcc;
+      text-shadow: 0 0 20px #00ffcc;
+      margin-bottom: 15px;
     }
 
-    .players {
-      margin-bottom: 20px;
+    #players {
+      margin-bottom: 15px;
     }
 
-    .players input {
+    #players input {
       padding: 8px;
       margin: 5px;
-      border-radius: 10px;
       border: none;
+      border-radius: 8px;
       font-size: 1em;
+      outline: none;
       text-align: center;
     }
 
-    #game {
+    .board {
       display: grid;
       grid-template-columns: repeat(3, 120px);
       grid-template-rows: repeat(3, 120px);
@@ -43,177 +46,225 @@
     }
 
     .cell {
-      width: 120px;
-      height: 120px;
-      background: linear-gradient(145deg, #222, #111);
-      border: 3px solid cyan;
-      border-radius: 15px;
+      background: #222;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.5em;
+      font-size: 3em;
+      font-weight: bold;
+      color: #00ffcc;
+      border-radius: 15px;
       cursor: pointer;
-      box-shadow: 0 0 15px cyan;
-      transition: all 0.2s;
+      box-shadow: 0 0 15px #00ffcc;
+      transition: transform 0.2s, box-shadow 0.3s;
+    }
+
+    .cell.taken {
+      cursor: not-allowed;
     }
 
     .cell:hover {
-      background: linear-gradient(145deg, #333, #111);
-      transform: scale(1.05);
+      transform: scale(1.1);
+    }
+
+    .cell.glow {
+      animation: glow 0.6s ease-out;
+    }
+
+    @keyframes glow {
+      0% { box-shadow: 0 0 5px #fff; }
+      50% { box-shadow: 0 0 25px #00ffcc; }
+      100% { box-shadow: 0 0 5px #fff; }
     }
 
     #message {
-      position: absolute;
-      top: 20%;
-      background: rgba(0,0,0,0.85);
-      padding: 20px 40px;
-      border-radius: 15px;
-      font-size: 1.8em;
+      margin-top: 20px;
+      font-size: 1.4em;
       text-align: center;
+      padding: 15px;
+      border-radius: 12px;
+      background: rgba(0, 255, 200, 0.15);
       display: none;
-      animation: fadeIn 1s ease-in-out;
-      box-shadow: 0 0 25px lime;
+      animation: fadeIn 1s;
     }
 
     @keyframes fadeIn {
-      from {opacity: 0; transform: scale(0.5);}
-      to {opacity: 1; transform: scale(1);}
+      from {opacity: 0; transform: translateY(-10px);}
+      to {opacity: 1; transform: translateY(0);}
     }
 
-    @keyframes vibrate {
-      0% { transform: translate(0);}
-      25% { transform: translate(-2px, 2px);}
-      50% { transform: translate(2px, -2px);}
-      75% { transform: translate(-2px, -2px);}
-      100% { transform: translate(0);}
-    }
-
-    .scoreboard {
-      margin: 20px;
+    #score {
+      margin-top: 15px;
       font-size: 1.2em;
-      text-shadow: 0 0 10px magenta;
+      color: #ffcc00;
+      text-shadow: 0 0 10px #ffcc00;
     }
 
     #credits {
-      margin-top: 30px;
+      position: absolute;
+      bottom: 10px;
       font-size: 0.9em;
-      text-shadow: 0 0 10px cyan;
+      color: #888;
     }
 
-    /* 🎉 Confetti para cuando gana */
-    .confetti {
-      position: fixed;
-      width: 10px;
-      height: 10px;
-      background: hsl(var(--hue), 100%, 50%);
-      top: -10px;
-      animation: fall 3s linear infinite;
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1em;
+      cursor: pointer;
+      background: #00ffcc;
+      color: #000;
+      font-weight: bold;
+      transition: transform 0.2s;
     }
 
-    @keyframes fall {
-      to {
-        transform: translateY(100vh) rotate(360deg);
-      }
+    button:hover {
+      transform: scale(1.1);
+      background: #ffcc00;
     }
   </style>
 </head>
 <body>
-  <h1>🎮 Juego de XO - BerMat_Mods</h1>
+  <h1>🔥 Juego XO - BerMat_Mods ⚡</h1>
 
-  <div class="players">
-    <input type="text" id="player1" placeholder="Nombre Jugador 1">
-    <input type="text" id="player2" placeholder="Nombre Jugador 2 / Bot">
-    <button onclick="startGame()">Iniciar</button>
+  <div id="players">
+    <input type="text" id="playerX" placeholder="Jugador X" />
+    <input type="text" id="playerO" placeholder="Jugador O o Bot" />
+    <button onclick="startGame()">Iniciar Juego</button>
   </div>
 
-  <div id="game"></div>
-  <div class="scoreboard" id="scoreboard">Marcador: </div>
+  <div class="board" id="board"></div>
 
   <div id="message"></div>
-  <div id="credits">⚡ Creado por Anth'Zz Berrocal (Alias: BerMat_Mods) ⚡</div>
+  <div id="score"></div>
+
+  <div id="credits">⚡ Creado por: <b>BerMat_Mods</b> 🔥</div>
+
+  <audio id="applause" src="https://www.soundjay.com/human/applause-1.mp3"></audio>
 
   <script>
-    const gameBoard = document.getElementById('game');
-    const messageBox = document.getElementById('message');
-    const scoreboard = document.getElementById('scoreboard');
-    let currentPlayer = 'X';
-    let board = Array(9).fill('');
-    let playerNames = ['Jugador 1','Jugador 2'];
-    let scores = {X:0,O:0};
+    const boardElement = document.getElementById("board");
+    const messageElement = document.getElementById("message");
+    const scoreElement = document.getElementById("score");
+    const applause = document.getElementById("applause");
+
+    let board, currentPlayer, gameOver, scores, playerX, playerO, vsBot;
 
     function startGame() {
-      playerNames[0] = document.getElementById('player1').value || "Jugador 1";
-      playerNames[1] = document.getElementById('player2').value || "Jugador 2";
-      resetBoard();
-      updateScoreboard();
+      playerX = document.getElementById("playerX").value || "Jugador X";
+      playerO = document.getElementById("playerO").value || "Jugador O";
+      vsBot = playerO.toLowerCase().includes("bot");
+
+      board = Array(9).fill("");
+      currentPlayer = "X";
+      gameOver = false;
+      scores = scores || {X: 0, O: 0};
+
+      renderBoard();
+      updateScore();
+      messageElement.style.display = "none";
     }
 
-    function resetBoard() {
-      board = Array(9).fill('');
-      gameBoard.innerHTML = '';
-      for (let i=0;i<9;i++){
-        const cell = document.createElement('div');
-        cell.className = 'cell';
-        cell.dataset.index = i;
-        cell.addEventListener('click', handleClick);
-        gameBoard.appendChild(cell);
-      }
+    function renderBoard() {
+      boardElement.innerHTML = "";
+      board.forEach((cell, index) => {
+        const cellElement = document.createElement("div");
+        cellElement.classList.add("cell");
+        if (cell) {
+          cellElement.textContent = cell;
+          cellElement.classList.add("taken");
+        }
+        cellElement.addEventListener("click", () => makeMove(index));
+        boardElement.appendChild(cellElement);
+      });
     }
 
-    function handleClick(e){
-      const index = e.target.dataset.index;
-      if (board[index] !== '') return;
+    function makeMove(index) {
+      if (board[index] || gameOver) return;
 
       board[index] = currentPlayer;
-      e.target.textContent = currentPlayer;
-      e.target.style.animation = "vibrate 0.2s";
+      vibrate();
+      renderBoard();
+      document.querySelectorAll(".cell")[index].classList.add("glow");
 
-      if (checkWinner()) {
+      if (checkWin(currentPlayer)) {
+        endGame(`${currentPlayer === "X" ? playerX : playerO} ha ganado 🎉👏`);
         scores[currentPlayer]++;
-        updateScoreboard();
-        showMessage(`🎉 Felicidades ${playerNames[currentPlayer === 'X' ? 0:1]} (${currentPlayer}) ganó! 🎉`);
-        confetti();
-        setTimeout(resetBoard, 2500);
+        updateScore();
         return;
       }
 
-      if (board.every(cell => cell !== '')) {
-        showMessage("🤝 ¡Empate! Grandes jugadores 👏");
-        setTimeout(resetBoard, 2000);
+      if (!board.includes("")) {
+        endGame("Empate 🤝 ¡Gran partida!");
         return;
       }
 
-      currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+      currentPlayer = currentPlayer === "X" ? "O" : "X";
+
+      if (vsBot && currentPlayer === "O") {
+        setTimeout(botMove, 500);
+      }
     }
 
-    function checkWinner(){
-      const combos = [
+    function botMove() {
+      // Estrategia básica: ganar si puede, bloquear si debe, si no aleatorio
+      let move = findBestMove();
+      makeMove(move);
+    }
+
+    function findBestMove() {
+      // 1. Ganar si posible
+      for (let i = 0; i < 9; i++) {
+        if (!board[i]) {
+          board[i] = "O";
+          if (checkWin("O")) { board[i] = ""; return i; }
+          board[i] = "";
+        }
+      }
+      // 2. Bloquear a X
+      for (let i = 0; i < 9; i++) {
+        if (!board[i]) {
+          board[i] = "X";
+          if (checkWin("X")) { board[i] = ""; return i; }
+          board[i] = "";
+        }
+      }
+      // 3. Centro
+      if (!board[4]) return 4;
+      // 4. Esquinas
+      const corners = [0,2,6,8].filter(i => !board[i]);
+      if (corners.length) return corners[Math.floor(Math.random()*corners.length)];
+      // 5. Restantes
+      const empty = board.map((v,i)=>v?null:i).filter(v=>v!==null);
+      return empty[Math.floor(Math.random()*empty.length)];
+    }
+
+    function checkWin(player) {
+      const winPatterns = [
         [0,1,2],[3,4,5],[6,7,8],
         [0,3,6],[1,4,7],[2,5,8],
         [0,4,8],[2,4,6]
       ];
-      return combos.some(([a,b,c]) => board[a] && board[a]===board[b] && board[a]===board[c]);
+      return winPatterns.some(pattern => 
+        pattern.every(index => board[index] === player)
+      );
     }
 
-    function showMessage(msg){
-      messageBox.textContent = msg;
-      messageBox.style.display = "block";
-      setTimeout(()=>{messageBox.style.display="none"}, 2000);
+    function endGame(msg) {
+      messageElement.innerText = msg;
+      messageElement.style.display = "block";
+      applause.play();
+      gameOver = true;
     }
 
-    function updateScoreboard(){
-      scoreboard.textContent = `Marcador: ${playerNames[0]} (X): ${scores.X} | ${playerNames[1]} (O): ${scores.O}`;
+    function updateScore() {
+      scoreElement.innerText = `${playerX} (X): ${scores.X} | ${playerO} (O): ${scores.O}`;
     }
 
-    function confetti(){
-      for(let i=0;i<50;i++){
-        const c = document.createElement('div');
-        c.className='confetti';
-        c.style.left = Math.random()*100+'vw';
-        c.style.setProperty('--hue', Math.random()*360);
-        document.body.appendChild(c);
-        setTimeout(()=>c.remove(),3000);
-      }
+    function vibrate() {
+      if (navigator.vibrate) navigator.vibrate(100);
     }
   </script>
 </body>

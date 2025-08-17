@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>XO RGB — BerMat_Mods</title>
+<title>👽BerMat_Mods👽 Games 👾phyton 👾</title>
 
 <!-- Fuentes llamativas -->
 <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Russo+One&family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">

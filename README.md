@@ -3,28 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BerMa_Mods</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&family=Great+Vibes&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+  <title>BerMa_Mods 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Pacifico&family=Great+Vibes&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <style>
     /* Reset */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    /* FONDO OSCURO PARA RESALTAR EL NEÓN */
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
+    }
+
+    body {
       background: #000;
       color: #fff;
-      font-family: 'Raleway', sans-serif;
+      font-family: 'Orbitron', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
-      position: relative;
       min-height: 100vh;
       overflow: hidden;
-      -webkit-font-smoothing: antialiased;
+      position: relative;
     }
 
-    /* ---- PANTALLA DE ACCESO ---- */
+    /* --- FONDO DE ESTRELLAS (OPCIONAL) --- */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: radial-gradient(ellipse at center, transparent 60%, #000 100%), repeating-radial-gradient(ellipse at center, #0f0f20 1px, transparent 2px, transparent 10px);
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.3;
+    }
+
+    /* --- PANTALLAS DE ACCESO (NEÓN) --- */
     .pantalla {
       position: fixed;
       top: 0; left: 0;
@@ -37,369 +50,425 @@
       z-index: 9999;
       padding: 20px;
       text-align: center;
+      backdrop-filter: blur(4px);
       border: 2px solid #ff00ff;
-      box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+      box-shadow: 0 0 30px #ff00ff, 0 0 60px rgba(255, 0, 255, 0.5);
     }
+
     .pantalla.hidden { display: none; }
 
-    /* TÍTULO NEÓN ROSA */
     .pantalla h2 {
-      font-size: 34px;
-      color: #ff00ff;
       font-family: 'Pacifico', cursive;
-      margin-bottom: 16px;
-      text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
-      animation: parpadeo 1.5s infinite alternate;
-    }
-    @keyframes parpadeo {
-      from { opacity: 0.8; }
-      to { opacity: 1; }
+      font-size: 36px;
+      color: #00ff00;
+      text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+      margin-bottom: 20px;
+      animation: parpadeo-neon 1.5s infinite alternate;
     }
 
-    /* INPUT NEÓN */
+    /* --- INPUT DE CLAVE (NEÓN) --- */
     #claveInput {
-      font-size: 26px;
-      padding: 14px 18px;
-      border: 3px solid #ff00ff;
+      font-size: 28px;
+      padding: 15px;
+      border: 3px solid #00ffff;
       border-radius: 15px;
       text-align: center;
-      width: 240px;
-      margin-bottom: 16px;
+      width: 250px;
+      margin-bottom: 20px;
       letter-spacing: 5px;
-      color: #ff80ff;
-      background: rgba(20, 0, 40, 0.6);
-      box-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
+      color: #00ffff;
+      background: rgba(0, 0, 0, 0.7);
+      box-shadow: 0 0 20px #00ffff, inset 0 0 10px #00ffff;
+      font-family: 'Orbitron', monospace;
     }
 
-    /* TECLADO NEÓN */
+    /* --- TECLADO NEÓN --- */
     #teclado {
       display: grid;
       grid-template-columns: repeat(3, 80px);
-      gap: 14px;
-      margin-bottom: 18px;
+      gap: 15px;
+      margin-bottom: 20px;
     }
 
     .tecla {
       font-size: 24px;
-      padding: 14px;
-      background: #330066;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.5);
       border: 2px solid #ff00ff;
-      border-radius: 14px;
-      color: #ff80ff;
-      cursor: pointer;
-      box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
-      user-select: none;
-    }
-    .tecla:active {
-      transform: translateY(3px);
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-    }
-
-    /* BOTÓN NEÓN */
-    #accederBtn {
-      padding: 14px 30px;
-      font-size: 22px;
-      background: #990099;
-      color: white;
-      border: none;
-      border-radius: 35px;
-      font-family: 'Pacifico', cursive;
-      box-shadow: 0 0 25px rgba(255, 0, 255, 0.6);
-      cursor: pointer;
-    }
-
-    /* STITCH CON MARCO NEÓN */
-    #stitch {
-      border: 4px solid #ff00ff;
-      border-radius: 20px;
-      padding: 10px;
-      box-shadow: 0 0 30px rgba(255, 0, 255, 0.6);
-      margin-top: 20px;
-      display: inline-block;
-    }
-    #stitch img {
-      width: 190px;
-      border-radius: 16px;
-      border: 3px solid #fff;
-    }
-
-    /* INFO DE SEGURIDAD NEÓN */
-    #infoSeguridad {
-      margin-top: 18px;
+      border-radius: 12px;
       color: #ff00ff;
+      cursor: pointer;
+      box-shadow: 0 0 15px #ff00ff, 0 5px 10px rgba(0, 0, 0, 0.5);
+      user-select: none;
+      transition: all 0.2s ease;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .tecla:hover {
+      background: rgba(255, 0, 255, 0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px #ff00ff, 0 10px 20px rgba(255, 0, 255, 0.3);
+    }
+
+    .tecla:active {
+      transform: translateY(1px);
+      box-shadow: 0 0 10px #ff00ff;
+    }
+
+    /* --- BOTÓN ACCEDER (NEÓN MORADO) --- */
+    #accederBtn {
+      padding: 15px 30px;
+      font-size: 22px;
+      background: rgba(0, 0, 0, 0.7);
+      color: #ff00ff;
+      border: 3px solid #ff00ff;
+      border-radius: 30px;
       font-family: 'Pacifico', cursive;
-      font-size: 18px;
+      box-shadow: 0 0 25px #ff00ff, 0 0 50px rgba(255, 0, 255, 0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
       text-shadow: 0 0 10px #ff00ff;
     }
 
-    /* ---- CONTENIDO PRINCIPAL ---- */
+    #accederBtn:hover {
+      background: rgba(255, 0, 255, 0.1);
+      transform: scale(1.05);
+      box-shadow: 0 0 40px #ff00ff, 0 0 70px rgba(255, 0, 255, 0.7);
+    }
+
+    /* --- STITCH EN NEÓN --- */
+    #stitch {
+      border: 4px solid #00ffff;
+      border-radius: 20px;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.6);
+      box-shadow: 0 0 25px #00ffff;
+      margin-top: 20px;
+      display: inline-block;
+    }
+
+    #stitch img {
+      width: 200px;
+      border-radius: 16px;
+      border: 3px solid #00ff00;
+      box-shadow: 0 0 20px #00ff00;
+    }
+
+    /* --- INFO DE SEGURIDAD (NEÓN VERDE) --- */
+    #infoSeguridad {
+      margin-top: 15px;
+      color: #00ff00;
+      font-family: 'Pacifico', cursive;
+      font-size: 18px;
+      text-shadow: 0 0 10px #00ff00;
+    }
+
+    /* --- PREGUNTA (NEÓN) --- */
+    .pregunta-contenedor h2 {
+      font-family: 'Pacifico', cursive;
+      font-size: 32px;
+      color: #00ffff;
+      text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+      margin-bottom: 20px;
+    }
+
+    .opciones button {
+      padding: 15px 20px;
+      font-size: 18px;
+      border-radius: 16px;
+      background: rgba(0, 0, 0, 0.6);
+      border: 2px solid #00ffff;
+      color: #00ffff;
+      cursor: pointer;
+      box-shadow: 0 0 15px #00ffff;
+      font-weight: 700;
+      max-width: 340px;
+      margin: 10px auto;
+      transition: all 0.3s ease;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    .opciones button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 25px #00ffff, 0 10px 20px rgba(0, 255, 255, 0.2);
+    }
+
+    .opciones button.correct {
+      border-color: #ff00ff;
+      color: #ff00ff;
+      box-shadow: 0 0 25px #ff00ff;
+    }
+
+    /* --- MODAL DE ERROR (NEÓN ROJO) --- */
+    #modalError {
+      position: fixed;
+      left: 50%;
+      top: 15%;
+      transform: translateX(-50%);
+      min-width: 280px;
+      max-width: 90%;
+      background: rgba(0, 0, 0, 0.9);
+      border: 3px solid #ff0000;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 0 30px #ff0000, 0 0 60px rgba(255, 0, 0, 0.4);
+      z-index: 10050;
+      display: none;
+      text-align: center;
+      animation: popup 0.3s ease;
+    }
+
+    #modalError h3 {
+      color: #ff0000;
+      font-family: 'Pacifico', cursive;
+      font-size: 22px;
+      text-shadow: 0 0 10px #ff0000;
+      margin: 8px 0;
+    }
+
+    #modalError p {
+      color: #ff5555;
+      font-weight: 700;
+      margin: 10px 0;
+    }
+
+    #modalError button {
+      padding: 10px 20px;
+      border-radius: 14px;
+      background: rgba(0, 0, 0, 0.7);
+      border: 2px solid #ff0000;
+      color: #ff0000;
+      cursor: pointer;
+      box-shadow: 0 0 15px #ff0000;
+      font-weight: 700;
+    }
+
+    /* --- CONTENIDO PRINCIPAL --- */
     #contenidoPrincipal {
       display: none;
       width: 100%;
-      padding: 50px 12px 190px;
-      justify-content: center;
+      padding: 40px 12px 80px;
+      flex-direction: column;
+      align-items: center;
     }
 
-    /* CONTENEDOR CON BORDE NEÓN DOBLE */
     .container {
       text-align: center;
       margin-top: 60px;
       padding: 40px;
       border-radius: 30px;
-      background: rgba(30, 0, 60, 0.7);
+      background: rgba(0, 0, 0, 0.8);
+      box-shadow: 0 0 40px #ff00ff, 0 0 80px rgba(255, 0, 255, 0.3);
       width: 90%;
-      max-width: 720px;
-      position: relative;
+      max-width: 700px;
       border: 3px solid #ff00ff;
-      box-shadow: 
-        0 0 30px rgba(255, 0, 255, 0.5),
-        0 0 50px rgba(255, 0, 255, 0.3) inset;
     }
 
-    /* BORDE EXTERNO NEÓN ANIMADO */
-    .container::before {
-      content: '';
-      position: absolute;
-      inset: -5px;
-      border-radius: 35px;
-      border: 3px solid #00ffff;
-      animation: rotar 4s linear infinite;
-      box-shadow: 0 0 40px rgba(0, 255, 255, 0.4);
-      z-index: -1;
-    }
-    .container::after {
-      content: '';
-      position: absolute;
-      inset: -10px;
-      border-radius: 40px;
-      border: 3px solid #ffff00;
-      animation: rotar 6s linear reverse infinite;
-      box-shadow: 0 0 60px rgba(255, 255, 0, 0.3);
-      z-index: -1;
-      opacity: 0.6;
-    }
-    @keyframes rotar {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    /* TÍTULO NEÓN */
     .titulo {
       font-family: 'Dancing Script', cursive;
       font-size: 56px;
       color: #ff00ff;
-      text-shadow: 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+      text-shadow: 0 0 15px #ff00ff, 0 0 30px #ff00ff, 0 0 50px #ff00ff;
+      animation: pulso 2s infinite alternate;
+      margin-bottom: 20px;
     }
 
-    /* CONTADOR NEÓN */
     .contador {
       font-size: 22px;
       color: #00ffff;
       font-weight: 700;
-      margin-top: 25px;
+      margin-top: 20px;
       text-shadow: 0 0 10px #00ffff;
     }
 
-    /* BOTÓN SORPRESA NEÓN */
     .btn {
       margin: 35px auto 0;
       padding: 22px 45px;
       font-size: 26px;
-      background: #990099;
-      border: 3px solid #ff00ff;
-      color: white;
+      background: rgba(0, 0, 0, 0.7);
+      border: 3px solid #00ff00;
+      color: #00ff00;
       border-radius: 40px;
       cursor: pointer;
-      box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+      box-shadow: 0 0 30px #00ff00, 0 0 60px rgba(0, 255, 0, 0.3);
       font-family: 'Pacifico', cursive;
-      position: relative;
-      z-index: 2;
+      transition: all 0.3s ease;
+      user-select: none;
+      display: inline-block;
+      text-shadow: 0 0 10px #00ff00;
     }
 
-    /* MENSAJE NEÓN - TEXTO MEJORADO */
+    .btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 40px #00ff00, 0 0 80px rgba(0, 255, 0, 0.5);
+    }
+
     .mensaje {
       margin-top: 35px;
-      padding: 35px 30px;
-      background: rgba(50, 0, 100, 0.4);
-      border: 3px solid #ff00ff;
+      padding: 35px;
+      background: rgba(0, 0, 0, 0.7);
       border-radius: 25px;
-      font-size: 26px;
-      color: #fff;
-      box-shadow: 0 0 35px rgba(255, 0, 255, 0.4);
+      font-size: 24px;
+      color: #00ffff;
+      box-shadow: 0 0 30px #00ffff;
       font-family: 'Great Vibes', cursive;
-      text-shadow: 0 0 15px rgba(255, 0, 255, 0.7);
+      text-shadow: 0 0 10px #00ffff;
       display: none;
-      position: relative;
-      line-height: 1.6;
-    }
-    .mensaje::before {
-      content: '';
-      position: absolute;
-      inset: -5px;
-      border-radius: 30px;
-      border: 3px solid #00ffff;
-      animation: pulso 2s infinite alternate;
-      box-shadow: 0 0 40px rgba(0, 255, 255, 0.4);
-      z-index: -1;
-    }
-    @keyframes pulso {
-      0% { opacity: 0.6; }
-      100% { opacity: 1; }
+      border: 2px solid #00ffff;
     }
 
-    /* FOTO EXTRA CON MARCO NEÓN */
     .imagen-extra {
       margin-top: 30px;
       display: none;
     }
+
     .imagen-extra img {
-      max-width: 95%;
+      max-width: 90%;
       border-radius: 30px;
+      box-shadow: 0 0 40px #ff00ff;
       border: 5px solid #ff00ff;
-      box-shadow: 0 0 40px rgba(255, 0, 255, 0.6);
-    }
-    .imagen-extra img::before {
-      content: '';
-      position: absolute;
-      inset: -8px;
-      border-radius: 38px;
-      border: 3px solid #00ffff;
-      animation: pulso 2.5s infinite alternate;
-      box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
-      z-index: -1;
     }
 
-    /* GALERÍA NEÓN */
+    /* --- MUÑEQUITOS NEÓN (3 nuevos cuadros con diferentes colores) --- */
+    .muñequitos {
+      position: fixed;
+      bottom: 10px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      padding: 15px 0;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .muñequitos .cuadro {
+      display: inline-block;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 25px;
+      padding: 15px;
+      box-shadow: 0 0 20px #00ffff;
+      border: 3px solid #00ffff;
+      animation: rebote 2.5s infinite ease-in-out;
+    }
+
+    .muñequitos .cuadro:nth-child(2) {
+      box-shadow: 0 0 20px #ff00ff;
+      border-color: #ff00ff;
+    }
+
+    .muñequitos .cuadro:nth-child(3) {
+      box-shadow: 0 0 20px #00ff00;
+      border-color: #00ff00;
+    }
+
+    .muñequitos img {
+      width: 90px;
+      height: 90px;
+      border-radius: 15px;
+      animation: muñequito-bailando 2.5s infinite;
+    }
+
+    /* --- GALERÍA NEÓN --- */
     #btnGaleria {
       margin-top: 25px;
-      padding: 18px 35px;
-      background: #990099;
-      border: 3px solid #ff00ff;
-      color: white;
+      background: rgba(0, 0, 0, 0.7);
+      border: 3px solid #00ffff;
+      color: #00ffff;
       border-radius: 35px;
+      padding: 18px 35px;
       font-size: 22px;
       font-family: 'Pacifico', cursive;
       cursor: pointer;
-      box-shadow: 0 0 25px rgba(255, 0, 255, 0.5);
+      box-shadow: 0 0 25px #00ffff;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 10px #00ffff;
     }
+
+    #btnGaleria:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 40px #00ffff, 0 0 70px rgba(0, 255, 255, 0.5);
+    }
+
     #galeria {
       display: none;
       margin-top: 30px;
-      max-width: 720px;
+      max-width: 700px;
       text-align: center;
     }
+
     #galeria .cuadro-foto {
       display: inline-block;
       margin: 12px;
-      border: 3px solid #ff00ff;
-      border-radius: 18px;
+      border: 4px solid #ff00ff;
+      border-radius: 20px;
       overflow: hidden;
-      width: 150px;
-      height: 150px;
-      position: relative;
-      box-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
+      box-shadow: 0 0 20px #ff00ff;
+      background: rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      width: 160px;
+      height: 160px;
     }
-    #galeria .cuadro-foto::before {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border-radius: 21px;
-      border: 2px solid #00ffff;
-      animation: rotar 5s linear infinite;
-      box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
-      z-index: -1;
+
+    #galeria .cuadro-foto:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 30px #ff00ff, 0 0 60px rgba(255, 0, 255, 0.5);
     }
+
     #galeria img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    /* VIDEO NEÓN */
-    .video-container {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90%;
-      max-width: 640px;
-      border: 4px solid #ff00ff;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 0 40px rgba(255, 0, 255, 0.6);
-      z-index: 1000;
-      position: relative;
-    }
-    .video-container::before {
-      content: '';
-      position: absolute;
-      inset: -5px;
-      border-radius: 25px;
-      border: 3px solid #00ffff;
-      animation: rotar 4s linear infinite;
-      box-shadow: 0 0 50px rgba(0, 255, 255, 0.4);
-      z-index: -1;
-    }
-    .video-container::after {
-      content: '';
-      position: absolute;
-      inset: -10px;
-      border-radius: 30px;
-      border: 3px solid #ffff00;
-      animation: rotar 7s linear reverse infinite;
-      box-shadow: 0 0 70px rgba(255, 255, 0, 0.3);
-      z-index: -1;
-      opacity: 0.6;
-    }
-    .video-container iframe {
-      width: 100%;
-      height: 315px;
-      border: none;
-    }
-
-    /* Muñequitos */
-    .muñequitos {
-      position: fixed;
-      bottom: 170px;
-      left: 0;
-      width: 100%;
-      text-align: center;
-      z-index: 1;
-    }
-    .muñequitos .cuadro {
-      display: inline-block;
-      background: transparent;
-      border: 3px solid #ff00ff;
-      border-radius: 20px;
-      padding: 15px;
-      margin: 0 15px;
-      box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
-    }
-    .muñequitos img {
-      width: 85px;
-      height: 85px;
-      border-radius: 12px;
-    }
-
-    /* Cursor neón */
+    /* --- CURSOR NEÓN --- */
     .cursor {
       display: inline-block;
       width: 10px;
-      height: 28px;
-      background-color: #ff00ff;
+      height: 24px;
+      background-color: #00ffff;
       margin-left: 5px;
-      animation: blink 0.8s infinite;
-      border-radius: 2px;
+      animation: parpadeo-neon 0.8s infinite;
+      vertical-align: middle;
     }
-    @keyframes blink {
-      0%,50%{opacity:1}
-      51%,100%{opacity:0}
+
+    /* --- ANIMACIONES --- */
+    @keyframes parpadeo-neon {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    @keyframes pulso {
+      0% { text-shadow: 0 0 15px #ff00ff; }
+      100% { text-shadow: 0 0 30px #ff00ff, 0 0 60px #ff00ff; }
+    }
+
+    @keyframes rebote {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    @keyframes muñequito-bailando {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes popup {
+      from { transform: translate(-50%, -10px); opacity: 0; }
+      to { transform: translate(-50%, 0); opacity: 1; }
+    }
+
+    @keyframes aparecer {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-
-  <!-- PANTALLA DE ACCESO -->
+  <!-- PANTALLA 1: ingreso de clave -->
   <div id="pantallaClave" class="pantalla">
     <h2>🔒 Código para acceder</h2>
     <input type="text" id="claveInput" placeholder="10/11/23" maxlength="8" readonly>
@@ -411,14 +480,33 @@
     </div>
 
     <div id="infoSeguridad">
-      By: <b>AnthZz Berrocal</b><br>👽  <strong>BerMat Proyects</strong> 👽
+      By: <b>Anth'Zz Berrocal</b><br>👽  <strong>BerMat Proyects</strong> 👽
     </div>
+  </div>
+
+  <!-- PANTALLA 2: pregunta -->
+  <div id="pantallaPregunta" class="pantalla hidden">
+    <div class="pregunta-contenedor">
+      <h2>❓ ¿Qué tan golosa eres…?</h2>
+      <div class="opciones">
+        <button data-resp="1">No soy Goloza</button>
+        <button data-resp="2">Soy poco Goloza</button>
+        <button data-resp="3" class="correct">Soy muy Goloza 🔥</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE ERROR -->
+  <div id="modalError" role="alert" aria-hidden="true">
+    <h3>❌ Respuesta incorrecta</h3>
+    <p>Estás mintiendo Mamaguevo... 😢💕</p>
+    <button id="cerrarModal">Volver a intentar</button>
   </div>
 
   <!-- CONTENIDO PRINCIPAL -->
   <div id="contenidoPrincipal">
     <div class="container">
-      <div class="titulo">💖 Mi Amor, Eres Mi Universo 💖</div>
+      <div class="titulo">💖 Feliz Aniversario Mi Amorcita hermosa 💖</div>
       <div class="contador" id="contador">Calculando el tiempo... ⏳</div>
 
       <button class="btn" id="btnSorpresa">TOCA AQUÍ MI REINA</button>
@@ -441,30 +529,19 @@
       </div>
     </div>
 
-    <div class="muñequitos">
+    <!-- MUÑEQUITOS NEÓN (3 cuadros de colores diferentes) -->
+    <div class="muñequitos" aria-hidden="true">
       <div class="cuadro"><img src="https://media0.giphy.com/media/yN5xPFm8klwMddZVKi/giphy.gif" alt=""></div>
       <div class="cuadro"><img src="https://media2.giphy.com/media/5dkb3UXNiRU5qwNrzL/giphy.gif" alt=""></div>
       <div class="cuadro"><img src="https://media0.giphy.com/media/yN5xPFm8klwMddZVKi/giphy.gif" alt=""></div>
     </div>
   </div>
 
-  <!-- VIDEO DE "LA BODA" DE COSCULLUELA -->
-  <div class="video-container" id="videoContainer" style="display: none;">
-    <iframe 
-      id="videoIframe"
-      src="" 
-      title="La Boda - Cosculluela"
-      frameborder="0" 
-      allow="autoplay; encrypted-media; picture-in-picture" 
-      allowfullscreen>
-    </iframe>
-  </div>
-
   <script>
-    // --- TECLADO Y ACCESO ---
     const input = document.getElementById('claveInput');
     const teclado = document.getElementById('teclado');
     const accederBtn = document.getElementById('accederBtn');
+    const claveCorrecta = '10/11/23';
 
     const numeros = ['1','2','3','4','5','6','7','8','9','0','B','/'];
     numeros.forEach(n => {
@@ -479,21 +556,39 @@
     });
 
     accederBtn.addEventListener('click', () => {
-      if (input.value === '10/11/23') {
+      if (input.value === claveCorrecta) {
         document.getElementById('pantallaClave').classList.add('hidden');
-        setTimeout(() => {
-          document.getElementById('contenidoPrincipal').style.display = 'flex';
-        }, 300);
-        iniciarTodo();
+        document.getElementById('pantallaPregunta').classList.remove('hidden');
       } else {
         alert('Código incorrecto ❌');
       }
     });
 
-    // --- CONTADOR ---
+    const botonesPregunta = document.querySelectorAll('#pantallaPregunta .opciones button');
+    const modalError = document.getElementById('modalError');
+    const cerrarModal = document.getElementById('cerrarModal');
+
+    botonesPregunta.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const resp = btn.dataset.resp;
+        if (resp === '3') {
+          document.getElementById('pantallaPregunta').classList.add('hidden');
+          document.getElementById('contenidoPrincipal').style.display = 'flex';
+          iniciarTodo();
+        } else {
+          modalError.style.display = 'block';
+          modalError.setAttribute('aria-hidden','false');
+        }
+      });
+    });
+
+    cerrarModal.addEventListener('click', () => {
+      modalError.style.display = 'none';
+      modalError.setAttribute('aria-hidden','true');
+    });
+
     const inicio = new Date("2023-11-10T00:00:00");
     const contador = document.getElementById("contador");
-    let intervaloContador = null;
 
     function actualizarContador() {
       const ahora = new Date();
@@ -514,35 +609,45 @@
       }
       if (meses < 0) { meses += 12; anos--; }
 
-      contador.innerHTML = `✨ YA VAMOS: ${anos} AÑOS, ${meses} MESES, ${días} DÍAS ✨`;
+      contador.innerHTML = `💞 𝐘𝐀 𝐕𝐀𝐌𝐎𝐒: ${anos} AÑOS, ${meses} MESES, ${dias} DÍAS, ${horas}h ${minutos}m ${segundos}s 💞`;
     }
 
-    // --- MENSAJE MEJORADO (más bonito y romántico) ---
-    const mensaje = document.getElementById("mensaje");
-    const cursor = document.getElementById("cursor");
-    const btnSorpresa = document.getElementById("btnSorpresa");
-    const imagenExtra = document.getElementById("imagenExtra");
+    let intervaloContador = null;
 
-    const textoBonito = `💫 Mi vida, mi amor, mi todo... Briyidth 💫
-Cada segundo contigo es un regalo que mi corazón atesora.
-Desde que llegaste, mi mundo cambió: ahora brilla, ahora late, ahora tiene sentido.
-Eres la luz que ilumina mis días, el abrazo que calma mis noches, el sueño que nunca quiero despertar.
-No hay palabra que pueda describir lo que siento, pero si pudiera, sería: eterno, infinito, verdadero.
-Gracias por ser mi compañera, mi confidente, mi risa, mi paz.
-Prometo amarte hoy, mañana y en todas las vidas que vengan.
-Porque tú no eres solo mi amor… eres mi destino. 💖`;
+    const btnSorpresa = document.getElementById("btnSorpresa");
+    const mensaje = document.getElementById("mensaje");
+    const imagenExtra = document.getElementById("imagenExtra");
+    const btnGaleria = document.getElementById("btnGaleria");
+    const galeria = document.getElementById("galeria");
+    const cursor = document.getElementById("cursor");
+
+    const texto = `🎉💖 ¡Feliz aniversario mi reina ! 💖🎉
+Hoy celebramos otro mes más juntos, y mi corazón late más fuerte por ti cada día. 💕
+Gracias por llegar a mi vida, por llenar mis días de risas, abrazos y momentos que nunca olvidaré. 🌹
+Eres mi razón de sonreír, mi inspiración, mi fuerza y mi paz. 💌
+Quiero que sepas que no importa lo que pase, siempre estaré a tu lado para cuidarte, apoyarte y amarte. 💍
+Tu amor me ha hecho mejor persona, y no hay un solo segundo en el que no agradezca tenerte. ✨
+Te prometo seguir luchando por nosotros, cumplir nuestros sueños y escribir juntos una historia que dure para siempre. 🌈
+Cada beso tuyo me recuerda que el verdadero paraíso es tenerte cerca. 🌅
+Eres mi todo, mi hogar, mi destino y mi vida entera. 💘
+No hay distancia, tiempo o dificultad que pueda separarnos, porque nuestro amor es más fuerte que todo. 💞
+Te amo con la intensidad de mil soles, con la ternura de mil lunas y con la eternidad de mil vidas. 🌠
+💞 Mi reina hermosa, eres lo más valioso que tengo y siempre lo serás. 💞`;
+
+    let i = 0;
+    let escribirInterval = null;
 
     function iniciarEscritura() {
       mensaje.textContent = '';
-      let i = 0;
-      cursor.style.display = 'inline-block';
+      i = 0;
       mensaje.style.display = 'block';
-      const intervalo = setInterval(() => {
-        if (i < textoBonito.length) {
-          mensaje.textContent += textoBonito[i];
+      cursor.style.display = 'inline-block';
+      escribirInterval = setInterval(() => {
+        if (i < texto.length) {
+          mensaje.textContent += texto.charAt(i);
           i++;
         } else {
-          clearInterval(intervalo);
+          clearInterval(escribirInterval);
           cursor.style.display = 'none';
         }
       }, 45);
@@ -552,33 +657,24 @@ Porque tú no eres solo mi amor… eres mi destino. 💖`;
       iniciarEscritura();
       imagenExtra.style.display = 'block';
       btnSorpresa.disabled = true;
+      btnSorpresa.style.cursor = 'not-allowed';
     });
-
-    // --- GALERÍA ---
-    const btnGaleria = document.getElementById("btnGaleria");
-    const galeria = document.getElementById("galeria");
 
     btnGaleria.addEventListener('click', () => {
-      galeria.style.display = galeria.style.display === 'block' ? 'none' : 'block';
-      btnGaleria.textContent = galeria.style.display === 'block' ? "❌ Ocultar galería" : "✨ Ver nuestra galería";
+      if (galeria.style.display === 'none' || galeria.style.display === '') {
+        galeria.style.display = 'block';
+        btnGaleria.textContent = "Ocultar galería 📸";
+      } else {
+        galeria.style.display = 'none';
+        btnGaleria.textContent = "Ver nuestra galería 📸";
+      }
     });
 
-    // --- VIDEO ---
-    const videoContainer = document.getElementById('videoContainer');
-    const videoIframe = document.getElementById('videoIframe');
-
-    document.body.addEventListener('click', function activarVideo() {
-      if (!videoContainer.style.display || videoContainer.style.display === 'none') {
-        videoContainer.style.display = 'block';
-        videoIframe.src = 'https://www.youtube.com/embed/K9L0JGpXg6A?autoplay=1&controls=1&showinfo=0&rel=0';
-      }
-      document.body.removeEventListener('click', activarVideo);
-    }, { once: false });
-
-    // --- INICIAR TODO ---
     function iniciarTodo() {
+      if (intervaloContador) clearInterval(intervaloContador);
       actualizarContador();
       intervaloContador = setInterval(actualizarContador, 1000);
+      cursor.style.display = 'none';
     }
   </script>
 </body>

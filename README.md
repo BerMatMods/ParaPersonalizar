@@ -89,7 +89,7 @@
 
     /* Menú de tres rayas */
     .menu-btn {
-      position: absolute;
+      position: fixed;
       top: 20px;
       left: 20px;
       cursor: pointer;
@@ -99,6 +99,10 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      background: var(--card-bg);
+      padding: 8px;
+      border-radius: 12px;
+      box-shadow: var(--border-glow);
     }
 
     .menu-btn span {
@@ -121,7 +125,7 @@
       box-shadow: var(--border-glow);
       transition: left 0.4s ease;
       z-index: 1000;
-      padding: 80px 20px 20px;
+      padding: 20px;
       overflow-y: auto;
     }
 
@@ -138,6 +142,36 @@
       cursor: pointer;
       background: none;
       border: none;
+    }
+
+    /* Perfil en menú */
+    .menu-profile {
+      text-align: center;
+      padding: 20px 0;
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--primary);
+    }
+
+    .menu-profile img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid var(--primary);
+      object-fit: cover;
+      margin-bottom: 10px;
+      box-shadow: 0 0 15px rgba(156, 39, 176, 0.4);
+    }
+
+    .menu-profile h3 {
+      color: var(--primary);
+      font-family: 'Playfair Display', serif;
+      margin: 10px 0;
+      font-size: 1.3em;
+    }
+
+    .menu-profile p {
+      color: var(--dark);
+      font-size: 0.9em;
     }
 
     .menu-title {
@@ -167,8 +201,8 @@
       animation: rainbowGlow 3s ease-in-out infinite alternate;
     }
 
-    /* Modales */
-    .modal {
+    /* Modal: Requisito de TikTok */
+    .modal-tiktok {
       display: none;
       position: fixed;
       top: 0;
@@ -179,9 +213,10 @@
       z-index: 1000;
       justify-content: center;
       align-items: center;
+      animation: fadeIn 0.4s;
     }
 
-    .modal-content {
+    .modal-tiktok-content {
       background: var(--card-bg);
       border-radius: 20px;
       padding: 25px;
@@ -191,16 +226,10 @@
       box-shadow: 0 10px 40px rgba(0,0,0,0.2);
       border: var(--border);
       position: relative;
+      animation: popIn 0.4s;
     }
 
-    .modal-title {
-      color: var(--primary);
-      font-family: 'Playfair Display', serif;
-      margin-bottom: 15px;
-      font-size: 1.6em;
-    }
-
-    .modal-close {
+    .modal-tiktok-close {
       position: absolute;
       top: 15px;
       right: 15px;
@@ -216,15 +245,99 @@
       justify-content: center;
     }
 
-    .modal-btn {
-      margin: 10px 5px;
-      padding: 10px 18px;
-      background: var(--primary);
+    .modal-tiktok-title {
+      color: var(--primary);
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 15px;
+      font-size: 1.5em;
+    }
+
+    .btn-tiktok {
+      margin: 15px auto;
+      padding: 12px 20px;
+      background: #000000;
       color: white;
       border: none;
       border-radius: 12px;
       cursor: pointer;
-      font-size: 1em;
+      font-size: 1.1em;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 80%;
+      max-width: 300px;
+    }
+
+    .btn-tiktok::before {
+      content: "🎵";
+    }
+
+    /* Modal: Error si no sigue */
+    .modal-error {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-error-content {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 25px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      border: 3px solid #e91e63;
+      position: relative;
+      animation: popIn 0.4s;
+    }
+
+    .modal-error-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 1.4em;
+      color: #e91e63;
+      cursor: pointer;
+      background: #fff0f5;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-error h3 {
+      color: #e91e63;
+      margin-bottom: 12px;
+      font-size: 1.3em;
+    }
+
+    .modal-error p {
+      color: var(--dark);
+      line-height: 1.6;
+      font-size: 0.95em;
+    }
+
+    /* Animaciones */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
 
     /* Pantalla de creación */
@@ -299,11 +412,6 @@
       text-align: center;
       border: var(--border);
       animation: fadeIn 0.5s;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     .link-box h3 {
@@ -528,11 +636,6 @@
       animation: fadeIn 0.3s;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
     /* Cuadro de error */
     .error-modal {
       position: fixed;
@@ -678,7 +781,7 @@
         line-height: 1.6;
       }
 
-      .btn-gallery, .btn-recreate {
+      .btn-gallery, .btn-recreate, .btn-tiktok {
         font-size: 1.1rem;
       }
     }
@@ -695,12 +798,23 @@
 
   <div class="menu" id="menu">
     <div class="close-btn" id="closeMenu">&times;</div>
-    <h3 class="menu-title">🔧 Menú</h3>
+
+    <!-- Perfil en menú -->
+    <div class="menu-profile">
+      <img src="https://i.postimg.cc/CKMXCWTj/Screenshot-20250826-182522.jpg" alt="AnthZz Berrocal">
+      <h3>AnthZz Berrocal</h3>
+      <p>BerMatMods • Desarrollador</p>
+    </div>
+
+    <h3 class="menu-title">🔧 Ajustes</h3>
     <div class="menu-grid">
       <div class="menu-item" onclick="openModal('langModal')">🌐 Idioma</div>
       <div class="menu-item" onclick="openModal('themeModal')">🌙 Tema</div>
       <div class="menu-item" onclick="openModal('infoModal')">ℹ️ Información</div>
       <div class="menu-item" onclick="openModal('contactModal')">📞 Contacto</div>
+      <div class="menu-item" onclick="toggleMusic()">🎵 Música</div>
+      <div class="menu-item" onclick="toggleNotifications()">🔔 Notificaciones</div>
+      <div class="menu-item" onclick="optimizeMobile()">📱 Modo Móvil</div>
     </div>
   </div>
 
@@ -720,6 +834,36 @@
     }
     createHearts();
   </script>
+
+  <!-- Modal: Requisito TikTok -->
+  <div id="modalTiktok" class="modal-tiktok">
+    <div class="modal-tiktok-content">
+      <div class="modal-tiktok-close" onclick="closeModalTiktok()">×</div>
+      <h3 class="modal-tiktok-title">🔔 ¡Importante!</h3>
+      <p style="color:var(--dark); margin:10px 0;">
+        Para crear tu detalle personalizado, primero debes seguir a mi cuenta de TikTok.
+      </p>
+      <a href="https://www.tiktok.com/@bermat_mods?_t=ZS-8zNqlsUAY7t&_r=1" target="_blank" class="btn-tiktok" onclick="seguirTikTok()">
+        Seguir en TikTok
+      </a>
+      <p style="font-size:0.9em; color:var(--primary); margin-top:10px;">@bermat_mods</p>
+    </div>
+  </div>
+
+  <!-- Modal: Error si no sigue -->
+  <div id="modalError" class="modal-error">
+    <div class="modal-error-content">
+      <div class="modal-error-close" onclick="closeModalError()">×</div>
+      <h3>⚠️ Acceso Denegado</h3>
+      <p>
+        El sistema de <strong>BerMatMods</strong> ha detectado que no has seguido la cuenta de TikTok.
+        <br><br>
+        Por lo tanto, no se podrá generar tu enlace de detalle personalizado.
+        <br><br>
+        Inténtalo más tarde.
+      </p>
+    </div>
+  </div>
 
   <!-- Pantalla de creación -->
   <div id="createScreen" class="create-screen">
@@ -778,7 +922,7 @@
 https://ejemplo.com/foto2.jpg"></textarea>
     </div>
 
-    <button onclick="generarLink()"><span id="btnGenerar">Generar Link 🌟</span></button>
+    <button onclick="checkTikTokFollow()">Generar Link 🌟</button>
 
     <!-- Cuadro de link generado -->
     <div class="link-box" id="linkBox">
@@ -896,12 +1040,15 @@ https://ejemplo.com/foto2.jpg"></textarea>
     <div class="modal-content">
       <div class="modal-close" onclick="closeModal('infoModal')">×</div>
       <h3 class="modal-title">ℹ️ Información</h3>
-      <p style="color:var(--dark); text-align:left; margin:10px 0;">
-        <strong>Software:</strong> Detalles Virtuales<br>
-        <strong>Desarrollado por:</strong> AnthZz Berrocal _ BerMatMods<br>
-        <strong>Versión:</strong> 1.0<br>
-        <strong>Plataforma:</strong> Web (HTML/CSS/JS)
-      </p>
+      <div style="text-align: center; margin: 15px 0;">
+        <img src="https://i.postimg.cc/CKMXCWTj/Screenshot-20250826-182522.jpg" alt="AnthZz Berrocal" style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid #9c27b0; object-fit: cover;">
+        <p style="color:var(--dark); text-align:left; margin:10px 0; font-size:0.95em;">
+          <strong>Nombre:</strong> AnthZz Berrocal<br>
+          <strong>Alias:</strong> BerMatMods<br>
+          <strong>Desarrollador Web</strong><br>
+          <strong>País:</strong> Perú
+        </p>
+      </div>
       <button class="modal-btn" onclick="closeModal('infoModal')">Cerrar</button>
     </div>
   </div>
@@ -923,6 +1070,10 @@ https://ejemplo.com/foto2.jpg"></textarea>
     let data = {};
     let currentLang = 'es';
     let currentTheme = 'light';
+    let tikTokFollowed = false;
+    let musicEnabled = false;
+    let notificationsEnabled = false;
+    let mobileOptimized = false;
 
     // Menú
     document.getElementById('menuBtn').addEventListener('click', () => {
@@ -932,14 +1083,34 @@ https://ejemplo.com/foto2.jpg"></textarea>
       document.getElementById('menu').classList.remove('active');
     });
 
-    // Modales
-    function openModal(id) {
-      document.getElementById(id).style.display = 'flex';
-      document.getElementById('menu').classList.remove('active');
+    // Mostrar modal de TikTok al cargar
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('modalTiktok').style.display = 'flex';
+      }, 1000);
+    });
+
+    function closeModalTiktok() {
+      document.getElementById('modalTiktok').style.display = 'none';
     }
 
-    function closeModal(id) {
-      document.getElementById(id).style.display = 'none';
+    function closeModalError() {
+      document.getElementById('modalError').style.display = 'none';
+    }
+
+    function seguirTikTok() {
+      tikTokFollowed = true;
+      setTimeout(() => {
+        document.getElementById('modalTiktok').style.display = 'none';
+      }, 1000);
+    }
+
+    function checkTikTokFollow() {
+      if (tikTokFollowed) {
+        generarLink();
+      } else {
+        document.getElementById('modalError').style.display = 'flex';
+      }
     }
 
     // Idioma
@@ -1150,6 +1321,22 @@ https://ejemplo.com/foto2.jpg"></textarea>
         }
       }
     });
+
+    // Ajustes adicionales
+    function toggleMusic() {
+      musicEnabled = !musicEnabled;
+      alert(musicEnabled ? '🎵 Música activada' : '🔇 Música desactivada');
+    }
+
+    function toggleNotifications() {
+      notificationsEnabled = !notificationsEnabled;
+      alert(notificationsEnabled ? '🔔 Notificaciones activadas' : '🔕 Notificaciones desactivadas');
+    }
+
+    function optimizeMobile() {
+      mobileOptimized = !mobileOptimized;
+      alert(mobileOptimized ? '📱 Modo móvil optimizado' : '🖥️ Modo normal');
+    }
   </script>
 </body>
 </html>

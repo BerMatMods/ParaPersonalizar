@@ -62,6 +62,77 @@
       transform: scale(1.03);
     }
 
+    /* Menú de hamburguesa */
+    .menu-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      cursor: pointer;
+      z-index: 100;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .menu-btn span {
+      display: block;
+      width: 100%;
+      height: 4px;
+      background: #e91e63;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    .menu {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 280px;
+      height: 100vh;
+      background: linear-gradient(135deg, #e91e63, #ba68c8);
+      transition: left 0.4s ease;
+      z-index: 999;
+      padding: 80px 20px 20px;
+      box-shadow: 5px 0 20px rgba(0,0,0,0.3);
+    }
+
+    .menu.active {
+      left: 0;
+    }
+
+    .menu ul {
+      list-style: none;
+    }
+
+    .menu ul li {
+      margin: 20px 0;
+    }
+
+    .menu ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.1em;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .menu ul li a::before {
+      content: "💬";
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 1.8em;
+      color: white;
+      cursor: pointer;
+    }
+
     /* Pantalla de creación */
     .create-screen {
       text-align: center;
@@ -399,6 +470,82 @@
       to { opacity: 1; transform: scale(1); }
     }
 
+    /* Cuadro de error */
+    .error-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .error-modal.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .error-content {
+      background: white;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 360px;
+      padding: 1.6rem;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      border: 3px solid #ffb6c1;
+      animation: popIn 0.3s;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .close-error {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.4rem;
+      color: #e91e63;
+      cursor: pointer;
+      width: 26px;
+      height: 26px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      background: #fff0f5;
+      transition: all 0.2s;
+    }
+
+    .close-error:hover {
+      background: #ffe6f0;
+      transform: rotate(90deg);
+    }
+
+    .error-content h3 {
+      color: #e91e63;
+      margin-bottom: 0.9rem;
+      font-size: 1.25rem;
+      text-align: center;
+    }
+
+    .error-content p {
+      color: #555;
+      line-height: 1.55;
+      margin-bottom: 1.3rem;
+      font-size: 1.02rem;
+    }
+
     /* Corazones flotantes */
     .floating-heart {
       position: fixed;
@@ -426,6 +573,39 @@
     @keyframes fadeHeart {
       0%, 100% { opacity: 0.6; }
       50% { opacity: 1; }
+    }
+
+    /* Cuadro de link generado */
+    .link-box {
+      display: none;
+      margin: 20px auto;
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      max-width: 460px;
+      text-align: center;
+      border: 2px solid #e91e63;
+    }
+
+    .link-box input {
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      border: 2px solid #ff80ab;
+      border-radius: 12px;
+      font-size: 1em;
+      text-align: center;
+      background: #fff9fb;
+      color: #d81b60;
+      font-family: monospace;
+    }
+
+    .link-box button {
+      margin: 10px 5px;
+      padding: 10px 18px;
+      font-size: 1em;
+      width: auto;
     }
 
     /* Créditos */
@@ -461,6 +641,21 @@
   </style>
 </head>
 <body>
+
+  <!-- Menú de tres rayas -->
+  <div class="menu-btn" id="menuBtn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="menu" id="menu">
+    <div class="close-btn" id="closeMenu">&times;</div>
+    <ul>
+      <li><a href="https://wa.me/51937556459?text=Hola%20AnthZz%2C%20quiero%20un%20detalle%20más%20personalizado" target="_blank">💬 Contactar por WhatsApp</a></li>
+      <li><a href="#" onclick="showInfo()">ℹ️ Cómo funciona</a></li>
+    </ul>
+  </div>
 
   <!-- Corazones flotantes -->
   <script>
@@ -546,6 +741,14 @@ https://ejemplo.com/foto2.jpg"></textarea>
     </div>
 
     <button onclick="generarLink()">Generar Link 🌟</button>
+
+    <!-- Cuadro de link generado -->
+    <div class="link-box" id="linkBox">
+      <p><strong>🔗 Tu link está listo:</strong></p>
+      <input type="text" id="linkInput" readonly />
+      <button onclick="copyLink()">📋 Copiar Link</button>
+      <button onclick="shareOnWhatsApp()">💬 Enviar por WhatsApp</button>
+    </div>
   </div>
 
   <!-- Pantalla de bloqueo -->
@@ -616,7 +819,7 @@ https://ejemplo.com/foto2.jpg"></textarea>
     <img id="zoomedImage" src="" />
   </div>
 
-  <!-- Error -->
+  <!-- Cuadro de error -->
   <div id="errorModal" class="error-modal">
     <div class="error-content">
       <div class="close-error" onclick="cerrarError()">×</div>
@@ -628,6 +831,14 @@ https://ejemplo.com/foto2.jpg"></textarea>
   <script>
     let input = '';
     let data = {};
+
+    // Menú
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      document.getElementById('menu').classList.add('active');
+    });
+    document.getElementById('closeMenu').addEventListener('click', () => {
+      document.getElementById('menu').classList.remove('active');
+    });
 
     function addDigit(digit) {
       if (input.length < 10) {
@@ -735,13 +946,24 @@ https://ejemplo.com/foto2.jpg"></textarea>
       localStorage.setItem('detalle_' + id, JSON.stringify(data));
 
       const link = `${window.location.href.split('#')[0]}#${id}`;
-      const mensajeWa = encodeURIComponent(`Hola mi amor, tengo un detalle especial para ti 💖\n\nHaz clic aquí: ${link}`);
-      const waLink = `https://wa.me/?text=${mensajeWa}`;
+      document.getElementById('linkInput').value = link;
+      document.getElementById('linkBox').style.display = 'block';
 
-      alert(`✅ ¡Listo! Tu detalle está listo.\n\nLink: ${link}\n\nSe abrirá WhatsApp para que lo envíes.`);
-      setTimeout(() => {
-        window.open(waLink, '_blank');
-      }, 1000);
+      // Scroll suave al cuadro de link
+      document.getElementById('linkBox').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function copyLink() {
+      const link = document.getElementById('linkInput').value;
+      navigator.clipboard.writeText(link).then(() => {
+        alert('✅ Link copiado al portapapeles');
+      });
+    }
+
+    function shareOnWhatsApp() {
+      const link = document.getElementById('linkInput').value;
+      const mensajeWa = encodeURIComponent(`Hola mi amor, tengo un detalle especial para ti 💖\n\nHaz clic aquí: ${link}`);
+      window.open(`https://wa.me/?text=${mensajeWa}`, '_blank');
     }
 
     // Cargar detalle si hay hash
@@ -759,6 +981,11 @@ https://ejemplo.com/foto2.jpg"></textarea>
         }
       }
     });
+
+    function showInfo() {
+      alert("1. Llena todos los campos.\n2. Haz clic en 'Generar Link'.\n3. Copia o envía el link por WhatsApp.\n4. Tu amor lo abre, ingresa el código y ve tu carta personalizada.\n\n¿Quieres uno más profesional? Contacta a AnthZz por WhatsApp.");
+      document.getElementById('menu').classList.remove('active');
+    }
   </script>
 </body>
 </html>

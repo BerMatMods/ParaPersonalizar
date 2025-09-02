@@ -73,11 +73,18 @@
       padding: 4px;
     }
 
-    .glow-frame img, .glow-frame button, .glow-frame input {
-      border-radius: 16px;
+    .glow-frame img {
+      border-radius: 18px;
       display: block;
       width: 100%;
+      height: auto;
       border: 4px solid #fff;
+      filter: brightness(1) blur(0.5px);
+      transition: transform 0.3s ease;
+    }
+
+    .glow-frame img:hover {
+      transform: scale(1.03);
     }
 
     /* Menú de tres rayas */
@@ -209,7 +216,6 @@
       justify-content: center;
     }
 
-    /* Botones en modales */
     .modal-btn {
       margin: 10px 5px;
       padding: 10px 18px;
@@ -335,6 +341,291 @@
       width: auto;
     }
 
+    /* Pantalla de bloqueo */
+    .lock-screen {
+      display: none;
+      text-align: center;
+      padding: 1.8rem 2rem;
+      max-width: 440px;
+      background: var(--card-bg);
+      border-radius: 32px;
+      box-shadow: 0 16px 45px rgba(0,0,0,0.15);
+      border: var(--border);
+      position: relative;
+      z-index: 1;
+    }
+
+    .lock-screen h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.1rem;
+      color: var(--primary);
+      margin: 1rem 0;
+      animation: rainbowGlow 3s ease-in-out infinite alternate;
+    }
+
+    .lock-screen p {
+      color: var(--primary);
+      font-size: 1.15rem;
+      margin-bottom: 1.3rem;
+      font-weight: 500;
+    }
+
+    .key-display {
+      font-family: 'Poppins', monospace;
+      font-size: 1.8rem;
+      color: var(--primary);
+      background: rgba(255,255,255,0.7);
+      padding: 0.9rem 1.3rem;
+      border-radius: 16px;
+      margin: 1.1rem auto;
+      width: 90%;
+      border: 2px solid var(--primary);
+      letter-spacing: 4px;
+      box-shadow: 0 6px 15px rgba(156, 39, 176, 0.2);
+    }
+
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 1.3rem 0;
+    }
+
+    .key {
+      font-size: 1.45rem;
+      font-weight: 600;
+      padding: 1rem 0;
+      background: rgba(255,255,255,0.7);
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.25s;
+      box-shadow: 0 4px 10px rgba(156, 39, 176, 0.1);
+    }
+
+    .key:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(156, 39, 176, 0.2);
+    }
+
+    /* Contenedor principal - Carta */
+    .main-container {
+      display: none;
+      text-align: center;
+      max-width: 95%;
+      padding: 1.8rem 1.4rem;
+    }
+
+    .letter-frame {
+      background: var(--card-bg);
+      border-radius: 30px;
+      padding: 1.8rem 1.6rem;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      border: var(--border);
+      position: relative;
+      margin-bottom: 1.6rem;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.3rem;
+      color: var(--primary);
+      margin-bottom: 1.4rem;
+    }
+
+    .letter {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.55rem;
+      line-height: 1.65;
+      color: var(--primary);
+      text-align: left;
+      white-space: pre-line;
+      letter-spacing: 0.8px;
+      margin: 0;
+      opacity: 1;
+      font-weight: 500;
+    }
+
+    .btn-gallery {
+      display: inline-block;
+      margin: 1.4rem auto 1rem;
+      padding: 0.9rem 2rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: white;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(156, 39, 176, 0.4);
+      transition: all 0.3s ease;
+      animation: rainbowGlow 3s ease-in-out infinite alternate;
+    }
+
+    footer {
+      margin-top: 1.4rem;
+      font-style: italic;
+      color: var(--primary);
+      font-size: 1.1rem;
+    }
+
+    /* Galería */
+    .gallery-screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 900px;
+      padding: 2rem 1.4rem;
+      text-align: center;
+    }
+
+    .gallery-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1.6rem;
+      animation: rainbowGlow 3s ease-in-out infinite alternate;
+    }
+
+    .gallery-main-img {
+      width: 100%;
+      max-width: 480px;
+      margin-bottom: 1.8rem;
+    }
+
+    .gallery-thumbnails {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 10px;
+      width: 100%;
+      max-width: 580px;
+    }
+
+    /* Modal de zoom */
+    .modal-zoom {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      cursor: zoom-out;
+    }
+
+    .modal-zoom img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 15px;
+      border: 5px solid var(--primary);
+      box-shadow: 0 0 30px rgba(156, 39, 176, 0.8);
+      animation: fadeIn 0.3s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Cuadro de error */
+    .error-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .error-modal.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .error-content {
+      background: white;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 360px;
+      padding: 1.6rem;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      border: 3px solid #ffb6c1;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .close-error {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.4rem;
+      color: #e91e63;
+      cursor: pointer;
+      width: 26px;
+      height: 26px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      background: #fff0f5;
+    }
+
+    .error-content h3 {
+      color: #e91e63;
+      margin-bottom: 0.9rem;
+      font-size: 1.25rem;
+      text-align: center;
+    }
+
+    .error-content p {
+      color: #555;
+      line-height: 1.55;
+      margin-bottom: 1.3rem;
+      font-size: 1.02rem;
+    }
+
+    /* Corazones flotantes */
+    .floating-heart {
+      position: fixed;
+      font-size: 18px;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 1000;
+      user-select: none;
+      animation: floatUp 18s ease-out forwards, fadeHeart 4s ease-in-out infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% {
+        transform: translateY(-20vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeHeart {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
     /* Créditos */
     .credit {
       margin-top: 25px;
@@ -354,17 +645,22 @@
 
     /* Responsive */
     @media (max-width: 480px) {
-      .create-screen, .link-box, .credit {
+      .create-screen, .lock-screen, .main-container, .gallery-screen, .credit {
         padding: 1.4rem;
         max-width: 98%;
       }
 
-      .link-actions {
-        flex-direction: column;
+      h1 {
+        font-size: 2rem;
       }
 
-      button {
-        width: 100%;
+      .letter {
+        font-size: 1.4rem;
+        line-height: 1.6;
+      }
+
+      .btn-gallery {
+        font-size: 1.1rem;
       }
     }
   </style>
@@ -389,57 +685,6 @@
     </div>
   </div>
 
-  <!-- Modal: Idioma -->
-  <div id="langModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-close" onclick="closeModal('langModal')">×</div>
-      <h3 class="modal-title">🌐 Idioma</h3>
-      <p>Selecciona tu idioma:</p>
-      <button class="modal-btn" onclick="setLang('es'); closeModal('langModal')">Español</button>
-      <button class="modal-btn" onclick="setLang('en'); closeModal('langModal')">English</button>
-    </div>
-  </div>
-
-  <!-- Modal: Tema -->
-  <div id="themeModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-close" onclick="closeModal('themeModal')">×</div>
-      <h3 class="modal-title">🎨 Tema</h3>
-      <p>Elige tu modo:</p>
-      <button class="modal-btn" onclick="setTheme('light'); closeModal('themeModal')">Claro</button>
-      <button class="modal-btn" onclick="setTheme('dark'); closeModal('themeModal')">Oscuro</button>
-    </div>
-  </div>
-
-  <!-- Modal: Información -->
-  <div id="infoModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-close" onclick="closeModal('infoModal')">×</div>
-      <h3 class="modal-title">ℹ️ Información</h3>
-      <p style="color:var(--dark); text-align:left; margin:10px 0;">
-        <strong>Software:</strong> Detalles Virtuales<br>
-        <strong>Desarrollado por:</strong> AnthZz Berrocal _ BerMatMods<br>
-        <strong>Versión:</strong> 1.0<br>
-        <strong>Plataforma:</strong> Web (HTML/CSS/JS)<br><br>
-        Creado con amor para hacer sentir especial a tu persona.
-      </p>
-      <button class="modal-btn" onclick="closeModal('infoModal')">Cerrar</button>
-    </div>
-  </div>
-
-  <!-- Modal: Contacto -->
-  <div id="contactModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-close" onclick="closeModal('contactModal')">×</div>
-      <h3 class="modal-title">📞 Contacto Directo</h3>
-      <p style="color:var(--dark);">¿Quieres un detalle más personalizado o profesional?</p>
-      <a href="https://wa.me/51937556459?text=Hola%20AnthZz,%20quiero%20un%20detalle%20personalizado" target="_blank" style="margin:15px auto; padding:12px 20px; background:var(--secondary); color:white; text-decoration:none; border-radius:12px; display:inline-block;">
-        💬 Chatear por WhatsApp
-      </a>
-      <p style="font-size:0.9em; color:var(--primary); margin-top:10px;">+51 937 556 459</p>
-    </div>
-  </div>
-
   <!-- Corazones flotantes -->
   <script>
     function createHearts() {
@@ -448,15 +693,8 @@
         const heart = document.createElement('div');
         heart.className = 'floating-heart';
         heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-        heart.style.position = 'fixed';
         heart.style.left = Math.random() * 90 + 5 + 'vw';
         heart.style.bottom = '0';
-        heart.style.fontSize = '20px';
-        heart.style.color = ['#e91e63', '#9c27b0'][Math.floor(Math.random()*2)];
-        heart.style.pointerEvents = 'none';
-        heart.style.zIndex = '1000';
-        heart.style.opacity = '0';
-        heart.style.animation = 'floatUp 18s ease-out forwards, fadeHeart 4s ease-in-out infinite';
         document.body.appendChild(heart);
         setTimeout(() => heart.remove(), 18000);
       }, 2500);
@@ -534,8 +772,130 @@ https://ejemplo.com/foto2.jpg"></textarea>
     </div>
   </div>
 
-  <!-- Créditos -->
-  <p class="credit">Desarrollado por AnthZz Berrocal | BerMatMods</p>
+  <!-- Pantalla de bloqueo -->
+  <div id="lockScreen" class="lock-screen">
+    <h2>🔐 Tu Carta Mi Amor</h2>
+    <p>👇 INGRESA EL CÓDIGO DE ACCESO 👇</p>
+
+    <div class="glow-frame">
+      <img src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyZTAxbHV0Mm1rYmI2emc3ZmdvcGdka2szMGMzMHl4ZXlhcmEzN3A4cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Y62ofc4S1Vst2/giphy.gif" alt="Corazones flotando" />
+    </div>
+
+    <div id="display" class="key-display"></div>
+
+    <div class="keypad">
+      <div class="key" onclick="addDigit('1')">1</div>
+      <div class="key" onclick="addDigit('2')">2</div>
+      <div class="key" onclick="addDigit('3')">3</div>
+      <div class="key" onclick="addDigit('4')">4</div>
+      <div class="key" onclick="addDigit('5')">5</div>
+      <div class="key" onclick="addDigit('6')">6</div>
+      <div class="key" onclick="addDigit('7')">7</div>
+      <div class="key" onclick="addDigit('8')">8</div>
+      <div class="key" onclick="addDigit('9')">9</div>
+      <div class="key" onclick="addDigit('0')">0</div>
+      <div class="key" onclick="addDigit('/')">/</div>
+      <div class="key" onclick="clearInput()">⌫</div>
+    </div>
+
+    <button class="btn-iniciar" onclick="submitKey()">Iniciar</button>
+
+    <div class="glow-frame">
+      <img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyMzl0NTh2ZHhmOHF1Nm45NHNqcmN1bTVrdHNtbDgwbjZpZTFqMno3diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/11TyfGbDbBv4be/giphy.gif" alt="Bailarina de amor" />
+    </div>
+  </div>
+
+  <!-- Carta principal -->
+  <div id="mainContainer" class="main-container">
+    <div class="letter-frame">
+      <h1 id="tituloCarta"></h1>
+      <div id="letter" class="letter"></div>
+
+      <div class="glow-frame" style="margin: 1.4rem auto; max-width: 400px; display: flex; justify-content: center;">
+        <img id="fotoPrincipalMostrada" src="" alt="Foto principal" />
+      </div>
+
+      <button class="btn-gallery" onclick="openGallery()">Ver nuestras fotos 📸</button>
+      <footer id="firmaCarta"></footer>
+    </div>
+    <p class="credit">Desarrollado por AnthZz Berrocal | BerMatMods</p>
+  </div>
+
+  <!-- Galería -->
+  <div id="galleryScreen" class="gallery-screen">
+    <h2 class="gallery-title">✨ Nuestra Galería</h2>
+
+    <div class="glow-frame gallery-main-img">
+      <img id="mainGalleryImg" src="" style="width: 100%; border-radius: 18px;" onclick="zoomImage(this)" />
+    </div>
+
+    <div class="gallery-thumbnails" id="thumbnailsContainer"></div>
+
+    <button class="btn-iniciar" style="margin-top: 1.8rem;" onclick="closeGallery()">Volver a la carta</button>
+    <p class="credit">Desarrollado por AnthZz Berrocal | BerMatMods</p>
+  </div>
+
+  <!-- Modal de zoom -->
+  <div id="zoomModal" class="modal-zoom" onclick="closeZoom()">
+    <img id="zoomedImage" src="" />
+  </div>
+
+  <!-- Cuadro de error -->
+  <div id="errorModal" class="error-modal">
+    <div class="error-content">
+      <div class="close-error" onclick="cerrarError()">×</div>
+      <h3>⚠️ Código Incorrecto</h3>
+      <p>El código que ingresaste es incorrecto. Por favor, inténtalo de nuevo.</p>
+    </div>
+  </div>
+
+  <!-- Modales -->
+  <div id="langModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-close" onclick="closeModal('langModal')">×</div>
+      <h3 class="modal-title">🌐 Idioma</h3>
+      <p>Selecciona tu idioma:</p>
+      <button class="modal-btn" onclick="setLang('es'); closeModal('langModal')">Español</button>
+      <button class="modal-btn" onclick="setLang('en'); closeModal('langModal')">English</button>
+      <button class="modal-btn" onclick="setLang('pt'); closeModal('langModal')">Português</button>
+    </div>
+  </div>
+
+  <div id="themeModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-close" onclick="closeModal('themeModal')">×</div>
+      <h3 class="modal-title">🎨 Tema</h3>
+      <p>Elige tu modo:</p>
+      <button class="modal-btn" onclick="setTheme('light'); closeModal('themeModal')">Claro</button>
+      <button class="modal-btn" onclick="setTheme('dark'); closeModal('themeModal')">Oscuro</button>
+    </div>
+  </div>
+
+  <div id="infoModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-close" onclick="closeModal('infoModal')">×</div>
+      <h3 class="modal-title">ℹ️ Información</h3>
+      <p style="color:var(--dark); text-align:left; margin:10px 0;">
+        <strong>Software:</strong> Detalles Virtuales<br>
+        <strong>Desarrollado por:</strong> AnthZz Berrocal _ BerMatMods<br>
+        <strong>Versión:</strong> 1.0<br>
+        <strong>Plataforma:</strong> Web (HTML/CSS/JS)
+      </p>
+      <button class="modal-btn" onclick="closeModal('infoModal')">Cerrar</button>
+    </div>
+  </div>
+
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-close" onclick="closeModal('contactModal')">×</div>
+      <h3 class="modal-title">📞 Contacto Directo</h3>
+      <p style="color:var(--dark);">¿Quieres un detalle más personalizado?</p>
+      <a href="https://wa.me/51937556459?text=Hola%20AnthZz,%20quiero%20un%20detalle%20personalizado" target="_blank" style="margin:15px auto; padding:12px 20px; background:var(--secondary); color:white; text-decoration:none; border-radius:12px; display:inline-block;">
+        💬 Chatear por WhatsApp
+      </a>
+      <p style="font-size:0.9em; color:var(--primary); margin-top:10px;">+51 937 556 459</p>
+    </div>
+  </div>
 
   <script>
     let input = '';
@@ -579,7 +939,7 @@ https://ejemplo.com/foto2.jpg"></textarea>
         document.getElementById('linkTitle').textContent = '🔗 Tu link está listo';
         document.getElementById('btnCopiar').textContent = '📋 Copiar Link';
         document.getElementById('btnWhatsApp').textContent = '💬 Enviar por WhatsApp';
-      } else {
+      } else if (lang === 'en') {
         document.getElementById('createTitle').textContent = '✨ Create Your Detail';
         document.getElementById('createSubtitle').textContent = 'Fill everything and generate your link ❤️';
         document.getElementById('labelPara').textContent = '💌 For: Your love name';
@@ -594,6 +954,21 @@ https://ejemplo.com/foto2.jpg"></textarea>
         document.getElementById('linkTitle').textContent = '🔗 Your link is ready';
         document.getElementById('btnCopiar').textContent = '📋 Copy Link';
         document.getElementById('btnWhatsApp').textContent = '💬 Send via WhatsApp';
+      } else if (lang === 'pt') {
+        document.getElementById('createTitle').textContent = '✨ Crie seu Detalhe Virtual';
+        document.getElementById('createSubtitle').textContent = 'Preencha tudo e gere seu link personalizado ❤️';
+        document.getElementById('labelPara').textContent = '💌 Para: Nome do seu amor';
+        document.getElementById('labelDe').textContent = '👨‍❤️‍💋‍👨 De: Seu nome';
+        document.getElementById('labelMensaje').textContent = '✍️ Sua mensagem (use quebras de linha)';
+        document.getElementById('labelFuente').textContent = '🎨 Estilo da fonte';
+        document.getElementById('labelColor').textContent = '🌈 Cor do texto';
+        document.getElementById('labelCodigo').textContent = '🔐 Código de acesso (ex: 10/11/23)';
+        document.getElementById('labelFoto').textContent = '🖼️ URL da foto principal';
+        document.getElementById('labelGaleria').textContent = '🖼️ URLs das fotos da galeria (uma por linha)';
+        document.getElementById('btnGenerar').textContent = 'Gerar Link 🌟';
+        document.getElementById('linkTitle').textContent = '🔗 Seu link está pronto';
+        document.getElementById('btnCopiar').textContent = '📋 Copiar Link';
+        document.getElementById('btnWhatsApp').textContent = '💬 Enviar pelo WhatsApp';
       }
     }
 
@@ -619,7 +994,7 @@ https://ejemplo.com/foto2.jpg"></textarea>
       const colorTexto = document.getElementById('colorTexto').value;
 
       if (!nombreElla || !nombreYo || !mensaje || !codigoAcceso) {
-        alert(currentLang === 'es' ? 'Completa todos los campos.' : 'Complete all fields.');
+        alert(currentLang === 'es' ? 'Completa todos los campos.' : currentLang === 'en' ? 'Complete all fields.' : 'Preencha todos os campos.');
         return;
       }
 
@@ -636,19 +1011,103 @@ https://ejemplo.com/foto2.jpg"></textarea>
     function copyLink() {
       const link = document.getElementById('linkInput').value;
       navigator.clipboard.writeText(link).then(() => {
-        alert(currentLang === 'es' ? '✅ Link copiado al portapapeles' : '✅ Link copied to clipboard');
+        alert(currentLang === 'es' ? '✅ Link copiado' : currentLang === 'en' ? '✅ Link copied' : '✅ Link copiado');
       });
     }
 
     function shareOnWhatsApp() {
       const link = document.getElementById('linkInput').value;
-      const text = currentLang === 'es'
-        ? `Hola mi amor, tengo un detalle especial para ti 💖\n\nHaz clic aquí: ${link}`
-        : `Hello my love, I have a special detail for you 💖\n\nClick here: ${link}`;
+      const text = currentLang === 'es' ? `Hola mi amor, tengo un detalle especial para ti 💖\n\nHaz clic aquí: ${link}` :
+                   currentLang === 'en' ? `Hello my love, I have a special detail for you 💖\n\nClick here: ${link}` :
+                   `Olá meu amor, tenho um detalhe especial para você 💖\n\nClique aqui: ${link}`;
       window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
     }
 
-    // Cargar en hash
+    // Pantalla de bloqueo
+    function addDigit(digit) {
+      if (input.length < 10) {
+        input += digit;
+        document.getElementById('display').textContent = input;
+      }
+    }
+
+    function clearInput() {
+      input = '';
+      document.getElementById('display').textContent = '';
+    }
+
+    function cerrarError() {
+      document.getElementById('errorModal').classList.remove('active');
+    }
+
+    function submitKey() {
+      if (input === data.codigoAcceso) {
+        document.getElementById('lockScreen').style.display = 'none';
+        document.getElementById('mainContainer').style.display = 'block';
+        mostrarCarta();
+      } else {
+        document.getElementById('errorModal').classList.add('active');
+        clearInput();
+      }
+    }
+
+    function mostrarCarta() {
+      document.getElementById('tituloCarta').textContent = `Para Ti ${data.nombreElla} 💖`;
+      document.getElementById('firmaCarta').textContent = `Con todo mi corazón, ${data.nombreYo}`;
+      document.getElementById('fotoPrincipalMostrada').src = data.fotoPrincipal;
+
+      const letter = document.getElementById('letter');
+      letter.style.fontFamily = data.fuenteTexto;
+      letter.style.color = data.colorTexto;
+      letter.textContent = '';
+      let i = 0;
+      const speed = 40;
+      function type() {
+        if (i < data.mensaje.length) {
+          letter.textContent += data.mensaje.charAt(i);
+          i++;
+          setTimeout(type, speed);
+        }
+      }
+      setTimeout(type, 500);
+    }
+
+    function openGallery() {
+      const fotos = data.fotosGaleria.split('\n').filter(f => f.trim() !== '');
+      if (fotos.length > 0) {
+        document.getElementById('mainGalleryImg').src = fotos[0];
+        const thumbs = document.getElementById('thumbnailsContainer');
+        thumbs.innerHTML = '';
+        fotos.forEach(foto => {
+          const div = document.createElement('div');
+          div.className = 'glow-frame';
+          const img = document.createElement('img');
+          img.src = foto;
+          img.className = 'gallery-img';
+          img.onclick = () => document.getElementById('mainGalleryImg').src = foto;
+          div.appendChild(img);
+          thumbs.appendChild(div);
+        });
+      }
+      document.getElementById('mainContainer').style.display = 'none';
+      document.getElementById('galleryScreen').style.display = 'flex';
+    }
+
+    function closeGallery() {
+      document.getElementById('galleryScreen').style.display = 'none';
+      document.getElementById('mainContainer').style.display = 'block';
+    }
+
+    function zoomImage(img) {
+      document.getElementById('zoomedImage').src = img.src;
+      document.getElementById('zoomModal').style.display = 'flex';
+    }
+
+    function closeZoom() {
+      document.getElementById('zoomModal').style.display = 'none';
+    }
+
+    // Cargar detalle si hay hash
     window.addEventListener('load', () => {
       const hash = window.location.hash.slice(1);
       if (hash) {
@@ -656,7 +1115,10 @@ https://ejemplo.com/foto2.jpg"></textarea>
         if (saved) {
           data = JSON.parse(saved);
           document.getElementById('createScreen').style.display = 'none';
-          // Aquí iría la lógica de carta (se puede extender si deseas)
+          document.getElementById('lockScreen').style.display = 'block';
+          document.getElementById('display').textContent = '';
+        } else {
+          alert('❌ Detalle no encontrado.');
         }
       }
     });

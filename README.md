@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-  <title>Detalles Virtuales - Crea tu Carta de Amor</title>
+  <title>Detalles Virtuales - Tu Carta de Amor</title>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@700&family=Poppins:wght@400;500&family=Quicksand:wght@500&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -66,7 +66,7 @@
     .create-screen {
       text-align: center;
       padding: 1.8rem 2rem;
-      max-width: 460px;
+      max-width: 480px;
       background: rgba(255, 255, 255, 0.98);
       border-radius: 32px;
       box-shadow: 0 16px 45px rgba(255, 105, 180, 0.25);
@@ -97,6 +97,7 @@
       margin-bottom: 8px;
       color: #d81b60;
       font-weight: 600;
+      font-size: 0.95em;
     }
 
     input, textarea, select {
@@ -398,82 +399,6 @@
       to { opacity: 1; transform: scale(1); }
     }
 
-    /* Cuadro de error */
-    .error-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 200;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-    }
-
-    .error-modal.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .error-content {
-      background: white;
-      border-radius: 20px;
-      width: 90%;
-      max-width: 360px;
-      padding: 1.6rem;
-      position: relative;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-      border: 3px solid #ffb6c1;
-      animation: popIn 0.3s;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    @keyframes popIn {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    .close-error {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 1.4rem;
-      color: #e91e63;
-      cursor: pointer;
-      width: 26px;
-      height: 26px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 50%;
-      background: #fff0f5;
-      transition: all 0.2s;
-    }
-
-    .close-error:hover {
-      background: #ffe6f0;
-      transform: rotate(90deg);
-    }
-
-    .error-content h3 {
-      color: #e91e63;
-      margin-bottom: 0.9rem;
-      font-size: 1.25rem;
-      text-align: center;
-    }
-
-    .error-content p {
-      color: #555;
-      line-height: 1.55;
-      margin-bottom: 1.3rem;
-      font-size: 1.02rem;
-    }
-
     /* Corazones flotantes */
     .floating-heart {
       position: fixed;
@@ -503,10 +428,11 @@
       50% { opacity: 1; }
     }
 
+    /* Créditos */
     .credit {
       margin-top: 1.3rem;
-      font-size: 0.7rem;
-      color: #ccc;
+      font-size: 0.8rem;
+      color: #999;
       font-style: italic;
       text-align: center;
     }
@@ -556,26 +482,56 @@
   <!-- Pantalla de creación -->
   <div id="createScreen" class="create-screen">
     <h2>✨ Crea tu Detalle Virtual</h2>
-    <p>Rellena todo y genera tu link personalizado</p>
+    <p>Llena todo y genera tu link personalizado ❤️</p>
 
     <div class="form-group">
       <label>💌 Para: Nombre de tu amor</label>
-      <input type="text" id="nombreElla" placeholder="Ej: María" />
+      <input type="text" id="nombreElla" placeholder="Ej: María" required />
     </div>
 
     <div class="form-group">
       <label>👨‍❤️‍💋‍👨 De: Tu nombre</label>
-      <input type="text" id="nombreYo" placeholder="Ej: Juan" />
+      <input type="text" id="nombreYo" placeholder="Ej: Juan" required />
     </div>
 
     <div class="form-group">
-      <label>✍️ Tu mensaje (puedes usar saltos de línea)</label>
-      <textarea id="mensaje" placeholder="Mi amor, desde que te conocí..."></textarea>
+      <label>✍️ Tu mensaje (usa saltos de línea)</label>
+      <textarea id="mensaje" placeholder="Mi amor, desde que te conocí..." required></textarea>
     </div>
 
     <div class="form-group">
-      <label>🔐 Código de acceso (ej: 12/25)</label>
-      <input type="text" id="codigoAcceso" placeholder="Ej: 14/02" value="14/02" />
+      <label>🎨 Tipo de letra</label>
+      <select id="fuenteTexto">
+        <option value="'Dancing Script', cursive">Elegante (Script)</option>
+        <option value="'Quicksand', sans-serif">Moderna (Quicksand)</option>
+        <option value="'Poppins', sans-serif">Clara (Poppins)</option>
+        <option value="Arial, sans-serif">Simple (Arial)</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>🌈 Color del texto</label>
+      <select id="colorTexto">
+        <option value="#d81b60">Rosa intenso</option>
+        <option value="#8B0000">Rojo amor</option>
+        <option value="#4B0082">Morado profundo</option>
+        <option value="#2F4F4F">Verde bosque</option>
+        <option value="#000080">Azul noche</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>📏 Tamaño del texto</label>
+      <select id="tamanoTexto">
+        <option value="1.4rem">Mediano</option>
+        <option value="1.6rem">Grande</option>
+        <option value="1.8rem">Muy grande</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>🔐 Código de acceso (ej: 21/07/25)</label>
+      <input type="text" id="codigoAcceso" placeholder="Ej: 14/02" value="21/07/25" required />
     </div>
 
     <div class="form-group">
@@ -592,8 +548,8 @@ https://ejemplo.com/foto2.jpg"></textarea>
     <button onclick="generarLink()">Generar Link 🌟</button>
   </div>
 
-  <!-- Pantalla de bloqueo (se mostrará después) -->
-  <div id="lockScreen" class="lock-screen" style="display:none;">
+  <!-- Pantalla de bloqueo -->
+  <div id="lockScreen" class="lock-screen">
     <h2>🔐 Tu Carta Mi Amor</h2>
     <p>👇 INGRESA EL CÓDIGO DE ACCESO 👇</p>
 
@@ -706,6 +662,9 @@ https://ejemplo.com/foto2.jpg"></textarea>
       document.getElementById('fotoPrincipalMostrada').src = data.fotoPrincipal;
 
       const letter = document.getElementById('letter');
+      letter.style.fontFamily = data.fuenteTexto;
+      letter.style.color = data.colorTexto;
+      letter.style.fontSize = data.tamanoTexto;
       letter.textContent = '';
       let i = 0;
       const speed = 35;
@@ -761,20 +720,28 @@ https://ejemplo.com/foto2.jpg"></textarea>
       const mensaje = document.getElementById('mensaje').value.trim();
       const codigoAcceso = document.getElementById('codigoAcceso').value.trim();
       const fotoPrincipal = document.getElementById('fotoPrincipal').value.trim() || 'https://via.placeholder.com/400x300?text=Foto+Principal';
-      const fotosGaleria = document.getElementById('fotosGaleria').value.trim() || '';
+      const fotosGaleria = document.getElementById('fotosGaleria').value.trim();
+      const fuenteTexto = document.getElementById('fuenteTexto').value;
+      const colorTexto = document.getElementById('colorTexto').value;
+      const tamanoTexto = document.getElementById('tamanoTexto').value;
 
       if (!nombreElla || !nombreYo || !mensaje || !codigoAcceso) {
-        alert('Completa todos los campos');
+        alert('Por favor, completa los campos obligatorios.');
         return;
       }
 
-      data = { nombreElla, nombreYo, mensaje, codigoAcceso, fotoPrincipal, fotosGaleria };
+      data = { nombreElla, nombreYo, mensaje, codigoAcceso, fotoPrincipal, fotosGaleria, fuenteTexto, colorTexto, tamanoTexto };
       const id = Math.random().toString(36).substr(2, 6);
       localStorage.setItem('detalle_' + id, JSON.stringify(data));
 
       const link = `${window.location.href.split('#')[0]}#${id}`;
-      alert(`✅ Link generado:\n\n${link}\n\nPuedes copiarlo y enviarlo por WhatsApp.`);
-      prompt('Link para compartir:', link);
+      const mensajeWa = encodeURIComponent(`Hola mi amor, tengo un detalle especial para ti 💖\n\nHaz clic aquí: ${link}`);
+      const waLink = `https://wa.me/?text=${mensajeWa}`;
+
+      alert(`✅ ¡Listo! Tu detalle está listo.\n\nLink: ${link}\n\nSe abrirá WhatsApp para que lo envíes.`);
+      setTimeout(() => {
+        window.open(waLink, '_blank');
+      }, 1000);
     }
 
     // Cargar detalle si hay hash

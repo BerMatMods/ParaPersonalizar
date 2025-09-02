@@ -843,7 +843,7 @@
       <p style="color:var(--dark); margin:10px 0;">
         Para crear tu detalle personalizado, primero debes seguir a mi cuenta de TikTok.
       </p>
-      <a href="tiktok.com/@bermat_mods" target="_blank" class="btn-tiktok" onclick="seguirTikTok()">
+      <a href="https://www.tiktok.com/@bermat_mods?_t=ZS-8zNxDKfjhfI&_r=1" target="_blank" class="btn-tiktok" onclick="seguirTikTok()">
         Seguir en TikTok
       </a>
       <p style="font-size:0.9em; color:var(--primary); margin-top:10px;">@bermat_mods</p>

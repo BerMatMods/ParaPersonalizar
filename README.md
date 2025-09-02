@@ -63,11 +63,11 @@
       100% { box-shadow: 0 0 15px rgba(156, 39, 176, 0.7); }
     }
 
-    /* Menú Hamburguesa - Ahora en la izquierda */
+    /* Menú Hamburguesa - Izquierda */
     .menu-toggle {
       position: fixed;
       top: 20px;
-      left: 20px; /* Cambiado a la izquierda */
+      left: 20px;
       width: 50px;
       height: 50px;
       background: var(--card-bg);
@@ -115,11 +115,11 @@
       100% { transform: scale(1.05); }
     }
 
-    /* Menú desplegable - ahora desde la izquierda */
+    /* Menú desplegable */
     .menu-panel {
       position: fixed;
       top: 0;
-      left: -320px; /* Sale desde la izquierda */
+      left: -320px;
       width: 300px;
       height: 100vh;
       background: var(--card-bg);
@@ -236,7 +236,7 @@
       transform: scale(1.03);
     }
 
-    /* Modal: Requisito de TikTok */
+    /* Modal: Requisito TikTok (solo al generar) */
     .modal-tiktok {
       display: none;
       position: fixed;
@@ -861,7 +861,7 @@
     createHearts();
   </script>
 
-  <!-- Menú Hamburguesa - Ahora en la parte superior izquierda -->
+  <!-- Menú Hamburguesa -->
   <div class="menu-toggle" id="menuToggle">
     <span></span>
     <span></span>
@@ -878,7 +878,6 @@
       <p>Detalles virtuales únicos y románticos</p>
     </div>
 
-    <!-- Nuevas opciones con efectos -->
     <button class="menu-btn glow-frame" onclick="toggleDarkMode()">
       🌙 Modo Oscuro
     </button>
@@ -904,15 +903,15 @@
     </button>
   </div>
 
-  <!-- Modal: Requisito TikTok -->
+  <!-- Modal: Seguir en TikTok (solo al generar) -->
   <div id="modalTiktok" class="modal-tiktok">
     <div class="modal-tiktok-content">
       <div class="modal-tiktok-close" onclick="closeModalTiktok()">×</div>
       <h3 class="modal-tiktok-title">🔔 ¡Importante!</h3>
       <p style="color:var(--dark); margin:10px 0;">
-        Para crear tu detalle personalizado, primero debes seguir a mi cuenta de TikTok.
+        Para generar tu detalle personalizado, primero debes seguir a mi cuenta de TikTok.
       </p>
-      <a href="https://www.tiktok.com/@bermat_mods?_t=ZS-8zNy5TzEpoi&_r=1" target="_blank" class="btn-tiktok" onclick="seguirTikTok()">
+      <a href="https://www.tiktok.com/@bermat_mods?_t=ZS-8zNy5TzEpoi&_r=1" target="_blank" class="btn-tiktok" onclick="seguirYGenerar()">
         Seguir en TikTok
       </a>
       <p style="font-size:0.9em; color:var(--primary); margin-top:10px;">@bermat_mods</p>
@@ -991,11 +990,11 @@
 https://ejemplo.com/foto2.jpg "></textarea>
     </div>
 
-    <button onclick="checkTikTokFollow()">Generar Link 🌟</button>
+    <button onclick="mostrarModalTikTok()">Generar Link 🌟</button>
 
     <!-- Cuadro de link generado -->
     <div class="link-box" id="linkBox">
-      <h3 id="linkTitle">🔗 Tu link está listo</h3>
+      <h3 id="linkTitle">🔗 ¡Listo! Tu link está creado</h3>
       <input type="text" id="linkInput" readonly />
       <div class="link-actions">
         <button onclick="copyLink()"><span id="btnCopiar">📋 Copiar Link</span></button>
@@ -1087,16 +1086,10 @@ https://ejemplo.com/foto2.jpg "></textarea>
     let input = '';
     let data = {};
 
-    // Verificar si ya hizo clic en "Seguir"
-    window.addEventListener('load', () => {
-      const yaSigue = localStorage.getItem('tiktokFollowed') === 'true';
-      
-      if (!yaSigue) {
-        setTimeout(() => {
-          document.getElementById('modalTiktok').style.display = 'flex';
-        }, 1000);
-      }
-    });
+    // Mostrar modal de TikTok al hacer clic en "Generar"
+    function mostrarModalTikTok() {
+      document.getElementById('modalTiktok').style.display = 'flex';
+    }
 
     function closeModalTiktok() {
       document.getElementById('modalTiktok').style.display = 'none';
@@ -1106,17 +1099,13 @@ https://ejemplo.com/foto2.jpg "></textarea>
       document.getElementById('modalError').style.display = 'none';
     }
 
-    function seguirTikTok() {
+    // Cuando hace clic en "Seguir", se guarda y genera el link
+    function seguirYGenerar() {
       localStorage.setItem('tiktokFollowed', 'true');
-    }
-
-    function checkTikTokFollow() {
-      const yaSigue = localStorage.getItem('tiktokFollowed') === 'true';
-      if (yaSigue) {
+      setTimeout(() => {
         generarLink();
-      } else {
-        document.getElementById('modalError').style.display = 'flex';
-      }
+        document.getElementById('modalTiktok').style.display = 'none';
+      }, 800);
     }
 
     // Generar link
@@ -1264,7 +1253,7 @@ https://ejemplo.com/foto2.jpg "></textarea>
       }
     });
 
-    // === FUNCIONES DEL MENÚ ===
+    // === MENÚ FUNCIONES ===
     const menuToggle = document.getElementById('menuToggle');
     const menuPanel = document.getElementById('menuPanel');
 
@@ -1279,13 +1268,16 @@ https://ejemplo.com/foto2.jpg "></textarea>
     }
 
     // Modo oscuro
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.body.classList.add('dark-mode');
+    }
     function toggleDarkMode() {
       document.body.classList.toggle('dark-mode');
       localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
     }
 
     // Música de fondo
-    const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'); // Música de ejemplo suave
+    const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
     audio.loop = true;
     let isPlaying = false;
 
@@ -1295,7 +1287,7 @@ https://ejemplo.com/foto2.jpg "></textarea>
         audio.pause();
         btn.textContent = '▶️';
       } else {
-        audio.play().catch(e => alert('Permite audio para activar la música.'));
+        audio.play().catch(e => alert('Activa el sonido para escuchar la música.'));
         btn.textContent = '⏸️';
       }
       isPlaying = !isPlaying;
@@ -1303,12 +1295,12 @@ https://ejemplo.com/foto2.jpg "></textarea>
 
     // Compartir proyecto
     function shareProject() {
-      const text = "Mira este increíble detalle virtual que encontré 💖\n\nPuedes crear uno personalizado aquí: " + window.location.href;
+      const text = "Mira este detalle virtual tan romántico 💖\n\nPuedes crear uno personalizado aquí: " + window.location.href;
       if (navigator.share) {
         navigator.share({ text });
       } else {
         navigator.clipboard.writeText(text).then(() => {
-          alert('Enlace copiado para compartir 📲');
+          alert('Enlace copiado 📲');
         });
       }
     }

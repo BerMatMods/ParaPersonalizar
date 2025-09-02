@@ -8,6 +8,9 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@700&family=Poppins:wght@400;500&family=Quicksand:wght@500&display=swap" rel="stylesheet">
 
+  <!-- Librería para QR: qrcode.js -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode.js/lib/qrcode.min.js"></script>
+
   <style>
     :root {
       --primary: #9c27b0;
@@ -341,6 +344,26 @@
       width: auto;
     }
 
+    /* QR Code */
+    .qr-box {
+      margin: 15px 0;
+      padding: 15px;
+      background: white;
+      border-radius: 16px;
+      display: inline-block;
+    }
+
+    .qr-download {
+      margin-top: 10px;
+      padding: 8px 16px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.95em;
+    }
+
     /* Pantalla de bloqueo */
     .lock-screen {
       display: none;
@@ -643,6 +666,19 @@
       width: 90%;
     }
 
+    /* Botón de volver a personalizar */
+    .btn-recreate {
+      margin: 1.4rem auto;
+      padding: 0.9rem 2rem;
+      font-size: 1.15rem;
+      background: var(--secondary);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4);
+    }
+
     /* Responsive */
     @media (max-width: 480px) {
       .create-screen, .lock-screen, .main-container, .gallery-screen, .credit {
@@ -659,7 +695,7 @@
         line-height: 1.6;
       }
 
-      .btn-gallery {
+      .btn-gallery, .btn-recreate {
         font-size: 1.1rem;
       }
     }
@@ -765,8 +801,16 @@ https://ejemplo.com/foto2.jpg"></textarea>
     <div class="link-box" id="linkBox">
       <h3 id="linkTitle">🔗 Tu link está listo</h3>
       <input type="text" id="linkInput" readonly />
+
+      <!-- QR Code -->
+      <div class="qr-box">
+        <div id="qrcode"></div>
+        <button class="qr-download" onclick="downloadQR()">💾 Descargar QR</button>
+      </div>
+
       <div class="link-actions">
         <button onclick="copyLink()"><span id="btnCopiar">📋 Copiar Link</span></button>
+        <button onclick="openInBrowser()"><span id="btnAbrir">🌐 Abrir en navegador</span></button>
         <button onclick="shareOnWhatsApp()"><span id="btnWhatsApp">💬 Enviar por WhatsApp</span></button>
       </div>
     </div>
@@ -817,6 +861,8 @@ https://ejemplo.com/foto2.jpg"></textarea>
 
       <button class="btn-gallery" onclick="openGallery()">Ver nuestras fotos 📸</button>
       <footer id="firmaCarta"></footer>
+
+      <button class="btn-recreate" onclick="volverAPersonalizar()">🔄 Volver a Personalizar</button>
     </div>
     <p class="credit">Desarrollado por AnthZz Berrocal | BerMatMods</p>
   </div>
@@ -938,6 +984,7 @@ https://ejemplo.com/foto2.jpg"></textarea>
         document.getElementById('btnGenerar').textContent = 'Generar Link 🌟';
         document.getElementById('linkTitle').textContent = '🔗 Tu link está listo';
         document.getElementById('btnCopiar').textContent = '📋 Copiar Link';
+        document.getElementById('btnAbrir').textContent = '🌐 Abrir en navegador';
         document.getElementById('btnWhatsApp').textContent = '💬 Enviar por WhatsApp';
       } else if (lang === 'en') {
         document.getElementById('createTitle').textContent = '✨ Create Your Detail';
@@ -953,6 +1000,7 @@ https://ejemplo.com/foto2.jpg"></textarea>
         document.getElementById('btnGenerar').textContent = 'Generate Link 🌟';
         document.getElementById('linkTitle').textContent = '🔗 Your link is ready';
         document.getElementById('btnCopiar').textContent = '📋 Copy Link';
+        document.getElementById('btnAbrir').textContent = '🌐 Open in browser';
         document.getElementById('btnWhatsApp').textContent = '💬 Send via WhatsApp';
       } else if (lang === 'pt') {
         document.getElementById('createTitle').textContent = '✨ Crie seu Detalhe Virtual';
@@ -968,6 +1016,7 @@ https://ejemplo.com/foto2.jpg"></textarea>
         document.getElementById('btnGenerar').textContent = 'Gerar Link 🌟';
         document.getElementById('linkTitle').textContent = '🔗 Seu link está pronto';
         document.getElementById('btnCopiar').textContent = '📋 Copiar Link';
+        document.getElementById('btnAbrir').textContent = '🌐 Abrir no navegador';
         document.getElementById('btnWhatsApp').textContent = '💬 Enviar pelo WhatsApp';
       }
     }
@@ -982,7 +1031,7 @@ https://ejemplo.com/foto2.jpg"></textarea>
       }
     }
 
-    // Generar link
+    // Generar link y QR
     function generarLink() {
       const nombreElla = document.getElementById('nombreElla').value.trim();
       const nombreYo = document.getElementById('nombreYo').value.trim();
@@ -1004,6 +1053,18 @@ https://ejemplo.com/foto2.jpg"></textarea>
 
       const link = `${window.location.href.split('#')[0]}#${id}`;
       document.getElementById('linkInput').value = link;
+
+      // Generar QR
+      const qrDiv = document.getElementById('qrcode');
+      qrDiv.innerHTML = ''; // Limpiar QR anterior
+      new QRCode(qrDiv, {
+        text: link,
+        width: 180,
+        height: 180,
+        colorDark: "#9c27b0",
+        colorLight: "#ffffff"
+      });
+
       document.getElementById('linkBox').style.display = 'block';
       document.getElementById('linkBox').scrollIntoView({ behavior: 'smooth' });
     }
@@ -1015,12 +1076,25 @@ https://ejemplo.com/foto2.jpg"></textarea>
       });
     }
 
+    function openInBrowser() {
+      const link = document.getElementById('linkInput').value;
+      window.open(link, '_blank');
+    }
+
     function shareOnWhatsApp() {
       const link = document.getElementById('linkInput').value;
       const text = currentLang === 'es' ? `Hola mi amor, tengo un detalle especial para ti 💖\n\nHaz clic aquí: ${link}` :
                    currentLang === 'en' ? `Hello my love, I have a special detail for you 💖\n\nClick here: ${link}` :
                    `Olá meu amor, tenho um detalhe especial para você 💖\n\nClique aqui: ${link}`;
       window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+    }
+
+    function downloadQR() {
+      const qrImg = document.querySelector('#qrcode img');
+      const a = document.createElement('a');
+      a.href = qrImg.src;
+      a.download = 'detalle-qr.png';
+      a.click();
     }
 
     // Pantalla de bloqueo
@@ -1105,6 +1179,13 @@ https://ejemplo.com/foto2.jpg"></textarea>
 
     function closeZoom() {
       document.getElementById('zoomModal').style.display = 'none';
+    }
+
+    function volverAPersonalizar() {
+      document.getElementById('mainContainer').style.display = 'none';
+      document.getElementById('createScreen').style.display = 'block';
+      document.getElementById('linkBox').style.display = 'none';
+      location.hash = '';
     }
 
     // Cargar detalle si hay hash

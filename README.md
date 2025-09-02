@@ -63,6 +63,155 @@
       100% { box-shadow: 0 0 15px rgba(156, 39, 176, 0.7); }
     }
 
+    /* Menú Hamburguesa */
+    .menu-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background: var(--card-bg);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 1001;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      border: 3px solid transparent;
+      animation: pulse 2s infinite alternate;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 26px;
+      height: 3px;
+      background: var(--primary);
+      margin: 3px 0;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    .menu-toggle.active {
+      border: 3px solid var(--primary);
+      animation: rainbowGlow 2s ease-in-out infinite;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.05); }
+    }
+
+    /* Menú desplegable */
+    .menu-panel {
+      position: fixed;
+      top: 0;
+      right: -320px;
+      width: 300px;
+      height: 100vh;
+      background: var(--card-bg);
+      box-shadow: -10px 0 30px rgba(0,0,0,0.15);
+      border-left: var(--border);
+      z-index: 1000;
+      transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      padding: 80px 20px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-y: auto;
+    }
+
+    .menu-panel.active {
+      right: 0;
+      animation: slideIn 0.5s forwards;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0.8; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    .menu-panel h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary);
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      text-align: center;
+    }
+
+    .menu-profile {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: rgba(156, 39, 176, 0.08);
+      border-radius: 16px;
+      width: 100%;
+      border: 2px dashed var(--primary);
+    }
+
+    .menu-profile h4 {
+      color: var(--primary);
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+
+    .menu-profile p {
+      color: var(--dark);
+      font-size: 0.95rem;
+    }
+
+    .menu-btn {
+      display: block;
+      width: 100%;
+      padding: 14px 20px;
+      margin: 10px 0;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      color: white;
+      border: none;
+      border-radius: 14px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      box-shadow: var(--border-glow);
+      transition: all 0.3s;
+    }
+
+    .menu-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(156, 39, 176, 0.5);
+    }
+
+    .menu-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 1.8rem;
+      color: var(--primary);
+      cursor: pointer;
+      background: #fff;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
     .glow-frame {
       position: relative;
       display: inline-block;
@@ -670,6 +819,26 @@
       .btn-gallery, .btn-recreate, .btn-tiktok {
         font-size: 1.1rem;
       }
+
+      .menu-toggle {
+        top: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+      }
+
+      .menu-toggle span {
+        width: 22px;
+        height: 2.5px;
+      }
+
+      .menu-panel {
+        width: 280px;
+      }
+
+      .menu-panel h3 {
+        font-size: 1.6rem;
+      }
     }
   </style>
 </head>
@@ -692,6 +861,32 @@
     createHearts();
   </script>
 
+  <!-- Menú Hamburguesa -->
+  <div class="menu-toggle" id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="menu-panel" id="menuPanel">
+    <div class="menu-close" onclick="closeMenu()">×</div>
+    <h3>✨ Menú del Proyecto</h3>
+
+    <div class="menu-profile">
+      <h4>AnthZz Berrocal</h4>
+      <p>Desarrollador | BerMatMods</p>
+      <p>Experto en detalles virtuales personalizados</p>
+    </div>
+
+    <a href="https://wa.me/937556459" target="_blank" class="menu-btn">
+      💬 WhatsApp - 937556459
+    </a>
+
+    <button class="menu-btn" onclick="alert('Proyecto: Detalles Virtuales\\nCreado por: AnthZz Berrocal\\nMarca: BerMatMods\\nVersión: 1.0\\nEstilo: Romántico & Profesional')">
+      🛠️ Sobre el Proyecto
+    </button>
+  </div>
+
   <!-- Modal: Requisito TikTok -->
   <div id="modalTiktok" class="modal-tiktok">
     <div class="modal-tiktok-content">
@@ -700,7 +895,7 @@
       <p style="color:var(--dark); margin:10px 0;">
         Para crear tu detalle personalizado, primero debes seguir a mi cuenta de TikTok.
       </p>
-      <a href="https://www.tiktok.com/@bermat_mods?_t=ZS-8zNy5TzEpoi&_r=1" target="_blank" class="btn-tiktok">
+      <a href="https://www.tiktok.com/@bermat_mods?_t=ZS-8zNy5TzEpoi&_r=1" target="_blank" class="btn-tiktok" onclick="seguirTikTok()">
         Seguir en TikTok
       </a>
       <p style="font-size:0.9em; color:var(--primary); margin-top:10px;">@bermat_mods</p>
@@ -713,7 +908,7 @@
       <div class="modal-error-close" onclick="closeModalError()">×</div>
       <h3>⚠️ Acceso Denegado</h3>
       <p>
-        El sistema de <strong>BerMatMods</strong> ha detectado que no has seguido la cuenta de TikTok.
+        El sistema de <strong>BerMatMods</strong> ha detectado que no has hecho clic en "Seguir en TikTok".
         <br><br>
         Por lo tanto, no se podrá generar tu enlace de detalle personalizado.
         <br><br>
@@ -770,13 +965,13 @@
 
     <div class="form-group">
       <label id="labelFoto">🖼️ URL de foto principal</label>
-      <input type="url" id="fotoPrincipal" placeholder="https://ejemplo.com/foto.jpg" />
+      <input type="url" id="fotoPrincipal" placeholder=" https://ejemplo.com/foto.jpg " />
     </div>
 
     <div class="form-group">
       <label id="labelGaleria">🖼️ URLs de fotos para galería (una por línea)</label>
-      <textarea id="fotosGaleria" placeholder="https://ejemplo.com/foto1.jpg
-https://ejemplo.com/foto2.jpg"></textarea>
+      <textarea id="fotosGaleria" placeholder="https://ejemplo.com/foto1.jpg 
+https://ejemplo.com/foto2.jpg "></textarea>
     </div>
 
     <button onclick="checkTikTokFollow()">Generar Link 🌟</button>
@@ -798,7 +993,7 @@ https://ejemplo.com/foto2.jpg"></textarea>
     <p>👇 INGRESA EL CÓDIGO DE ACCESO 👇</p>
 
     <div class="glow-frame">
-      <img src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyZTAxbHV0Mm1rYmI2emc3ZmdvcGdka2szMGMzMHl4ZXlhcmEzN3A4cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Y62ofc4S1Vst2/giphy.gif" alt="Corazones flotando" />
+      <img src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyZTAxbHV0Mm1rYmI2emc3ZmdvcGdka2szMGMzMHl4ZXlhcmEzN3A4cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Y62ofc4S1Vst2/giphy.gif " alt="Corazones flotando" />
     </div>
 
     <div id="display" class="key-display"></div>
@@ -821,7 +1016,7 @@ https://ejemplo.com/foto2.jpg"></textarea>
     <button class="btn-iniciar" onclick="submitKey()">Iniciar</button>
 
     <div class="glow-frame">
-      <img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyMzl0NTh2ZHhmOHF1Nm45NHNqcmN1bTVrdHNtbDgwbjZpZTFqMno3diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/11TyfGbDbBv4be/giphy.gif" alt="Bailarina de amor" />
+      <img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyMzl0NTh2ZHhmOHF1Nm45NHNqcmN1bTVrdHNtbDgwbjZpZTFqMno3diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/11TyfGbDbBv4be/giphy.gif " alt="Bailarina de amor" />
     </div>
   </div>
 
@@ -874,13 +1069,17 @@ https://ejemplo.com/foto2.jpg"></textarea>
   <script>
     let input = '';
     let data = {};
-    let tikTokFollowed = false;
 
-    // Mostrar modal de TikTok al cargar
+    // Verificar si ya hizo clic en "Seguir"
     window.addEventListener('load', () => {
-      setTimeout(() => {
-        document.getElementById('modalTiktok').style.display = 'flex';
-      }, 1000);
+      const yaSigue = localStorage.getItem('tiktokFollowed') === 'true';
+      
+      // Mostrar modal solo si NO ha hecho clic antes
+      if (!yaSigue) {
+        setTimeout(() => {
+          document.getElementById('modalTiktok').style.display = 'flex';
+        }, 1000);
+      }
     });
 
     function closeModalTiktok() {
@@ -891,15 +1090,15 @@ https://ejemplo.com/foto2.jpg"></textarea>
       document.getElementById('modalError').style.display = 'none';
     }
 
+    // Cuando hace clic en "Seguir", se guarda
     function seguirTikTok() {
-      tikTokFollowed = true;
-      setTimeout(() => {
-        document.getElementById('modalTiktok').style.display = 'none';
-      }, 1000);
+      localStorage.setItem('tiktokFollowed', 'true');
+      // El usuario es redirigido automáticamente por el enlace
     }
 
     function checkTikTokFollow() {
-      if (tikTokFollowed) {
+      const yaSigue = localStorage.getItem('tiktokFollowed') === 'true';
+      if (yaSigue) {
         generarLink();
       } else {
         document.getElementById('modalError').style.display = 'flex';
@@ -1051,6 +1250,20 @@ https://ejemplo.com/foto2.jpg"></textarea>
         }
       }
     });
+
+    // Menú funciones
+    const menuToggle = document.getElementById('menuToggle');
+    const menuPanel = document.getElementById('menuPanel');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      menuPanel.classList.toggle('active');
+    });
+
+    function closeMenu() {
+      menuToggle.classList.remove('active');
+      menuPanel.classList.remove('active');
+    }
   </script>
 </body>
 </html>

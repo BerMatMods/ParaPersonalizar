@@ -63,11 +63,11 @@
       100% { box-shadow: 0 0 15px rgba(156, 39, 176, 0.7); }
     }
 
-    /* Menú Hamburguesa */
+    /* Menú Hamburguesa - Ahora en la izquierda */
     .menu-toggle {
       position: fixed;
       top: 20px;
-      right: 20px;
+      left: 20px; /* Cambiado a la izquierda */
       width: 50px;
       height: 50px;
       background: var(--card-bg);
@@ -115,18 +115,18 @@
       100% { transform: scale(1.05); }
     }
 
-    /* Menú desplegable */
+    /* Menú desplegable - ahora desde la izquierda */
     .menu-panel {
       position: fixed;
       top: 0;
-      right: -320px;
+      left: -320px; /* Sale desde la izquierda */
       width: 300px;
       height: 100vh;
       background: var(--card-bg);
-      box-shadow: -10px 0 30px rgba(0,0,0,0.15);
-      border-left: var(--border);
+      box-shadow: 10px 0 30px rgba(0,0,0,0.15);
+      border-right: var(--border);
       z-index: 1000;
-      transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      transition: left 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
       padding: 80px 20px 40px;
       display: flex;
       flex-direction: column;
@@ -135,12 +135,12 @@
     }
 
     .menu-panel.active {
-      right: 0;
+      left: 0;
       animation: slideIn 0.5s forwards;
     }
 
     @keyframes slideIn {
-      from { transform: translateX(100%); opacity: 0.8; }
+      from { transform: translateX(-100%); opacity: 0.8; }
       to { transform: translateX(0); opacity: 1; }
     }
 
@@ -198,7 +198,7 @@
     .menu-close {
       position: absolute;
       top: 20px;
-      right: 20px;
+      left: 20px;
       font-size: 1.8rem;
       color: var(--primary);
       cursor: pointer;
@@ -822,7 +822,7 @@
 
       .menu-toggle {
         top: 15px;
-        right: 15px;
+        left: 15px;
         width: 45px;
         height: 45px;
       }
@@ -861,7 +861,7 @@
     createHearts();
   </script>
 
-  <!-- Menú Hamburguesa -->
+  <!-- Menú Hamburguesa - Ahora en la parte superior izquierda -->
   <div class="menu-toggle" id="menuToggle">
     <span></span>
     <span></span>
@@ -870,20 +870,37 @@
 
   <div class="menu-panel" id="menuPanel">
     <div class="menu-close" onclick="closeMenu()">×</div>
-    <h3>✨ Menú del Proyecto</h3>
+    <h3>✨ Menú BerMatMods</h3>
 
     <div class="menu-profile">
       <h4>AnthZz Berrocal</h4>
       <p>Desarrollador | BerMatMods</p>
-      <p>Experto en detalles virtuales personalizados</p>
+      <p>Detalles virtuales únicos y románticos</p>
     </div>
 
-    <a href="https://wa.me/937556459" target="_blank" class="menu-btn">
-      💬 WhatsApp - 937556459
+    <!-- Nuevas opciones con efectos -->
+    <button class="menu-btn glow-frame" onclick="toggleDarkMode()">
+      🌙 Modo Oscuro
+    </button>
+
+    <button class="menu-btn glow-frame" onclick="toggleMusic()">
+      🎵 Música de Fondo <span id="musicStatus">▶️</span>
+    </button>
+
+    <a href="https://wa.me/937556459?text=Hola%20AnthZz,%20me%20encantó%20tu%20proyecto%20de%20detalles%20virtuales.%20¿Puedo%20encargarte%20uno?" target="_blank" class="menu-btn glow-frame">
+      📞 Consulta Personalizada
     </a>
 
-    <button class="menu-btn" onclick="alert('Proyecto: Detalles Virtuales\\nCreado por: AnthZz Berrocal\\nMarca: BerMatMods\\nVersión: 1.0\\nEstilo: Romántico & Profesional')">
-      🛠️ Sobre el Proyecto
+    <button class="menu-btn glow-frame" onclick="shareProject()">
+      📱 Compartir Proyecto
+    </button>
+
+    <button class="menu-btn glow-frame" onclick="aboutProject()">
+      🧾 Acerca del Proyecto
+    </button>
+
+    <button class="menu-btn glow-frame" onclick="location.reload()">
+      🔄 Recargar
     </button>
   </div>
 
@@ -1074,7 +1091,6 @@ https://ejemplo.com/foto2.jpg "></textarea>
     window.addEventListener('load', () => {
       const yaSigue = localStorage.getItem('tiktokFollowed') === 'true';
       
-      // Mostrar modal solo si NO ha hecho clic antes
       if (!yaSigue) {
         setTimeout(() => {
           document.getElementById('modalTiktok').style.display = 'flex';
@@ -1090,10 +1106,8 @@ https://ejemplo.com/foto2.jpg "></textarea>
       document.getElementById('modalError').style.display = 'none';
     }
 
-    // Cuando hace clic en "Seguir", se guarda
     function seguirTikTok() {
       localStorage.setItem('tiktokFollowed', 'true');
-      // El usuario es redirigido automáticamente por el enlace
     }
 
     function checkTikTokFollow() {
@@ -1228,7 +1242,6 @@ https://ejemplo.com/foto2.jpg "></textarea>
       document.getElementById('zoomModal').style.display = 'none';
     }
 
-    // Volver a personalizar
     function volverACrear() {
       document.getElementById('mainContainer').style.display = 'none';
       document.getElementById('createScreen').style.display = 'block';
@@ -1251,7 +1264,7 @@ https://ejemplo.com/foto2.jpg "></textarea>
       }
     });
 
-    // Menú funciones
+    // === FUNCIONES DEL MENÚ ===
     const menuToggle = document.getElementById('menuToggle');
     const menuPanel = document.getElementById('menuPanel');
 
@@ -1263,6 +1276,46 @@ https://ejemplo.com/foto2.jpg "></textarea>
     function closeMenu() {
       menuToggle.classList.remove('active');
       menuPanel.classList.remove('active');
+    }
+
+    // Modo oscuro
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    }
+
+    // Música de fondo
+    const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'); // Música de ejemplo suave
+    audio.loop = true;
+    let isPlaying = false;
+
+    function toggleMusic() {
+      const btn = document.getElementById('musicStatus');
+      if (isPlaying) {
+        audio.pause();
+        btn.textContent = '▶️';
+      } else {
+        audio.play().catch(e => alert('Permite audio para activar la música.'));
+        btn.textContent = '⏸️';
+      }
+      isPlaying = !isPlaying;
+    }
+
+    // Compartir proyecto
+    function shareProject() {
+      const text = "Mira este increíble detalle virtual que encontré 💖\n\nPuedes crear uno personalizado aquí: " + window.location.href;
+      if (navigator.share) {
+        navigator.share({ text });
+      } else {
+        navigator.clipboard.writeText(text).then(() => {
+          alert('Enlace copiado para compartir 📲');
+        });
+      }
+    }
+
+    // Acerca del proyecto
+    function aboutProject() {
+      alert(`✨ Detalles Virtuales v1.0\n\nCreado por: AnthZz Berrocal\nMarca: BerMatMods\n\nUn proyecto romántico y personalizado para expresar amor de forma digital.\n\n© 2025 BerMatMods`);
     }
   </script>
 </body>

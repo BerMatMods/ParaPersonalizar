@@ -3,33 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-  <title>Detalles Virtuales - Tu Carta de Amor</title>
+  <title>Detalles Virtuales - Tu Carta de Amor 💖</title>
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@700&family=Poppins:wght@400;500&family=Quicksand:wght@500&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --primary: #9c27b0;
-      --secondary: #e91e63;
-      --light: #f8f0f7;
-      --dark: #333;
+      --primary: #d500f9;
+      --secondary: #ff4081;
+      --light: #faf3ff;
+      --dark: #2d1b4e;
       --text-light: #fff;
-      --bg-gradient: linear-gradient(135deg, #f8f0f7, #eadcf4, #f3e1f8);
-      --card-bg: rgba(255, 255, 255, 0.94);
-      --border-glow: 0 0 20px rgba(156, 39, 176, 0.6);
+      --bg-gradient: linear-gradient(135deg, #fdf6fb, #f5d0f0, #e9b6e8, #f0d6f4);
+      --card-bg: rgba(255, 255, 255, 0.96);
+      --border-glow: 0 0 25px rgba(213, 0, 249, 0.8);
       --border: 3px solid var(--primary);
     }
 
     .dark-mode {
-      --primary: #ba68c8;
-      --secondary: #ec407a;
-      --light: #2e1a3a;
-      --dark: #e0e0e0;
+      --primary: #e040fb;
+      --secondary: #ff70a6;
+      --light: #3a1d5c;
+      --dark: #e4d5f9;
       --text-light: #fff;
-      --bg-gradient: linear-gradient(135deg, #2e1a3a, #3a214a, #4a2d5a);
-      --card-bg: rgba(40, 25, 45, 0.88);
-      --border-glow: 0 0 20px rgba(236, 64, 122, 0.7);
+      --bg-gradient: linear-gradient(135deg, #1e0f2e, #2a154a, #381b5c, #2e144c);
+      --card-bg: rgba(45, 25, 65, 0.92);
+      --border-glow: 0 0 25px rgba(224, 64, 251, 0.6);
       --border: 3px solid var(--primary);
     }
 
@@ -52,18 +52,51 @@
       padding: 20px;
       overflow-x: hidden;
       position: relative;
+      cursor: default;
     }
 
     /* Animación de borde brillante RGB */
     @keyframes rainbowGlow {
-      0% { box-shadow: 0 0 15px rgba(156, 39, 176, 0.7); }
-      25% { box-shadow: 0 0 15px rgba(233, 30, 99, 0.7); }
-      50% { box-shadow: 0 0 15px rgba(0, 200, 255, 0.7); }
-      75% { box-shadow: 0 0 15px rgba(255, 190, 100, 0.7); }
-      100% { box-shadow: 0 0 15px rgba(156, 39, 176, 0.7); }
+      0% { box-shadow: 0 0 15px rgba(213, 0, 249, 0.7); }
+      25% { box-shadow: 0 0 15px rgba(255, 64, 129, 0.7); }
+      50% { box-shadow: 0 0 15px rgba(255, 112, 166, 0.8); }
+      75% { box-shadow: 0 0 15px rgba(183, 86, 255, 0.7); }
+      100% { box-shadow: 0 0 15px rgba(213, 0, 249, 0.7); }
     }
 
-    /* Menú Hamburguesa - Izquierda */
+    /* Corazones flotantes */
+    .floating-heart {
+      position: fixed;
+      font-size: 20px;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 1000;
+      user-select: none;
+      animation: floatUp 15s ease-out forwards, fadeHeart 4s ease-in-out infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.9; }
+      90% { opacity: 0.9; }
+      100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+    }
+
+    @keyframes fadeHeart {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    /* Partículas de explosión */
+    .particle {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1000;
+      user-select: none;
+      opacity: 0;
+    }
+
+    /* Menú Hamburguesa */
     .menu-toggle {
       position: fixed;
       top: 20px;
@@ -156,7 +189,7 @@
       text-align: center;
       margin-bottom: 30px;
       padding: 20px;
-      background: rgba(156, 39, 176, 0.08);
+      background: rgba(213, 0, 249, 0.08);
       border-radius: 16px;
       width: 100%;
       border: 2px dashed var(--primary);
@@ -192,7 +225,7 @@
 
     .menu-btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(156, 39, 176, 0.5);
+      box-shadow: 0 10px 25px rgba(213, 0, 249, 0.5);
     }
 
     .menu-close {
@@ -218,7 +251,7 @@
       border-radius: 20px;
       margin: 1rem 0;
       animation: rainbowGlow 3s ease-in-out infinite alternate;
-      background: linear-gradient(45deg, #9c27b0, #ba68c8, #ec407a, #ff80ab);
+      background: linear-gradient(45deg, #d500f9, #e040fb, #ff4081, #ff70a6);
       padding: 4px;
     }
 
@@ -236,145 +269,6 @@
       transform: scale(1.03);
     }
 
-    /* Modal: Requisito TikTok (solo al generar) */
-    .modal-tiktok {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-      animation: fadeIn 0.4s;
-    }
-
-    .modal-tiktok-content {
-      background: var(--card-bg);
-      border-radius: 20px;
-      padding: 25px;
-      max-width: 400px;
-      width: 90%;
-      text-align: center;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-      border: var(--border);
-      position: relative;
-      animation: popIn 0.4s;
-    }
-
-    .modal-tiktok-close {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      font-size: 1.4em;
-      color: var(--primary);
-      cursor: pointer;
-      background: #fff;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal-tiktok-title {
-      color: var(--primary);
-      font-family: 'Playfair Display', serif;
-      margin-bottom: 15px;
-      font-size: 1.5em;
-    }
-
-    .btn-tiktok {
-      margin: 15px auto;
-      padding: 12px 20px;
-      background: #000000;
-      color: white;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      font-size: 1.1em;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 80%;
-      max-width: 300px;
-    }
-
-    .btn-tiktok::before {
-      content: "🎵";
-    }
-
-    /* Modal: Error si no sigue */
-    .modal-error {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.6);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-error-content {
-      background: var(--card-bg);
-      border-radius: 20px;
-      padding: 25px;
-      max-width: 400px;
-      width: 90%;
-      text-align: center;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-      border: 3px solid #e91e63;
-      position: relative;
-      animation: popIn 0.4s;
-    }
-
-    .modal-error-close {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      font-size: 1.4em;
-      color: #e91e63;
-      cursor: pointer;
-      background: #fff0f5;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal-error h3 {
-      color: #e91e63;
-      margin-bottom: 12px;
-      font-size: 1.3em;
-    }
-
-    .modal-error p {
-      color: var(--dark);
-      line-height: 1.6;
-      font-size: 0.95em;
-    }
-
-    /* Animaciones */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes popIn {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
     /* Pantalla de creación */
     .create-screen {
       text-align: center;
@@ -382,7 +276,7 @@
       max-width: 480px;
       background: var(--card-bg);
       border-radius: 32px;
-      box-shadow: 0 16px 45px rgba(0,0,0,0.15);
+      box-shadow: var(--border-glow);
       border: var(--border);
       position: relative;
       z-index: 1;
@@ -394,10 +288,7 @@
       font-size: 2.1rem;
       color: var(--primary);
       margin: 1rem 0;
-    }
-
-    .form-group {
-      margin: 1.2rem 0;
+      animation: rainbowGlow 3s ease-in-out infinite alternate;
     }
 
     label {
@@ -415,9 +306,14 @@
       border: 2px solid var(--primary);
       border-radius: 14px;
       font-size: 1em;
-      background: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.8);
       color: var(--dark);
       font-family: inherit;
+    }
+
+    textarea {
+      height: 100px;
+      resize: vertical;
     }
 
     button {
@@ -430,9 +326,10 @@
       border: none;
       border-radius: 32px;
       cursor: pointer;
-      box-shadow: 0 8px 20px rgba(156, 39, 176, 0.4);
+      box-shadow: 0 8px 20px rgba(213, 0, 249, 0.4);
       transition: all 0.3s ease;
       display: block;
+      animation: rainbowGlow 3s ease-in-out infinite alternate;
     }
 
     /* Cuadro de link generado */
@@ -446,13 +343,6 @@
       max-width: 460px;
       text-align: center;
       border: var(--border);
-      animation: fadeIn 0.5s;
-    }
-
-    .link-box h3 {
-      color: var(--primary);
-      font-family: 'Playfair Display', serif;
-      margin-bottom: 12px;
     }
 
     .link-box input {
@@ -474,14 +364,6 @@
       justify-content: center;
       gap: 12px;
       flex-wrap: wrap;
-    }
-
-    .link-actions button {
-      margin: 0;
-      padding: 10px 18px;
-      font-size: 1em;
-      background: var(--secondary);
-      width: auto;
     }
 
     /* Pantalla de bloqueo */
@@ -524,7 +406,7 @@
       width: 90%;
       border: 2px solid var(--primary);
       letter-spacing: 4px;
-      box-shadow: 0 6px 15px rgba(156, 39, 176, 0.2);
+      box-shadow: 0 6px 15px rgba(213, 0, 249, 0.2);
     }
 
     .keypad {
@@ -544,15 +426,15 @@
       border-radius: 14px;
       cursor: pointer;
       transition: all 0.25s;
-      box-shadow: 0 4px 10px rgba(156, 39, 176, 0.1);
+      box-shadow: 0 4px 10px rgba(213, 0, 249, 0.1);
     }
 
     .key:hover {
       transform: translateY(-3px);
-      box-shadow: 0 6px 15px rgba(156, 39, 176, 0.2);
+      box-shadow: 0 6px 15px rgba(213, 0, 249, 0.2);
     }
 
-    /* Contenedor principal - Carta */
+    /* Carta principal */
     .main-container {
       display: none;
       text-align: center;
@@ -575,6 +457,7 @@
       font-size: 2.3rem;
       color: var(--primary);
       margin-bottom: 1.4rem;
+      animation: rainbowGlow 3s ease-in-out infinite alternate;
     }
 
     .letter {
@@ -590,21 +473,12 @@
       font-weight: 500;
     }
 
-    .btn-gallery {
-      display: inline-block;
-      margin: 1.4rem auto 1rem;
-      padding: 0.9rem 2rem;
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: white;
-      background: linear-gradient(45deg, var(--primary), var(--secondary));
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      box-shadow: 0 8px 20px rgba(156, 39, 176, 0.4);
-      transition: all 0.3s ease;
-      animation: rainbowGlow 3s ease-in-out infinite alternate;
+    .letter img {
+      max-width: 100%;
+      border-radius: 18px;
+      margin: 1.4rem 0;
+      border: 4px solid #fff;
+      box-shadow: 0 0 15px rgba(213, 0, 249, 0.5);
     }
 
     footer {
@@ -612,156 +486,6 @@
       font-style: italic;
       color: var(--primary);
       font-size: 1.1rem;
-    }
-
-    /* Galería */
-    .gallery-screen {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      max-width: 900px;
-      padding: 2rem 1.4rem;
-      text-align: center;
-    }
-
-    .gallery-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      color: var(--primary);
-      margin-bottom: 1.6rem;
-      animation: rainbowGlow 3s ease-in-out infinite alternate;
-    }
-
-    .gallery-main-img {
-      width: 100%;
-      max-width: 480px;
-      margin-bottom: 1.8rem;
-    }
-
-    .gallery-thumbnails {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-      gap: 10px;
-      width: 100%;
-      max-width: 580px;
-    }
-
-    /* Modal de zoom */
-    .modal-zoom {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.9);
-      z-index: 2000;
-      justify-content: center;
-      align-items: center;
-      cursor: zoom-out;
-    }
-
-    .modal-zoom img {
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 15px;
-      border: 5px solid var(--primary);
-      box-shadow: 0 0 30px rgba(156, 39, 176, 0.8);
-      animation: fadeIn 0.3s;
-    }
-
-    /* Cuadro de error */
-    .error-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 200;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-    }
-
-    .error-modal.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .error-content {
-      background: white;
-      border-radius: 20px;
-      width: 90%;
-      max-width: 360px;
-      padding: 1.6rem;
-      position: relative;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      border: 3px solid #ffb6c1;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .close-error {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 1.4rem;
-      color: #e91e63;
-      cursor: pointer;
-      width: 26px;
-      height: 26px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 50%;
-      background: #fff0f5;
-    }
-
-    .error-content h3 {
-      color: #e91e63;
-      margin-bottom: 0.9rem;
-      font-size: 1.25rem;
-      text-align: center;
-    }
-
-    .error-content p {
-      color: #555;
-      line-height: 1.55;
-      margin-bottom: 1.3rem;
-      font-size: 1.02rem;
-    }
-
-    /* Corazones flotantes */
-    .floating-heart {
-      position: fixed;
-      font-size: 18px;
-      pointer-events: none;
-      opacity: 0;
-      z-index: 1000;
-      user-select: none;
-      animation: floatUp 18s ease-out forwards, fadeHeart 4s ease-in-out infinite;
-    }
-
-    @keyframes floatUp {
-      0% {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0;
-      }
-      10% { opacity: 0.8; }
-      90% { opacity: 0.8; }
-      100% {
-        transform: translateY(-20vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
-
-    @keyframes fadeHeart {
-      0%, 100% { opacity: 0.6; }
-      50% { opacity: 1; }
     }
 
     /* Créditos */
@@ -799,47 +523,6 @@
     .btn-recreate:hover {
       transform: scale(1.05);
     }
-
-    /* Responsive */
-    @media (max-width: 480px) {
-      .create-screen, .lock-screen, .main-container, .gallery-screen, .credit {
-        padding: 1.4rem;
-        max-width: 98%;
-      }
-
-      h1 {
-        font-size: 2rem;
-      }
-
-      .letter {
-        font-size: 1.4rem;
-        line-height: 1.6;
-      }
-
-      .btn-gallery, .btn-recreate, .btn-tiktok {
-        font-size: 1.1rem;
-      }
-
-      .menu-toggle {
-        top: 15px;
-        left: 15px;
-        width: 45px;
-        height: 45px;
-      }
-
-      .menu-toggle span {
-        width: 22px;
-        height: 2.5px;
-      }
-
-      .menu-panel {
-        width: 280px;
-      }
-
-      .menu-panel h3 {
-        font-size: 1.6rem;
-      }
-    }
   </style>
 </head>
 <body>
@@ -855,10 +538,54 @@
         heart.style.left = Math.random() * 90 + 5 + 'vw';
         heart.style.bottom = '0';
         document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 18000);
+        setTimeout(() => heart.remove(), 15000);
       }, 2500);
     }
     createHearts();
+
+    // Efecto de partículas al tocar
+    function createParticles(x, y) {
+      const colors = ['#d500f9', '#ff4081', '#e040fb', '#ff70a6', '#ba68c8'];
+      const hearts = ['❤️', '💖', '💕', '💓', '💗', '💘'];
+      for (let i = 0; i < 15; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        particle.style.fontSize = Math.random() * 24 + 16 + 'px';
+        particle.style.color = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        document.body.appendChild(particle);
+
+        const angle = Math.random() * 360;
+        const velocity = Math.random() * 6 + 2;
+        const vx = Math.cos(angle) * velocity;
+        const vy = Math.sin(angle) * velocity;
+
+        let opacity = 1;
+        let posX = x;
+        let posY = y;
+
+        const animate = () => {
+          opacity -= 0.02;
+          posX += vx;
+          posY += vy - 2;
+          particle.style.opacity = opacity;
+          particle.style.transform = `translate(${posX - x}px, ${posY - y}px) rotate(${angle}deg)`;
+          if (opacity > 0) {
+            requestAnimationFrame(animate);
+          } else {
+            particle.remove();
+          }
+        };
+        animate();
+      }
+    }
+
+    document.body.addEventListener('click', (e) => createParticles(e.clientX, e.clientY));
+    document.body.addEventListener('touchstart', (e) => {
+      for (let touch of e.touches) createParticles(touch.clientX, touch.clientY);
+    });
   </script>
 
   <!-- Menú Hamburguesa -->
@@ -886,7 +613,7 @@
       🎵 Música de Fondo <span id="musicStatus">▶️</span>
     </button>
 
-    <a href="https://wa.me/937556459?text=Hola%20AnthZz,%20me%20encantó%20tu%20proyecto%20de%20detalles%20virtuales.%20¿Puedo%20encargarte%20uno?" target="_blank" class="menu-btn glow-frame">
+    <a href="https://wa.me/930569195?text=Hola%20AnthZz,%20me%20encantó%20tu%20proyecto%20de%20detalles%20virtuales.%20¿Puedo%20encargarte%20uno?" target="_blank" class="menu-btn glow-frame">
       📞 Consulta Personalizada
     </a>
 
@@ -903,40 +630,9 @@
     </button>
   </div>
 
-  <!-- Modal: Seguir en TikTok (solo al generar) -->
-  <div id="modalTiktok" class="modal-tiktok">
-    <div class="modal-tiktok-content">
-      <div class="modal-tiktok-close" onclick="closeModalTiktok()">×</div>
-      <h3 class="modal-tiktok-title">🔔 ¡Importante!</h3>
-      <p style="color:var(--dark); margin:10px 0;">
-        Para generar tu detalle personalizado, primero debes seguir a mi cuenta de TikTok.
-      </p>
-      <a href="https://www.tiktok.com/@bermat_mods?_t=ZS-8zNy5TzEpoi&_r=1" target="_blank" class="btn-tiktok" onclick="seguirYGenerar()">
-        Seguir en TikTok
-      </a>
-      <p style="font-size:0.9em; color:var(--primary); margin-top:10px;">@bermat_mods</p>
-    </div>
-  </div>
-
-  <!-- Modal: Error si no sigue -->
-  <div id="modalError" class="modal-error">
-    <div class="modal-error-content">
-      <div class="modal-error-close" onclick="closeModalError()">×</div>
-      <h3>⚠️ Acceso Denegado</h3>
-      <p>
-        El sistema de <strong>BerMatMods</strong> ha detectado que no has hecho clic en "Seguir en TikTok".
-        <br><br>
-        Por lo tanto, no se podrá generar tu enlace de detalle personalizado.
-        <br><br>
-        Inténtalo más tarde.
-      </p>
-    </div>
-  </div>
-
   <!-- Pantalla de creación -->
   <div id="createScreen" class="create-screen">
     <h2 id="createTitle">✨ Crea tu Detalle Virtual</h2>
-    <p id="createSubtitle">Llena todo y genera tu link personalizado ❤️</p>
 
     <div class="form-group">
       <label id="labelPara">💌 Para: Nombre de tu amor</label>
@@ -949,48 +645,21 @@
     </div>
 
     <div class="form-group">
-      <label id="labelMensaje">✍️ Tu mensaje (usa saltos de línea)</label>
+      <label id="labelMensaje">✍️ Tu mensaje</label>
       <textarea id="mensaje" placeholder="Mi amor, desde que te conocí..." required></textarea>
     </div>
 
     <div class="form-group">
-      <label id="labelFuente">🎨 Tipo de letra</label>
-      <select id="fuenteTexto">
-        <option value="'Dancing Script', cursive">Elegante (Script)</option>
-        <option value="'Quicksand', sans-serif">Moderna (Quicksand)</option>
-        <option value="'Poppins', sans-serif">Clara (Poppins)</option>
-        <option value="Arial, sans-serif">Simple (Arial)</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label id="labelColor">🌈 Color del texto</label>
-      <select id="colorTexto">
-        <option value="#9c27b0">Morado</option>
-        <option value="#e91e63">Rosa</option>
-        <option value="#8B0000">Rojo</option>
-        <option value="#4B0082">Índigo</option>
-        <option value="#2F4F4F">Verde</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label id="labelCodigo">🔐 Código de acceso (ej: 10/11/23)</label>
+      <label id="labelCodigo">🔐 Código de acceso</label>
       <input type="text" id="codigoAcceso" placeholder="Ej: 10/11/23" value="10/11/23" required />
     </div>
 
     <div class="form-group">
-      <label id="labelFoto">🖼️ URL de foto principal</label>
-      <input type="url" id="fotoPrincipal" placeholder=" https://ejemplo.com/foto.jpg " />
+      <label id="labelFoto">🖼️ Foto principal</label>
+      <input type="file" id="fotoPrincipal" accept="image/*" required />
     </div>
 
-    <div class="form-group">
-      <label id="labelGaleria">🖼️ URLs de fotos para galería (una por línea)</label>
-      <textarea id="fotosGaleria" placeholder="https://ejemplo.com/foto1.jpg 
-https://ejemplo.com/foto2.jpg "></textarea>
-    </div>
-
-    <button onclick="mostrarModalTikTok()">Generar Link 🌟</button>
+    <button onclick="generarLink()">Generar Link 🌟</button>
 
     <!-- Cuadro de link generado -->
     <div class="link-box" id="linkBox">
@@ -1009,7 +678,7 @@ https://ejemplo.com/foto2.jpg "></textarea>
     <p>👇 INGRESA EL CÓDIGO DE ACCESO 👇</p>
 
     <div class="glow-frame">
-      <img src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyZTAxbHV0Mm1rYmI2emc3ZmdvcGdka2szMGMzMHl4ZXlhcmEzN3A4cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Y62ofc4S1Vst2/giphy.gif " alt="Corazones flotando" />
+      <img src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyZTAxbHV0Mm1rYmI2emc3ZmdvcGdka2szMGMzMHl4ZXlhcmEzN3A4cCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Y62ofc4S1Vst2/giphy.gif" alt="Corazones flotando" />
     </div>
 
     <div id="display" class="key-display"></div>
@@ -1032,7 +701,7 @@ https://ejemplo.com/foto2.jpg "></textarea>
     <button class="btn-iniciar" onclick="submitKey()">Iniciar</button>
 
     <div class="glow-frame">
-      <img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyMzl0NTh2ZHhmOHF1Nm45NHNqcmN1bTVrdHNtbDgwbjZpZTFqMno3diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/11TyfGbDbBv4be/giphy.gif " alt="Bailarina de amor" />
+      <img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyMzl0NTh2ZHhmOHF1Nm45NHNqcmN1bTVrdHNtbDgwbjZpZTFqMno3diZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/11TyfGbDbBv4be/giphy.gif" alt="Bailarina de amor" />
     </div>
   </div>
 
@@ -1041,219 +710,21 @@ https://ejemplo.com/foto2.jpg "></textarea>
     <div class="letter-frame">
       <h1 id="tituloCarta"></h1>
       <div id="letter" class="letter"></div>
-
-      <div class="glow-frame" style="margin: 1.4rem auto; max-width: 400px; display: flex; justify-content: center;">
-        <img id="fotoPrincipalMostrada" src="" alt="Foto principal" />
-      </div>
-
-      <button class="btn-gallery" onclick="openGallery()">Ver nuestras fotos 📸</button>
+      <img id="fotoPrincipalMostrada" src="" alt="Foto principal" />
       <footer id="firmaCarta"></footer>
-
       <button class="btn-recreate" onclick="volverACrear()">🔄 Volver a personalizar</button>
     </div>
     <p class="credit">Desarrollado por AnthZz Berrocal | BerMatMods</p>
   </div>
 
-  <!-- Galería -->
-  <div id="galleryScreen" class="gallery-screen">
-    <h2 class="gallery-title">✨ Nuestra Galería</h2>
-
-    <div class="glow-frame gallery-main-img">
-      <img id="mainGalleryImg" src="" style="width: 100%; border-radius: 18px;" onclick="zoomImage(this)" />
-    </div>
-
-    <div class="gallery-thumbnails" id="thumbnailsContainer"></div>
-
-    <button class="btn-iniciar" style="margin-top: 1.8rem;" onclick="closeGallery()">Volver a la carta</button>
-    <p class="credit">Desarrollado por AnthZz Berrocal | BerMatMods</p>
-  </div>
-
-  <!-- Modal de zoom -->
-  <div id="zoomModal" class="modal-zoom" onclick="closeZoom()">
-    <img id="zoomedImage" src="" />
-  </div>
-
-  <!-- Cuadro de error -->
-  <div id="errorModal" class="error-modal">
-    <div class="error-content">
-      <div class="close-error" onclick="cerrarError()">×</div>
-      <h3>⚠️ Código Incorrecto</h3>
-      <p>El código que ingresaste es incorrecto. Por favor, inténtalo de nuevo.</p>
-    </div>
-  </div>
-
   <script>
+    // 🔑 API Key de jsonbin.io
+    const API_KEY = '$2a$10$Jm.IYTKKCB0vTiqyhwTWSuc087rEY9raARyM2H//9C7Xd.AyFdOGa';
+
     let input = '';
     let data = {};
 
-    // Mostrar modal de TikTok al hacer clic en "Generar"
-    function mostrarModalTikTok() {
-      document.getElementById('modalTiktok').style.display = 'flex';
-    }
-
-    function closeModalTiktok() {
-      document.getElementById('modalTiktok').style.display = 'none';
-    }
-
-    function closeModalError() {
-      document.getElementById('modalError').style.display = 'none';
-    }
-
-    // Cuando hace clic en "Seguir", se guarda y genera el link
-    function seguirYGenerar() {
-      localStorage.setItem('tiktokFollowed', 'true');
-      setTimeout(() => {
-        generarLink();
-        document.getElementById('modalTiktok').style.display = 'none';
-      }, 800);
-    }
-
-    // Generar link
-    function generarLink() {
-      const nombreElla = document.getElementById('nombreElla').value.trim();
-      const nombreYo = document.getElementById('nombreYo').value.trim();
-      const mensaje = document.getElementById('mensaje').value.trim();
-      const codigoAcceso = document.getElementById('codigoAcceso').value.trim();
-      const fotoPrincipal = document.getElementById('fotoPrincipal').value.trim() || 'https://via.placeholder.com/400x300?text=Foto+Principal';
-      const fotosGaleria = document.getElementById('fotosGaleria').value.trim();
-      const fuenteTexto = document.getElementById('fuenteTexto').value;
-      const colorTexto = document.getElementById('colorTexto').value;
-
-      if (!nombreElla || !nombreYo || !mensaje || !codigoAcceso) {
-        alert('Completa todos los campos.');
-        return;
-      }
-
-      data = { nombreElla, nombreYo, mensaje, codigoAcceso, fotoPrincipal, fotosGaleria, fuenteTexto, colorTexto };
-      const id = Math.random().toString(36).substr(2, 6);
-      localStorage.setItem('detalle_' + id, JSON.stringify(data));
-
-      const link = `${window.location.href.split('#')[0]}#${id}`;
-      document.getElementById('linkInput').value = link;
-      document.getElementById('linkBox').style.display = 'block';
-      document.getElementById('linkBox').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function copyLink() {
-      const link = document.getElementById('linkInput').value;
-      navigator.clipboard.writeText(link).then(() => {
-        alert('✅ Link copiado');
-      });
-    }
-
-    function shareOnWhatsApp() {
-      const link = document.getElementById('linkInput').value;
-      const text = `Hola mi amor, tengo un detalle especial para ti 💖\n\nHaz clic aquí: ${link}`;
-      window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
-    }
-
-    // Pantalla de bloqueo
-    function addDigit(digit) {
-      if (input.length < 10) {
-        input += digit;
-        document.getElementById('display').textContent = input;
-      }
-    }
-
-    function clearInput() {
-      input = '';
-      document.getElementById('display').textContent = '';
-    }
-
-    function cerrarError() {
-      document.getElementById('errorModal').classList.remove('active');
-    }
-
-    function submitKey() {
-      if (input === data.codigoAcceso) {
-        document.getElementById('lockScreen').style.display = 'none';
-        document.getElementById('mainContainer').style.display = 'block';
-        mostrarCarta();
-      } else {
-        document.getElementById('errorModal').classList.add('active');
-        clearInput();
-      }
-    }
-
-    function mostrarCarta() {
-      document.getElementById('tituloCarta').textContent = `Para Ti ${data.nombreElla} 💖`;
-      document.getElementById('firmaCarta').textContent = `Con todo mi corazón, ${data.nombreYo}`;
-      document.getElementById('fotoPrincipalMostrada').src = data.fotoPrincipal;
-
-      const letter = document.getElementById('letter');
-      letter.style.fontFamily = data.fuenteTexto;
-      letter.style.color = data.colorTexto;
-      letter.textContent = '';
-      let i = 0;
-      const speed = 40;
-      function type() {
-        if (i < data.mensaje.length) {
-          letter.textContent += data.mensaje.charAt(i);
-          i++;
-          setTimeout(type, speed);
-        }
-      }
-      setTimeout(type, 500);
-    }
-
-    function openGallery() {
-      const fotos = data.fotosGaleria.split('\n').filter(f => f.trim() !== '');
-      if (fotos.length > 0) {
-        document.getElementById('mainGalleryImg').src = fotos[0];
-        const thumbs = document.getElementById('thumbnailsContainer');
-        thumbs.innerHTML = '';
-        fotos.forEach(foto => {
-          const div = document.createElement('div');
-          div.className = 'glow-frame';
-          const img = document.createElement('img');
-          img.src = foto;
-          img.className = 'gallery-img';
-          img.onclick = () => document.getElementById('mainGalleryImg').src = foto;
-          div.appendChild(img);
-          thumbs.appendChild(div);
-        });
-      }
-      document.getElementById('mainContainer').style.display = 'none';
-      document.getElementById('galleryScreen').style.display = 'flex';
-    }
-
-    function closeGallery() {
-      document.getElementById('galleryScreen').style.display = 'none';
-      document.getElementById('mainContainer').style.display = 'block';
-    }
-
-    function zoomImage(img) {
-      document.getElementById('zoomedImage').src = img.src;
-      document.getElementById('zoomModal').style.display = 'flex';
-    }
-
-    function closeZoom() {
-      document.getElementById('zoomModal').style.display = 'none';
-    }
-
-    function volverACrear() {
-      document.getElementById('mainContainer').style.display = 'none';
-      document.getElementById('createScreen').style.display = 'block';
-      document.getElementById('linkBox').style.display = 'none';
-    }
-
-    // Cargar detalle si hay hash
-    window.addEventListener('load', () => {
-      const hash = window.location.hash.slice(1);
-      if (hash) {
-        const saved = localStorage.getItem('detalle_' + hash);
-        if (saved) {
-          data = JSON.parse(saved);
-          document.getElementById('createScreen').style.display = 'none';
-          document.getElementById('lockScreen').style.display = 'block';
-          document.getElementById('display').textContent = '';
-        } else {
-          alert('❌ Detalle no encontrado.');
-        }
-      }
-    });
-
-    // === MENÚ FUNCIONES ===
+    // Menú
     const menuToggle = document.getElementById('menuToggle');
     const menuPanel = document.getElementById('menuPanel');
 
@@ -1276,7 +747,7 @@ https://ejemplo.com/foto2.jpg "></textarea>
       localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
     }
 
-    // Música de fondo
+    // Música
     const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3');
     audio.loop = true;
     let isPlaying = false;
@@ -1287,27 +758,138 @@ https://ejemplo.com/foto2.jpg "></textarea>
         audio.pause();
         btn.textContent = '▶️';
       } else {
-        audio.play().catch(e => alert('Activa el sonido para escuchar la música.'));
+        audio.play().catch(() => alert('Activa el sonido'));
         btn.textContent = '⏸️';
       }
       isPlaying = !isPlaying;
     }
 
-    // Compartir proyecto
-    function shareProject() {
-      const text = "Mira este detalle virtual tan romántico 💖\n\nPuedes crear uno personalizado aquí: " + window.location.href;
-      if (navigator.share) {
-        navigator.share({ text });
-      } else {
-        navigator.clipboard.writeText(text).then(() => {
-          alert('Enlace copiado 📲');
+    // Leer archivo
+    function leerArchivo(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // Generar link
+    async function generarLink() {
+      const nombreElla = document.getElementById('nombreElla').value.trim();
+      const nombreYo = document.getElementById('nombreYo').value.trim();
+      const mensaje = document.getElementById('mensaje').value.trim();
+      const codigoAcceso = document.getElementById('codigoAcceso').value.trim();
+      const fotoInput = document.getElementById('fotoPrincipal').files[0];
+
+      if (!nombreElla || !nombreYo || !mensaje || !codigoAcceso || !fotoInput) {
+        alert('Completa todos los campos.');
+        return;
+      }
+
+      try {
+        const fotoPrincipal = await leerArchivo(fotoInput);
+        data = { nombreElla, nombreYo, mensaje, codigoAcceso, fotoPrincipal };
+
+        const response = await fetch('https://api.jsonbin.io/v3/b', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Master-Key': API_KEY
+          },
+          body: JSON.stringify(data)
         });
+
+        if (!response.ok) throw new Error('Error al guardar');
+
+        const result = await response.json();
+        const binId = result.record.id;
+        const link = `${window.location.href.split('#')[0]}?id=${binId}`;
+
+        document.getElementById('linkInput').value = link;
+        document.getElementById('linkBox').style.display = 'block';
+      } catch (err) {
+        alert('❌ Error al subir los datos: ' + err.message);
       }
     }
 
-    // Acerca del proyecto
+    // Cargar detalle
+    window.addEventListener('load', async () => {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      if (!id) return;
+
+      try {
+        const response = await fetch(`https://api.jsonbin.io/v3/b/${id}`, {
+          headers: { 'X-Master-Key': API_KEY }
+        });
+
+        if (!response.ok) throw new Error('No encontrado');
+
+        data = await response.json().then(r => r.record);
+        document.getElementById('createScreen').style.display = 'none';
+        document.getElementById('lockScreen').style.display = 'block';
+      } catch (err) {
+        alert('❌ Detalle no encontrado o expirado.');
+      }
+    });
+
+    // Pantalla de bloqueo
+    function addDigit(digit) {
+      if (input.length < 10) {
+        input += digit;
+        document.getElementById('display').textContent = input;
+      }
+    }
+
+    function clearInput() {
+      input = '';
+      document.getElementById('display').textContent = '';
+    }
+
+    function submitKey() {
+      if (input === data.codigoAcceso) {
+        document.getElementById('lockScreen').style.display = 'none';
+        document.getElementById('mainContainer').style.display = 'block';
+        mostrarCarta();
+      } else {
+        alert('❌ Código incorrecto');
+        clearInput();
+      }
+    }
+
+    function mostrarCarta() {
+      document.getElementById('tituloCarta').textContent = `Para Ti ${data.nombreElla} 💖`;
+      document.getElementById('firmaCarta').textContent = `Con todo mi corazón, ${data.nombreYo}`;
+      document.getElementById('letter').textContent = data.mensaje;
+      document.getElementById('fotoPrincipalMostrada').src = data.fotoPrincipal;
+    }
+
+    // Copiar y compartir
+    function copyLink() {
+      const link = document.getElementById('linkInput').value;
+      navigator.clipboard.writeText(link).then(() => alert('✅ Link copiado'));
+    }
+
+    function shareOnWhatsApp() {
+      const link = document.getElementById('linkInput').value;
+      const text = `Hola mi amor, tengo un detalle especial para ti 💖\n\nHaz clic aquí: ${link}`;
+      window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+    }
+
+    function volverACrear() {
+      document.getElementById('mainContainer').style.display = 'none';
+      document.getElementById('createScreen').style.display = 'block';
+      document.getElementById('linkBox').style.display = 'none';
+    }
+
+    function shareProject() {
+      const text = "Mira este detalle virtual tan romántico 💖\n\n" + window.location.href;
+      navigator.share ? navigator.share({ text }) : copyLink();
+    }
+
     function aboutProject() {
-      alert(`✨ Detalles Virtuales v1.0\n\nCreado por: AnthZz Berrocal\nMarca: BerMatMods\n\nUn proyecto romántico y personalizado para expresar amor de forma digital.\n\n© 2025 BerMatMods`);
+      alert("✨ Detalles Virtuales v1.0\n\nCreado por: AnthZz Berrocal\n© 2025 BerMatMods");
     }
   </script>
 </body>
